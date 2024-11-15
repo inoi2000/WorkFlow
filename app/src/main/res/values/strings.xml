@@ -2,4 +2,22 @@
     <string name="app_name">WorkFlow</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="email_hint">Your email:</string>
+    <string name="password_hint">Password:</string>
+    <string name="login_button_text">LOGIN</string>
+    <string name="forgot_password">Forgot password ?</string>
+    <string name="register">Register</string>
+    <string name="registration">Registration</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="last_name">Last name</string>
+    <string name="age_hint">How old are you?</string>
+    <string name="sign_up_button_text">SIGN UP</string>
+    <string name="sign_out">Sign out</string>
+    <string name="fill_all_fields">Fill all fields</string>
+    <string name="the_reset_link_has_been_successfully_sent">The reset link has been successfully sent</string>
+    <string name="reset_button_text">Reset</string>
+    <string name="type_your_message">Type your message:</string>
 </resources>
