@@ -1,6 +1,5 @@
 package com.petproject.workflow.presentation.views
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher

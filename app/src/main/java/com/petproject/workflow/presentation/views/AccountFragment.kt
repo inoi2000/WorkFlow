@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
-import com.petproject.workflow.R
 import com.petproject.workflow.databinding.FragmentAccountBinding
 import com.petproject.workflow.presentation.viewmodels.AccountViewModel
 
