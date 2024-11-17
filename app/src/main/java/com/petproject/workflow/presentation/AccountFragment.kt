@@ -1,14 +1,12 @@
 package com.petproject.workflow.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.petproject.workflow.R
 import com.petproject.workflow.databinding.FragmentAccountBinding
-import com.petproject.workflow.databinding.FragmentLoginBinding
 
 class AccountFragment : Fragment() {
     private var _binding: FragmentAccountBinding? = null

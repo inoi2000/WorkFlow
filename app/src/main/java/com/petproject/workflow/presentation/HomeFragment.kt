@@ -1,16 +1,14 @@
 package com.petproject.workflow.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.petproject.workflow.R
 import com.petproject.workflow.databinding.FragmentHomeBinding
-import com.petproject.workflow.databinding.FragmentLoginBinding
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
