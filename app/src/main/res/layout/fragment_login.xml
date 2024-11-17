@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.LoginFragment">
+    tools:context=".presentation.views.LoginFragment">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.petproject.workflow.presentation.LoginViewModel" />
+            type="com.petproject.workflow.presentation.viewmodels.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,15 +16,11 @@
         android:layout_height="match_parent"
         android:padding="25dp">
 
-        <TextView
+        <ImageView
             android:id="@+id/textViewLogo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold"
+            android:src="@drawable/app_logo"
             app:layout_constraintBottom_toTopOf="@+id/til_email"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -72,6 +68,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:onClick="@{() -> viewModel.signIn()}"
+            android:textStyle="bold"
+            android:textColor="@color/white"
             android:text="@string/login_button_text"
             android:textAllCaps="true"
             app:layout_constraintBottom_toTopOf="@+id/tv_forgot_password"
@@ -82,6 +80,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorPrimary"
             android:text="@string/forgot_password"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,4 +1,4 @@
-package com.petproject.workflow.presentation
+package com.petproject.workflow.presentation.views
 
 import android.os.Bundle
 import android.text.Editable
@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.petproject.workflow.databinding.FragmentLoginBinding
+import com.petproject.workflow.presentation.viewmodels.LoginViewModel
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null

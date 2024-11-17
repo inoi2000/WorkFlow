@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.petproject.workflow.presentation.LoginFragment"
+        android:name="com.petproject.workflow.presentation.views.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.petproject.workflow.presentation.HomeFragment"
+        android:name="com.petproject.workflow.presentation.views.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <argument
@@ -25,6 +25,17 @@
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.petproject.workflow.presentation.AccountFragment"
-        android:label="AccountFragment" />
+        android:name="com.petproject.workflow.presentation.views.AccountFragment"
+        android:label="AccountFragment" >
+        <action
+            android:id="@+id/action_accountFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.petproject.workflow.presentation.views.NewsFragment"
+        android:label="fragment_news"
+        tools:layout="@layout/fragment_news" />
 </navigation>

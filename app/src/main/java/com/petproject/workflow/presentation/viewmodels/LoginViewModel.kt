@@ -1,4 +1,4 @@
-package com.petproject.workflow.presentation
+package com.petproject.workflow.presentation.viewmodels
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -12,9 +12,6 @@ class LoginViewModel : ViewModel() {
 
     private val auth: FirebaseAuth = Firebase.auth
 
-//    private val _employeeId = MutableLiveData<String?>()
-//    val employeeId: LiveData<String?> get() = _employeeId
-
     private val _errorInputEmail = MutableLiveData<Boolean>(false)
     val errorInputEmail: LiveData<Boolean> get() = _errorInputEmail
 
@@ -24,7 +21,6 @@ class LoginViewModel : ViewModel() {
 
     private val _navigateToHomeScreen = MutableLiveData<String?>()
     val navigateToHomeScreen: LiveData<String?> get() = _navigateToHomeScreen
-
 
 
     var emailField: ObservableField<String> = ObservableField()

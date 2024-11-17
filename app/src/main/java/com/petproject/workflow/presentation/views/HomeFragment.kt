@@ -1,4 +1,4 @@
-package com.petproject.workflow.presentation
+package com.petproject.workflow.presentation.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
