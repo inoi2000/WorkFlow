@@ -1,5 +1,6 @@
 package com.petproject.workflow.presentation.views
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,6 +21,10 @@ class LoginFragment : Fragment() {
         ViewModelProvider.create(viewModelStore)[LoginViewModel::class]
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (requireActivity() as MainActivity).hideBottomNavigationView()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +44,7 @@ class LoginFragment : Fragment() {
                 val action =
                     LoginFragmentDirections.actionLoginFragmentToHomeFragment(it)
                 findNavController().navigate(action)
+                (requireActivity() as MainActivity).showBottomNavigationView()
                 viewModel.onHomeScreenNavigated()
             }
         }

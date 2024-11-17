@@ -20,10 +20,6 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentNewsBinding.inflate(inflater, container, false)
-        val navHostFragment = requireActivity().supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
-        binding.bottomNav.setupWithNavController(navController)
         return binding.root
     }
 
