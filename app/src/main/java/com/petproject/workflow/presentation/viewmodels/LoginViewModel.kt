@@ -4,13 +4,16 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.petproject.workflow.data.repositories.AuthorizationRepositoryImpl
+import com.petproject.workflow.domain.repositories.AuthorizationRepository
+import com.petproject.workflow.domain.usecases.SignInUseCase
+import com.petproject.workflow.domain.usecases.VerifySuccessAuthorizationUseCase
 
 class LoginViewModel : ViewModel() {
 
-    private val auth: FirebaseAuth = Firebase.auth
+    private val repository: AuthorizationRepository = AuthorizationRepositoryImpl()
+    private val signInUseCase = SignInUseCase(repository)
+    private val verifySuccessAuthorization = VerifySuccessAuthorizationUseCase(repository)
 
     private val _errorInputEmail = MutableLiveData<Boolean>(false)
     val errorInputEmail: LiveData<Boolean> get() = _errorInputEmail
@@ -27,10 +30,8 @@ class LoginViewModel : ViewModel() {
     var passwordField: ObservableField<String> = ObservableField()
 
     init {
-        auth.addAuthStateListener { firebaseAuth: FirebaseAuth ->
-            firebaseAuth.currentUser?.let {
-                _navigateToHomeScreen.value = it.uid
-            }
+        verifySuccessAuthorization.invoke {
+            _navigateToHomeScreen.value = it
         }
     }
 
@@ -38,11 +39,10 @@ class LoginViewModel : ViewModel() {
         val email = emailField.get() ?: ""
         val password = passwordField.get() ?: ""
         if (validateInput(email, password)) {
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnFailureListener {
-                    _errorInputEmail.value = true
-                    _errorInputPassword.value = true
-                }
+            signInUseCase(email, password) {
+                _errorInputEmail.value = true
+                _errorInputPassword.value = true
+            }
         }
     }
 

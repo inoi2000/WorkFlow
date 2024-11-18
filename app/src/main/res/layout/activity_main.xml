@@ -23,8 +23,8 @@
             style="@style/BottomNavigationViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:menu="@menu/menu_main"
-            tools:visibility="gone"/>
+            android:visibility="gone"
+            app:menu="@menu/menu_main" />
     </LinearLayout>
 
 </layout>
