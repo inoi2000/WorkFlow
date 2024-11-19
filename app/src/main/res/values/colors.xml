@@ -5,6 +5,9 @@
 
     <color name="test">#964747</color>
 
+    <color name="green">#83B201</color>
+    <color name="red">#DF0729</color>
+
     <color name="blue">#3777FC</color>
     <color name="grey_dark">#E5ECFC</color>
     <color name="grey_light">#ECF0F2</color>

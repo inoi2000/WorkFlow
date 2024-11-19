@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WorkFlow</string>
+    <string name="hello_blank_fragment">Привет, пустой франмент</string>
+    <string name="email_hint">Ваш email:</string>
+    <string name="password_hint">Пароль:</string>
+    <string name="login_button_text">вход</string>
+    <string name="forgot_password">Забыли пароль ?</string>
+    <string name="sign_out">Выход</string>
+    <string name="the_reset_link_has_been_successfully_sent">Ссылка для сброса пароля успешно отправлена</string>
+    <string name="error_input_email">Ошибка ввода email</string>
+    <string name="error_input_password">Ошибка ввода пароля</string>
+    <string name="home">Главная</string>
+    <string name="news">Новости</string>
+    <string name="account">Профиль</string>
+    <string name="colleagues_services_news">Коллеги, сервисы, новости</string>
+    <string name="component_logo">логотип компонента</string>
+    <string name="vacation">Отпуск</string>
+    <string name="business_trips">Командировки</string>
+    <string name="on_your_approval">На вашем согласовании</string>
+    <string name="tasks">Задачи</string>
+    <string name="mentoring">Наставничество</string>
+    <string name="documents">Документы</string>
+</resources>

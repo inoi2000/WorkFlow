@@ -8,13 +8,61 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="Home fragment" />
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:paddingEnd="20dp"
+            tools:ignore="RtlSymmetry">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="20dp"
+                android:background="?attr/colorOnPrimary"
+                android:hint="@string/colleagues_services_news"
+                android:inputType="textEmailAddress"
+                android:paddingVertical="8dp"
+                android:paddingStart="15dp" />
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
 
+                <include
+                    android:id="@+id/vacations_item"
+                    layout="@layout/home_screen_item" />
 
+                <include
+                    android:id="@+id/business_trips_item"
+                    layout="@layout/home_screen_item" />
+
+                <include
+                    android:id="@+id/approvals_item"
+                    layout="@layout/home_screen_item" />
+
+                <include
+                    android:id="@+id/tasks_item"
+                    layout="@layout/home_screen_item" />
+
+                <include
+                    android:id="@+id/mentoring_item"
+                    layout="@layout/home_screen_item" />
+
+                <include
+                    android:id="@+id/documents_item"
+                    layout="@layout/home_screen_item" />
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </layout>
