@@ -1,22 +1,23 @@
 package com.petproject.workflow.domain.entities
 
 data class Employee(
-    val id: String,
-    val name: String,
-    val gender: String,
-    val phone: String,
-    val email: String,
-    val dob: String,
-    val registered: String,
-    val pictureUri: EmployeePictureUri,
+    val id: String = "",
+    val name: String = "",
+    val gender: String = GENDER_MAIE,
+    val phone: String = "",
+    val email: String = "",
+    val dob: String = "",
+    val registered: String = "",
 
-    val position: String,
-    val division: Division,
+    val position: String = "",
+    val divisionId: String = "",
 
-    val businessTrips: List<BusinessTrip>,
-    val vacations: List<Vacation>,
+    val businessTrips: List<BusinessTrip> = mutableListOf(),
+    val vacations: List<Vacation> = mutableListOf(),
 
-    val tasks: List<Task>
+    val tasks: List<Task> = mutableListOf(),
+
+    val onApproval: List<Approval>? = mutableListOf()
 ) {
     companion object {
         const val GENDER_MAIE: String = "male"

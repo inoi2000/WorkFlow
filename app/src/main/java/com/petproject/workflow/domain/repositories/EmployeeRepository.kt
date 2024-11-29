@@ -1,5 +1,8 @@
 package com.petproject.workflow.domain.repositories
 
-interface EmployeeRepository {
+import androidx.lifecycle.LiveData
+import com.petproject.workflow.domain.entities.Employee
 
+interface EmployeeRepository {
+    fun getEmployee(id: String): LiveData<Employee>
 }
