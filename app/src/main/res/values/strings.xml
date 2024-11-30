@@ -11,7 +11,7 @@
     <string name="error_input_email">Error input email</string>
     <string name="error_input_password">Error input password</string>
     <string name="home">Home</string>
-    <string name="news">News</string>
+    <string name="announcements">Announcements</string>
     <string name="account">Account</string>
     <string name="colleagues_services_news">Colleagues, services, news</string>
     <string name="component_logo">component logo</string>
