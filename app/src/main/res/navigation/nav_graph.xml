@@ -22,6 +22,9 @@
         <argument
             android:name="employeeId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_homeFragment_to_vacationListFragment"
+            app:destination="@id/vacationListFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -38,4 +41,8 @@
         android:name="com.petproject.workflow.presentation.views.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/vacationListFragment"
+        android:name="com.petproject.workflow.presentation.views.VacationListFragment"
+        android:label="VacationListFragment" />
 </navigation>
