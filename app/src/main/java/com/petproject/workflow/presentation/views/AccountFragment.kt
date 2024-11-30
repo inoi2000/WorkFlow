@@ -34,9 +34,9 @@ class AccountFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.navigateToLoginScreen.observe(viewLifecycleOwner) {
             if (it) {
-                val action =
-                    AccountFragmentDirections.actionAccountFragmentToLoginFragment()
-                findNavController().navigate(action)
+                val intent = LoginActivity.newIntent(requireContext())
+                startActivity(intent)
+                requireActivity().finish()
             }
         }
     }

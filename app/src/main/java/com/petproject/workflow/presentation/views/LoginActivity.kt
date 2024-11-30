@@ -1,50 +1,39 @@
 package com.petproject.workflow.presentation.views
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.petproject.workflow.databinding.FragmentLoginBinding
+import com.petproject.workflow.databinding.ActivityLoginBinding
 import com.petproject.workflow.presentation.viewmodels.LoginViewModel
 
-class LoginFragment : Fragment() {
-    private var _binding: FragmentLoginBinding? = null
-    private val binding: FragmentLoginBinding get() = _binding!!
+class LoginActivity : AppCompatActivity() {
+    private val binding: ActivityLoginBinding by lazy {
+        ActivityLoginBinding.inflate(layoutInflater)
+    }
 
     private val viewModel by lazy {
         ViewModelProvider.create(viewModelStore)[LoginViewModel::class]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        checkAuthorization()
         super.onCreate(savedInstanceState)
-        (requireActivity() as MainActivity).hideBottomNavigationView()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.lifecycleOwner = this
+        setContentView(binding.root)
         addTextChangeListeners()
-        observeViewModel()
-        return binding.root
     }
 
-    private fun observeViewModel() {
-        viewModel.navigateToHomeScreen.observe(viewLifecycleOwner) { employeeId ->
+    private fun checkAuthorization() {
+        viewModel.navigateToHomeScreen.observe(this) { employeeId ->
             employeeId?.let {
-                val action =
-                    LoginFragmentDirections.actionLoginFragmentToHomeFragment(it)
-                findNavController().navigate(action)
-                (requireActivity() as MainActivity).showBottomNavigationView()
-                viewModel.onHomeScreenNavigated()
+                val intent = MainActivity.newIntent(this, it)
+                startActivity(intent)
+                finish()
             }
         }
     }
@@ -70,8 +59,9 @@ class LoginFragment : Fragment() {
         })
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    companion object {
+        fun newIntent(context: Context): Intent {
+            return Intent(context, LoginActivity::class.java)
+        }
     }
 }

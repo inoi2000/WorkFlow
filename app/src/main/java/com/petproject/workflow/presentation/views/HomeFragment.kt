@@ -21,10 +21,10 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding get() = _binding!!
 
-    private val args by navArgs<HomeFragmentArgs>()
+//    private val args by navArgs<HomeFragmentArgs>()
 
     private val viewModelFactory by lazy {
-        HomeViewModelFactory(args.employeeId)
+        HomeViewModelFactory((requireActivity() as MainActivity).employeeId)
     }
 
     private val viewModel by lazy {
