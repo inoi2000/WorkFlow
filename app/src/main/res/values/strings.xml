@@ -24,6 +24,16 @@
     <string name="documents">Documents</string>
     <string name="password_hint">Password:</string>
     <string name="more">more</string>
+    <string name="tasks_count">%d task(s)</string>
+    <string name="business_trips_text">%s, %s</string>
+
+    <string name="approval">Approval</string>
+    <string name="not_approval">Not approval</string>
+
+    <string name="completed">Completed</string>
+    <string name="not_completed">Not completed</string>
+    <string name="in_progress">In progress</string>
+    <string name="on_approval">On approval</string>
 
 
 </resources>

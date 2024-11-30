@@ -11,6 +11,8 @@ class HomeViewModel(employeeId: String): ViewModel() {
     private val employeeRepository = EmployeeRepositoryImpl()
     private val getEmployeeUseCase = GetEmployeeUseCase(employeeRepository)
 
-    val employee: LiveData<Employee> = getEmployeeUseCase(employeeId)
+    val employee: LiveData<Employee> by lazy {
+        getEmployeeUseCase(employeeId)
+    }
 
 }

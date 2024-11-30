@@ -41,7 +41,7 @@
 
                 <include
                     android:id="@+id/vacations_item"
-                    layout="@layout/home_screen_item" />
+                    layout="@layout/home_screen_item_with_status" />
 
                 <include
                     android:id="@+id/business_trips_item"
@@ -49,7 +49,7 @@
 
                 <include
                     android:id="@+id/approvals_item"
-                    layout="@layout/home_screen_item" />
+                    layout="@layout/home_screen_item_with_status" />
 
                 <include
                     android:id="@+id/tasks_item"

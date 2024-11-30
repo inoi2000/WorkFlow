@@ -22,4 +22,12 @@
     <string name="mentoring">Наставничество</string>
     <string name="documents">Документы</string>
     <string name="more">подробнее</string>
+    <string name="tasks_count">%d задач(а)</string>
+    <string name="business_trips_text">%s, %s</string>
+    <string name="approval">Согласованно</string>
+    <string name="not_approval">Не согласованно</string>
+    <string name="completed">Выполненно</string>
+    <string name="not_completed">Не выполненно</string>
+    <string name="in_progress">В работе</string>
+    <string name="on_approval">На согласовании</string>
 </resources>

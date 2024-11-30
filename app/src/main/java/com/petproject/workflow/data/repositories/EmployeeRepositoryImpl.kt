@@ -28,8 +28,6 @@ class EmployeeRepositoryImpl : EmployeeRepository {
 
     private val employee = MutableLiveData<Employee>()
 
-//    private val employeeList: MutableList<Employee> = mutableListOf()
-
 //    init {
 //        val businessTrip = BusinessTrip(
 //            id = UUID.randomUUID().toString(),
@@ -83,11 +81,5 @@ class EmployeeRepositoryImpl : EmployeeRepository {
             override fun onCancelled(databaseError: DatabaseError) { }
         })
         return employee
-//        val employee = employeeList.find { it.id == id }
-//        if (employee != null) {
-//            return employee
-//        } else {
-//            throw IllegalArgumentException("The employee not found")
-//        }
     }
 }
