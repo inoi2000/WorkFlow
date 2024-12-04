@@ -3,11 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.petproject.workflow.presentation.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        android:id="@+id/homeFragment"
+        android:name="com.petproject.workflow.presentation.views.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <argument
+            android:name="employeeId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_homeFragment_to_vacationListFragment"
+            app:destination="@id/vacationListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.petproject.workflow.presentation.views.AccountFragment"
+        android:label="AccountFragment" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.petproject.workflow.presentation.views.NewsFragment"
+        android:label="fragment_news"
+        tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/vacationListFragment"
+        android:name="com.petproject.workflow.presentation.views.VacationListFragment"
+        android:label="VacationListFragment" />
 </navigation>
