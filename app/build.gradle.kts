@@ -66,6 +66,18 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 
+    implementation(libs.gson)
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+
+    
+    implementation(libs.aith0)
+
+
     implementation(libs.dagger)
     implementation(libs.androidx.fragment)
     kapt(libs.dagger.android.processor)

@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.navArgs
 import com.petproject.workflow.R
 import com.petproject.workflow.databinding.FragmentHomeBinding
-import com.petproject.workflow.domain.entities.Status
+import com.petproject.workflow.domain.entities.TaskStatus
 import com.petproject.workflow.presentation.viewmodels.HomeViewModel
 import com.petproject.workflow.presentation.viewmodels.HomeViewModelFactory
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
     private fun observeViewModel() {
         employee.observe(viewLifecycleOwner) { employee ->
             with(binding.vacationsItem) {
-                employee.vacations.firstOrNull()?.let {
+                employee.vacations?.firstOrNull()?.let {
                     itemText.text = formatingData(it.start)
                     val status = getApprovalStatus(it.isApproval)
                     itemStatus.background = status.first
@@ -56,7 +56,7 @@ class HomeFragment : Fragment() {
                 }
             }
             with(binding.businessTripsItem) {
-                employee.businessTrips.firstOrNull()?.let {
+                employee.businessTrips?.firstOrNull()?.let {
                     itemText.text = getString(R.string.business_trips_text)
                         .format(formatingData(it.start), it.place)
                     val status = getApprovalStatus(it.isApproval)
@@ -110,12 +110,16 @@ class HomeFragment : Fragment() {
     }
 
     @SuppressLint("SimpleDateFormat")
-    private fun formatingData(data: String): String {
-        val dateParser = SimpleDateFormat("dd.MM.yyyy")
-        val date = dateParser.parse(data) ?: return data
+    private fun formatingData(data: LocalDate): String {
+//        val dateParser = SimpleDateFormat("dd.MM.yyyy")
+//        val date = dateParser.parse(data) ?: return data
+//        val locale = resources.configuration.getLocales().get(0)
+//        val dateFormatter = SimpleDateFormat("dd MMMM yyyy", locale)
+//        return dateFormatter.format(date)
+
         val locale = resources.configuration.getLocales().get(0)
         val dateFormatter = SimpleDateFormat("dd MMMM yyyy", locale)
-        return dateFormatter.format(date)
+        return dateFormatter.format(dateFormatter)
     }
 
     private fun getApprovalStatus(isApproval: Boolean): Pair<Drawable?, String> {
@@ -132,27 +136,33 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun getTaskStatusBackground(status: Status): Pair<Drawable?, String> {
-        return when (status) {
-            Status.COMPLETED -> {
+    private fun getTaskStatusBackground(taskStatus: TaskStatus): Pair<Drawable?, String> {
+        return when (taskStatus) {
+            TaskStatus.NEW -> {
+                Pair(
+                    ContextCompat.getDrawable(requireContext(), R.drawable.circle_green),
+                    getString(R.string.new_task)
+                )
+            }
+            TaskStatus.COMPLETED -> {
                 Pair(
                     ContextCompat.getDrawable(requireContext(), R.drawable.circle_green),
                     getString(R.string.completed)
                 )
             }
-            Status.NOT_COMPLETED -> {
+            TaskStatus.FAILED -> {
                 Pair(
                     ContextCompat.getDrawable(requireContext(), R.drawable.circle_red),
                     getString(R.string.not_completed)
                 )
             }
-            Status.IN_PROGRESS -> {
+            TaskStatus.IN_PROGRESS -> {
                 Pair(
                     ContextCompat.getDrawable(requireContext(), R.drawable.circle_blue),
                     getString(R.string.in_progress)
                 )
             }
-            Status.ON_APPROVAL -> {
+            TaskStatus.ON_APPROVAL -> {
                 Pair(
                     ContextCompat.getDrawable(requireContext(), R.drawable.circle_yellow),
                     getString(R.string.on_approval)
