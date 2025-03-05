@@ -30,4 +30,6 @@
     <string name="not_completed">Не выполненно</string>
     <string name="in_progress">В работе</string>
     <string name="on_approval">На согласовании</string>
+    <string name="app_logo">Логотип</string>
+    <string name="new_task">Новая</string>
 </resources>

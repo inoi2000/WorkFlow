@@ -2,7 +2,7 @@ package com.petproject.workflow.domain.repositories
 
 interface AuthorizationRepository {
 
-    fun signIn(email: String, password: String, onFailureListener: (Exception) -> Unit)
+    fun signIn(username: String, password: String, onFailureListener: (Exception) -> Unit)
 
     fun signOut()
 

@@ -1,30 +1,38 @@
 package com.petproject.workflow.data.repositories
 
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.petproject.workflow.data.network.ApiFactory
+import com.petproject.workflow.data.network.models.SignInRequest
+import com.petproject.workflow.data.network.utils.TokenManager
 import com.petproject.workflow.domain.repositories.AuthorizationRepository
+import kotlinx.coroutines.runBlocking
 
 class AuthorizationRepositoryImpl : AuthorizationRepository {
 
-    private val auth: FirebaseAuth = Firebase.auth
+    private val tokenManager = TokenManager()
+    private val authApiService = ApiFactory.authApiService
 
-    override fun signIn(email: String, password: String, onFailureListener: (Exception) -> Unit) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnFailureListener {
-                onFailureListener(it)
+    override fun signIn(username: String, password: String, onFailureListener: (Exception) -> Unit) {
+        runBlocking {
+            val signInRequest = SignInRequest(username, password)
+            val response = authApiService.signIn(signInRequest)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    tokenManager.saveToken(it.token)
+                }
+            } else {
+                onFailureListener(Exception(response.message()))
             }
+        }
     }
 
     override fun signOut() {
-        auth.signOut()
+        tokenManager.deleteToken()
     }
 
     override fun verifySuccessAuthorization(callback: (String?) -> Unit) {
-        auth.addAuthStateListener { firebaseAuth: FirebaseAuth ->
-            firebaseAuth.currentUser?.let {
-                callback(it.uid)
-            }
+        val token = tokenManager.getToken()
+        token?.let {
+            callback(TokenManager.getIdFromToken(it))
         }
     }
 }

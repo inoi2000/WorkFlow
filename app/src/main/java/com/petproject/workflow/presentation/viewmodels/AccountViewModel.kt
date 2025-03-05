@@ -6,17 +6,20 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.petproject.workflow.data.repositories.AuthorizationRepositoryImpl
+import com.petproject.workflow.domain.repositories.AuthorizationRepository
+import com.petproject.workflow.domain.usecases.SignOutUseCase
 
 class AccountViewModel: ViewModel() {
-    private val auth: FirebaseAuth = Firebase.auth
+
+    private val repository: AuthorizationRepository = AuthorizationRepositoryImpl()
+    private val signOutUseCase = SignOutUseCase(repository)
 
     private val _navigateToLoginScreen = MutableLiveData<Boolean>(false)
     val navigateToLoginScreen: LiveData<Boolean> get() = _navigateToLoginScreen
 
     fun signOut() {
-        auth.signOut()
+        signOutUseCase()
         _navigateToLoginScreen.value = true
     }
-
-
 }
