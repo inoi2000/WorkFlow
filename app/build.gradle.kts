@@ -3,8 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
-    id("com.google.gms.google-services")
-
 }
 
 android {
@@ -74,19 +72,12 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
 
-    
     implementation(libs.aith0)
-
 
     implementation(libs.dagger)
     implementation(libs.androidx.fragment)
     kapt(libs.dagger.android.processor)
     kapt(libs.dagger.compiler)
-
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.auth)
-    implementation(libs.firebase.database)
-
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

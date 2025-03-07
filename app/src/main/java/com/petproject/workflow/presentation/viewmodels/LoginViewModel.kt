@@ -4,10 +4,12 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.petproject.workflow.data.repositories.AuthorizationRepositoryImpl
 import com.petproject.workflow.domain.repositories.AuthorizationRepository
 import com.petproject.workflow.domain.usecases.SignInUseCase
 import com.petproject.workflow.domain.usecases.VerifySuccessAuthorizationUseCase
+import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
 
@@ -30,8 +32,10 @@ class LoginViewModel : ViewModel() {
     var passwordField: ObservableField<String> = ObservableField()
 
     init {
-        verifySuccessAuthorization.invoke {
-            _navigateToHomeScreen.value = it
+        viewModelScope.launch {
+            verifySuccessAuthorization.invoke {
+                _navigateToHomeScreen.value = it
+            }
         }
     }
 
@@ -39,9 +43,11 @@ class LoginViewModel : ViewModel() {
         val email = emailField.get() ?: ""
         val password = passwordField.get() ?: ""
         if (validateInput(email, password)) {
-            signInUseCase(email, password) {
-                _errorInputEmail.value = true
-                _errorInputPassword.value = true
+            viewModelScope.launch {
+                signInUseCase(email, password) {
+                    _errorInputEmail.value = true
+                    _errorInputPassword.value = true
+                }
             }
         }
     }

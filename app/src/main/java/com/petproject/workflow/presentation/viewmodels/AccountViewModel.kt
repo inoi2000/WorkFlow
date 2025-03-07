@@ -3,12 +3,11 @@ package com.petproject.workflow.presentation.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import androidx.lifecycle.viewModelScope
 import com.petproject.workflow.data.repositories.AuthorizationRepositoryImpl
 import com.petproject.workflow.domain.repositories.AuthorizationRepository
 import com.petproject.workflow.domain.usecases.SignOutUseCase
+import kotlinx.coroutines.launch
 
 class AccountViewModel: ViewModel() {
 
@@ -19,7 +18,9 @@ class AccountViewModel: ViewModel() {
     val navigateToLoginScreen: LiveData<Boolean> get() = _navigateToLoginScreen
 
     fun signOut() {
-        signOutUseCase()
-        _navigateToLoginScreen.value = true
+        viewModelScope.launch {
+            signOutUseCase()
+            _navigateToLoginScreen.value = true
+        }
     }
 }
