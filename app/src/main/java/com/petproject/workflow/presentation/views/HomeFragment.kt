@@ -46,6 +46,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeViewModel() {
+        viewModel.navigateToLoginScreen.observe(viewLifecycleOwner) {
+            if (it) {
+                val intent = LoginActivity.newIntent(requireContext())
+                startActivity(intent)
+                requireActivity().finish()
+            }
+        }
         employee.observe(viewLifecycleOwner) { employee ->
             with(binding.vacationsItem) {
                 employee.vacations?.firstOrNull()?.let {
