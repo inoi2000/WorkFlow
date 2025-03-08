@@ -1,8 +1,7 @@
 package com.petproject.workflow.data.repositories
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.petproject.workflow.data.network.ApiFactory
+import com.petproject.workflow.data.network.exceptions.AuthException
 import com.petproject.workflow.data.network.mappers.EmployeeMapper
 import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.repositories.EmployeeRepository
@@ -20,6 +19,6 @@ class EmployeeRepositoryImpl : EmployeeRepository {
                 return employeeMapper.mapDtoToEntity(it)
             }
         }
-        throw RuntimeException()
+        throw AuthException()
     }
 }

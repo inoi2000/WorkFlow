@@ -10,12 +10,15 @@ class AuthorizationRepositoryImpl : AuthorizationRepository {
     private val tokenManager = TokenManager()
     private val authApiService = ApiFactory.authApiService
 
+    private var verifySuccessAuthorizationCallback: ((String?) -> Unit)? = null
+
     override suspend fun signIn(username: String, password: String, onFailureListener: (Exception) -> Unit) {
         val signInRequest = SignInRequest(username, password)
         val response = authApiService.signIn(signInRequest)
         if (response.isSuccessful) {
-            response.body()?.let {
-                tokenManager.saveToken(it.token)
+            response.body()?.token?.let {
+                tokenManager.saveToken(it)
+                verifySuccessAuthorizationCallback?.invoke(TokenManager.getIdFromToken(it))
             }
         } else {
             onFailureListener(Exception(response.message()))
@@ -27,8 +30,8 @@ class AuthorizationRepositoryImpl : AuthorizationRepository {
     }
 
     override suspend fun verifySuccessAuthorization(callback: (String?) -> Unit) {
+        verifySuccessAuthorizationCallback = callback
         val token = tokenManager.getToken()
-        //TODO добавить запрос валидности токена
         token?.let {
             callback(TokenManager.getIdFromToken(it))
         }

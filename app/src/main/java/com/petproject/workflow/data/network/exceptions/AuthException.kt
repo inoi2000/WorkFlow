@@ -1,3 +1,3 @@
 package com.petproject.workflow.data.network.exceptions
 
-class AuthException: RuntimeException()
+class AuthException: Exception()
