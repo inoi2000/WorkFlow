@@ -1,14 +1,17 @@
 package com.petproject.workflow.data.repositories
 
-import com.petproject.workflow.data.network.ApiFactory
+import com.petproject.workflow.data.network.AuthApiService
 import com.petproject.workflow.data.network.models.SignInRequest
 import com.petproject.workflow.data.network.utils.TokenManager
+import com.petproject.workflow.di.ApplicationScope
 import com.petproject.workflow.domain.repositories.AuthorizationRepository
+import javax.inject.Inject
 
-class AuthorizationRepositoryImpl : AuthorizationRepository {
-
-    private val tokenManager = TokenManager()
-    private val authApiService = ApiFactory.authApiService
+@ApplicationScope
+class AuthorizationRepositoryImpl @Inject constructor(
+    private val tokenManager: TokenManager,
+    private val authApiService: AuthApiService
+) : AuthorizationRepository {
 
     private var verifySuccessAuthorizationCallback: ((String?) -> Unit)? = null
 

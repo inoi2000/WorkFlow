@@ -1,23 +1,16 @@
 package com.petproject.workflow.data.network.utils
 
-import com.petproject.workflow.data.network.ApiFactory
 import com.petproject.workflow.data.network.models.AuthenticationResponse
-import com.petproject.workflow.presentation.application.WorkFlowApplication
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
-import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.Route
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
-class AuthAuthenticator : Authenticator {
-
-    private val tokenManager = TokenManager()
+class AuthAuthenticator @Inject constructor(
+    private val tokenManager: TokenManager
+) : Authenticator {
 
     override fun authenticate(route: Route?, response: Response): Request? {
         val token = tokenManager.getToken();

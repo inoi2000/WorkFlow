@@ -1,15 +1,16 @@
 package com.petproject.workflow.data.repositories
 
-import com.petproject.workflow.data.network.ApiFactory
+import com.petproject.workflow.data.network.MainApiService
 import com.petproject.workflow.data.network.exceptions.AuthException
 import com.petproject.workflow.data.network.mappers.EmployeeMapper
 import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.repositories.EmployeeRepository
+import javax.inject.Inject
 
-class EmployeeRepositoryImpl : EmployeeRepository {
-
-    private val employeeMapper = EmployeeMapper
-    private val mainApiService = ApiFactory.mainApiService
+class EmployeeRepositoryImpl @Inject constructor(
+    private val employeeMapper: EmployeeMapper,
+    private val mainApiService: MainApiService
+) : EmployeeRepository {
 
     override suspend fun getEmployee(id: String): Employee {
         //TODO добавить обновления пользователя через websocket

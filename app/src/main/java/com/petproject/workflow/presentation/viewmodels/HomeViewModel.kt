@@ -5,21 +5,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.petproject.workflow.data.network.exceptions.AuthException
-import com.petproject.workflow.data.repositories.AuthorizationRepositoryImpl
-import com.petproject.workflow.data.repositories.EmployeeRepositoryImpl
 import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.usecases.GetEmployeeUseCase
 import com.petproject.workflow.domain.usecases.SignOutUseCase
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
-class HomeViewModel(employeeId: String): ViewModel() {
-
-    private val employeeRepository = EmployeeRepositoryImpl()
-    private val getEmployeeUseCase = GetEmployeeUseCase(employeeRepository)
-    private val authorizationRepository = AuthorizationRepositoryImpl()
-    private val signOutUseCase = SignOutUseCase(authorizationRepository)
+class HomeViewModel @Inject constructor(
+    private val employeeId: String = "",
+    private val getEmployeeUseCase: GetEmployeeUseCase,
+    private val signOutUseCase: SignOutUseCase
+): ViewModel() {
 
     private val _navigateToLoginScreen = MutableLiveData(false)
     val navigateToLoginScreen: LiveData<Boolean> get() = _navigateToLoginScreen

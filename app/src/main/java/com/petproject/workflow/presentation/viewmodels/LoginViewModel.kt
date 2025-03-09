@@ -5,17 +5,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.petproject.workflow.data.repositories.AuthorizationRepositoryImpl
-import com.petproject.workflow.domain.repositories.AuthorizationRepository
 import com.petproject.workflow.domain.usecases.SignInUseCase
 import com.petproject.workflow.domain.usecases.VerifySuccessAuthorizationUseCase
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel : ViewModel() {
-
-    private val repository: AuthorizationRepository = AuthorizationRepositoryImpl()
-    private val signInUseCase = SignInUseCase(repository)
-    private val verifySuccessAuthorization = VerifySuccessAuthorizationUseCase(repository)
+class LoginViewModel @Inject constructor(
+    private val signInUseCase: SignInUseCase,
+    private val verifySuccessAuthorizationUseCase: VerifySuccessAuthorizationUseCase
+) : ViewModel() {
 
     private val _errorInputEmail = MutableLiveData<Boolean>(false)
     val errorInputEmail: LiveData<Boolean> get() = _errorInputEmail
@@ -23,17 +21,15 @@ class LoginViewModel : ViewModel() {
     private val _errorInputPassword = MutableLiveData<Boolean>(false)
     val errorInputPassword: LiveData<Boolean> get() = _errorInputPassword
 
-
     private val _navigateToHomeScreen = MutableLiveData<String?>()
     val navigateToHomeScreen: LiveData<String?> get() = _navigateToHomeScreen
-
 
     var emailField: ObservableField<String> = ObservableField()
     var passwordField: ObservableField<String> = ObservableField()
 
     init {
         viewModelScope.launch {
-            verifySuccessAuthorization.invoke {
+            verifySuccessAuthorizationUseCase.invoke {
                 _navigateToHomeScreen.value = it
             }
         }
@@ -72,7 +68,6 @@ class LoginViewModel : ViewModel() {
     fun resetErrorInputPassword() {
         _errorInputPassword.value = false
     }
-
 
     fun onHomeScreenNavigated() {
         _navigateToHomeScreen.value = null

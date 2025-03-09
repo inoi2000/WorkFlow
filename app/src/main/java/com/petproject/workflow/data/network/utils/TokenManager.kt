@@ -2,11 +2,13 @@ package com.petproject.workflow.data.network.utils
 
 import android.content.Context
 import com.auth0.android.jwt.JWT
-import com.petproject.workflow.presentation.application.WorkFlowApplication
+import com.petproject.workflow.di.ApplicationScope
+import javax.inject.Inject
 
-class TokenManager {
-
-    private val context by lazy { WorkFlowApplication.context ?: throw RuntimeException() }
+@ApplicationScope
+class TokenManager @Inject constructor(
+    context: Context,
+) {
 
     private val preferences =
         context.getSharedPreferences("WorkFlowApp", Context.MODE_PRIVATE)
@@ -16,13 +18,13 @@ class TokenManager {
         private const val TOKEN_KEY = "jwt_token"
 
         fun getIdFromToken(token: String): String? {
-            val jwt: JWT = JWT(token)
+            val jwt = JWT(token)
             return jwt.getClaim("id").asString()
         }
     }
 
     fun getToken(): String? {
-        return preferences.getString(TOKEN_KEY, null);
+        return preferences.getString(TOKEN_KEY, null)
     }
 
     fun saveToken(token: String) {
