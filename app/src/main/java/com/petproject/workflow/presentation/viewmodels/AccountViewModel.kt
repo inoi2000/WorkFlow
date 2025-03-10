@@ -12,7 +12,7 @@ class AccountViewModel @Inject constructor(
     private val signOutUseCase: SignOutUseCase
 ) : ViewModel() {
 
-    private val _navigateToLoginScreen = MutableLiveData<Boolean>(false)
+    private val _navigateToLoginScreen = MutableLiveData(false)
     val navigateToLoginScreen: LiveData<Boolean> get() = _navigateToLoginScreen
 
     fun signOut() {

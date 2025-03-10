@@ -14,7 +14,7 @@ import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
-    private val employeeId: String = "",
+    private val employeeId: String,
     private val getEmployeeUseCase: GetEmployeeUseCase,
     private val signOutUseCase: SignOutUseCase
 ): ViewModel() {

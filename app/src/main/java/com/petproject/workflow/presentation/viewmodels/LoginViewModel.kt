@@ -15,10 +15,10 @@ class LoginViewModel @Inject constructor(
     private val verifySuccessAuthorizationUseCase: VerifySuccessAuthorizationUseCase
 ) : ViewModel() {
 
-    private val _errorInputEmail = MutableLiveData<Boolean>(false)
+    private val _errorInputEmail = MutableLiveData(false)
     val errorInputEmail: LiveData<Boolean> get() = _errorInputEmail
 
-    private val _errorInputPassword = MutableLiveData<Boolean>(false)
+    private val _errorInputPassword = MutableLiveData(false)
     val errorInputPassword: LiveData<Boolean> get() = _errorInputPassword
 
     private val _navigateToHomeScreen = MutableLiveData<String?>()
