@@ -4,17 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.petproject.workflow.data.repositories.AuthorizationRepositoryImpl
-import com.petproject.workflow.domain.repositories.AuthorizationRepository
 import com.petproject.workflow.domain.usecases.SignOutUseCase
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AccountViewModel: ViewModel() {
+class AccountViewModel @Inject constructor(
+    private val signOutUseCase: SignOutUseCase
+) : ViewModel() {
 
-    private val repository: AuthorizationRepository = AuthorizationRepositoryImpl()
-    private val signOutUseCase = SignOutUseCase(repository)
-
-    private val _navigateToLoginScreen = MutableLiveData<Boolean>(false)
+    private val _navigateToLoginScreen = MutableLiveData(false)
     val navigateToLoginScreen: LiveData<Boolean> get() = _navigateToLoginScreen
 
     fun signOut() {

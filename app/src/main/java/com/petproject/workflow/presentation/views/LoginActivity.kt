@@ -7,19 +7,30 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.ActivityLoginBinding
 import com.petproject.workflow.presentation.viewmodels.LoginViewModel
+import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
+import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
     private val binding: ActivityLoginBinding by lazy {
         ActivityLoginBinding.inflate(layoutInflater)
     }
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     private val viewModel by lazy {
-        ViewModelProvider.create(viewModelStore)[LoginViewModel::class]
+        ViewModelProvider.create(viewModelStore, viewModelFactory)[LoginViewModel::class]
+    }
+
+    private val component by lazy {
+        (application as WorkFlowApplication).component
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
         checkAuthorization()
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel

@@ -1,8 +1,11 @@
 package com.petproject.workflow.domain.usecases
 
 import com.petproject.workflow.domain.repositories.AuthorizationRepository
+import javax.inject.Inject
 
-class SignInUseCase(private val repository: AuthorizationRepository) {
+class SignInUseCase @Inject constructor(
+    private val repository: AuthorizationRepository
+) {
     suspend operator fun invoke(
         username: String,
         password: String,
