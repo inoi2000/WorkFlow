@@ -2,6 +2,7 @@ package com.petproject.workflow.di
 
 import androidx.lifecycle.ViewModel
 import com.petproject.workflow.presentation.viewmodels.AccountViewModel
+import com.petproject.workflow.presentation.viewmodels.ExecutingTaskListViewModel
 import com.petproject.workflow.presentation.viewmodels.LoginViewModel
 import dagger.Binds
 import dagger.Module
@@ -19,4 +20,9 @@ interface ViewModelModule {
     @ViewModelKey(LoginViewModel::class)
     @Binds
     fun bindLoginViewModel(impl: LoginViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(ExecutingTaskListViewModel::class)
+    @Binds
+    fun bindExecutingTaskListViewModel(impl: ExecutingTaskListViewModel): ViewModel
 }
