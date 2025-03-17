@@ -2,6 +2,7 @@ package com.petproject.workflow.di
 
 import android.content.Context
 import com.petproject.workflow.presentation.views.AccountFragment
+import com.petproject.workflow.presentation.views.ExecutingTaskListFragment
 import com.petproject.workflow.presentation.views.LoginActivity
 import com.petproject.workflow.presentation.views.NewsFragment
 import com.petproject.workflow.presentation.views.VacationListFragment
@@ -19,6 +20,8 @@ interface ApplicationComponent {
     fun inject(newsFragment: NewsFragment)
 
     fun inject(vacationListFragment: VacationListFragment)
+
+    fun inject(executingTaskListFragment: ExecutingTaskListFragment)
 
     fun activityComponentFactory(): ActivityComponent.Factory
 

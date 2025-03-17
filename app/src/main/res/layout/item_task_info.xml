@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="12dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp">
+
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:lines="2"
+                android:ellipsize="end"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="№ SR0278294, Предоставление VPN доступа партнерам, доступ партнерам находящимся за рубежем" />
+
+            <View
+                android:id="@+id/item_status"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginTop="18dp"
+                app:layout_constraintStart_toStartOf="@+id/item_title"
+                app:layout_constraintTop_toBottomOf="@+id/item_title"
+                tools:background="@drawable/circle_blue" />
+
+
+            <TextView
+                android:id="@+id/item_status_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="12dp"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/item_status"
+                app:layout_constraintTop_toBottomOf="@+id/item_title"
+                tools:text="В работе" />
+
+
+<!--            <Button-->
+<!--                android:id="@+id/item_ref_button"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="22dp"-->
+<!--                android:text="@string/more"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/item_title"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent" />-->
+
+            <TextView
+                android:id="@+id/item_ref_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="@string/more"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/item_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
