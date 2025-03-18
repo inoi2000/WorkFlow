@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentHomeBinding
@@ -89,6 +90,11 @@ class HomeFragment : Fragment() {
                 employee.tasks?.let {
 
                 }
+                binding.tasksItem.root.setOnClickListener {
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionHomeFragmentToExecutingTaskListFragment()
+                    )
+                }
             }
         }
     }
@@ -146,7 +152,7 @@ class HomeFragment : Fragment() {
                 ContextCompat.getDrawable(requireContext(), R.drawable.circle_green),
                 getString(R.string.approval)
             )
-        }  else {
+        } else {
             Pair(
                 ContextCompat.getDrawable(requireContext(), R.drawable.circle_red),
                 getString(R.string.not_approval)
@@ -162,24 +168,28 @@ class HomeFragment : Fragment() {
                     getString(R.string.new_task)
                 )
             }
+
             TaskStatus.COMPLETED -> {
                 Pair(
                     ContextCompat.getDrawable(requireContext(), R.drawable.circle_green),
                     getString(R.string.completed)
                 )
             }
+
             TaskStatus.FAILED -> {
                 Pair(
                     ContextCompat.getDrawable(requireContext(), R.drawable.circle_red),
                     getString(R.string.not_completed)
                 )
             }
+
             TaskStatus.IN_PROGRESS -> {
                 Pair(
                     ContextCompat.getDrawable(requireContext(), R.drawable.circle_blue),
                     getString(R.string.in_progress)
                 )
             }
+
             TaskStatus.ON_APPROVAL -> {
                 Pair(
                     ContextCompat.getDrawable(requireContext(), R.drawable.circle_yellow),

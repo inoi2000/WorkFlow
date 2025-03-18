@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_vacationListFragment"
             app:destination="@id/vacationListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_executingTaskListFragment"
+            app:destination="@id/executingTaskListFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -30,4 +33,9 @@
         android:id="@+id/vacationListFragment"
         android:name="com.petproject.workflow.presentation.views.VacationListFragment"
         android:label="VacationListFragment" />
+    <fragment
+        android:id="@+id/executingTaskListFragment"
+        android:name="com.petproject.workflow.presentation.views.ExecutingTaskListFragment"
+        android:label="fragment_executing_task_list"
+        tools:layout="@layout/fragment_executing_task_list" />
 </navigation>
