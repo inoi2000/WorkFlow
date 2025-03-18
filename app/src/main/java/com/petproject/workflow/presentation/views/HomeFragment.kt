@@ -86,7 +86,9 @@ class HomeFragment : Fragment() {
                 }
             }
             with(binding.tasksItem) {
+                employee.tasks?.let {
 
+                }
             }
         }
     }

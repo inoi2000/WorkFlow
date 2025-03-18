@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="task"
+            type="com.petproject.workflow.domain.entities.Task" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,10 +25,11 @@
                 android:id="@+id/item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="2"
+                android:text="@{task.description}"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:lines="2"
-                android:ellipsize="end"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="№ SR0278294, Предоставление VPN доступа партнерам, доступ партнерам находящимся за рубежем" />
@@ -31,6 +39,7 @@
                 android:layout_width="8dp"
                 android:layout_height="8dp"
                 android:layout_marginTop="18dp"
+                app:taskStatusColor="@{task.status}"
                 app:layout_constraintStart_toStartOf="@+id/item_title"
                 app:layout_constraintTop_toBottomOf="@+id/item_title"
                 tools:background="@drawable/circle_blue" />
@@ -43,20 +52,21 @@
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="12dp"
                 android:textSize="14sp"
+                app:taskStatusText="@{task.status}"
                 app:layout_constraintStart_toEndOf="@+id/item_status"
                 app:layout_constraintTop_toBottomOf="@+id/item_title"
                 tools:text="В работе" />
 
 
-<!--            <Button-->
-<!--                android:id="@+id/item_ref_button"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="22dp"-->
-<!--                android:text="@string/more"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/item_title"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent" />-->
+            <!--            <Button-->
+            <!--                android:id="@+id/item_ref_button"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="22dp"-->
+            <!--                android:text="@string/more"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/item_title"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent" />-->
 
             <TextView
                 android:id="@+id/item_ref_button"
@@ -67,9 +77,9 @@
                 android:textColor="?attr/colorPrimary"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/item_title"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/item_title" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,6 +36,7 @@
     <string name="on_approval">On approval</string>
     <string name="app_logo">app logo</string>
     <string name="new_task">New</string>
+    <string name="faild">Faild</string>
 
 
 </resources>
