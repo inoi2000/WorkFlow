@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentExecutingTaskListBinding
 import com.petproject.workflow.presentation.viewmodels.ExecutingTaskListViewModel
@@ -40,7 +39,7 @@ class ExecutingTaskListFragment : Fragment() {
     }
 
     private fun setRecyclerView() {
-        val adapter = TaskAdapter(requireContext()) {
+        val adapter = TaskAdapter {
             //TODO добаввить реакцию на нажатие
 //            val action =
 //                ExecutingTasksListFragmentDirections

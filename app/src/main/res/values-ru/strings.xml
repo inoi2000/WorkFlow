@@ -32,4 +32,5 @@
     <string name="on_approval">На согласовании</string>
     <string name="app_logo">Логотип</string>
     <string name="new_task">Новая</string>
+    <string name="faild">Просрочено</string>
 </resources>
