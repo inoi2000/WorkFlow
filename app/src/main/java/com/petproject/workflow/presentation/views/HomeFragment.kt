@@ -141,9 +141,11 @@ class HomeFragment : Fragment() {
 //        val dateFormatter = SimpleDateFormat("dd MMMM yyyy", locale)
 //        return dateFormatter.format(date)
 
-        val locale = resources.configuration.getLocales().get(0)
-        val dateFormatter = SimpleDateFormat("dd MMMM yyyy", locale)
-        return dateFormatter.format(dateFormatter)
+//        val locale = resources.configuration.getLocales().get(0)
+//        val dateFormatter = SimpleDateFormat("dd MMMM yyyy", locale)
+//        return dateFormatter.format(dateFormatter)
+
+        return data.toString()
     }
 
     private fun getApprovalStatus(isApproval: Boolean): Pair<Drawable?, String> {
