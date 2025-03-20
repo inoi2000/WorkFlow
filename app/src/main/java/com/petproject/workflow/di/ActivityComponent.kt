@@ -1,5 +1,6 @@
 package com.petproject.workflow.di
 
+import com.petproject.workflow.presentation.views.ExecutingTaskInfoFragment
 import com.petproject.workflow.presentation.views.HomeFragment
 import dagger.BindsInstance
 import dagger.Subcomponent
@@ -8,6 +9,8 @@ import dagger.Subcomponent
 interface ActivityComponent {
 
     fun inject(homeFragment: HomeFragment)
+
+    fun inject(executingTaskInfoFragment: ExecutingTaskInfoFragment)
 
     @Subcomponent.Factory
     interface Factory {

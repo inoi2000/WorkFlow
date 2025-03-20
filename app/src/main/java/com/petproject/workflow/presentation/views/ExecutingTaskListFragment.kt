@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentExecutingTaskListBinding
 import com.petproject.workflow.presentation.viewmodels.ExecutingTaskListViewModel
@@ -21,7 +22,10 @@ class ExecutingTaskListFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelFactory
 
     private val viewModel by lazy {
-        ViewModelProvider.create(viewModelStore, viewModelFactory)[ExecutingTaskListViewModel::class]
+        ViewModelProvider.create(
+            viewModelStore,
+            viewModelFactory
+        )[ExecutingTaskListViewModel::class]
     }
 
     private val component by lazy {
@@ -40,11 +44,9 @@ class ExecutingTaskListFragment : Fragment() {
 
     private fun setRecyclerView() {
         val adapter = TaskAdapter {
-            //TODO добаввить реакцию на нажатие
-//            val action =
-//                ExecutingTasksListFragmentDirections
-//                    .actionExecutingTasksListFragmentToTaskInfoFragment(it.id)
-//            findNavController().navigate(action)
+            val action = ExecutingTaskListFragmentDirections
+                .actionExecutingTaskListFragmentToExecutingTaskInfoFragment(it.id)
+            findNavController().navigate(action)
         }
         binding.rvExecutingTasksList.itemAnimator = null
         binding.rvExecutingTasksList.adapter = adapter

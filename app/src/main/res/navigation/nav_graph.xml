@@ -37,5 +37,18 @@
         android:id="@+id/executingTaskListFragment"
         android:name="com.petproject.workflow.presentation.views.ExecutingTaskListFragment"
         android:label="fragment_executing_task_list"
-        tools:layout="@layout/fragment_executing_task_list" />
+        tools:layout="@layout/fragment_executing_task_list" >
+        <action
+            android:id="@+id/action_executingTaskListFragment_to_executingTaskInfoFragment"
+            app:destination="@id/executingTaskInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/executingTaskInfoFragment"
+        android:name="com.petproject.workflow.presentation.views.ExecutingTaskInfoFragment"
+        android:label="fragment_executing_task_info"
+        tools:layout="@layout/fragment_executing_task_info" >
+        <argument
+            android:name="taskId"
+            app:argType="string" />
+    </fragment>
 </navigation>

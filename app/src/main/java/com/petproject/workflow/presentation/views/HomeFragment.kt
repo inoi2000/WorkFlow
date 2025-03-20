@@ -24,8 +24,6 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding get() = _binding!!
 
-//    private val args by navArgs<HomeFragmentArgs>()
-
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
@@ -90,7 +88,7 @@ class HomeFragment : Fragment() {
                 employee.tasks?.let {
 
                 }
-                binding.tasksItem.root.setOnClickListener {
+                binding.tasksItem.itemRefIc.setOnClickListener {
                     findNavController().navigate(
                         HomeFragmentDirections.actionHomeFragmentToExecutingTaskListFragment()
                     )
