@@ -38,10 +38,11 @@
                 android:id="@+id/item_status"
                 android:layout_width="8dp"
                 android:layout_height="8dp"
-                android:layout_marginTop="18dp"
+                app:layout_constraintStart_toStartOf="@+id/comment_image_view"
+                app:layout_constraintEnd_toEndOf="@+id/comment_image_view"
+                app:layout_constraintTop_toTopOf="@+id/item_status_text"
+                app:layout_constraintBottom_toBottomOf="@+id/item_status_text"
                 app:taskStatusColor="@{task.status}"
-                app:layout_constraintStart_toStartOf="@+id/item_title"
-                app:layout_constraintTop_toBottomOf="@+id/item_title"
                 tools:background="@drawable/circle_blue" />
 
 
@@ -49,37 +50,141 @@
                 android:id="@+id/item_status_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 android:textSize="14sp"
-                app:taskStatusText="@{task.status}"
-                app:layout_constraintStart_toEndOf="@+id/item_status"
+                app:layout_constraintStart_toStartOf="@+id/comment_count_text_view"
                 app:layout_constraintTop_toBottomOf="@+id/item_title"
+                app:taskStatusText="@{task.status}"
                 tools:text="В работе" />
 
+            <ImageView
+                android:id="@+id/comment_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/ic_comment"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_status" />
 
-            <!--            <Button-->
+            <TextView
+                android:id="@+id/comment_count_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="1 комментарий"
+                android:textColor="@color/light_blue"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/comment_image_view"
+                app:layout_constraintTop_toTopOf="@+id/comment_image_view" />
+
+            <View
+                android:id="@+id/line_view"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="6dp"
+                android:background="?attr/background"
+                app:layout_constraintTop_toBottomOf="@+id/comment_image_view" />
+
+            <ImageView
+                android:id="@+id/deadline_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_flag"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line_view" />
+
+            <TextView
+                android:id="@+id/deadline_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="25 декабря 2025"
+                android:textSize="14sp"
+                app:layout_constraintTop_toTopOf="@+id/deadline_image_view"
+                app:layout_constraintBottom_toBottomOf="@+id/deadline_image_view"
+                app:layout_constraintStart_toStartOf="@+id/comment_count_text_view" />
+
+            <ImageView
+                android:id="@+id/destination_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_location"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/deadline_image_view" />
+
+            <TextView
+                android:id="@+id/destination_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ул. Туркестанская д.46"
+                app:layout_constraintTop_toTopOf="@+id/destination_image_view"
+                app:layout_constraintBottom_toBottomOf="@+id/destination_image_view"
+                app:layout_constraintStart_toStartOf="@+id/comment_count_text_view" />
+
+            <ImageView
+                android:id="@+id/inspector_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_person"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/destination_image_view" />
+
+            <TextView
+                android:id="@+id/inspector_name_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Иванов Иван Иванович"
+                app:layout_constraintTop_toTopOf="@+id/inspector_image_view"
+                app:layout_constraintBottom_toBottomOf="@+id/inspector_image_view"
+                app:layout_constraintStart_toStartOf="@+id/comment_count_text_view" />
+
+            <ImageView
+                android:id="@+id/urgent_task_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_bolt"
+
+                app:layout_constraintTop_toTopOf="@+id/item_ref_button"
+                app:layout_constraintBottom_toBottomOf="@+id/item_ref_button"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/urgent_task_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:text="@string/urgent"
+                app:layout_constraintStart_toEndOf="@+id/urgent_task_image_view"
+                app:layout_constraintTop_toTopOf="@+id/item_ref_button"
+                app:layout_constraintBottom_toBottomOf="@+id/item_ref_button" />
+
+
+
+
+            <Button
+                android:id="@+id/item_ref_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/more"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inspector_name_text_view" />
+
+            <!--            <TextView-->
             <!--                android:id="@+id/item_ref_button"-->
             <!--                android:layout_width="wrap_content"-->
             <!--                android:layout_height="wrap_content"-->
             <!--                android:layout_marginTop="22dp"-->
             <!--                android:text="@string/more"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/item_title"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent" />-->
-
-            <TextView
-                android:id="@+id/item_ref_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
-                android:text="@string/more"
-                android:textColor="?attr/colorPrimary"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/item_title" />
+            <!--                android:textColor="?attr/colorPrimary"-->
+            <!--                android:textSize="13sp"-->
+            <!--                android:textStyle="bold"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent" />-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

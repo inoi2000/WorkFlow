@@ -37,4 +37,6 @@
     <string name="overdue_tasks">Просроченные задачи</string>
     <string name="urgent_tasks">Срочные задачи</string>
     <string name="finished">Завершенные</string>
+    <string name="urgent">Срочная</string>
+    <string name="common">Обычная</string>
 </resources>

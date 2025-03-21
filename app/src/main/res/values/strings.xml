@@ -41,6 +41,8 @@
     <string name="overdue_tasks">Overdue tasks</string>
     <string name="urgent_tasks">Urgent tasks</string>
     <string name="finished">Finished</string>
+    <string name="urgent">Urgent</string>
+    <string name="common">Common</string>
 
 
 </resources>
