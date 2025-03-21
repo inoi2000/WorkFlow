@@ -4,6 +4,7 @@ import com.petproject.workflow.data.network.models.TaskDto
 import com.petproject.workflow.di.ApplicationScope
 import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.entities.Task
+import com.petproject.workflow.domain.entities.TaskPriority
 import com.petproject.workflow.domain.entities.TaskStatus
 import javax.inject.Inject
 
@@ -15,6 +16,7 @@ class TaskMapper @Inject constructor() {
             id = dto.id,
             description = dto.description,
             status = TaskStatus.fromString(dto.status),
+            priority = TaskPriority.fromString(dto.priority),
             creation = dto.creation,
             deadline = dto.deadline,
             executor = dto.executor?.let { Employee(

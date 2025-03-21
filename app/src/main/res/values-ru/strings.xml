@@ -33,4 +33,8 @@
     <string name="app_logo">Логотип</string>
     <string name="new_task">Новая</string>
     <string name="faild">Просрочено</string>
+    <string name="my_tasks">Мои задачи</string>
+    <string name="overdue_tasks">Просроченные задачи</string>
+    <string name="urgent_tasks">Срочные задачи</string>
+    <string name="finished">Завершенные</string>
 </resources>

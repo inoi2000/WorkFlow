@@ -37,6 +37,10 @@
     <string name="app_logo">app logo</string>
     <string name="new_task">New</string>
     <string name="faild">Faild</string>
+    <string name="my_tasks">My tasks</string>
+    <string name="overdue_tasks">Overdue tasks</string>
+    <string name="urgent_tasks">Urgent tasks</string>
+    <string name="finished">Finished</string>
 
 
 </resources>

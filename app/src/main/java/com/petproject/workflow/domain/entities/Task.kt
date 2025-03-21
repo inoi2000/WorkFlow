@@ -6,6 +6,7 @@ data class Task(
     val id: String = "",
     val description: String,
     val status: TaskStatus,
+    val priority: TaskPriority,
     val creation: LocalDate? = null,
     val deadline: LocalDate? = null,
     val executor: Employee? = null,

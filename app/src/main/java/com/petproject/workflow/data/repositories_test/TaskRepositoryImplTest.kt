@@ -4,6 +4,7 @@ import com.petproject.workflow.data.network.utils.TokenManager
 import com.petproject.workflow.di.ApplicationScope
 import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.entities.Task
+import com.petproject.workflow.domain.entities.TaskPriority
 import com.petproject.workflow.domain.entities.TaskStatus
 import com.petproject.workflow.domain.repositories.TaskRepository
 import java.time.LocalDate
@@ -53,6 +54,7 @@ class TaskRepositoryImplTest @Inject constructor(
             creation = LocalDate.now(),
             deadline = LocalDate.of(2025, 5, 10),
             status = TaskStatus.NEW,
+            priority = TaskPriority.COMMON,
             executor = employee1,
             inspector = employee2
         )
@@ -63,6 +65,7 @@ class TaskRepositoryImplTest @Inject constructor(
             creation = LocalDate.now(),
             deadline = LocalDate.of(2025, 4, 15),
             status = TaskStatus.NEW,
+            priority = TaskPriority.URGENT,
             executor = employee1,
             inspector = employee2
         )
@@ -72,6 +75,7 @@ class TaskRepositoryImplTest @Inject constructor(
             creation = LocalDate.now(),
             deadline = LocalDate.of(2025, 4, 15),
             status = TaskStatus.ON_APPROVAL,
+            priority = TaskPriority.COMMON,
             executor = employee2,
             inspector = employee1
         )
