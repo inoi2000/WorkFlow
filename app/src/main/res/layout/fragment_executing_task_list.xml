@@ -239,34 +239,39 @@
                         android:id="@+id/task_status_filter_card_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="12dp"
-                        android:layout_marginTop="12dp"
                         android:layout_marginStart="10dp"
+                        android:layout_marginTop="12dp"
+                        app:cardCornerRadius="12dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/my_tasks_text_view">
+
                         <Spinner
                             android:id="@+id/task_status_spinner"
-                            android:layout_width="wrap_content"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                             />
+                            android:entries="@array/task_status_array"
+                            android:popupBackground="?attr/colorSecondary" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/task_priority_filter_card_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="12dp"
-                        android:layout_marginTop="12dp"
                         android:layout_marginStart="10dp"
+                        android:layout_marginTop="12dp"
+                        app:cardCornerRadius="12dp"
                         app:layout_constraintStart_toEndOf="@+id/task_status_filter_card_view"
                         app:layout_constraintTop_toBottomOf="@+id/my_tasks_text_view">
+
                         <Spinner
                             android:id="@+id/task_priority_spinner"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            />
+                            android:entries="@array/task_priority_array"
+                            android:popupBackground="?attr/colorSecondary"
+                            android:textSize="12sp" />
                     </androidx.cardview.widget.CardView>
 
 
@@ -276,11 +281,11 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvExecutingTasksList"
-            android:paddingTop="12dp"
+            android:id="@+id/tasks_list_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="10dp"
+            android:paddingTop="12dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/item_task_info" />

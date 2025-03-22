@@ -55,6 +55,7 @@ class TaskRepositoryImplTest @Inject constructor(
             deadline = LocalDate.of(2025, 5, 10),
             status = TaskStatus.NEW,
             priority = TaskPriority.COMMON,
+            destination = null,
             executor = employee1,
             inspector = employee2
         )
@@ -66,6 +67,7 @@ class TaskRepositoryImplTest @Inject constructor(
             deadline = LocalDate.of(2025, 4, 15),
             status = TaskStatus.NEW,
             priority = TaskPriority.URGENT,
+            destination = "г. Москва, ул. Пречистенка, д.7",
             executor = employee1,
             inspector = employee2
         )
@@ -76,6 +78,7 @@ class TaskRepositoryImplTest @Inject constructor(
             deadline = LocalDate.of(2025, 4, 15),
             status = TaskStatus.ON_APPROVAL,
             priority = TaskPriority.COMMON,
+            destination = "г. Оренбург, ул. Сенная 2а",
             executor = employee2,
             inspector = employee1
         )

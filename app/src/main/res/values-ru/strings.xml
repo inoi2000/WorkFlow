@@ -39,4 +39,18 @@
     <string name="finished">Завершенные</string>
     <string name="urgent">Срочная</string>
     <string name="common">Обычная</string>
+
+    <string-array name="task_status_array">
+        <item>Статус</item>
+        <item>Новая</item>
+        <item>В работе</item>
+        <item>Выполнена</item>
+        <item>Просрочена</item>
+        <item>На одобрении</item>
+    </string-array>
+    <string-array name="task_priority_array">
+        <item>Приоритет</item>
+        <item>Обычная</item>
+        <item>Срочная</item>
+    </string-array>
 </resources>

@@ -19,6 +19,7 @@ class TaskMapper @Inject constructor() {
             priority = TaskPriority.fromString(dto.priority),
             creation = dto.creation,
             deadline = dto.deadline,
+            destination = dto.destination,
             executor = dto.executor?.let { Employee(
                 id = it.id,
                 name = it.name

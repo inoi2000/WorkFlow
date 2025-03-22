@@ -17,6 +17,9 @@ data class TaskDto(
     @SerializedName("priority")
     @Expose
     val priority: String,
+    @SerializedName("destination")
+    @Expose
+    val destination: String?,
     @SerializedName("creation")
     @Expose
     val creation: LocalDate?,

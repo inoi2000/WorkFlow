@@ -9,6 +9,7 @@ data class Task(
     val priority: TaskPriority,
     val creation: LocalDate? = null,
     val deadline: LocalDate? = null,
+    val destination: String? = null,
     val executor: Employee? = null,
     val inspector: Employee? = null
 )
