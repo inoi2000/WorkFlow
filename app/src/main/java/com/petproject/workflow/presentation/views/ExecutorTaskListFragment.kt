@@ -5,20 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.petproject.workflow.WorkFlowApplication
-import com.petproject.workflow.databinding.FragmentExecutingTaskListBinding
-import com.petproject.workflow.domain.entities.TaskStatus
-import com.petproject.workflow.presentation.viewmodels.ExecutingTaskListViewModel
+import com.petproject.workflow.databinding.FragmentExecutorTaskListBinding
+import com.petproject.workflow.presentation.viewmodels.ExecutorTaskListViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import com.petproject.workflow.presentation.views.adapters.TaskAdapter
 import javax.inject.Inject
 
-class ExecutingTaskListFragment : Fragment() {
-    private var _binding: FragmentExecutingTaskListBinding? = null
-    private val binding: FragmentExecutingTaskListBinding get() = _binding!!
+class ExecutorTaskListFragment : Fragment() {
+    private var _binding: FragmentExecutorTaskListBinding? = null
+    private val binding: FragmentExecutorTaskListBinding get() = _binding!!
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -27,7 +25,7 @@ class ExecutingTaskListFragment : Fragment() {
         ViewModelProvider.create(
             viewModelStore,
             viewModelFactory
-        )[ExecutingTaskListViewModel::class]
+        )[ExecutorTaskListViewModel::class]
     }
 
     private val component by lazy {
@@ -39,7 +37,7 @@ class ExecutingTaskListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         component.inject(this)
-        _binding = FragmentExecutingTaskListBinding.inflate(inflater, container, false)
+        _binding = FragmentExecutorTaskListBinding.inflate(inflater, container, false)
         setRecyclerView()
         return binding.root
     }
@@ -50,7 +48,7 @@ class ExecutingTaskListFragment : Fragment() {
 
     private fun setRecyclerView() {
         val adapter = TaskAdapter {
-            val action = ExecutingTaskListFragmentDirections
+            val action = ExecutorTaskListFragmentDirections
                 .actionExecutingTaskListFragmentToExecutingTaskInfoFragment(it.id)
             findNavController().navigate(action)
         }

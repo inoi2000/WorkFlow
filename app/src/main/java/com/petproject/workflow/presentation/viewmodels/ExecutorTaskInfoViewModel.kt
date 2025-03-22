@@ -9,7 +9,7 @@ import com.petproject.workflow.domain.usecases.GetExecutingTaskUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ExecutingTaskInfoViewModel @Inject constructor(
+class ExecutorTaskInfoViewModel @Inject constructor(
     private val taskId: String,
     private val getExecutingTaskUseCase: GetExecutingTaskUseCase
 ): ViewModel() {

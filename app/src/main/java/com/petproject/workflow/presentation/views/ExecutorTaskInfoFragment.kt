@@ -8,16 +8,16 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.petproject.workflow.WorkFlowApplication
-import com.petproject.workflow.databinding.FragmentExecutingTaskInfoBinding
-import com.petproject.workflow.presentation.viewmodels.ExecutingTaskInfoViewModel
+import com.petproject.workflow.databinding.FragmentExecutorTaskInfoBinding
+import com.petproject.workflow.presentation.viewmodels.ExecutorTaskInfoViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import javax.inject.Inject
 
-class ExecutingTaskInfoFragment : Fragment() {
-    private var _binding: FragmentExecutingTaskInfoBinding? = null
-    private val binding: FragmentExecutingTaskInfoBinding get() = _binding!!
+class ExecutorTaskInfoFragment : Fragment() {
+    private var _binding: FragmentExecutorTaskInfoBinding? = null
+    private val binding: FragmentExecutorTaskInfoBinding get() = _binding!!
 
-    private val args by navArgs<ExecutingTaskInfoFragmentArgs>()
+    private val args by navArgs<ExecutorTaskInfoFragmentArgs>()
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -26,7 +26,7 @@ class ExecutingTaskInfoFragment : Fragment() {
         ViewModelProvider.create(
             viewModelStore,
             viewModelFactory
-        )[ExecutingTaskInfoViewModel::class]
+        )[ExecutorTaskInfoViewModel::class]
     }
 
     private val component by lazy {
@@ -41,7 +41,7 @@ class ExecutingTaskInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         component.inject(this)
-        _binding = FragmentExecutingTaskInfoBinding.inflate(inflater, container, false)
+        _binding = FragmentExecutorTaskInfoBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
