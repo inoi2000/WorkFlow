@@ -37,6 +37,25 @@
     <string name="app_logo">app logo</string>
     <string name="new_task">New</string>
     <string name="faild">Faild</string>
+    <string name="my_tasks">My tasks</string>
+    <string name="overdue_tasks">Overdue tasks</string>
+    <string name="urgent_tasks">Urgent tasks</string>
+    <string name="finished">Finished</string>
+    <string name="urgent">Urgent</string>
+    <string name="common">Common</string>
 
+    <string-array name="task_status_array">
+        <item>Status</item>
+        <item>New</item>
+        <item>In progress</item>
+        <item>Completed</item>
+        <item>Failed</item>
+        <item>On approval</item>
+    </string-array>
+    <string-array name="task_priority_array">
+        <item>Priority</item>
+        <item>Common</item>
+        <item>Urgent</item>
+    </string-array>
 
 </resources>

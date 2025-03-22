@@ -6,6 +6,7 @@ import com.petproject.workflow.data.network.mappers.EmployeeMapper
 import com.petproject.workflow.domain.entities.BusinessTrip
 import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.entities.Task
+import com.petproject.workflow.domain.entities.TaskPriority
 import com.petproject.workflow.domain.entities.TaskStatus
 import com.petproject.workflow.domain.entities.Vacation
 import com.petproject.workflow.domain.repositories.EmployeeRepository
@@ -38,6 +39,7 @@ class EmployeeRepositoryImplTest @Inject constructor(
             creation = LocalDate.now(),
             deadline = LocalDate.of(2025,5,10),
             status = TaskStatus.NEW,
+            priority = TaskPriority.COMMON,
             executor = null,
             inspector = null
         )
@@ -47,6 +49,7 @@ class EmployeeRepositoryImplTest @Inject constructor(
             creation = LocalDate.now(),
             deadline = LocalDate.of(2025,4,15),
             status = TaskStatus.NEW,
+            priority = TaskPriority.COMMON,
             executor = null,
             inspector = null
         )
@@ -56,6 +59,7 @@ class EmployeeRepositoryImplTest @Inject constructor(
             creation = LocalDate.now(),
             deadline = LocalDate.of(2025,4,15),
             status = TaskStatus.ON_APPROVAL,
+            priority = TaskPriority.COMMON,
             executor = null,
             inspector = null
         )

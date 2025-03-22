@@ -19,4 +19,8 @@ class TaskRepositoryImpl @Inject constructor(
             throw AuthException()
         }
     }
+
+    override suspend fun getExecutingTask(id: String): Task {
+        TODO("Not yet implemented")
+    }
 }

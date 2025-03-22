@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentExecutingTaskListBinding
+import com.petproject.workflow.domain.entities.TaskStatus
 import com.petproject.workflow.presentation.viewmodels.ExecutingTaskListViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import com.petproject.workflow.presentation.views.adapters.TaskAdapter
@@ -21,7 +24,10 @@ class ExecutingTaskListFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelFactory
 
     private val viewModel by lazy {
-        ViewModelProvider.create(viewModelStore, viewModelFactory)[ExecutingTaskListViewModel::class]
+        ViewModelProvider.create(
+            viewModelStore,
+            viewModelFactory
+        )[ExecutingTaskListViewModel::class]
     }
 
     private val component by lazy {
@@ -38,16 +44,18 @@ class ExecutingTaskListFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
     private fun setRecyclerView() {
         val adapter = TaskAdapter {
-            //TODO добаввить реакцию на нажатие
-//            val action =
-//                ExecutingTasksListFragmentDirections
-//                    .actionExecutingTasksListFragmentToTaskInfoFragment(it.id)
-//            findNavController().navigate(action)
+            val action = ExecutingTaskListFragmentDirections
+                .actionExecutingTaskListFragmentToExecutingTaskInfoFragment(it.id)
+            findNavController().navigate(action)
         }
-        binding.rvExecutingTasksList.itemAnimator = null
-        binding.rvExecutingTasksList.adapter = adapter
+        binding.tasksListRecyclerView.itemAnimator = null
+        binding.tasksListRecyclerView.adapter = adapter
         viewModel.executingTasksList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }

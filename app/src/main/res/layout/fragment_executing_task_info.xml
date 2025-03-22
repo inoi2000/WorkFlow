@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.views.ExecutingTaskInfoFragment">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.petproject.workflow.presentation.viewmodels.ExecutingTaskInfoViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/task_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewmodel.executingTask.description}" />
+
+        <TextView
+            android:id="@+id/task_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(viewmodel.executingTask.status)}" />
+
+        <TextView
+            android:id="@+id/task_creation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(viewmodel.executingTask.creation)}" />
+
+        <TextView
+            android:id="@+id/task_deadline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(viewmodel.executingTask.deadline)}" />
+
+        <TextView
+            android:id="@+id/task_executor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(viewmodel.executingTask.executor)}" />
+
+        <TextView
+            android:id="@+id/task_inspector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(viewmodel.executingTask.inspector)}" />
+
+    </LinearLayout>
+</layout>
