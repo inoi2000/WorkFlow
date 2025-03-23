@@ -5,6 +5,7 @@
         <item name="colorOnPrimary">@color/white</item>
 
         <item name="colorSecondary">@color/white</item>
+        <item name="colorOnSecondary">@color/grey_for_text</item>
 
         <item name="background">@color/grey_light</item>
 

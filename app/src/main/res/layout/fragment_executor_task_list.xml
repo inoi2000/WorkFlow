@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.views.ExecutingTaskListFragment">
+    tools:context=".presentation.views.ExecutorTaskListFragment">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -247,9 +247,11 @@
 
                         <Spinner
                             android:id="@+id/task_status_spinner"
-                            android:layout_width="70dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="6dp"
+                            android:layout_marginVertical="4dp"
+                            android:background="@null"
                             android:entries="@array/task_status_array"
                             android:popupBackground="?attr/colorSecondary" />
                     </androidx.cardview.widget.CardView>
@@ -266,12 +268,13 @@
 
                         <Spinner
                             android:id="@+id/task_priority_spinner"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
+                            android:layout_marginHorizontal="6dp"
+                            android:layout_marginVertical="4dp"
+                            android:background="@null"
                             android:entries="@array/task_priority_array"
-                            android:popupBackground="?attr/colorSecondary"
-                            android:textSize="12sp" />
+                            android:popupBackground="?attr/colorSecondary" />
                     </androidx.cardview.widget.CardView>
 
 

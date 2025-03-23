@@ -1,7 +1,7 @@
 package com.petproject.workflow.di
 
 import androidx.lifecycle.ViewModel
-import com.petproject.workflow.presentation.viewmodels.ExecutingTaskInfoViewModel
+import com.petproject.workflow.presentation.viewmodels.ExecutorTaskInfoViewModel
 import com.petproject.workflow.presentation.viewmodels.HomeViewModel
 import dagger.Binds
 import dagger.Module
@@ -16,7 +16,7 @@ interface ActivityViewModelModule {
     fun bindHomeViewModel(impl: HomeViewModel): ViewModel
 
     @IntoMap
-    @ViewModelKey(ExecutingTaskInfoViewModel::class)
+    @ViewModelKey(ExecutorTaskInfoViewModel::class)
     @Binds
-    fun bindExecutingTaskInfoViewModel(impl: ExecutingTaskInfoViewModel): ViewModel
+    fun bindExecutingTaskInfoViewModel(impl: ExecutorTaskInfoViewModel): ViewModel
 }

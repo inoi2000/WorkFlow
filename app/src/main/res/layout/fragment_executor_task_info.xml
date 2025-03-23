@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.views.ExecutingTaskInfoFragment">
+    tools:context=".presentation.views.ExecutorTaskInfoFragment">
 
     <data>
 
         <variable
             name="viewmodel"
-            type="com.petproject.workflow.presentation.viewmodels.ExecutingTaskInfoViewModel" />
+            type="com.petproject.workflow.presentation.viewmodels.ExecutorTaskInfoViewModel" />
     </data>
 
     <LinearLayout
