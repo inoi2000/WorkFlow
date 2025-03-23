@@ -43,6 +43,13 @@
     <string name="finished">Finished</string>
     <string name="urgent">Urgent</string>
     <string name="common">Common</string>
+    <string name="details">Details</string>
+    <string name="comments">Comments</string>
+    <string name="description">Description</string>
+    <string name="status">Status</string>
+    <string name="priority">Priority</string>
+    <string name="inspector">Inspector</string>
+    <string name="send_for_approval">Send for approval</string>
 
     <string-array name="task_status_array">
         <item>Status</item>

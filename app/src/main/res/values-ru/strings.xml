@@ -39,6 +39,13 @@
     <string name="finished">Завершенные</string>
     <string name="urgent">Срочная</string>
     <string name="common">Обычная</string>
+    <string name="details">Детали</string>
+    <string name="comments">Комментарии</string>
+    <string name="description">Description</string>
+    <string name="status">Status</string>
+    <string name="priority">Priority</string>
+    <string name="inspector">Inspector</string>
+    <string name="send_for_approval">Send for approval</string>
 
     <string-array name="task_status_array">
         <item>Статус</item>
