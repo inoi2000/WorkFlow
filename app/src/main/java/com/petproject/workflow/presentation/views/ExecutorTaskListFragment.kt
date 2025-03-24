@@ -47,11 +47,17 @@ class ExecutorTaskListFragment : Fragment() {
     }
 
     private fun setRecyclerView() {
-        val adapter = TaskAdapter {
-            val action = ExecutorTaskListFragmentDirections
-                .actionExecutingTaskListFragmentToExecutingTaskInfoFragment(it.id)
-            findNavController().navigate(action)
-        }
+        val adapter = TaskAdapter(
+            { taskId ->
+                val action = ExecutorTaskListFragmentDirections
+                    .actionExecutingTaskListFragmentToExecutingTaskInfoFragment(taskId)
+                findNavController().navigate(action)
+            },
+            { taskId ->
+                val action = ExecutorTaskListFragmentDirections
+                    .actionExecutingTaskListFragmentToTaskCommentListFragment(taskId)
+                findNavController().navigate(action)
+            })
         binding.tasksListRecyclerView.itemAnimator = null
         binding.tasksListRecyclerView.adapter = adapter
         viewModel.executingTasksList.observe(viewLifecycleOwner) {

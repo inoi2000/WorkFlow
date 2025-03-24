@@ -71,11 +71,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="1 комментарий"
                 android:textColor="@color/light_blue"
                 android:textStyle="bold"
+                app:countTaskComments="@{task.commentsCount}"
                 app:layout_constraintStart_toEndOf="@+id/comment_image_view"
-                app:layout_constraintTop_toTopOf="@+id/comment_image_view" />
+                app:layout_constraintTop_toTopOf="@+id/comment_image_view"
+                tools:text="1 комментарий" />
 
             <View
                 android:id="@+id/line_view"
@@ -171,8 +172,8 @@
                 android:id="@+id/item_ref_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/more"
                 android:backgroundTint="@color/blue_transparent"
+                android:text="@string/more"
                 android:textColor="?attr/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

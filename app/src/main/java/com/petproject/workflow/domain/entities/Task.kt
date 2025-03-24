@@ -13,4 +13,6 @@ data class Task(
     val executor: Employee? = null,
     val inspector: Employee? = null,
     val comments: List<Comment>? = null
-)
+) {
+    val commentsCount: Int get() = comments?.count() ?: 0
+}

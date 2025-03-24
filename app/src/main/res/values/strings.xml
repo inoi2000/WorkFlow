@@ -65,5 +65,8 @@
         <item>Common</item>
         <item>Urgent</item>
     </string-array>
+    <string name="comments_count_nom">%d comment</string>
+    <string name="comments_count_gen">%d comments</string>
+    <string name="comments_count_plu">%d comments</string>
 
 </resources>
