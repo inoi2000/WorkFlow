@@ -17,6 +17,8 @@ class ExecutorTaskInfoViewModel @Inject constructor(
     private val _executingTask = MutableLiveData<Task>()
     val executingTask: LiveData<Task> get() = _executingTask
 
+    val commentsCount: String get() = executingTask.value?.commentsCount.toString()
+
     init {
         loadData()
     }

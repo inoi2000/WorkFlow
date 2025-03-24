@@ -47,12 +47,13 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     app:cardBackgroundColor="?attr/colorSecondary"
-                    app:cardElevation="0dp"
-                    app:cardCornerRadius="24dp">
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                         <TextView
                             android:id="@+id/comments_text_view"
                             android:layout_width="wrap_content"
@@ -74,16 +75,16 @@
                             android:layout_gravity="top|end"
                             android:layout_margin="6dp"
                             android:background="@drawable/circle_grey"
-                            android:text="0"
+                            android:text="@{viewmodel.commentsCount}"
                             android:textColor="?attr/colorPrimary"
                             android:textSize="12sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/comments_text_view"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="0" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
                 </androidx.cardview.widget.CardView>
@@ -107,10 +108,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:layout_marginVertical="8dp"
+                    android:text="@string/description"
                     android:textColor="?attr/colorPrimary"
-                    android:text="@string/description" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/task_description"
@@ -128,17 +129,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:layout_marginVertical="8dp"
+                    android:text="@string/inspector"
                     android:textColor="?attr/colorPrimary"
-                    android:text="@string/inspector" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/task_inspector"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{String.valueOf(viewmodel.executingTask.inspector)}"
-                    tools:text="Иванов Иван Иванович"/>
+                    tools:text="Иванов Иван Иванович" />
 
                 <View
                     android:layout_width="match_parent"
@@ -149,17 +150,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:layout_marginVertical="8dp"
+                    android:text="@string/status"
                     android:textColor="?attr/colorPrimary"
-                    android:text="@string/status" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/task_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{String.valueOf(viewmodel.executingTask.status)}"
-                    tools:text="@string/new_task"/>
+                    tools:text="@string/new_task" />
 
                 <View
                     android:layout_width="match_parent"
@@ -170,17 +171,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:layout_marginVertical="8dp"
+                    android:text="@string/priority"
                     android:textColor="?attr/colorPrimary"
-                    android:text="@string/priority" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/task_priority"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{String.valueOf(viewmodel.executingTask.priority)}"
-                    tools:text="@string/urgent"/>
+                    tools:text="@string/urgent" />
 
                 <View
                     android:layout_width="match_parent"
@@ -191,31 +192,31 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:layout_marginVertical="8dp"
+                    android:text="@string/details"
                     android:textColor="?attr/colorPrimary"
-                    android:text="@string/details" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/task_creation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{String.valueOf(viewmodel.executingTask.creation)}"
-                    tools:text="20.08.2025"/>
+                    tools:text="20.08.2025" />
 
                 <TextView
                     android:id="@+id/task_deadline"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{String.valueOf(viewmodel.executingTask.deadline)}"
-                    tools:text="28.08.2025"/>
+                    tools:text="28.08.2025" />
 
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
-                    android:text="@string/send_for_approval"/>
+                    android:text="@string/send_for_approval" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

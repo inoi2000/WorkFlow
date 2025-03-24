@@ -17,6 +17,8 @@ class TaskCommentListViewModel @Inject constructor(
     private val _comments = MutableLiveData<List<Comment>>()
     val comments: LiveData<List<Comment>> get() = _comments
 
+    val commentsCount: String get() = comments.value?.count().toString()
+
     init {
         loadData()
     }

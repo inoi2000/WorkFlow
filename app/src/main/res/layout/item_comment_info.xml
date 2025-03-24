@@ -27,7 +27,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/comment_text"
                 app:layout_constraintBottom_toBottomOf="@+id/comment_text"
-                tools:src="@drawable/ic_info_circle" />
+                android:src="@drawable/ic_info_circle" />
 
             <TextView
                 android:id="@+id/comment_text"

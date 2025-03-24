@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentTaskCommentListBinding
-import com.petproject.workflow.presentation.viewmodels.ExecutorTaskInfoViewModel
 import com.petproject.workflow.presentation.viewmodels.TaskCommentListViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
+import com.petproject.workflow.presentation.views.adapters.CommentAdapter
 import javax.inject.Inject
 
 class TaskCommentListFragment : Fragment() {
@@ -52,10 +51,25 @@ class TaskCommentListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setRecyclerView()
         binding.detailsButton.setOnClickListener {
             val action = TaskCommentListFragmentDirections
                 .actionTaskCommentListFragmentToExecutingTaskInfoFragment(args.taskId)
             findNavController().navigate(action)
         }
+    }
+
+    private fun setRecyclerView() {
+        val adapter = CommentAdapter()
+        binding.commentsListRecyclerView.itemAnimator = null
+        binding.commentsListRecyclerView.adapter = adapter
+        viewModel.comments.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 }
