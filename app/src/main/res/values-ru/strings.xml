@@ -54,6 +54,7 @@
         <item>Выполнена</item>
         <item>Просрочена</item>
         <item>На одобрении</item>
+        <item>Не одобрена</item>
     </string-array>
     <string-array name="task_priority_array">
         <item>Приоритет</item>

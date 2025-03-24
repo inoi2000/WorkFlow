@@ -58,6 +58,7 @@
         <item>Completed</item>
         <item>Failed</item>
         <item>On approval</item>
+        <item>Not approval</item>
     </string-array>
     <string-array name="task_priority_array">
         <item>Priority</item>
