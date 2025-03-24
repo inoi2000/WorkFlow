@@ -5,7 +5,8 @@ enum class TaskStatus {
     IN_PROGRESS,
     COMPLETED,
     FAILED,
-    ON_APPROVAL;
+    ON_APPROVAL,
+    NOT_APPROVAL;
 
     companion object {
         fun fromString(status: String): TaskStatus {
@@ -15,6 +16,7 @@ enum class TaskStatus {
                 COMPLETED.toString() -> COMPLETED
                 FAILED.toString() -> FAILED
                 ON_APPROVAL.toString() -> ON_APPROVAL
+                NOT_APPROVAL.toString() -> NOT_APPROVAL
 
                 else -> { throw ClassCastException() }
             }

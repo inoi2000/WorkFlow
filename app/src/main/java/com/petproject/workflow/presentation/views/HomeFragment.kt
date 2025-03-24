@@ -196,6 +196,13 @@ class HomeFragment : Fragment() {
                     getString(R.string.on_approval)
                 )
             }
+
+            TaskStatus.NOT_APPROVAL -> {
+                Pair(
+                    ContextCompat.getDrawable(requireContext(), R.drawable.circle_orange),
+                    getString(R.string.not_approval)
+                )
+            }
         }
     }
 

@@ -11,5 +11,6 @@ data class Task(
     val deadline: LocalDate? = null,
     val destination: String? = null,
     val executor: Employee? = null,
-    val inspector: Employee? = null
+    val inspector: Employee? = null,
+    val comments: List<Comment>? = null
 )
