@@ -43,17 +43,21 @@ class TaskRepositoryImplTest @Inject constructor(
             onApproval = null
         )
 
+        var executionTask1: Task? = null
         val comment1ToTask1 = Comment(
             id = UUID.randomUUID().toString(),
-            text = "Занеси в мой кабинет готовый результат"
+            text = "Занеси в мой кабинет готовый результат",
+            creation = LocalDate.now(),
+            task = executionTask1
         )
 
         val comment2ToTask1 = Comment(
             id = UUID.randomUUID().toString(),
-            text = "Распечатай в двух экземплярах"
+            text = "Распечатай в двух экземплярах",
+            creation = LocalDate.now(),
+            task = executionTask1
         )
-
-        val executionTask1 = Task(
+        executionTask1 = Task(
             id = UUID.randomUUID().toString(),
             description = "Распечатать журналы инструкатажа по пожарной безопасности за 2025 год",
             creation = LocalDate.now(),
