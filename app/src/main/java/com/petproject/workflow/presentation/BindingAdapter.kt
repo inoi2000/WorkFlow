@@ -36,7 +36,7 @@ fun bindErrorInputCount(textInputLayout: TextInputLayout, isError: Boolean) {
 
 @BindingAdapter("taskStatusColor")
 fun bindTaskStatusColor(view: View, status: TaskStatus) {
-    val backgroundId: Int = when(status) {
+    val backgroundId: Int = when (status) {
         TaskStatus.NEW -> R.drawable.circle_green
         TaskStatus.IN_PROGRESS -> R.drawable.circle_blue
         TaskStatus.COMPLETED -> R.drawable.circle_green
@@ -51,7 +51,7 @@ fun bindTaskStatusColor(view: View, status: TaskStatus) {
 @BindingAdapter("taskStatusText")
 fun bindTaskStatusText(textView: TextView, status: TaskStatus) {
     with(textView) {
-        text = when(status) {
+        text = when (status) {
             TaskStatus.NEW -> context.resources.getString(R.string.new_task)
             TaskStatus.IN_PROGRESS -> context.resources.getString(R.string.in_progress)
             TaskStatus.COMPLETED -> context.resources.getString(R.string.completed)
@@ -83,7 +83,24 @@ fun bindTaskDestination(imageView: ImageView, destination: String?) {
     }
 }
 
-@SuppressLint("ResourceAsColor")
+@BindingAdapter("countTaskComments")
+fun bindTaskPriority(textView: TextView, count: Int) {
+    val resId = if (count in 11..19) {
+        R.string.comments_count_plu
+    } else {
+        val temp = count % 10;
+        when (temp) {
+            1 -> R.string.comments_count_nom
+            in 2..4 -> R.string.comments_count_gen
+            else -> R.string.comments_count_plu
+        }
+    }
+    textView.text = String.format(
+        textView.context.resources.getString(resId),
+        count
+    )
+}
+
 @BindingAdapter("taskPriority")
 fun bindTaskPriority(textView: TextView, priority: TaskPriority) {
     when (priority) {
@@ -91,6 +108,7 @@ fun bindTaskPriority(textView: TextView, priority: TaskPriority) {
             textView.text = textView.context.resources.getString(R.string.common)
             textView.setTextColor(textView.context.resources.getColor(R.color.green))
         }
+
         TaskPriority.URGENT -> {
             textView.text = textView.context.resources.getString(R.string.urgent)
             textView.setTextColor(textView.context.resources.getColor(R.color.red))
@@ -105,6 +123,7 @@ fun bindTaskPriority(imageView: ImageView, priority: TaskPriority) {
         TaskPriority.COMMON -> {
             imageView.setImageResource(R.drawable.ic_bolt_green)
         }
+
         TaskPriority.URGENT -> {
             imageView.setImageResource(R.drawable.ic_bolt_red)
         }

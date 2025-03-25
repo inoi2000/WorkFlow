@@ -9,16 +9,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.petproject.workflow.WorkFlowApplication
-import com.petproject.workflow.databinding.FragmentExecutorTaskInfoBinding
-import com.petproject.workflow.presentation.viewmodels.ExecutorTaskInfoViewModel
+import com.petproject.workflow.databinding.FragmentTaskCommentListBinding
+import com.petproject.workflow.presentation.viewmodels.TaskCommentListViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
+import com.petproject.workflow.presentation.views.adapters.CommentAdapter
 import javax.inject.Inject
 
-class ExecutorTaskInfoFragment : Fragment() {
-    private var _binding: FragmentExecutorTaskInfoBinding? = null
-    private val binding: FragmentExecutorTaskInfoBinding get() = _binding!!
+class TaskCommentListFragment : Fragment() {
+    private var _binding: FragmentTaskCommentListBinding? = null
+    private val binding: FragmentTaskCommentListBinding get() = _binding!!
 
-    private val args by navArgs<ExecutorTaskInfoFragmentArgs>()
+    private val args by navArgs<TaskCommentListFragmentArgs>()
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -27,7 +28,7 @@ class ExecutorTaskInfoFragment : Fragment() {
         ViewModelProvider.create(
             viewModelStore,
             viewModelFactory
-        )[ExecutorTaskInfoViewModel::class]
+        )[TaskCommentListViewModel::class]
     }
 
     private val component by lazy {
@@ -42,7 +43,7 @@ class ExecutorTaskInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         component.inject(this)
-        _binding = FragmentExecutorTaskInfoBinding.inflate(inflater, container, false)
+        _binding = FragmentTaskCommentListBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -50,15 +51,25 @@ class ExecutorTaskInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.commentsCardView.setOnClickListener {
-            val action = ExecutorTaskInfoFragmentDirections
-                .actionExecutingTaskInfoFragmentToTaskCommentListFragment(args.taskId)
+        setRecyclerView()
+        binding.detailsButton.setOnClickListener {
+            val action = TaskCommentListFragmentDirections
+                .actionTaskCommentListFragmentToExecutingTaskInfoFragment(args.taskId)
             findNavController().navigate(action)
         }
     }
 
+    private fun setRecyclerView() {
+        val adapter = CommentAdapter()
+        binding.commentsListRecyclerView.itemAnimator = null
+        binding.commentsListRecyclerView.adapter = adapter
+        viewModel.comments.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
+    }
+
     override fun onDestroyView() {
-        super.onDestroyView()
         _binding = null
+        super.onDestroyView()
     }
 }

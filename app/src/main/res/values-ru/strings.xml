@@ -61,4 +61,7 @@
         <item>Обычная</item>
         <item>Срочная</item>
     </string-array>
+    <string name="comments_count_nom">%d комменатарий</string>
+    <string name="comments_count_gen">%d комменатаря</string>
+    <string name="comments_count_plu">%d комменатариев</string>
 </resources>

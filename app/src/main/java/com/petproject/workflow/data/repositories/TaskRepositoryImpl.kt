@@ -2,6 +2,7 @@ package com.petproject.workflow.data.repositories
 
 import com.petproject.workflow.data.network.exceptions.AuthException
 import com.petproject.workflow.data.network.utils.TokenManager
+import com.petproject.workflow.domain.entities.Comment
 import com.petproject.workflow.domain.entities.Task
 import com.petproject.workflow.domain.repositories.TaskRepository
 import javax.inject.Inject
@@ -21,6 +22,10 @@ class TaskRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getExecutingTask(id: String): Task {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getTaskComments(taskId: String): List<Comment> {
         TODO("Not yet implemented")
     }
 }

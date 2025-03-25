@@ -41,6 +41,9 @@
         <action
             android:id="@+id/action_executingTaskListFragment_to_executingTaskInfoFragment"
             app:destination="@id/executingTaskInfoFragment" />
+        <action
+            android:id="@+id/action_executingTaskListFragment_to_taskCommentListFragment"
+            app:destination="@id/taskCommentListFragment" />
     </fragment>
     <fragment
         android:id="@+id/executingTaskInfoFragment"
@@ -50,5 +53,22 @@
         <argument
             android:name="taskId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_executingTaskInfoFragment_to_taskCommentListFragment"
+            app:destination="@id/taskCommentListFragment"
+            app:popUpTo="@id/executingTaskListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskCommentListFragment"
+        android:name="com.petproject.workflow.presentation.views.TaskCommentListFragment"
+        android:label="fragment_task_comment_list"
+        tools:layout="@layout/fragment_task_comment_list" >
+        <argument
+            android:name="taskId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_taskCommentListFragment_to_executingTaskInfoFragment"
+            app:destination="@id/executingTaskInfoFragment"
+            app:popUpTo="@id/executingTaskListFragment" />
     </fragment>
 </navigation>

@@ -8,7 +8,8 @@ import com.petproject.workflow.databinding.ItemTaskInfoBinding
 import com.petproject.workflow.domain.entities.Task
 
 class TaskAdapter(
-    private val onTaskClick: (Task) -> Unit
+    private val onTaskClick: (String) -> Unit,
+    private val onCountCommentsClick: (String) -> Unit
 ) : ListAdapter<Task, TaskAdapter.TaskInfoViewHolder>(TaskDiffItemCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskInfoViewHolder {
@@ -21,7 +22,10 @@ class TaskAdapter(
         val task = getItem(position)
         holder.binding.task = task
         holder.binding.itemRefButton.setOnClickListener {
-            onTaskClick(task)
+            onTaskClick(task.id)
+        }
+        holder.binding.commentCountTextView.setOnClickListener {
+            onCountCommentsClick(task.id)
         }
     }
 
