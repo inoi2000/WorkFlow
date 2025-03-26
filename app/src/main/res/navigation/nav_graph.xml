@@ -14,11 +14,11 @@
             android:name="employeeId"
             app:argType="string" />
         <action
-            android:id="@+id/action_homeFragment_to_vacationListFragment"
-            app:destination="@id/vacationListFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_executingTaskListFragment"
             app:destination="@id/executingTaskListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_vacationListFragment"
+            app:destination="@id/vacationListFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -29,10 +29,6 @@
         android:name="com.petproject.workflow.presentation.views.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" />
-    <fragment
-        android:id="@+id/vacationListFragment"
-        android:name="com.petproject.workflow.presentation.views.VacationListFragment"
-        android:label="VacationListFragment" />
     <fragment
         android:id="@+id/executingTaskListFragment"
         android:name="com.petproject.workflow.presentation.views.ExecutorTaskListFragment"
@@ -71,4 +67,9 @@
             app:destination="@id/executingTaskInfoFragment"
             app:popUpTo="@id/executingTaskListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/vacationListFragment"
+        android:name="com.petproject.workflow.presentation.views.VacationListFragment"
+        android:label="fragment_vacation_list"
+        tools:layout="@layout/fragment_vacation_list" />
 </navigation>

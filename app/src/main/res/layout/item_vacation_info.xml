@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vacation"
+            type="com.petproject.workflow.domain.entities.Vacation" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,61 +19,36 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp">
-
-            <ImageView
-                android:id="@+id/item_logo"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="@string/component_logo"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_vacation" />
+            android:layout_margin="12dp">
 
             <TextView
                 android:id="@+id/item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/item_logo"
-                app:layout_constraintStart_toEndOf="@+id/item_logo"
-                app:layout_constraintTop_toTopOf="@+id/item_logo"
-                tools:text="Отпуск" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="Основной отпуск" />
 
             <ImageView
-                android:id="@+id/item_ref_ic"
+                android:id="@+id/duration_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/component_logo"
-                android:src="@drawable/ic_arrow_forward"
-                app:layout_constraintEnd_toEndOf="parent"
-
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_calendar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_title" />
 
             <TextView
-                android:id="@+id/item_text"
+                android:id="@+id/duration_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/item_title"
-                app:layout_constraintTop_toBottomOf="@+id/item_title"
-                tools:text="11 сентября 2024" />
-
-
-            <TextView
-                android:id="@+id/item_ref_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="@string/more"
-                android:textColor="?attr/colorPrimary"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/item_ref_ic"
-                app:layout_constraintTop_toBottomOf="@+id/item_text" />
+                android:layout_marginStart="4dp"
+                app:layout_constraintStart_toEndOf="@+id/duration_image_view"
+                app:layout_constraintTop_toTopOf="@+id/duration_image_view"
+                app:layout_constraintBottom_toBottomOf="@+id/duration_image_view"
+                tools:text="c 25.10.2025 по 23.11.2025" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

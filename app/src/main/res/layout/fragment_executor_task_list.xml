@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentation.views.ExecutorTaskListFragment">
 
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.petproject.workflow.presentation.viewmodels.ExecutorTaskListViewModel" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -86,13 +93,15 @@
                             android:text="@string/overdue_tasks" />
 
                         <TextView
+                            android:id="@+id/overdue_tasks_counter_text_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="top|end"
                             android:layout_margin="10dp"
                             android:background="@drawable/circle_grey"
-                            android:text="0"
-                            android:textStyle="bold" />
+                            android:text="@{viewmodel.overdueTasksCount.toString()}"
+                            android:textStyle="bold"
+                            tools:text="0" />
 
 
                     </androidx.cardview.widget.CardView>
@@ -128,13 +137,15 @@
                             android:text="@string/urgent_tasks" />
 
                         <TextView
+                            android:id="@+id/urgent_tasks_counter_text_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="top|end"
                             android:layout_margin="10dp"
                             android:background="@drawable/circle_grey"
-                            android:text="0"
-                            android:textStyle="bold" />
+                            android:text="@{viewmodel.urgentTasksCount.toString()}"
+                            android:textStyle="bold"
+                            tools:text="0" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -167,13 +178,15 @@
                             android:text="@string/on_approval" />
 
                         <TextView
+                            android:id="@+id/on_approval_tasks_counter_text_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="top|end"
                             android:layout_margin="10dp"
                             android:background="@drawable/circle_grey"
-                            android:text="0"
-                            android:textStyle="bold" />
+                            android:text="@{viewmodel.onApprovalTasksCount.toString()}"
+                            android:textStyle="bold"
+                            tools:text="0" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -206,13 +219,15 @@
                             android:text="@string/finished" />
 
                         <TextView
+                            android:id="@+id/finished_tasks_counter_text_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="top|end"
                             android:layout_margin="10dp"
                             android:background="@drawable/circle_grey"
-                            android:text="0"
-                            android:textStyle="bold" />
+                            android:text="@{viewmodel.finishedTasksCount.toString()}"
+                            android:textStyle="bold"
+                            tools:text="0" />
 
                     </androidx.cardview.widget.CardView>
 
