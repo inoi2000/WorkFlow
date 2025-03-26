@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.views.VacationListFragment">
+    tools:context=".presentation.views.AbsenceListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vacation_list"
@@ -10,5 +10,5 @@
         android:layout_height="match_parent"
         android:padding="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_vacation_info" />
+        tools:listitem="@layout/item_absence_info" />
 </layout>

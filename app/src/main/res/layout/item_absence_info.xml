@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="vacation"
-            type="com.petproject.workflow.domain.entities.Vacation" />
+            name="absence"
+            type="com.petproject.workflow.domain.entities.Absence" />
     </data>
 
     <androidx.cardview.widget.CardView
