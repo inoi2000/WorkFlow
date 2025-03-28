@@ -3,12 +3,12 @@ package com.petproject.workflow.data.repositories_test
 import com.petproject.workflow.data.network.MainApiService
 import com.petproject.workflow.data.network.exceptions.AuthException
 import com.petproject.workflow.data.network.mappers.EmployeeMapper
-import com.petproject.workflow.domain.entities.BusinessTrip
+import com.petproject.workflow.domain.entities.Absence
+import com.petproject.workflow.domain.entities.AbsenceType
 import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.entities.Task
 import com.petproject.workflow.domain.entities.TaskPriority
 import com.petproject.workflow.domain.entities.TaskStatus
-import com.petproject.workflow.domain.entities.Vacation
 import com.petproject.workflow.domain.repositories.EmployeeRepository
 import java.time.LocalDate
 import java.util.UUID
@@ -20,15 +20,17 @@ class EmployeeRepositoryImplTest @Inject constructor(
 ) : EmployeeRepository {
 
     override suspend fun getEmployee(id: String): Employee {
-        val businessTrip = BusinessTrip(
+        val businessTrip = Absence(
             id = UUID.randomUUID().toString(),
+            type = AbsenceType.BUSINESS_TRIP,
             start = LocalDate.of(2025,3,21),
             end = LocalDate.of(2025,4,12),
             isApproval = true,
             place = "Екатеренбург"
         )
-        val vacation = Vacation(
+        val vacation = Absence(
             id = UUID.randomUUID().toString(),
+            type = AbsenceType.VACATION,
             start = LocalDate.of(2025,5,10),
             end = LocalDate.of(2025,5,15),
             isApproval = true,
@@ -68,8 +70,7 @@ class EmployeeRepositoryImplTest @Inject constructor(
             name = "Иванов Иван Иванович",
             position = "Администратор",
             department = null,
-            businessTrips = listOf(businessTrip),
-            vacations = listOf(vacation),
+            absences = listOf(vacation, businessTrip),
             tasks = listOf(executionTask1, executionTask2),
             onApproval = listOf(inspectionTask)
         )
