@@ -4,11 +4,268 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.views.AbsenceListFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/vacation_list"
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.petproject.workflow.presentation.viewmodels.AbsenceViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_absence_info" />
+        app:contentScrim="?attr/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:collapsedTitleGravity="start"
+                app:collapsedTitleTextColor="@color/black"
+                app:contentScrim="?attr/background"
+                app:expandedTitleTextColor="@android:color/transparent"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:title="@string/my_tasks">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?attr/background"
+                    app:layout_collapseMode="parallax">
+
+                    <com.google.android.material.appbar.MaterialToolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/colorPrimary"
+                        android:paddingEnd="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="RtlSymmetry">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_search"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="20dp"
+                            android:background="?attr/colorOnPrimary"
+                            android:hint="@string/colleagues_services_news"
+                            android:inputType="textEmailAddress"
+                            android:paddingVertical="8dp"
+                            android:paddingStart="15dp" />
+                    </com.google.android.material.appbar.MaterialToolbar>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/overdue_tasks_card_view"
+                        android:layout_width="0dp"
+                        android:layout_height="86dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="8dp"
+                        app:cardCornerRadius="12dp"
+                        app:layout_constraintBottom_toTopOf="@+id/on_approval_tasks_card_view"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                        app:layout_constraintVertical_chainStyle="spread_inside">
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_margin="10dp"
+                            app:tint="@color/light_blue"
+                            android:src="@drawable/ic_business_trip" />
+
+                        <TextView
+                            android:id="@+id/overdue_tasks_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|bottom"
+                            android:layout_margin="10dp"
+                            android:text="@string/vacation" />
+
+                        <TextView
+                            android:id="@+id/overdue_tasks_counter_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top|end"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/circle_grey"
+                            android:text="0"
+                            android:textStyle="bold"
+                            tools:text="0" />
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/urgent_tasks_card_view"
+                        android:layout_width="0dp"
+                        android:layout_height="86dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="10dp"
+                        android:minHeight="72dp"
+                        app:cardCornerRadius="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                        app:layout_constraintVertical_chainStyle="spread_inside">
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_margin="10dp"
+                            app:tint="@color/red"
+                            android:src="@drawable/ic_sick" />
+
+                        <TextView
+                            android:id="@+id/urgent_tasks_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|bottom"
+                            android:layout_margin="10dp"
+                            android:text="@string/urgent_tasks" />
+
+                        <TextView
+                            android:id="@+id/urgent_tasks_counter_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top|end"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/circle_grey"
+                            android:text="0"
+                            android:textStyle="bold"
+                            tools:text="0" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/on_approval_tasks_card_view"
+                        android:layout_width="0dp"
+                        android:layout_height="86dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="8dp"
+                        android:minHeight="72dp"
+                        app:cardCornerRadius="12dp"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/overdue_tasks_card_view">
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_margin="10dp"
+                            app:tint="@color/green"
+                            android:contentDescription="@string/overdue_tasks"
+                            android:src="@drawable/ic_vacation" />
+
+                        <TextView
+                            android:id="@+id/on_approval_tasks_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|bottom"
+                            android:layout_margin="10dp"
+                            android:text="@string/on_approval" />
+
+                        <TextView
+                            android:id="@+id/on_approval_tasks_counter_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top|end"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/circle_grey"
+                            android:text="0"
+                            android:textStyle="bold"
+                            tools:text="0" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.5" />
+
+                    <TextView
+                        android:id="@+id/my_tasks_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/my_tasks"
+                        android:textSize="27sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/on_approval_tasks_card_view" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/task_status_filter_card_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="12dp"
+                        app:cardCornerRadius="12dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/my_tasks_text_view">
+
+                        <Spinner
+                            android:id="@+id/task_status_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="6dp"
+                            android:layout_marginVertical="4dp"
+                            android:background="@null"
+                            android:entries="@array/task_status_array"
+                            android:popupBackground="?attr/colorSecondary" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/task_priority_filter_card_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="12dp"
+                        app:cardCornerRadius="12dp"
+                        app:layout_constraintStart_toEndOf="@+id/task_status_filter_card_view"
+                        app:layout_constraintTop_toBottomOf="@+id/my_tasks_text_view">
+
+                        <Spinner
+                            android:id="@+id/task_priority_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="6dp"
+                            android:layout_marginVertical="4dp"
+                            android:background="@null"
+                            android:entries="@array/task_priority_array"
+                            android:popupBackground="?attr/colorSecondary" />
+                    </androidx.cardview.widget.CardView>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/absence_list_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:paddingTop="12dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/item_absence_info" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
