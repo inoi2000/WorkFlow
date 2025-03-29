@@ -19,12 +19,9 @@ data class EmployeeDto(
     @SerializedName("executionTasks")
     @Expose
     val executionTasks: List<TaskDto>?,
-    @SerializedName("businessTrips")
+    @SerializedName("absence")
     @Expose
-    val businessTrips: List<BusinessTripDto>?,
-    @SerializedName("vacations")
-    @Expose
-    val vacations: List<VacationDto>?,
+    val absence: List<AbsenceDto>?,
     @SerializedName("department")
     @Expose
     val department: DepartmentDto?

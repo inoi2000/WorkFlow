@@ -26,8 +26,7 @@ class TaskRepositoryImplTest @Inject constructor(
             name = "Иванов Иван Иванович",
             position = "Администратор",
             department = null,
-            businessTrips = null,
-            vacations = null,
+            absences = null,
             tasks = null,
             onApproval = null
         )
@@ -37,8 +36,7 @@ class TaskRepositoryImplTest @Inject constructor(
             name = "Петров Петр Петрович",
             position = "Водитель",
             department = null,
-            businessTrips = null,
-            vacations = null,
+            absences = null,
             tasks = null,
             onApproval = null
         )

@@ -9,8 +9,7 @@ import javax.inject.Inject
 class EmployeeMapper @Inject constructor(
     private val departmentMapper: DepartmentMapper,
     private val taskMapper: TaskMapper,
-    private val businessTripMapper: BusinessTripMapper,
-    private val vacationMapper: VacationMapper
+    private val absenceMapper: AbsenceMapper
 )  {
 
     fun mapDtoToEntity(dto: EmployeeDto): Employee {
@@ -19,8 +18,7 @@ class EmployeeMapper @Inject constructor(
             name = dto.name,
             position = dto.position,
             department = dto.department?.let { departmentMapper.mapDtoToEntity(it) },
-            businessTrips = dto.businessTrips?.map { businessTripMapper.mapDtoToEntity(it) },
-            vacations = dto.vacations?.map { vacationMapper.mapDtoToEntity(it) },
+            absences = dto.absence?.map { absenceMapper.mapDtoToEntity(it) },
             tasks = dto.executionTasks?.map { taskMapper.mapDtoToEntity(it) },
             onApproval = dto.inspectionTasks?.map { taskMapper.mapDtoToEntity(it) }
         )

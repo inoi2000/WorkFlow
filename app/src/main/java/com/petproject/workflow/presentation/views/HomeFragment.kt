@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentHomeBinding
+import com.petproject.workflow.domain.entities.AbsenceType
 import com.petproject.workflow.domain.entities.TaskStatus
 import com.petproject.workflow.presentation.viewmodels.HomeViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
@@ -63,7 +64,7 @@ class HomeFragment : Fragment() {
         }
         employee.observe(viewLifecycleOwner) { employee ->
             with(binding.vacationsItem) {
-                employee.vacations?.firstOrNull()?.let {
+                employee.absences?.firstOrNull { it.type == AbsenceType.VACATION }?.let {
                     itemText.text = formatingData(it.start)
                     val status = getApprovalStatus(it.isApproval)
                     itemStatus.background = status.first
@@ -71,7 +72,7 @@ class HomeFragment : Fragment() {
                 }
             }
             with(binding.businessTripsItem) {
-                employee.businessTrips?.firstOrNull()?.let {
+                employee.absences?.firstOrNull { it.type == AbsenceType.BUSINESS_TRIP }?.let {
                     itemText.text = getString(R.string.business_trips_text)
                         .format(formatingData(it.start), it.place)
                     val status = getApprovalStatus(it.isApproval)

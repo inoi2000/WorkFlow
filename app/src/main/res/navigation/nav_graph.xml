@@ -69,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/vacationListFragment"
-        android:name="com.petproject.workflow.presentation.views.VacationListFragment"
+        android:name="com.petproject.workflow.presentation.views.AbsenceListFragment"
         android:label="fragment_vacation_list"
-        tools:layout="@layout/fragment_vacation_list" />
+        tools:layout="@layout/fragment_absence_list" />
 </navigation>
