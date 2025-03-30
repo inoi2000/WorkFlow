@@ -70,6 +70,13 @@ class HomeFragment : Fragment() {
                     itemStatus.background = status.first
                     itemStatusText.text = status.second
                 }
+                itemRefIc.setOnClickListener {
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionHomeFragmentToAbsenceListFragment(
+                            AbsenceType.VACATION
+                        )
+                    )
+                }
             }
             with(binding.businessTripsItem) {
                 employee.absences?.firstOrNull { it.type == AbsenceType.BUSINESS_TRIP }?.let {
@@ -78,6 +85,13 @@ class HomeFragment : Fragment() {
                     val status = getApprovalStatus(it.isApproval)
                     itemStatus.background = status.first
                     itemStatusText.text = status.second
+                }
+                itemRefIc.setOnClickListener {
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionHomeFragmentToAbsenceListFragment(
+                            AbsenceType.BUSINESS_TRIP
+                        )
+                    )
                 }
             }
             with(binding.approvalsItem) {
@@ -89,7 +103,7 @@ class HomeFragment : Fragment() {
                 employee.tasks?.let {
 
                 }
-                binding.tasksItem.itemRefIc.setOnClickListener {
+                itemRefIc.setOnClickListener {
                     findNavController().navigate(
                         HomeFragmentDirections.actionHomeFragmentToExecutingTaskListFragment()
                     )

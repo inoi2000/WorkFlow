@@ -1,6 +1,12 @@
 package com.petproject.workflow.domain.entities
 
-enum class AbsenceType {
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+enum class AbsenceType: Parcelable {
     VACATION,
-    BUSINESS_TRIP
+    BUSINESS_TRIP,
+    SICK_LEAVE,
+    DAY_OFF
 }
