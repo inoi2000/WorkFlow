@@ -1,15 +1,14 @@
 package com.petproject.workflow.presentation
 
-import android.annotation.SuppressLint
-import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputLayout
 import com.petproject.workflow.R
+import com.petproject.workflow.domain.entities.Absence
+import com.petproject.workflow.domain.entities.AbsenceType
 import com.petproject.workflow.domain.entities.TaskPriority
 import com.petproject.workflow.domain.entities.TaskStatus
 import java.time.LocalDate
@@ -127,5 +126,34 @@ fun bindTaskPriority(imageView: ImageView, priority: TaskPriority) {
         TaskPriority.URGENT -> {
             imageView.setImageResource(R.drawable.ic_bolt_red)
         }
+    }
+}
+
+@BindingAdapter("absenceType")
+fun bindAbsenceType(textView: TextView, type: AbsenceType) {
+    when (type) {
+        AbsenceType.VACATION -> textView.text =
+            textView.context.resources.getString(R.string.vacation)
+
+        AbsenceType.BUSINESS_TRIP -> textView.text =
+            textView.context.resources.getString(R.string.business_trip)
+
+        AbsenceType.SICK_LEAVE -> textView.text =
+            textView.context.resources.getString(R.string.sick_leave)
+
+        AbsenceType.DAY_OFF -> textView.text =
+            textView.context.resources.getString(R.string.day_off)
+    }
+}
+
+@BindingAdapter("absenceDuration")
+fun bindAbsenceDuration(textView: TextView, absence: Absence) {
+    with(textView.context) {
+        val template = resources.getString(R.string.from_to_template)
+        textView.text = String.format(
+            template,
+            absence.start.toString(),
+            absence.end.toString()
+        )
     }
 }

@@ -16,8 +16,6 @@
     <string name="colleagues_services_news">Colleagues, services, news</string>
     <string name="component_logo">component logo</string>
 
-    <string name="vacation">Vacation</string>
-    <string name="business_trips">Business trips</string>
     <string name="on_your_approval">On your approval</string>
     <string name="tasks">Tasks</string>
     <string name="mentoring">Mentoring</string>
@@ -68,5 +66,16 @@
     <string name="comments_count_nom">%d comment</string>
     <string name="comments_count_gen">%d comments</string>
     <string name="comments_count_plu">%d comments</string>
+    <string name="business_trip">Business trip</string>
+    <string name="business_trips">Business trips</string>
+    <string name="sick_leave">Sick leave</string>
+    <string name="sick_leaves">Sick leaves</string>
+    <string name="vacation">Vacation</string>
+    <string name="vacations">Vacations</string>
+    <string name="day_off">Day off</string>
+    <string name="days_off">Days off</string>
+
+    <string name="from_to_template">From %s to %s</string>
+
 
 </resources>

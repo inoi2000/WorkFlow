@@ -1,6 +1,7 @@
 package com.petproject.workflow.di
 
 import androidx.lifecycle.ViewModel
+import com.petproject.workflow.presentation.viewmodels.AbsenceViewModel
 import com.petproject.workflow.presentation.viewmodels.AccountViewModel
 import com.petproject.workflow.presentation.viewmodels.ExecutorTaskListViewModel
 import com.petproject.workflow.presentation.viewmodels.LoginViewModel
@@ -25,4 +26,9 @@ interface ViewModelModule {
     @ViewModelKey(ExecutorTaskListViewModel::class)
     @Binds
     fun bindExecutingTaskListViewModel(impl: ExecutorTaskListViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(AbsenceViewModel::class)
+    @Binds
+    fun bindAbsenceViewModel(impl: AbsenceViewModel): ViewModel
 }

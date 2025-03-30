@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.petproject.workflow.databinding.ItemAbsenceInfoBinding
 import com.petproject.workflow.domain.entities.Absence
 
-class AbsenceAdapter() : ListAdapter<Absence, AbsenceAdapter.AbsenceInfoViewHolder>(AbsenceDiffItemCallback) {
+class AbsenceAdapter : ListAdapter<Absence, AbsenceAdapter.AbsenceInfoViewHolder>(AbsenceDiffItemCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbsenceInfoViewHolder {
         val inflater = LayoutInflater.from(parent.context)

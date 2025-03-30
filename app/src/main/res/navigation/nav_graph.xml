@@ -17,8 +17,8 @@
             android:id="@+id/action_homeFragment_to_executingTaskListFragment"
             app:destination="@id/executingTaskListFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_vacationListFragment"
-            app:destination="@id/vacationListFragment" />
+            android:id="@+id/action_homeFragment_to_absenceListFragment"
+            app:destination="@id/absenceListFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -68,8 +68,12 @@
             app:popUpTo="@id/executingTaskListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/vacationListFragment"
+        android:id="@+id/absenceListFragment"
         android:name="com.petproject.workflow.presentation.views.AbsenceListFragment"
-        android:label="fragment_vacation_list"
-        tools:layout="@layout/fragment_absence_list" />
+        android:label="fragment_absence_list"
+        tools:layout="@layout/fragment_absence_list" >
+        <argument
+            android:name="absenceType"
+            app:argType="com.petproject.workflow.domain.entities.AbsenceType" />
+    </fragment>
 </navigation>
