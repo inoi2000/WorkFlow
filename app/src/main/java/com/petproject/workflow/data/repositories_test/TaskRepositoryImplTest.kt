@@ -96,15 +96,23 @@ class TaskRepositoryImplTest @Inject constructor(
     }
 
 
-    override suspend fun getAllExecutingTasks(): List<Task> {
+    override suspend fun getAllExecutorTasks(): List<Task> {
         return executionTasksList
     }
 
-    override suspend fun getExecutingTask(id: String): Task {
+    override suspend fun getExecutorTask(id: String): Task {
         return executionTasksList.first { it.id == id }
     }
 
     override suspend fun getTaskComments(taskId: String): List<Comment> {
         return executionTasksList.first { it.id == taskId }.comments ?: listOf()
+    }
+
+    override suspend fun getAllInspectorTasks(): List<Task> {
+        return inspectingTasksList
+    }
+
+    override suspend fun getInspectorTask(id: String): Task {
+        return inspectingTasksList.first { it.id == id }
     }
 }

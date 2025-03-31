@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.views.ExecutorTaskListFragment">
+    tools:context=".presentation.views.InspectorTaskListFragment">
 
     <data>
 
         <variable
             name="viewmodel"
-            type="com.petproject.workflow.presentation.viewmodels.ExecutorTaskListViewModel" />
+            type="com.petproject.workflow.presentation.viewmodels.InspectorTaskListViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -63,93 +63,6 @@
                     </com.google.android.material.appbar.MaterialToolbar>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/overdue_tasks_card_view"
-                        android:layout_width="0dp"
-                        android:layout_height="86dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="8dp"
-                        app:cardCornerRadius="12dp"
-                        app:layout_constraintBottom_toTopOf="@+id/on_approval_tasks_card_view"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline"
-                        app:layout_constraintHorizontal_chainStyle="spread_inside"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                        app:layout_constraintVertical_chainStyle="spread_inside">
-
-                        <ImageView
-                            android:layout_width="26dp"
-                            android:layout_height="26dp"
-                            android:layout_margin="10dp"
-                            android:contentDescription="@string/overdue_tasks"
-                            android:src="@drawable/ic_overdue" />
-
-                        <TextView
-                            android:id="@+id/overdue_tasks_text_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="start|bottom"
-                            android:layout_margin="10dp"
-                            android:text="@string/overdue_tasks" />
-
-                        <TextView
-                            android:id="@+id/overdue_tasks_counter_text_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top|end"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/circle_grey"
-                            android:text="@{viewmodel.overdueTasksCount.toString()}"
-                            android:textStyle="bold"
-                            tools:text="0" />
-
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/urgent_tasks_card_view"
-                        android:layout_width="0dp"
-                        android:layout_height="86dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="10dp"
-                        android:minHeight="72dp"
-                        app:cardCornerRadius="12dp"
-                        app:layout_constraintBottom_toTopOf="@+id/finished_tasks_card_view"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/guideline"
-                        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                        app:layout_constraintVertical_chainStyle="spread_inside">
-
-                        <ImageView
-                            android:layout_width="26dp"
-                            android:layout_height="26dp"
-                            android:layout_margin="10dp"
-                            android:contentDescription="@string/overdue_tasks"
-                            android:src="@drawable/ic_urgent" />
-
-                        <TextView
-                            android:id="@+id/urgent_tasks_text_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="start|bottom"
-                            android:layout_margin="10dp"
-                            android:text="@string/urgent_tasks" />
-
-                        <TextView
-                            android:id="@+id/urgent_tasks_counter_text_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top|end"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/circle_grey"
-                            android:text="@{viewmodel.urgentTasksCount.toString()}"
-                            android:textStyle="bold"
-                            tools:text="0" />
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
                         android:id="@+id/on_approval_tasks_card_view"
                         android:layout_width="0dp"
                         android:layout_height="86dp"
@@ -160,7 +73,7 @@
                         app:cardCornerRadius="12dp"
                         app:layout_constraintEnd_toStartOf="@+id/guideline"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/overdue_tasks_card_view">
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
                         <ImageView
                             android:layout_width="26dp"
@@ -191,7 +104,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/finished_tasks_card_view"
+                        android:id="@+id/all_tasks_card_view"
                         android:layout_width="0dp"
                         android:layout_height="86dp"
                         android:layout_marginStart="8dp"
@@ -201,7 +114,7 @@
                         app:cardCornerRadius="12dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/guideline"
-                        app:layout_constraintTop_toBottomOf="@+id/urgent_tasks_card_view">
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
                         <ImageView
                             android:layout_width="26dp"
@@ -211,21 +124,21 @@
                             android:src="@drawable/ic_done" />
 
                         <TextView
-                            android:id="@+id/finished_tasks_text_view"
+                            android:id="@+id/all_tasks_text_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start|bottom"
                             android:layout_margin="10dp"
-                            android:text="@string/finished" />
+                            android:text="@string/all_assignment" />
 
                         <TextView
-                            android:id="@+id/finished_tasks_counter_text_view"
+                            android:id="@+id/all_tasks_counter_text_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="top|end"
                             android:layout_margin="10dp"
                             android:background="@drawable/circle_grey"
-                            android:text="@{viewmodel.finishedTasksCount.toString()}"
+                            android:text="@{viewmodel.allTasksCount.toString()}"
                             android:textStyle="bold"
                             tools:text="0" />
 
@@ -244,7 +157,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginTop="12dp"
-                        android:text="@string/my_tasks"
+                        android:text="@string/my_assignment"
                         android:textSize="27sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"

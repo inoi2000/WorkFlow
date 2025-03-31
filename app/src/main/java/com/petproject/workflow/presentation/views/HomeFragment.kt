@@ -98,6 +98,11 @@ class HomeFragment : Fragment() {
                 employee.onApproval?.let {
                     itemText.text = getString(R.string.tasks_count).format(it.count())
                 }
+                itemRefIc.setOnClickListener {
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionHomeFragmentToInspectorTaskListFragment()
+                    )
+                }
             }
             with(binding.tasksItem) {
                 employee.tasks?.let {

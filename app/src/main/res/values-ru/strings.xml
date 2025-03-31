@@ -73,4 +73,7 @@
 
     <string name="from_to_template">От %s по %s</string>
 
+    <string name="all_assignment">Все поручения</string>
+    <string name="my_assignment">Мои поручения</string>
+
 </resources>

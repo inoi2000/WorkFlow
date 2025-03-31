@@ -71,6 +71,7 @@ class ExecutorTaskListFragment : Fragment() {
 
     private fun setRecyclerView() {
         val adapter = TaskAdapter(
+            TaskAdapter.EXECUTOR_MODE,
             { taskId ->
                 val action = ExecutorTaskListFragmentDirections
                     .actionExecutingTaskListFragmentToExecutingTaskInfoFragment(taskId)
