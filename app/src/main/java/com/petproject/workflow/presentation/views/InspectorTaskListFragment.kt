@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.petproject.workflow.R
@@ -81,19 +82,22 @@ class InspectorTaskListFragment : Fragment() {
     }
 
     private fun choseCardView(cardView: CardView) {
-        binding.onApprovalTasksCounterTextView.setTextColor(resources.getColor(R.color.grey_for_text))
+        val whiteColor = ContextCompat.getColor(requireContext(), R.color.white)
+        val greyColor = ContextCompat.getColor(requireContext(), R.color.grey_for_text)
+
+        binding.onApprovalTasksCounterTextView.setTextColor(greyColor)
         binding.onApprovalTasksCounterTextView.setBackgroundResource(R.drawable.circle_grey)
 
-        binding.allTasksCounterTextView.setTextColor(resources.getColor(R.color.grey_for_text))
+        binding.allTasksCounterTextView.setTextColor(greyColor)
         binding.allTasksCounterTextView.setBackgroundResource(R.drawable.circle_grey)
 
         when (cardView) {
             binding.onApprovalTasksCardView -> {
-                binding.onApprovalTasksCounterTextView.setTextColor(resources.getColor(R.color.white))
+                binding.onApprovalTasksCounterTextView.setTextColor(whiteColor)
                 binding.onApprovalTasksCounterTextView.setBackgroundResource(R.drawable.circle_blue)
             }
             binding.allTasksCardView -> {
-                binding.allTasksCounterTextView.setTextColor(resources.getColor(R.color.white))
+                binding.allTasksCounterTextView.setTextColor(whiteColor)
                 binding.allTasksCounterTextView.setBackgroundResource(R.drawable.circle_green)
             }
         }
