@@ -68,18 +68,22 @@ class AbsenceListFragment : Fragment() {
 
     private fun setClickListeners() {
         binding.vacationsCardView.setOnClickListener {
+            binding.titleTextView.text = getString(R.string.vacations)
             viewModel.filteredAbsenceListByType(AbsenceType.VACATION)
             choseCardView(binding.vacationsCardView)
         }
         binding.businessTripsCardView.setOnClickListener {
+            binding.titleTextView.text = getString(R.string.business_trips)
             viewModel.filteredAbsenceListByType(AbsenceType.BUSINESS_TRIP)
             choseCardView(binding.businessTripsCardView)
         }
         binding.sickLeavesCardView.setOnClickListener {
+            binding.titleTextView.text = getString(R.string.sick_leaves)
             viewModel.filteredAbsenceListByType(AbsenceType.SICK_LEAVE)
             choseCardView(binding.sickLeavesCardView)
         }
         binding.daysOffCardView.setOnClickListener {
+            binding.titleTextView.text = getString(R.string.days_off)
             viewModel.filteredAbsenceListByType(AbsenceType.DAY_OFF)
             choseCardView(binding.daysOffCardView)
         }

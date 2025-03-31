@@ -75,5 +75,6 @@
 
     <string name="all_assignment">Все поручения</string>
     <string name="my_assignment">Мои поручения</string>
+    <string name="add_comment">Add comment</string>
 
 </resources>

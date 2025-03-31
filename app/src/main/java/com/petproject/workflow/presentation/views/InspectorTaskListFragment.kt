@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentInspectorTaskListBinding
@@ -59,6 +58,7 @@ class InspectorTaskListFragment : Fragment() {
             choseCardView(binding.allTasksCardView)
         }
 
+        binding.onApprovalTasksCardView.callOnClick()
     }
 
     private fun setRecyclerView() {
@@ -93,10 +93,12 @@ class InspectorTaskListFragment : Fragment() {
 
         when (cardView) {
             binding.onApprovalTasksCardView -> {
+                binding.titleTextView.text = getString(R.string.on_your_approval)
                 binding.onApprovalTasksCounterTextView.setTextColor(whiteColor)
                 binding.onApprovalTasksCounterTextView.setBackgroundResource(R.drawable.circle_blue)
             }
             binding.allTasksCardView -> {
+                binding.titleTextView.text = getString(R.string.all_assignment)
                 binding.allTasksCounterTextView.setTextColor(whiteColor)
                 binding.allTasksCounterTextView.setBackgroundResource(R.drawable.circle_green)
             }

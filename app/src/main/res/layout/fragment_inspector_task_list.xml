@@ -152,16 +152,16 @@
                         app:layout_constraintGuide_percent="0.5" />
 
                     <TextView
-                        android:id="@+id/my_tasks_text_view"
+                        android:id="@+id/title_text_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginTop="12dp"
-                        android:text="@string/my_assignment"
                         android:textSize="27sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/on_approval_tasks_card_view" />
+                        app:layout_constraintTop_toBottomOf="@+id/on_approval_tasks_card_view"
+                        tools:text="@string/my_assignment" />
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/task_status_filter_card_view"
@@ -171,7 +171,7 @@
                         android:layout_marginTop="12dp"
                         app:cardCornerRadius="12dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/my_tasks_text_view">
+                        app:layout_constraintTop_toBottomOf="@+id/title_text_view">
 
                         <Spinner
                             android:id="@+id/task_status_spinner"
@@ -192,7 +192,7 @@
                         android:layout_marginTop="12dp"
                         app:cardCornerRadius="12dp"
                         app:layout_constraintStart_toEndOf="@+id/task_status_filter_card_view"
-                        app:layout_constraintTop_toBottomOf="@+id/my_tasks_text_view">
+                        app:layout_constraintTop_toBottomOf="@+id/title_text_view">
 
                         <Spinner
                             android:id="@+id/task_priority_spinner"
