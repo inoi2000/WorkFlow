@@ -79,6 +79,8 @@
     <string name="all_assignment">All assignment</string>
     <string name="my_assignment">My assignment</string>
     <string name="add_comment">Add comment</string>
+    <string name="executor">Executor</string>
+    <string name="approval_task">Approval task</string>
 
 
 </resources>
