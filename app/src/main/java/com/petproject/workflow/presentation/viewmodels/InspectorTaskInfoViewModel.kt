@@ -5,19 +5,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.petproject.workflow.domain.entities.Task
-import com.petproject.workflow.domain.usecases.GetExecutorTaskUseCase
+import com.petproject.workflow.domain.usecases.GetInspectorTaskUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ExecutorTaskInfoViewModel @Inject constructor(
+class InspectorTaskInfoViewModel @Inject constructor(
     private val taskId: String,
-    private val getExecutorTaskUseCase: GetExecutorTaskUseCase
+    private val getInspectorTaskUseCase: GetInspectorTaskUseCase
 ): ViewModel() {
 
-    private val _executingTask = MutableLiveData<Task>()
-    val executingTask: LiveData<Task> get() = _executingTask
+    private val _inspectorTask = MutableLiveData<Task>()
+    val inspectorTask: LiveData<Task> get() = _inspectorTask
 
-    val commentsCount: String get() = executingTask.value?.commentsCount.toString()
+    val commentsCount: String get() = inspectorTask.value?.commentsCount.toString()
 
     init {
         loadData()
@@ -25,7 +25,7 @@ class ExecutorTaskInfoViewModel @Inject constructor(
 
     fun loadData() {
         viewModelScope.launch {
-            _executingTask.value = getExecutorTaskUseCase(taskId)
+            _inspectorTask.value = getInspectorTaskUseCase(taskId)
         }
     }
 }

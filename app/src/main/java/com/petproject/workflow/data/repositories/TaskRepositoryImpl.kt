@@ -11,7 +11,7 @@ class TaskRepositoryImpl @Inject constructor(
     private val tokenManager: TokenManager
 ) : TaskRepository {
 
-    override suspend fun getAllExecutingTasks(): List<Task> {
+    override suspend fun getAllExecutorTasks(): List<Task> {
         val token = tokenManager.getToken()
         if (token != null) {
             val empId = TokenManager.getIdFromToken(token)
@@ -21,11 +21,19 @@ class TaskRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getExecutingTask(id: String): Task {
+    override suspend fun getExecutorTask(id: String): Task {
         TODO("Not yet implemented")
     }
 
     override suspend fun getTaskComments(taskId: String): List<Comment> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getAllInspectorTasks(): List<Task> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getInspectorTask(id: String): Task {
         TODO("Not yet implemented")
     }
 }

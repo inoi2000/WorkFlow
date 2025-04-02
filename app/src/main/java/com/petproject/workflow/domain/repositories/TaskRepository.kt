@@ -4,9 +4,13 @@ import com.petproject.workflow.domain.entities.Comment
 import com.petproject.workflow.domain.entities.Task
 
 interface TaskRepository {
-    suspend fun getAllExecutingTasks(): List<Task>
+    suspend fun getAllExecutorTasks(): List<Task>
 
-    suspend fun getExecutingTask(id: String): Task
+    suspend fun getExecutorTask(id: String): Task
+
+    suspend fun getAllInspectorTasks(): List<Task>
+
+    suspend fun getInspectorTask(id: String): Task
 
     suspend fun getTaskComments(taskId: String): List<Comment>
 }

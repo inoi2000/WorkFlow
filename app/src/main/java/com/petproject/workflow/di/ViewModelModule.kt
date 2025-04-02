@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.petproject.workflow.presentation.viewmodels.AbsenceViewModel
 import com.petproject.workflow.presentation.viewmodels.AccountViewModel
 import com.petproject.workflow.presentation.viewmodels.ExecutorTaskListViewModel
+import com.petproject.workflow.presentation.viewmodels.InspectorTaskListViewModel
 import com.petproject.workflow.presentation.viewmodels.LoginViewModel
 import dagger.Binds
 import dagger.Module
@@ -26,6 +27,11 @@ interface ViewModelModule {
     @ViewModelKey(ExecutorTaskListViewModel::class)
     @Binds
     fun bindExecutingTaskListViewModel(impl: ExecutorTaskListViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(InspectorTaskListViewModel::class)
+    @Binds
+    fun bindInspectorTaskListViewModel(impl: InspectorTaskListViewModel): ViewModel
 
     @IntoMap
     @ViewModelKey(AbsenceViewModel::class)

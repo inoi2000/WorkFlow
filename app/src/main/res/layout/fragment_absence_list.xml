@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentation.views.AbsenceListFragment">
 
     <data>
@@ -80,8 +80,8 @@
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_margin="10dp"
-                            app:tint="@color/light_blue"
-                            android:src="@drawable/ic_business_trip" />
+                            android:src="@drawable/ic_business_trip"
+                            app:tint="@color/light_blue" />
 
                         <TextView
                             android:id="@+id/business_trips_text_view"
@@ -123,8 +123,8 @@
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_margin="10dp"
-                            app:tint="@color/red"
-                            android:src="@drawable/ic_sick" />
+                            android:src="@drawable/ic_sick"
+                            app:tint="@color/red" />
 
                         <TextView
                             android:id="@+id/sick_leaves_text_view"
@@ -164,9 +164,9 @@
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_margin="10dp"
-                            app:tint="@color/green"
                             android:contentDescription="@string/overdue_tasks"
-                            android:src="@drawable/ic_vacation" />
+                            android:src="@drawable/ic_vacation"
+                            app:tint="@color/green" />
 
                         <TextView
                             android:id="@+id/vacations_tasks_text_view"
@@ -207,8 +207,8 @@
                             android:layout_height="26dp"
                             android:layout_margin="10dp"
                             android:contentDescription="@string/overdue_tasks"
-                            app:tint="@color/orange"
-                            android:src="@drawable/ic_person" />
+                            android:src="@drawable/ic_person"
+                            app:tint="@color/orange" />
 
                         <TextView
                             android:id="@+id/days_off_text_view"
@@ -244,11 +244,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginTop="12dp"
-                        android:text="@string/my_tasks"
                         android:textSize="27sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/vacations_card_view" />
+                        app:layout_constraintTop_toBottomOf="@+id/vacations_card_view"
+                        tools:text="@string/business_trips" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

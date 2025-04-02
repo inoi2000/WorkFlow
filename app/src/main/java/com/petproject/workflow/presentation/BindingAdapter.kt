@@ -87,7 +87,7 @@ fun bindTaskPriority(textView: TextView, count: Int) {
     val resId = if (count in 11..19) {
         R.string.comments_count_plu
     } else {
-        val temp = count % 10;
+        val temp = count % 10
         when (temp) {
             1 -> R.string.comments_count_nom
             in 2..4 -> R.string.comments_count_gen
@@ -105,15 +105,18 @@ fun bindTaskPriority(textView: TextView, priority: TaskPriority) {
     when (priority) {
         TaskPriority.COMMON -> {
             textView.text = textView.context.resources.getString(R.string.common)
-            textView.setTextColor(textView.context.resources.getColor(R.color.green))
+            textView.setTextColor(
+                ContextCompat.getColor(textView.context, R.color.green)
+            )
         }
 
         TaskPriority.URGENT -> {
             textView.text = textView.context.resources.getString(R.string.urgent)
-            textView.setTextColor(textView.context.resources.getColor(R.color.red))
+            textView.setTextColor(
+                ContextCompat.getColor(textView.context, R.color.red)
+            )
         }
     }
-
 }
 
 @BindingAdapter("taskPriority")

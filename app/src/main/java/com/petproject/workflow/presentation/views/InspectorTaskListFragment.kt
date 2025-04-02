@@ -8,20 +8,18 @@ import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
-import com.petproject.workflow.databinding.FragmentExecutorTaskListBinding
-import com.petproject.workflow.domain.entities.TaskPriority
+import com.petproject.workflow.databinding.FragmentInspectorTaskListBinding
 import com.petproject.workflow.domain.entities.TaskStatus
-import com.petproject.workflow.presentation.viewmodels.ExecutorTaskListViewModel
+import com.petproject.workflow.presentation.viewmodels.InspectorTaskListViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import com.petproject.workflow.presentation.views.adapters.TaskAdapter
 import javax.inject.Inject
 
-class ExecutorTaskListFragment : Fragment() {
-    private var _binding: FragmentExecutorTaskListBinding? = null
-    private val binding: FragmentExecutorTaskListBinding get() = _binding!!
+class InspectorTaskListFragment : Fragment() {
+    private var _binding: FragmentInspectorTaskListBinding? = null
+    private val binding: FragmentInspectorTaskListBinding get() = _binding!!
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -30,7 +28,7 @@ class ExecutorTaskListFragment : Fragment() {
         ViewModelProvider.create(
             viewModelStore,
             viewModelFactory
-        )[ExecutorTaskListViewModel::class]
+        )[InspectorTaskListViewModel::class]
     }
 
     private val component by lazy {
@@ -42,7 +40,7 @@ class ExecutorTaskListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         component.inject(this)
-        _binding = FragmentExecutorTaskListBinding.inflate(inflater, container, false)
+        _binding = FragmentInspectorTaskListBinding.inflate(inflater, container, false)
         setRecyclerView()
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -51,37 +49,30 @@ class ExecutorTaskListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.overdueTasksCardView.setOnClickListener {
-            viewModel.filteredTaskListByStatus(TaskStatus.FAILED)
-            choseCardView(binding.overdueTasksCardView)
-        }
-        binding.urgentTasksCardView.setOnClickListener {
-            viewModel.filteredTaskListByPriority(TaskPriority.URGENT)
-            choseCardView(binding.urgentTasksCardView)
-        }
         binding.onApprovalTasksCardView.setOnClickListener {
             viewModel.filteredTaskListByStatus(TaskStatus.ON_APPROVAL)
             choseCardView(binding.onApprovalTasksCardView)
         }
-        binding.finishedTasksCardView.setOnClickListener {
+        binding.allTasksCardView.setOnClickListener {
             viewModel.filteredTaskListByStatus(TaskStatus.COMPLETED)
-            choseCardView(binding.finishedTasksCardView)
+            choseCardView(binding.allTasksCardView)
         }
 
+        binding.onApprovalTasksCardView.callOnClick()
     }
 
     private fun setRecyclerView() {
         val adapter = TaskAdapter(
-            TaskAdapter.EXECUTOR_MODE,
+            TaskAdapter.INSPECTOR_MODE,
             { taskId ->
-                val action = ExecutorTaskListFragmentDirections
-                    .actionExecutingTaskListFragmentToExecutingTaskInfoFragment(taskId)
-                findNavController().navigate(action)
+//                val action = ExecutorTaskListFragmentDirections
+//                    .actionExecutingTaskListFragmentToExecutingTaskInfoFragment(taskId)
+//                findNavController().navigate(action)
             },
             { taskId ->
-                val action = ExecutorTaskListFragmentDirections
-                    .actionExecutingTaskListFragmentToTaskCommentListFragment(taskId)
-                findNavController().navigate(action)
+//                val action = ExecutorTaskListFragmentDirections
+//                    .actionExecutingTaskListFragmentToTaskCommentListFragment(taskId)
+//                findNavController().navigate(action)
             })
         binding.tasksListRecyclerView.itemAnimator = null
         binding.tasksListRecyclerView.adapter = adapter
@@ -94,37 +85,22 @@ class ExecutorTaskListFragment : Fragment() {
         val whiteColor = ContextCompat.getColor(requireContext(), R.color.white)
         val greyColor = ContextCompat.getColor(requireContext(), R.color.grey_for_text)
 
-        binding.overdueTasksCounterTextView.setTextColor(greyColor)
-        binding.overdueTasksCounterTextView.setBackgroundResource(R.drawable.circle_grey)
-
-        binding.urgentTasksCounterTextView.setTextColor(greyColor)
-        binding.urgentTasksCounterTextView.setBackgroundResource(R.drawable.circle_grey)
-
         binding.onApprovalTasksCounterTextView.setTextColor(greyColor)
         binding.onApprovalTasksCounterTextView.setBackgroundResource(R.drawable.circle_grey)
 
-        binding.finishedTasksCounterTextView.setTextColor(greyColor)
-        binding.finishedTasksCounterTextView.setBackgroundResource(R.drawable.circle_grey)
+        binding.allTasksCounterTextView.setTextColor(greyColor)
+        binding.allTasksCounterTextView.setBackgroundResource(R.drawable.circle_grey)
 
         when (cardView) {
-            binding.overdueTasksCardView -> {
-                binding.overdueTasksCounterTextView.setTextColor(whiteColor)
-                binding.overdueTasksCounterTextView.setBackgroundResource(R.drawable.circle_yellow)
-            }
-
-            binding.urgentTasksCardView -> {
-                binding.urgentTasksCounterTextView.setTextColor(whiteColor)
-                binding.urgentTasksCounterTextView.setBackgroundResource(R.drawable.circle_red)
-            }
-
             binding.onApprovalTasksCardView -> {
+                binding.titleTextView.text = getString(R.string.on_your_approval)
                 binding.onApprovalTasksCounterTextView.setTextColor(whiteColor)
                 binding.onApprovalTasksCounterTextView.setBackgroundResource(R.drawable.circle_blue)
             }
-
-            binding.finishedTasksCardView -> {
-                binding.finishedTasksCounterTextView.setTextColor(whiteColor)
-                binding.finishedTasksCounterTextView.setBackgroundResource(R.drawable.circle_green)
+            binding.allTasksCardView -> {
+                binding.titleTextView.text = getString(R.string.all_assignment)
+                binding.allTasksCounterTextView.setTextColor(whiteColor)
+                binding.allTasksCounterTextView.setBackgroundResource(R.drawable.circle_green)
             }
         }
     }

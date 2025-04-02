@@ -37,5 +37,4 @@ class HomeViewModel @Inject constructor(
             _employee.value = getEmployeeUseCase(employeeId)
         }
     }
-
 }

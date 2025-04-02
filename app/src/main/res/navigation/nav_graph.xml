@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragment_to_absenceListFragment"
             app:destination="@id/absenceListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_inspectorTaskListFragment"
+            app:destination="@id/inspectorTaskListFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -76,4 +79,18 @@
             android:name="absenceType"
             app:argType="com.petproject.workflow.domain.entities.AbsenceType" />
     </fragment>
+    <fragment
+        android:id="@+id/inspectorTaskListFragment"
+        android:name="com.petproject.workflow.presentation.views.InspectorTaskListFragment"
+        android:label="fragment_inspector_task_list"
+        tools:layout="@layout/fragment_inspector_task_list" >
+        <action
+            android:id="@+id/action_inspectorTaskListFragment_to_inspectorTaskInfoFragment"
+            app:destination="@id/inspectorTaskInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inspectorTaskInfoFragment"
+        android:name="com.petproject.workflow.presentation.views.InspectorTaskInfoFragment"
+        android:label="fragment_inspector_task_info"
+        tools:layout="@layout/fragment_inspector_task_info" />
 </navigation>

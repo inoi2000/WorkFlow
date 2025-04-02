@@ -8,12 +8,12 @@ import androidx.lifecycle.viewModelScope
 import com.petproject.workflow.domain.entities.Task
 import com.petproject.workflow.domain.entities.TaskPriority
 import com.petproject.workflow.domain.entities.TaskStatus
-import com.petproject.workflow.domain.usecases.GetAllExecutorTasksUseCase
+import com.petproject.workflow.domain.usecases.GetAllInspectorTasksUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ExecutorTaskListViewModel @Inject constructor(
-    private val getAllExecutorTasksUseCase: GetAllExecutorTasksUseCase
+class InspectorTaskListViewModel @Inject constructor(
+    private val getAllInspectorTasksUseCase: GetAllInspectorTasksUseCase
 ) : ViewModel() {
 
     private val _tasksList = MutableLiveData<List<Task>>()
@@ -21,20 +21,12 @@ class ExecutorTaskListViewModel @Inject constructor(
     private val _filteredTaskList = MutableLiveData<List<Task>>()
     val filteredTaskList: LiveData<List<Task>> get() = _filteredTaskList
 
-    val overdueTasksCount: LiveData<Int> = _tasksList.map { taskList ->
-        taskList.count { it.status == TaskStatus.FAILED }
-    }
-
-    val urgentTasksCount: LiveData<Int> = _tasksList.map { taskList ->
-        taskList.count { it.priority == TaskPriority.URGENT }
-    }
-
     val onApprovalTasksCount: LiveData<Int> = _tasksList.map { taskList ->
         taskList.count { it.status == TaskStatus.ON_APPROVAL }
     }
 
-    val finishedTasksCount: LiveData<Int> = _tasksList.map { taskList ->
-        taskList.count { it.status == TaskStatus.COMPLETED }
+    val allTasksCount: LiveData<Int> = _tasksList.map { taskList ->
+        taskList.count()
     }
 
     init {
@@ -43,7 +35,7 @@ class ExecutorTaskListViewModel @Inject constructor(
 
     fun loadData() {
         viewModelScope.launch {
-            _tasksList.value = getAllExecutorTasksUseCase()
+            _tasksList.value = getAllInspectorTasksUseCase()
             filteredTaskListByDefault()
         }
     }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -67,25 +68,29 @@ class AbsenceListFragment : Fragment() {
 
     private fun setClickListeners() {
         binding.vacationsCardView.setOnClickListener {
+            binding.titleTextView.text = getString(R.string.vacations)
             viewModel.filteredAbsenceListByType(AbsenceType.VACATION)
             choseCardView(binding.vacationsCardView)
         }
         binding.businessTripsCardView.setOnClickListener {
+            binding.titleTextView.text = getString(R.string.business_trips)
             viewModel.filteredAbsenceListByType(AbsenceType.BUSINESS_TRIP)
             choseCardView(binding.businessTripsCardView)
         }
         binding.sickLeavesCardView.setOnClickListener {
+            binding.titleTextView.text = getString(R.string.sick_leaves)
             viewModel.filteredAbsenceListByType(AbsenceType.SICK_LEAVE)
             choseCardView(binding.sickLeavesCardView)
         }
         binding.daysOffCardView.setOnClickListener {
+            binding.titleTextView.text = getString(R.string.days_off)
             viewModel.filteredAbsenceListByType(AbsenceType.DAY_OFF)
             choseCardView(binding.daysOffCardView)
         }
     }
 
     private fun setMode() {
-        when(args.absenceType) {
+        when (args.absenceType) {
             AbsenceType.VACATION -> binding.vacationsCardView.callOnClick()
             AbsenceType.BUSINESS_TRIP -> binding.businessTripsCardView.callOnClick()
             AbsenceType.SICK_LEAVE -> binding.sickLeavesCardView.callOnClick()
@@ -94,33 +99,39 @@ class AbsenceListFragment : Fragment() {
     }
 
     private fun choseCardView(cardView: CardView) {
-        binding.daysOffCounterTextView.setTextColor(resources.getColor(R.color.grey_for_text))
+        val whiteColor = ContextCompat.getColor(requireContext(), R.color.white)
+        val greyColor = ContextCompat.getColor(requireContext(), R.color.grey_for_text)
+
+        binding.daysOffCounterTextView.setTextColor(greyColor)
         binding.daysOffCounterTextView.setBackgroundResource(R.drawable.circle_grey)
 
-        binding.sickLeavesCounterTextView.setTextColor(resources.getColor(R.color.grey_for_text))
+        binding.sickLeavesCounterTextView.setTextColor(greyColor)
         binding.sickLeavesCounterTextView.setBackgroundResource(R.drawable.circle_grey)
 
-        binding.businessTripsCounterTextView.setTextColor(resources.getColor(R.color.grey_for_text))
+        binding.businessTripsCounterTextView.setTextColor(greyColor)
         binding.businessTripsCounterTextView.setBackgroundResource(R.drawable.circle_grey)
 
-        binding.vacationsCounterTextView.setTextColor(resources.getColor(R.color.grey_for_text))
+        binding.vacationsCounterTextView.setTextColor(greyColor)
         binding.vacationsCounterTextView.setBackgroundResource(R.drawable.circle_grey)
 
         when (cardView) {
             binding.daysOffCardView -> {
-                binding.daysOffCounterTextView.setTextColor(resources.getColor(R.color.white))
+                binding.daysOffCounterTextView.setTextColor(whiteColor)
                 binding.daysOffCounterTextView.setBackgroundResource(R.drawable.circle_yellow)
             }
+
             binding.sickLeavesCardView -> {
-                binding.sickLeavesCounterTextView.setTextColor(resources.getColor(R.color.white))
+                binding.sickLeavesCounterTextView.setTextColor(whiteColor)
                 binding.sickLeavesCounterTextView.setBackgroundResource(R.drawable.circle_red)
             }
+
             binding.businessTripsCardView -> {
-                binding.businessTripsCounterTextView.setTextColor(resources.getColor(R.color.white))
+                binding.businessTripsCounterTextView.setTextColor(whiteColor)
                 binding.businessTripsCounterTextView.setBackgroundResource(R.drawable.circle_blue)
             }
+
             binding.vacationsCardView -> {
-                binding.vacationsCounterTextView.setTextColor(resources.getColor(R.color.white))
+                binding.vacationsCounterTextView.setTextColor(whiteColor)
                 binding.vacationsCounterTextView.setBackgroundResource(R.drawable.circle_green)
             }
         }
