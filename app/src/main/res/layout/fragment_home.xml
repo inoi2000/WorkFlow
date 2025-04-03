@@ -39,8 +39,8 @@
 
                 <ImageView
                     android:id="@+id/setting_image_view"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginEnd="20dp"
                     android:contentDescription="@string/component_logo"
                     android:src="@drawable/ic_settings"
@@ -252,7 +252,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="@string/vacations"
-                            android:textStyle="bold"
+
                             app:layout_constraintEnd_toEndOf="@+id/vacations_card_view"
                             app:layout_constraintStart_toStartOf="@+id/vacations_card_view"
                             app:layout_constraintTop_toBottomOf="@+id/vacations_card_view" />
@@ -285,7 +285,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="@string/sick_leaves"
-                            android:textStyle="bold"
+
                             app:layout_constraintEnd_toEndOf="@+id/sick_leaves_card_view"
                             app:layout_constraintStart_toStartOf="@+id/sick_leaves_card_view"
                             app:layout_constraintTop_toBottomOf="@+id/sick_leaves_card_view" />
@@ -318,7 +318,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="@string/days_off"
-                            android:textStyle="bold"
+
                             app:layout_constraintEnd_toEndOf="@+id/days_off_card_view"
                             app:layout_constraintStart_toStartOf="@+id/days_off_card_view"
                             app:layout_constraintTop_toBottomOf="@+id/days_off_card_view" />
@@ -350,7 +350,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="@string/others"
-                            android:textStyle="bold"
+
                             app:layout_constraintEnd_toEndOf="@+id/others_card_view"
                             app:layout_constraintStart_toStartOf="@+id/others_card_view"
                             app:layout_constraintTop_toBottomOf="@+id/others_card_view" />
@@ -372,6 +372,7 @@
 
                         <ImageView
                             android:id="@+id/on_approval_tasks_logo"
+                            app:tint="?attr/colorPrimary"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:contentDescription="@string/component_logo"
@@ -385,7 +386,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
                             android:text="@string/on_your_approval"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="@+id/on_approval_tasks_logo"
                             app:layout_constraintStart_toEndOf="@+id/on_approval_tasks_logo"
@@ -420,6 +421,7 @@
 
                         <ImageView
                             android:id="@+id/executor_tasks_logo"
+                            app:tint="?attr/colorPrimary"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:contentDescription="@string/component_logo"
@@ -433,7 +435,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
                             android:text="@string/tasks"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="@+id/executor_tasks_logo"
                             app:layout_constraintStart_toEndOf="@+id/executor_tasks_logo"
@@ -454,102 +456,6 @@
                 <include
                     android:id="@+id/executor_task"
                     layout="@layout/item_task_info" />
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    app:cardCornerRadius="12dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="12dp">
-
-                        <ImageView
-                            android:id="@+id/vacations_logo"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:contentDescription="@string/component_logo"
-                            android:src="@drawable/ic_vacation"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
-                            android:text="@string/vacations"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/vacations_logo"
-                            app:layout_constraintStart_toEndOf="@+id/vacations_logo"
-                            app:layout_constraintTop_toTopOf="@+id/vacations_logo" />
-
-                        <ImageView
-                            android:id="@+id/vacations_ref_ic"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@string/component_logo"
-                            android:src="@drawable/ic_arrow_forward"
-                            app:layout_constraintEnd_toEndOf="parent"
-
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.cardview.widget.CardView>
-
-                <include
-                    android:id="@+id/vacation_item"
-                    layout="@layout/item_absence_info" />
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    app:cardCornerRadius="12dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="12dp">
-
-                        <ImageView
-                            android:id="@+id/business_trips_logo"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:contentDescription="@string/component_logo"
-                            android:src="@drawable/ic_business_trip"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
-                            android:text="@string/business_trips"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/business_trips_logo"
-                            app:layout_constraintStart_toEndOf="@+id/business_trips_logo"
-                            app:layout_constraintTop_toTopOf="@+id/business_trips_logo" />
-
-                        <ImageView
-                            android:id="@+id/business_trips_ref_ic"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@string/component_logo"
-                            android:src="@drawable/ic_arrow_forward"
-                            app:layout_constraintEnd_toEndOf="parent"
-
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.cardview.widget.CardView>
-
-                <include
-                    android:id="@+id/business_trip_item"
-                    layout="@layout/item_absence_info" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
