@@ -16,11 +16,6 @@
         android:layout_marginTop="16dp"
         app:cardCornerRadius="12dp">
 
-        <View
-            android:id="@+id/task_status_color_view"
-            style="@style/StatusLineView"
-            android:background="@color/green" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
