@@ -1,29 +1,21 @@
 package com.petproject.workflow.presentation.views
 
 import android.annotation.SuppressLint
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentHomeBinding
 import com.petproject.workflow.domain.entities.AbsenceType
-import com.petproject.workflow.domain.entities.Task
-import com.petproject.workflow.domain.entities.TaskPriority
-import com.petproject.workflow.domain.entities.TaskStatus
 import com.petproject.workflow.presentation.viewmodels.HomeViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import com.petproject.workflow.presentation.views.adapters.AbsenceInfoViewHolder
 import com.petproject.workflow.presentation.views.adapters.TaskInfoViewHolder
-import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.util.UUID
 import javax.inject.Inject
 
 class HomeFragment : Fragment() {
@@ -55,7 +47,37 @@ class HomeFragment : Fragment() {
         component.inject(this)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         observeViewModel()
+        setNavigation()
         return binding.root
+    }
+
+    private fun setNavigation() {
+        binding.vacationsCardView.setOnClickListener {
+            val action = HomeFragmentDirections
+                .actionHomeFragmentToAbsenceListFragment(AbsenceType.VACATION)
+            findNavController().navigate(action)
+        }
+        binding.sickLeavesCardView.setOnClickListener {
+            val action = HomeFragmentDirections
+                .actionHomeFragmentToAbsenceListFragment(AbsenceType.SICK_LEAVE)
+            findNavController().navigate(action)
+        }
+        binding.daysOffCardView.setOnClickListener {
+            val action = HomeFragmentDirections
+                .actionHomeFragmentToAbsenceListFragment(AbsenceType.DAY_OFF)
+            findNavController().navigate(action)
+        }
+
+        binding.onApprovalTasksCardView.setOnClickListener {
+            val action = HomeFragmentDirections
+                .actionHomeFragmentToInspectorTaskListFragment()
+            findNavController().navigate(action)
+        }
+        binding.executorTasksCardView.setOnClickListener {
+            val action = HomeFragmentDirections
+                .actionHomeFragmentToExecutingTaskListFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun observeViewModel() {

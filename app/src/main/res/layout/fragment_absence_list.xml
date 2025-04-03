@@ -76,12 +76,16 @@
                         app:layout_constraintTop_toBottomOf="@+id/toolbar"
                         app:layout_constraintVertical_chainStyle="spread_inside">
 
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/gradient_blue">
                         <ImageView
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_margin="10dp"
                             android:src="@drawable/ic_business_trip"
-                            app:tint="@color/blue" />
+                            app:tint="?attr/colorOnPrimary" />
 
                         <TextView
                             android:id="@+id/business_trips_text_view"
@@ -89,6 +93,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="start|bottom"
                             android:layout_margin="10dp"
+                            android:textColor="?attr/colorOnPrimary"
                             android:text="@string/business_trips" />
 
                         <TextView
@@ -101,7 +106,7 @@
                             android:text="@{viewmodel.businessTripCount.toString()}"
                             android:textStyle="bold"
                             tools:text="0" />
-
+                        </FrameLayout>
 
                     </androidx.cardview.widget.CardView>
 
@@ -118,13 +123,16 @@
                         app:layout_constraintStart_toEndOf="@+id/guideline"
                         app:layout_constraintTop_toBottomOf="@+id/toolbar"
                         app:layout_constraintVertical_chainStyle="spread_inside">
-
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/gradient_birch">
                         <ImageView
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_margin="10dp"
                             android:src="@drawable/ic_sick"
-                            app:tint="@color/red" />
+                            app:tint="?attr/colorOnPrimary" />
 
                         <TextView
                             android:id="@+id/sick_leaves_text_view"
@@ -132,6 +140,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="start|bottom"
                             android:layout_margin="10dp"
+                            android:textColor="?attr/colorOnPrimary"
                             android:text="@string/sick_leaves" />
 
                         <TextView
@@ -144,7 +153,7 @@
                             android:text="@{viewmodel.sickLeaveCount.toString()}"
                             android:textStyle="bold"
                             tools:text="0" />
-
+                        </FrameLayout>
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -160,13 +169,17 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/business_trips_card_view">
 
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/gradient_purple">
                         <ImageView
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_margin="10dp"
                             android:contentDescription="@string/overdue_tasks"
                             android:src="@drawable/ic_vacation"
-                            app:tint="@color/green" />
+                            app:tint="?attr/colorOnPrimary" />
 
                         <TextView
                             android:id="@+id/vacations_tasks_text_view"
@@ -174,6 +187,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="start|bottom"
                             android:layout_margin="10dp"
+                            android:textColor="?attr/colorOnPrimary"
                             android:text="@string/vacations" />
 
                         <TextView
@@ -186,7 +200,7 @@
                             android:text="@{viewmodel.vacationCount.toString()}"
                             android:textStyle="bold"
                             tools:text="0" />
-
+                        </FrameLayout>
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -201,14 +215,17 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/guideline"
                         app:layout_constraintTop_toBottomOf="@+id/sick_leaves_card_view">
-
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/gradient_yellow">
                         <ImageView
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_margin="10dp"
                             android:contentDescription="@string/overdue_tasks"
                             android:src="@drawable/ic_person"
-                            app:tint="@color/orange" />
+                            app:tint="?attr/colorOnPrimary" />
 
                         <TextView
                             android:id="@+id/days_off_text_view"
@@ -216,6 +233,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="start|bottom"
                             android:layout_margin="10dp"
+                            android:textColor="?attr/colorOnPrimary"
                             android:text="@string/days_off" />
 
                         <TextView
@@ -228,7 +246,7 @@
                             android:text="@{viewmodel.dayOffCount.toString()}"
                             android:textStyle="bold"
                             tools:text="0" />
-
+                        </FrameLayout>
                     </androidx.cardview.widget.CardView>
 
                     <androidx.constraintlayout.widget.Guideline

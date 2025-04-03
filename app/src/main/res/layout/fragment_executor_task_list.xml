@@ -133,7 +133,7 @@
                         <FrameLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/gradient_violet">
+                            android:background="@drawable/gradient_red">
 
                         <ImageView
                             app:tint="?attr/colorOnPrimary"
@@ -183,7 +183,7 @@
                         <FrameLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/gradient_green">
+                            android:background="@drawable/gradient_yellow">
 
                         <ImageView
                             app:tint="?attr/colorOnPrimary"
@@ -233,7 +233,7 @@
                         <FrameLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/gradient_main">
+                            android:background="@drawable/gradient_gray">
                         <ImageView
                             app:tint="?attr/colorOnPrimary"
                             android:layout_width="26dp"

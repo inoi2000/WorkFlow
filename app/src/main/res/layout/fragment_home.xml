@@ -43,18 +43,18 @@
                     android:layout_height="32dp"
                     android:layout_marginEnd="20dp"
                     android:contentDescription="@string/component_logo"
-                    android:src="@drawable/ic_approval"
+                    android:src="@drawable/ic_settings"
                     app:layout_constraintBottom_toBottomOf="@+id/search_edit_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/search_edit_text"
                     app:tint="@color/white" />
 
                 <TextView
-                    android:id="@+id/services_text_view"
+                    android:id="@+id/helpful_ref_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/services"
+                    android:text="@string/helpful_ref"
                     android:textColor="?attr/colorOnPrimary"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/search_edit_text"
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@+id/services_text_view">
+                    app:layout_constraintTop_toBottomOf="@+id/helpful_ref_text_view">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -118,8 +118,7 @@
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/gradient_violet"
-                                >
+                                android:background="@drawable/gradient_cyan">
 
                                 <ImageView
                                     android:id="@+id/tasks_service_image_view"
@@ -156,8 +155,7 @@
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/gradient_green"
-                                >
+                                android:background="@drawable/gradient_purple">
 
                                 <ImageView
                                     android:id="@+id/management_service_image_view"
@@ -199,6 +197,263 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="12dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="12dp"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="28dp">
+
+                        <TextView
+                            android:id="@+id/services_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:text="@string/services"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/vacations_card_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            app:cardCornerRadius="28dp"
+                            app:layout_constraintEnd_toStartOf="@+id/sick_leaves_card_view"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintHorizontal_chainStyle="spread"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/services_text_view">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_margin="12dp"
+                                android:contentDescription="@string/component_logo"
+                                android:src="@drawable/ic_vacation"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="?attr/colorPrimary" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/vacations"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="@+id/vacations_card_view"
+                            app:layout_constraintStart_toStartOf="@+id/vacations_card_view"
+                            app:layout_constraintTop_toBottomOf="@+id/vacations_card_view" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/sick_leaves_card_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="28dp"
+                            app:layout_constraintEnd_toStartOf="@+id/days_off_card_view"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/vacations_card_view"
+                            app:layout_constraintTop_toTopOf="@+id/vacations_card_view">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_margin="12dp"
+                                android:contentDescription="@string/component_logo"
+                                android:src="@drawable/ic_sick"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="?attr/colorPrimary" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/sick_leaves"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="@+id/sick_leaves_card_view"
+                            app:layout_constraintStart_toStartOf="@+id/sick_leaves_card_view"
+                            app:layout_constraintTop_toBottomOf="@+id/sick_leaves_card_view" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/days_off_card_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="28dp"
+                            app:layout_constraintEnd_toStartOf="@+id/others_card_view"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/sick_leaves_card_view"
+                            app:layout_constraintTop_toTopOf="@+id/vacations_card_view">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="12dp"
+                                android:contentDescription="@string/component_logo"
+                                android:src="@drawable/ic_day_off"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="?attr/colorPrimary" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/days_off"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="@+id/days_off_card_view"
+                            app:layout_constraintStart_toStartOf="@+id/days_off_card_view"
+                            app:layout_constraintTop_toBottomOf="@+id/days_off_card_view" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/others_card_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="28dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/days_off_card_view"
+                            app:layout_constraintTop_toTopOf="@+id/vacations_card_view">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_margin="12dp"
+                                android:contentDescription="@string/component_logo"
+                                android:src="@drawable/ic_others"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="?attr/colorPrimary" />
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/others"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="@+id/others_card_view"
+                            app:layout_constraintStart_toStartOf="@+id/others_card_view"
+                            app:layout_constraintTop_toBottomOf="@+id/others_card_view" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/on_approval_tasks_card_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="12dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:id="@+id/on_approval_tasks_logo"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="@string/component_logo"
+                            android:src="@drawable/ic_approval"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:text="@string/on_your_approval"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/on_approval_tasks_logo"
+                            app:layout_constraintStart_toEndOf="@+id/on_approval_tasks_logo"
+                            app:layout_constraintTop_toTopOf="@+id/on_approval_tasks_logo" />
+
+                        <ImageView
+                            android:id="@+id/on_approval_tasks_ref_ic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/component_logo"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <include
+                    android:id="@+id/on_approval_task"
+                    layout="@layout/item_task_info" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/executor_tasks_card_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="12dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:id="@+id/executor_tasks_logo"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="@string/component_logo"
+                            android:src="@drawable/ic_task"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:text="@string/tasks"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/executor_tasks_logo"
+                            app:layout_constraintStart_toEndOf="@+id/executor_tasks_logo"
+                            app:layout_constraintTop_toTopOf="@+id/executor_tasks_logo" />
+
+                        <ImageView
+                            android:id="@+id/executor_tasks_ref_ic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/component_logo"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:layout_constraintEnd_toEndOf="parent"
+
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <include
+                    android:id="@+id/executor_task"
+                    layout="@layout/item_task_info" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -295,101 +550,6 @@
                 <include
                     android:id="@+id/business_trip_item"
                     layout="@layout/item_absence_info" />
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    app:cardCornerRadius="12dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="12dp">
-
-                        <ImageView
-                            android:id="@+id/on_approval_tasks_logo"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:contentDescription="@string/component_logo"
-                            android:src="@drawable/ic_approval"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
-                            android:text="@string/on_your_approval"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/on_approval_tasks_logo"
-                            app:layout_constraintStart_toEndOf="@+id/on_approval_tasks_logo"
-                            app:layout_constraintTop_toTopOf="@+id/on_approval_tasks_logo" />
-
-                        <ImageView
-                            android:id="@+id/on_approval_tasks_ref_ic"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@string/component_logo"
-                            android:src="@drawable/ic_arrow_forward"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.cardview.widget.CardView>
-
-                <include
-                    android:id="@+id/on_approval_task"
-                    layout="@layout/item_task_info" />
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    app:cardCornerRadius="12dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="12dp">
-
-                        <ImageView
-                            android:id="@+id/executor_tasks_logo"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:contentDescription="@string/component_logo"
-                            android:src="@drawable/ic_task"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
-                            android:text="@string/tasks"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/executor_tasks_logo"
-                            app:layout_constraintStart_toEndOf="@+id/executor_tasks_logo"
-                            app:layout_constraintTop_toTopOf="@+id/executor_tasks_logo" />
-
-                        <ImageView
-                            android:id="@+id/executor_tasks_ref_ic"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@string/component_logo"
-                            android:src="@drawable/ic_arrow_forward"
-                            app:layout_constraintEnd_toEndOf="parent"
-
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.cardview.widget.CardView>
-
-                <include
-                    android:id="@+id/executor_task"
-                    layout="@layout/item_task_info" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>

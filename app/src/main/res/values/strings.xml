@@ -82,6 +82,8 @@
     <string name="executor">Executor</string>
     <string name="approval_task">Approval task</string>
     <string name="services">Services</string>
+    <string name="helpful_ref">Helpful references</string>
+    <string name="others">Others</string>
 
 
 </resources>

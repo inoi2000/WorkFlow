@@ -79,5 +79,7 @@
     <string name="executor">Исполнитель</string>
     <string name="approval_task">Утвердить выполнение</string>
     <string name="services">Сервисы</string>
+    <string name="helpful_ref">Полезные ссылки</string>
+    <string name="others">Другие</string>
 
 </resources>

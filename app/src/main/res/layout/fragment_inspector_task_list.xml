@@ -74,8 +74,12 @@
                         app:layout_constraintEnd_toStartOf="@+id/guideline"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/gradient_blue">
                         <ImageView
+                            app:tint="?attr/colorOnPrimary"
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_margin="10dp"
@@ -83,6 +87,7 @@
                             android:src="@drawable/ic_on_approval" />
 
                         <TextView
+                            android:textColor="?attr/colorOnPrimary"
                             android:id="@+id/on_approval_tasks_text_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -100,7 +105,7 @@
                             android:text="@{viewmodel.onApprovalTasksCount.toString()}"
                             android:textStyle="bold"
                             tools:text="0" />
-
+                        </FrameLayout>
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -115,8 +120,12 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/guideline"
                         app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/gradient_birch">
                         <ImageView
+                            app:tint="?attr/colorOnPrimary"
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_margin="10dp"
@@ -124,6 +133,7 @@
                             android:src="@drawable/ic_done" />
 
                         <TextView
+                            android:textColor="?attr/colorOnPrimary"
                             android:id="@+id/all_tasks_text_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -141,7 +151,7 @@
                             android:text="@{viewmodel.allTasksCount.toString()}"
                             android:textStyle="bold"
                             tools:text="0" />
-
+                        </FrameLayout>
                     </androidx.cardview.widget.CardView>
 
                     <androidx.constraintlayout.widget.Guideline
