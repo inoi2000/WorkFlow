@@ -11,6 +11,9 @@ data class AbsenceDto(
     @SerializedName("type")
     @Expose
     val type: String,
+    @SerializedName("status")
+    @Expose
+    val status: String,
     @SerializedName("start")
     @Expose
     val start: LocalDate,

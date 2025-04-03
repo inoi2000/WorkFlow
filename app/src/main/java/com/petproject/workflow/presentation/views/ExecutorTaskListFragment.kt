@@ -17,6 +17,7 @@ import com.petproject.workflow.domain.entities.TaskStatus
 import com.petproject.workflow.presentation.viewmodels.ExecutorTaskListViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import com.petproject.workflow.presentation.views.adapters.TaskAdapter
+import com.petproject.workflow.presentation.views.adapters.TaskInfoViewHolder
 import javax.inject.Inject
 
 class ExecutorTaskListFragment : Fragment() {
@@ -72,7 +73,7 @@ class ExecutorTaskListFragment : Fragment() {
 
     private fun setRecyclerView() {
         val adapter = TaskAdapter(
-            TaskAdapter.EXECUTOR_MODE,
+            TaskInfoViewHolder.EXECUTOR_MODE,
             { taskId ->
                 val action = ExecutorTaskListFragmentDirections
                     .actionExecutingTaskListFragmentToExecutingTaskInfoFragment(taskId)

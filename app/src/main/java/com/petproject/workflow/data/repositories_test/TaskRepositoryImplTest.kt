@@ -56,7 +56,7 @@ class TaskRepositoryImplTest @Inject constructor(
             task = executionTask1
         )
         executionTask1 = Task(
-            id = UUID.randomUUID().toString(),
+            id = "f81d4fae-7dec-11d0-a765-00a0c91e6bf6",
             description = "Распечатать журналы инструкатажа по пожарной безопасности за 2025 год",
             creation = LocalDate.now(),
             deadline = LocalDate.of(2025, 5, 10),
@@ -69,7 +69,7 @@ class TaskRepositoryImplTest @Inject constructor(
         )
 
         val executionTask2 = Task(
-            id = UUID.randomUUID().toString(),
+            id = "e58ed763-928c-4155-bee9-fdbaaadc15f3",
             description = "Подготовить документацию по проекту сдачи недвижимого имущесто в субаренду в соответствии с текущеми контрактами",
             creation = LocalDate.now(),
             deadline = LocalDate.of(2025, 4, 15),
@@ -80,7 +80,7 @@ class TaskRepositoryImplTest @Inject constructor(
             inspector = employee2
         )
         val inspectionTask = Task(
-            id = UUID.randomUUID().toString(),
+            id = "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
             description = "Осуществить закупку кретически важного оборудования на базу в соответствии с текущеми нуждами предприятия",
             creation = LocalDate.now(),
             deadline = LocalDate.of(2025, 4, 15),

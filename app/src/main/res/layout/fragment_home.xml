@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentation.views.HomeFragment">
 
@@ -12,57 +13,499 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:paddingEnd="20dp"
+            android:background="@drawable/gradient_main"
+            android:paddingBottom="20dp"
             tools:ignore="RtlSymmetry">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_search"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="20dp"
-                android:background="?attr/colorOnPrimary"
-                android:hint="@string/colleagues_services_news"
-                android:inputType="textEmailAddress"
-                android:paddingVertical="8dp"
-                android:paddingStart="15dp" />
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/search_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="?attr/colorOnPrimary"
+                    android:hint="@string/colleagues_services_news"
+                    android:inputType="textEmailAddress"
+                    android:paddingVertical="8dp"
+                    android:paddingStart="15dp"
+                    app:layout_constraintEnd_toStartOf="@+id/setting_image_view"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/setting_image_view"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="20dp"
+                    android:contentDescription="@string/component_logo"
+                    android:src="@drawable/ic_approval"
+                    app:layout_constraintBottom_toBottomOf="@+id/search_edit_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/search_edit_text"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/services_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/services"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/search_edit_text"
+                    app:layout_constraintTop_toBottomOf="@+id/search_edit_text" />
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/services_text_view">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="118dp"
+                            android:layout_height="132dp"
+                            android:layout_marginEnd="8dp"
+                            app:cardCornerRadius="12dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/gradient_blue"
+                                >
+
+                                <ImageView
+                                    android:id="@+id/planning_service_image_view"
+                                    android:layout_width="64dp"
+                                    android:layout_height="64dp"
+                                    android:layout_margin="12dp"
+                                    android:src="@drawable/color_calendar"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/planning_service_text_view"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="12dp"
+                                    android:layout_marginStart="8dp"
+                                    android:text="Планирование"
+                                    android:textColor="?attr/colorOnPrimary"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    android:textAlignment="center"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="118dp"
+                            android:layout_height="132dp"
+                            android:layout_marginEnd="8dp"
+                            app:cardCornerRadius="12dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/gradient_violet"
+                                >
+
+                                <ImageView
+                                    android:id="@+id/tasks_service_image_view"
+                                    android:layout_width="64dp"
+                                    android:layout_height="64dp"
+                                    android:layout_margin="12dp"
+                                    android:src="@drawable/color_text_book"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/tasks_service_text_view"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="12dp"
+                                    android:layout_marginStart="8dp"
+                                    android:text="Мои задачи"
+                                    android:textColor="?attr/colorOnPrimary"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    android:textAlignment="center"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="118dp"
+                            android:layout_height="132dp"
+                            android:layout_marginEnd="8dp"
+                            app:cardCornerRadius="12dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/gradient_green"
+                                >
+
+                                <ImageView
+                                    android:id="@+id/management_service_image_view"
+                                    android:layout_width="64dp"
+                                    android:layout_height="64dp"
+                                    android:layout_margin="12dp"
+                                    android:src="@drawable/color_group"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/management_service_text_view"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="12dp"
+                                    android:layout_marginStart="8dp"
+                                    android:text="Управление персоналом"
+                                    android:textColor="?attr/colorOnPrimary"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.cardview.widget.CardView>
+
+<!--                        <androidx.cardview.widget.CardView-->
+<!--                            android:layout_width="118dp"-->
+<!--                            android:layout_height="142dp"-->
+<!--                            android:layout_marginEnd="8dp"-->
+<!--                            app:cardCornerRadius="12dp">-->
+
+<!--                            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent">-->
+
+<!--                                <ImageView-->
+<!--                                    android:id="@+id/planning_service_image_view"-->
+<!--                                    android:layout_width="48dp"-->
+<!--                                    android:layout_height="48dp"-->
+<!--                                    android:background="@drawable/circle_green"-->
+<!--                                    android:backgroundTint="@color/green_transparent"-->
+<!--                                    android:src="@drawable/ic_calendar"-->
+<!--                                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                                    app:layout_constraintVertical_bias="0.3"-->
+<!--                                    app:tint="@color/green" />-->
+
+<!--                                <TextView-->
+<!--                                    android:id="@+id/planning_service_text_view"-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginTop="8dp"-->
+<!--                                    android:text="Планирование"-->
+<!--                                    android:textAlignment="center"-->
+<!--                                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                                    app:layout_constraintTop_toBottomOf="@+id/planning_service_image_view" />-->
+
+<!--                            </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--                        </androidx.cardview.widget.CardView>-->
+
+<!--                        <androidx.cardview.widget.CardView-->
+<!--                            android:layout_width="118dp"-->
+<!--                            android:layout_height="142dp"-->
+<!--                            android:layout_marginEnd="8dp"-->
+<!--                            app:cardCornerRadius="12dp">-->
+
+<!--                            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent">-->
+
+<!--                                <ImageView-->
+<!--                                    android:id="@+id/my_tasks_service_image_view"-->
+<!--                                    android:layout_width="48dp"-->
+<!--                                    android:layout_height="48dp"-->
+<!--                                    android:background="@drawable/circle_orange"-->
+<!--                                    android:backgroundTint="@color/orange_transparent"-->
+<!--                                    android:src="@drawable/ic_bolt_green"-->
+<!--                                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                                    app:layout_constraintVertical_bias="0.3"-->
+<!--                                    app:tint="@color/orange" />-->
+
+<!--                                <TextView-->
+<!--                                    android:id="@+id/my_tasks_service_text_view"-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginTop="8dp"-->
+<!--                                    android:text="Мои задачи"-->
+<!--                                    android:textAlignment="center"-->
+<!--                                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                                    app:layout_constraintTop_toBottomOf="@+id/my_tasks_service_image_view" />-->
+
+<!--                            </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--                        </androidx.cardview.widget.CardView>-->
+
+<!--                        <androidx.cardview.widget.CardView-->
+<!--                            android:layout_width="118dp"-->
+<!--                            android:layout_height="142dp"-->
+<!--                            android:layout_marginEnd="8dp"-->
+<!--                            app:cardCornerRadius="12dp">-->
+
+<!--                            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent">-->
+
+<!--                                <ImageView-->
+<!--                                    android:id="@+id/management_service_image_view"-->
+<!--                                    android:layout_width="48dp"-->
+<!--                                    android:layout_height="48dp"-->
+<!--                                    android:background="@drawable/circle_blue"-->
+<!--                                    android:backgroundTint="@color/blue_transparent"-->
+<!--                                    android:src="@drawable/ic_person"-->
+<!--                                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                                    app:layout_constraintVertical_bias="0.3"-->
+<!--                                    app:tint="@color/blue" />-->
+
+<!--                                <TextView-->
+<!--                                    android:id="@+id/management_service_text_view"-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginTop="8dp"-->
+<!--                                    android:text="Управление персоналом"-->
+<!--                                    android:textAlignment="center"-->
+<!--                                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                                    app:layout_constraintTop_toBottomOf="@+id/management_service_image_view" />-->
+
+<!--                            </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--                        </androidx.cardview.widget.CardView>-->
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </com.google.android.material.appbar.MaterialToolbar>
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingHorizontal="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="12dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:id="@+id/vacations_logo"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="@string/component_logo"
+                            android:src="@drawable/ic_vacation"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:text="@string/vacations"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/vacations_logo"
+                            app:layout_constraintStart_toEndOf="@+id/vacations_logo"
+                            app:layout_constraintTop_toTopOf="@+id/vacations_logo" />
+
+                        <ImageView
+                            android:id="@+id/vacations_ref_ic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/component_logo"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:layout_constraintEnd_toEndOf="parent"
+
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
                 <include
-                    android:id="@+id/vacations_item"
-                    layout="@layout/home_screen_item_with_status" />
+                    android:id="@+id/vacation_item"
+                    layout="@layout/item_absence_info" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="12dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:id="@+id/business_trips_logo"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="@string/component_logo"
+                            android:src="@drawable/ic_business_trip"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:text="@string/business_trips"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/business_trips_logo"
+                            app:layout_constraintStart_toEndOf="@+id/business_trips_logo"
+                            app:layout_constraintTop_toTopOf="@+id/business_trips_logo" />
+
+                        <ImageView
+                            android:id="@+id/business_trips_ref_ic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/component_logo"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:layout_constraintEnd_toEndOf="parent"
+
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
                 <include
-                    android:id="@+id/business_trips_item"
-                    layout="@layout/home_screen_item_with_status" />
+                    android:id="@+id/business_trip_item"
+                    layout="@layout/item_absence_info" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="12dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:id="@+id/on_approval_tasks_logo"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="@string/component_logo"
+                            android:src="@drawable/ic_approval"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:text="@string/on_your_approval"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/on_approval_tasks_logo"
+                            app:layout_constraintStart_toEndOf="@+id/on_approval_tasks_logo"
+                            app:layout_constraintTop_toTopOf="@+id/on_approval_tasks_logo" />
+
+                        <ImageView
+                            android:id="@+id/on_approval_tasks_ref_ic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/component_logo"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
                 <include
-                    android:id="@+id/approvals_item"
-                    layout="@layout/home_screen_item_with_status" />
+                    android:id="@+id/on_approval_task"
+                    layout="@layout/item_task_info" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="12dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:id="@+id/executor_tasks_logo"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="@string/component_logo"
+                            android:src="@drawable/ic_task"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:text="@string/tasks"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/executor_tasks_logo"
+                            app:layout_constraintStart_toEndOf="@+id/executor_tasks_logo"
+                            app:layout_constraintTop_toTopOf="@+id/executor_tasks_logo" />
+
+                        <ImageView
+                            android:id="@+id/executor_tasks_ref_ic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/component_logo"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:layout_constraintEnd_toEndOf="parent"
+
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
                 <include
-                    android:id="@+id/tasks_item"
-                    layout="@layout/home_screen_item" />
-
-                <include
-                    android:id="@+id/mentoring_item"
-                    layout="@layout/home_screen_item" />
-
-                <include
-                    android:id="@+id/documents_item"
-                    layout="@layout/home_screen_item" />
+                    android:id="@+id/executor_task"
+                    layout="@layout/item_task_info" />
             </LinearLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 </layout>

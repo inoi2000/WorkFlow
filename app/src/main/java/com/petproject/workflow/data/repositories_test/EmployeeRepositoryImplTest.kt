@@ -4,6 +4,7 @@ import com.petproject.workflow.data.network.MainApiService
 import com.petproject.workflow.data.network.exceptions.AuthException
 import com.petproject.workflow.data.network.mappers.EmployeeMapper
 import com.petproject.workflow.domain.entities.Absence
+import com.petproject.workflow.domain.entities.AbsenceStatus
 import com.petproject.workflow.domain.entities.AbsenceType
 import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.entities.Task
@@ -21,22 +22,24 @@ class EmployeeRepositoryImplTest @Inject constructor(
 
     override suspend fun getEmployee(id: String): Employee {
         val businessTrip = Absence(
-            id = UUID.randomUUID().toString(),
+            id = "00112233-4455-6677-8899-aabbccddeeff",
             type = AbsenceType.BUSINESS_TRIP,
+            status = AbsenceStatus.APPROVED,
             start = LocalDate.of(2025,3,21),
             end = LocalDate.of(2025,4,12),
             isApproval = true,
             place = "Екатеренбург"
         )
         val vacation = Absence(
-            id = UUID.randomUUID().toString(),
+            id = "550e8400-e29b-41d4-a716-446655440000",
             type = AbsenceType.VACATION,
+            status = AbsenceStatus.APPROVED,
             start = LocalDate.of(2025,5,10),
             end = LocalDate.of(2025,5,15),
             isApproval = true,
         )
         val executionTask1 = Task(
-            id = UUID.randomUUID().toString(),
+            id = "f81d4fae-7dec-11d0-a765-00a0c91e6bf6",
             description = "Распечатать журналы инструкатажа по пожарной безопасности за 2025 год",
             creation = LocalDate.now(),
             deadline = LocalDate.of(2025,5,10),
@@ -46,7 +49,7 @@ class EmployeeRepositoryImplTest @Inject constructor(
             inspector = null
         )
         val executionTask2 = Task(
-            id = UUID.randomUUID().toString(),
+            id = "e58ed763-928c-4155-bee9-fdbaaadc15f3",
             description = "Подготовить документацию по проекту сдачи недвижимого имущесто в субаренду в соответствии с текущеми контрактами",
             creation = LocalDate.now(),
             deadline = LocalDate.of(2025,4,15),
@@ -56,7 +59,7 @@ class EmployeeRepositoryImplTest @Inject constructor(
             inspector = null
         )
         val inspectionTask = Task(
-            id = UUID.randomUUID().toString(),
+            id = "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
             description = "Осуществить закупку кретически важного оборудования на базу в соответствии с текущеми нуждами предприятия",
             creation = LocalDate.now(),
             deadline = LocalDate.of(2025,4,15),

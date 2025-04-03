@@ -2,20 +2,42 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="white_dark">#FBFDFD</color>
 
     <color name="test">#964747</color>
 
     <color name="green">#83B201</color>
     <color name="red">#DF0729</color>
     <color name="yellow">#FFC107</color>
-    <color name="light_blue">#5789E8</color>
+    <color name="blue">#5789E8</color>
     <color name="orange">#FF9800</color>
 
-    <color name="blue">#3777FC</color>
+    <color name="light_green">#CC83B201</color>
+    <color name="light_red">#DF0729</color>
+    <color name="light_yellow">#FFC107</color>
+    <color name="light_blue">#5789E8</color>
+    <color name="light_orange">#FF9800</color>
+
+    <color name="main_blue">#3777FC</color>
     <color name="grey_dark">#E5ECFC</color>
     <color name="grey_light">#ECF0F2</color>
     <color name="grey">#CFD0D4</color>
     <color name="grey_for_text">#1A1A1C</color>
 
-    <color name="blue_transparent">#0D3777FC</color>
+    <color name="blue_button_transparent">#0D3777FC</color>
+
+    <color name="blue_transparent">#333777FC</color>
+    <color name="green_transparent">#3283B201</color>
+    <color name="red_transparent">#33DF0729</color>
+    <color name="yellow_transparent">#33FFC107</color>
+    <color name="light_blue_transparent">#335789E8</color>
+    <color name="orange_transparent">#33FF9800</color>
+
+    <color name="back1">#1FD6F8</color>
+    <color name="back11">#1B7687</color>
+    <color name="back2">#CAA942</color>
+    <color name="back3">#3753B4</color>
+    <color name="back33">#0E287C</color>
+    <color name="back4">#7F42B5</color>
+    <color name="back44">#501E73</color>
 </resources>

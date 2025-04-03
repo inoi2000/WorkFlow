@@ -14,11 +14,16 @@ import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentHomeBinding
 import com.petproject.workflow.domain.entities.AbsenceType
+import com.petproject.workflow.domain.entities.Task
+import com.petproject.workflow.domain.entities.TaskPriority
 import com.petproject.workflow.domain.entities.TaskStatus
 import com.petproject.workflow.presentation.viewmodels.HomeViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
+import com.petproject.workflow.presentation.views.adapters.AbsenceInfoViewHolder
+import com.petproject.workflow.presentation.views.adapters.TaskInfoViewHolder
 import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.util.UUID
 import javax.inject.Inject
 
 class HomeFragment : Fragment() {
@@ -49,7 +54,6 @@ class HomeFragment : Fragment() {
     ): View {
         component.inject(this)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        setValueToViews()
         observeViewModel()
         return binding.root
     }
@@ -63,90 +67,48 @@ class HomeFragment : Fragment() {
             }
         }
         employee.observe(viewLifecycleOwner) { employee ->
-            with(binding.vacationsItem) {
-                employee.absences?.firstOrNull { it.type == AbsenceType.VACATION }?.let {
-                    itemText.text = formatingData(it.start)
-                    val status = getApprovalStatus(it.isApproval)
-                    itemStatus.background = status.first
-                    itemStatusText.text = status.second
-                }
-                itemRefIc.setOnClickListener {
-                    findNavController().navigate(
-                        HomeFragmentDirections.actionHomeFragmentToAbsenceListFragment(
-                            AbsenceType.VACATION
-                        )
-                    )
-                }
-            }
-            with(binding.businessTripsItem) {
-                employee.absences?.firstOrNull { it.type == AbsenceType.BUSINESS_TRIP }?.let {
-                    itemText.text = getString(R.string.business_trips_text)
-                        .format(formatingData(it.start), it.place)
-                    val status = getApprovalStatus(it.isApproval)
-                    itemStatus.background = status.first
-                    itemStatusText.text = status.second
-                }
-                itemRefIc.setOnClickListener {
-                    findNavController().navigate(
-                        HomeFragmentDirections.actionHomeFragmentToAbsenceListFragment(
-                            AbsenceType.BUSINESS_TRIP
-                        )
-                    )
-                }
-            }
-            with(binding.approvalsItem) {
-                employee.onApproval?.let {
-                    itemText.text = getString(R.string.tasks_count).format(it.count())
-                }
-                itemRefIc.setOnClickListener {
-                    findNavController().navigate(
-                        HomeFragmentDirections.actionHomeFragmentToInspectorTaskListFragment()
-                    )
-                }
-            }
-            with(binding.tasksItem) {
-                employee.tasks?.let {
 
-                }
-                itemRefIc.setOnClickListener {
-                    findNavController().navigate(
-                        HomeFragmentDirections.actionHomeFragmentToExecutingTaskListFragment()
-                    )
-                }
+        }
+        viewModel.vacation.observe(viewLifecycleOwner) { vacation ->
+            val absenceInfoViewHolder = AbsenceInfoViewHolder(binding.vacationItem)
+            if (vacation != null) {
+                absenceInfoViewHolder.bind(vacation)
+            } else {
+                absenceInfoViewHolder.binding.root.visibility = View.GONE
             }
         }
-    }
-
-
-    private fun setValueToViews() {
-        with(binding) {
-            with(vacationsItem) {
-                itemLogo.setImageResource(R.drawable.ic_vacation)
-                itemTitle.text = getString(R.string.vacation)
+        viewModel.businessTrip.observe(viewLifecycleOwner) { businessTrip ->
+            val absenceInfoViewHolder = AbsenceInfoViewHolder(binding.businessTripItem)
+            if (businessTrip != null) {
+                absenceInfoViewHolder.bind(businessTrip)
+            } else {
+                absenceInfoViewHolder.binding.root.visibility = View.GONE
             }
-            with(businessTripsItem) {
-                itemLogo.setImageResource(R.drawable.ic_business_trip)
-                itemTitle.text = getString(R.string.business_trips)
-                itemStatusText.text = "Согласованно"
+        }
+        viewModel.executorTask.observe(viewLifecycleOwner) { task ->
+            val taskInfoViewHolder = TaskInfoViewHolder(binding.executorTask)
+            if (task != null) {
+                taskInfoViewHolder.bind(
+                    task,
+                    TaskInfoViewHolder.EXECUTOR_MODE,
+                    {},
+                    {}
+                )
+            } else {
+                taskInfoViewHolder.binding.root.visibility = View.GONE
             }
-            with(approvalsItem) {
-                itemLogo.setImageResource(R.drawable.ic_approval)
-                itemTitle.text = getString(R.string.on_your_approval)
-            }
-            with(tasksItem) {
-                itemLogo.setImageResource(R.drawable.ic_task)
-                itemTitle.text = getString(R.string.tasks)
-                itemText.text = "Ваши цели и индивидуальный план"
-            }
-            with(mentoringItem) {
-                itemLogo.setImageResource(R.drawable.ic_mentoring)
-                itemTitle.text = getString(R.string.mentoring)
-                itemText.text = "Делитесь опытом с другими сотрудниками"
-            }
-            with(documentsItem) {
-                itemLogo.setImageResource(R.drawable.ic_document)
-                itemTitle.text = getString(R.string.documents)
-                itemText.text = "Необходиммо ознакомится с 8 документами"
+        }
+        viewModel.inspectorTask.observe(viewLifecycleOwner) { task ->
+            val taskInfoViewHolder = TaskInfoViewHolder(binding.onApprovalTask)
+            if (task != null) {
+                taskInfoViewHolder.bind(
+                    task,
+                    TaskInfoViewHolder.EXECUTOR_MODE,
+                    {},
+                    {}
+                )
+            } else {
+                taskInfoViewHolder.binding.root.visibility = View.GONE
             }
         }
     }
@@ -164,66 +126,6 @@ class HomeFragment : Fragment() {
 //        return dateFormatter.format(dateFormatter)
 
         return data.toString()
-    }
-
-    private fun getApprovalStatus(isApproval: Boolean): Pair<Drawable?, String> {
-        return if (isApproval) {
-            Pair(
-                ContextCompat.getDrawable(requireContext(), R.drawable.circle_green),
-                getString(R.string.approval)
-            )
-        } else {
-            Pair(
-                ContextCompat.getDrawable(requireContext(), R.drawable.circle_red),
-                getString(R.string.not_approval)
-            )
-        }
-    }
-
-    private fun getTaskStatusBackground(taskStatus: TaskStatus): Pair<Drawable?, String> {
-        return when (taskStatus) {
-            TaskStatus.NEW -> {
-                Pair(
-                    ContextCompat.getDrawable(requireContext(), R.drawable.circle_green),
-                    getString(R.string.new_task)
-                )
-            }
-
-            TaskStatus.COMPLETED -> {
-                Pair(
-                    ContextCompat.getDrawable(requireContext(), R.drawable.circle_green),
-                    getString(R.string.completed)
-                )
-            }
-
-            TaskStatus.FAILED -> {
-                Pair(
-                    ContextCompat.getDrawable(requireContext(), R.drawable.circle_red),
-                    getString(R.string.not_completed)
-                )
-            }
-
-            TaskStatus.IN_PROGRESS -> {
-                Pair(
-                    ContextCompat.getDrawable(requireContext(), R.drawable.circle_blue),
-                    getString(R.string.in_progress)
-                )
-            }
-
-            TaskStatus.ON_APPROVAL -> {
-                Pair(
-                    ContextCompat.getDrawable(requireContext(), R.drawable.circle_yellow),
-                    getString(R.string.on_approval)
-                )
-            }
-
-            TaskStatus.NOT_APPROVAL -> {
-                Pair(
-                    ContextCompat.getDrawable(requireContext(), R.drawable.circle_orange),
-                    getString(R.string.not_approval)
-                )
-            }
-        }
     }
 
     override fun onDestroyView() {

@@ -81,6 +81,7 @@
     <string name="add_comment">Add comment</string>
     <string name="executor">Executor</string>
     <string name="approval_task">Approval task</string>
+    <string name="services">Services</string>
 
 
 </resources>

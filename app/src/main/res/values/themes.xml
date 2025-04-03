@@ -1,18 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Base.Theme.WorkFlow" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimary">@color/main_blue</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <item name="colorSecondary">@color/white</item>
         <item name="colorOnSecondary">@color/grey_for_text</item>
 
-        <item name="background">@color/grey_light</item>
+        <item name="background">@color/white_dark</item>
 
         <item name="android:navigationBarColor">@color/white</item>
 
 
-        <item name="android:windowBackground">@color/grey_light</item>
+        <item name="android:windowBackground">@color/white_dark</item>
 
         <item name="hintTextColor">@color/grey</item>
 
@@ -21,8 +21,26 @@
 
     <style name="Theme.WorkFlow" parent="Base.Theme.WorkFlow" />
 
-    <style name="BottomNavigationViewStyle"
-        parent="Widget.MaterialComponents.BottomNavigationView">
+    <style name="BottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="HorizontalLineView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">@color/grey_light</item>
+    </style>
+
+    <style name="StatusLineView">
+        <item name="android:layout_width">6dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="StatusChip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="textEndPadding">0dp</item>
+        <item name="textStartPadding">0dp</item>
     </style>
 </resources>

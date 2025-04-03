@@ -81,7 +81,7 @@
                             android:layout_height="26dp"
                             android:layout_margin="10dp"
                             android:src="@drawable/ic_business_trip"
-                            app:tint="@color/light_blue" />
+                            app:tint="@color/blue" />
 
                         <TextView
                             android:id="@+id/business_trips_text_view"
@@ -261,7 +261,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="10dp"
-            android:paddingTop="12dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/item_absence_info" />
