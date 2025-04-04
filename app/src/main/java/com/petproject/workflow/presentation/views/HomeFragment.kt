@@ -95,22 +95,6 @@ class HomeFragment : Fragment() {
         employee.observe(viewLifecycleOwner) { employee ->
 
         }
-//        viewModel.vacation.observe(viewLifecycleOwner) { vacation ->
-//            val absenceInfoViewHolder = AbsenceInfoViewHolder(binding.vacationItem)
-//            if (vacation != null) {
-//                absenceInfoViewHolder.bind(vacation)
-//            } else {
-//                absenceInfoViewHolder.binding.root.visibility = View.GONE
-//            }
-//        }
-//        viewModel.businessTrip.observe(viewLifecycleOwner) { businessTrip ->
-//            val absenceInfoViewHolder = AbsenceInfoViewHolder(binding.businessTripItem)
-//            if (businessTrip != null) {
-//                absenceInfoViewHolder.bind(businessTrip)
-//            } else {
-//                absenceInfoViewHolder.binding.root.visibility = View.GONE
-//            }
-//        }
         viewModel.executorTask.observe(viewLifecycleOwner) { task ->
             val taskInfoViewHolder = TaskInfoViewHolder(binding.executorTask)
             if (task != null) {
