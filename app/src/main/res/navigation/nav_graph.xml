@@ -17,11 +17,14 @@
             android:id="@+id/action_homeFragment_to_executingTaskListFragment"
             app:destination="@id/executingTaskListFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_absenceListFragment"
-            app:destination="@id/absenceListFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_inspectorTaskListFragment"
             app:destination="@id/inspectorTaskListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_serviceListFragment"
+            app:destination="@id/serviceListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_absenceListFragment"
+            app:destination="@id/absenceListFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -93,4 +96,13 @@
         android:name="com.petproject.workflow.presentation.views.InspectorTaskInfoFragment"
         android:label="fragment_inspector_task_info"
         tools:layout="@layout/fragment_inspector_task_info" />
+    <fragment
+        android:id="@+id/serviceListFragment"
+        android:name="com.petproject.workflow.presentation.views.ServiceListFragment"
+        android:label="fragment_service_list"
+        tools:layout="@layout/fragment_service_list" >
+        <action
+            android:id="@+id/action_serviceListFragment_to_absenceListFragment"
+            app:destination="@id/absenceListFragment" />
+    </fragment>
 </navigation>

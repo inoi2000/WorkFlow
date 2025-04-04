@@ -7,6 +7,7 @@ import com.petproject.workflow.presentation.views.LoginActivity
 import com.petproject.workflow.presentation.views.NewsFragment
 import com.petproject.workflow.presentation.views.AbsenceListFragment
 import com.petproject.workflow.presentation.views.InspectorTaskListFragment
+import com.petproject.workflow.presentation.views.ServiceListFragment
 import dagger.BindsInstance
 import dagger.Component
 
@@ -19,6 +20,8 @@ interface ApplicationComponent {
     fun inject(accountFragment: AccountFragment)
 
     fun inject(newsFragment: NewsFragment)
+
+    fun inject(serviceListFragment: ServiceListFragment)
 
     fun inject(absenceListFragment: AbsenceListFragment)
 
