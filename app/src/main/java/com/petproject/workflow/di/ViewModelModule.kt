@@ -6,6 +6,7 @@ import com.petproject.workflow.presentation.viewmodels.AccountViewModel
 import com.petproject.workflow.presentation.viewmodels.ExecutorTaskListViewModel
 import com.petproject.workflow.presentation.viewmodels.InspectorTaskListViewModel
 import com.petproject.workflow.presentation.viewmodels.LoginViewModel
+import com.petproject.workflow.presentation.viewmodels.ServiceListViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -22,6 +23,11 @@ interface ViewModelModule {
     @ViewModelKey(LoginViewModel::class)
     @Binds
     fun bindLoginViewModel(impl: LoginViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(ServiceListViewModel::class)
+    @Binds
+    fun bindServiceListViewModel(impl: ServiceListViewModel): ViewModel
 
     @IntoMap
     @ViewModelKey(ExecutorTaskListViewModel::class)

@@ -13,7 +13,6 @@ import com.petproject.workflow.databinding.FragmentHomeBinding
 import com.petproject.workflow.domain.entities.AbsenceType
 import com.petproject.workflow.presentation.viewmodels.HomeViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
-import com.petproject.workflow.presentation.views.adapters.AbsenceInfoViewHolder
 import com.petproject.workflow.presentation.views.adapters.TaskInfoViewHolder
 import java.time.LocalDate
 import javax.inject.Inject
