@@ -121,10 +121,8 @@
                     tools:text="№ SR0278294, Предоставление VPN доступа партнерам, доступ партнерам находящимся за рубежем" />
 
                 <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="12dp"
-                    android:background="?attr/background" />
+                    style="@style/HorizontalLineView"
+                    android:layout_marginTop="12dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -142,10 +140,8 @@
                     tools:text="Иванов Иван Иванович" />
 
                 <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="12dp"
-                    android:background="?attr/background" />
+                    style="@style/HorizontalLineView"
+                    android:layout_marginTop="12dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -163,10 +159,8 @@
                     tools:text="@string/new_task" />
 
                 <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="12dp"
-                    android:background="?attr/background" />
+                    style="@style/HorizontalLineView"
+                    android:layout_marginTop="12dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -184,10 +178,8 @@
                     tools:text="@string/urgent" />
 
                 <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="12dp"
-                    android:background="?attr/background" />
+                    style="@style/HorizontalLineView"
+                    android:layout_marginTop="12dp" />
 
                 <TextView
                     android:layout_width="wrap_content"

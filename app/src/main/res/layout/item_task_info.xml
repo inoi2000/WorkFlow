@@ -13,13 +13,15 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="8dp"
+        android:layout_marginTop="16dp"
         app:cardCornerRadius="12dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp">
+            android:layout_marginVertical="12dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="12dp">
 
             <TextView
                 android:id="@+id/item_title"
@@ -71,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:textColor="@color/light_blue"
+                android:textColor="@color/blue"
                 android:textStyle="bold"
                 app:countTaskComments="@{task.commentsCount}"
                 app:layout_constraintStart_toEndOf="@+id/comment_image_view"
@@ -80,10 +82,9 @@
 
             <View
                 android:id="@+id/line_view"
+                style="@style/HorizontalLineView"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
                 android:layout_marginTop="6dp"
-                android:background="?attr/background"
                 app:layout_constraintTop_toBottomOf="@+id/comment_image_view" />
 
             <ImageView
@@ -171,7 +172,7 @@
                 android:id="@+id/item_ref_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/blue_transparent"
+                android:backgroundTint="@color/blue_button_transparent"
                 android:text="@string/more"
                 android:textColor="?attr/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
