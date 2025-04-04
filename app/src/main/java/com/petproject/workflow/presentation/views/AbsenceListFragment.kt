@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -99,40 +98,26 @@ class AbsenceListFragment : Fragment() {
     }
 
     private fun choseCardView(cardView: CardView) {
-        val whiteColor = ContextCompat.getColor(requireContext(), R.color.white)
-        val greyColor = ContextCompat.getColor(requireContext(), R.color.grey_for_text)
-
-        binding.daysOffCounterTextView.setTextColor(greyColor)
-        binding.daysOffCounterTextView.setBackgroundResource(R.drawable.circle_grey)
-
-        binding.sickLeavesCounterTextView.setTextColor(greyColor)
-        binding.sickLeavesCounterTextView.setBackgroundResource(R.drawable.circle_grey)
-
-        binding.businessTripsCounterTextView.setTextColor(greyColor)
-        binding.businessTripsCounterTextView.setBackgroundResource(R.drawable.circle_grey)
-
-        binding.vacationsCounterTextView.setTextColor(greyColor)
-        binding.vacationsCounterTextView.setBackgroundResource(R.drawable.circle_grey)
+        binding.vacationsSelector.visibility = View.GONE
+        binding.businessTripsSelector.visibility = View.GONE
+        binding.sickLeavesSelector.visibility = View.GONE
+        binding.daysOffSelector.visibility = View.GONE
 
         when (cardView) {
             binding.daysOffCardView -> {
-                binding.daysOffCounterTextView.setTextColor(whiteColor)
-                binding.daysOffCounterTextView.setBackgroundResource(R.drawable.circle_yellow)
+                binding.daysOffSelector.visibility = View.VISIBLE
             }
 
             binding.sickLeavesCardView -> {
-                binding.sickLeavesCounterTextView.setTextColor(whiteColor)
-                binding.sickLeavesCounterTextView.setBackgroundResource(R.drawable.circle_red)
+                binding.sickLeavesSelector.visibility = View.VISIBLE
             }
 
             binding.businessTripsCardView -> {
-                binding.businessTripsCounterTextView.setTextColor(whiteColor)
-                binding.businessTripsCounterTextView.setBackgroundResource(R.drawable.circle_blue)
+                binding.businessTripsSelector.visibility = View.VISIBLE
             }
 
             binding.vacationsCardView -> {
-                binding.vacationsCounterTextView.setTextColor(whiteColor)
-                binding.vacationsCounterTextView.setBackgroundResource(R.drawable.circle_green)
+                binding.vacationsSelector.visibility = View.VISIBLE
             }
         }
     }

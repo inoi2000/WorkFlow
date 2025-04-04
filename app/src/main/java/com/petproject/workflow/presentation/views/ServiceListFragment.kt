@@ -68,4 +68,9 @@ class ServiceListFragment : Fragment() {
             viewModel.onAbsenceScreenNavigated()
         }
     }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
 }

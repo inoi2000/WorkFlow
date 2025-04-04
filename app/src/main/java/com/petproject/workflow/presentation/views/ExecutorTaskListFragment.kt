@@ -1,15 +1,13 @@
 package com.petproject.workflow.presentation.views
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentExecutorTaskListBinding
 import com.petproject.workflow.domain.entities.TaskPriority
@@ -92,40 +90,26 @@ class ExecutorTaskListFragment : Fragment() {
     }
 
     private fun choseCardView(cardView: CardView) {
-        val whiteColor = ContextCompat.getColor(requireContext(), R.color.white)
-        val greyColor = ContextCompat.getColor(requireContext(), R.color.grey_for_text)
-
-        binding.overdueTasksCounterTextView.setTextColor(greyColor)
-        binding.overdueTasksCounterTextView.setBackgroundResource(R.drawable.circle_grey)
-
-        binding.urgentTasksCounterTextView.setTextColor(greyColor)
-        binding.urgentTasksCounterTextView.setBackgroundResource(R.drawable.circle_grey)
-
-        binding.onApprovalTasksCounterTextView.setTextColor(greyColor)
-        binding.onApprovalTasksCounterTextView.setBackgroundResource(R.drawable.circle_grey)
-
-        binding.finishedTasksCounterTextView.setTextColor(greyColor)
-        binding.finishedTasksCounterTextView.setBackgroundResource(R.drawable.circle_grey)
+        binding.overdueTasksSelector.visibility = View.GONE
+        binding.urgentTasksSelector.visibility = View.GONE
+        binding.onApprovalTasksSelector.visibility = View.GONE
+        binding.finishedTasksSelector.visibility = View.GONE
 
         when (cardView) {
             binding.overdueTasksCardView -> {
-                binding.overdueTasksCounterTextView.setTextColor(whiteColor)
-                binding.overdueTasksCounterTextView.setBackgroundResource(R.drawable.circle_yellow)
+                binding.overdueTasksSelector.visibility = View.VISIBLE
             }
 
             binding.urgentTasksCardView -> {
-                binding.urgentTasksCounterTextView.setTextColor(whiteColor)
-                binding.urgentTasksCounterTextView.setBackgroundResource(R.drawable.circle_red)
+                binding.urgentTasksSelector.visibility = View.VISIBLE
             }
 
             binding.onApprovalTasksCardView -> {
-                binding.onApprovalTasksCounterTextView.setTextColor(whiteColor)
-                binding.onApprovalTasksCounterTextView.setBackgroundResource(R.drawable.circle_blue)
+                binding.onApprovalTasksSelector.visibility = View.VISIBLE
             }
 
             binding.finishedTasksCardView -> {
-                binding.finishedTasksCounterTextView.setTextColor(whiteColor)
-                binding.finishedTasksCounterTextView.setBackgroundResource(R.drawable.circle_green)
+                binding.finishedTasksSelector.visibility = View.VISIBLE
             }
         }
     }

@@ -83,25 +83,15 @@ class InspectorTaskListFragment : Fragment() {
     }
 
     private fun choseCardView(cardView: CardView) {
-        val whiteColor = ContextCompat.getColor(requireContext(), R.color.white)
-        val greyColor = ContextCompat.getColor(requireContext(), R.color.grey_for_text)
-
-        binding.onApprovalTasksCounterTextView.setTextColor(greyColor)
-        binding.onApprovalTasksCounterTextView.setBackgroundResource(R.drawable.circle_grey)
-
-        binding.allTasksCounterTextView.setTextColor(greyColor)
-        binding.allTasksCounterTextView.setBackgroundResource(R.drawable.circle_grey)
+        binding.onApprovalTasksSelector.visibility = View.GONE
+        binding.allTasksSelector.visibility = View.GONE
 
         when (cardView) {
             binding.onApprovalTasksCardView -> {
-                binding.titleTextView.text = getString(R.string.on_your_approval)
-                binding.onApprovalTasksCounterTextView.setTextColor(whiteColor)
-                binding.onApprovalTasksCounterTextView.setBackgroundResource(R.drawable.circle_blue)
+                binding.onApprovalTasksSelector.visibility = View.VISIBLE
             }
             binding.allTasksCardView -> {
-                binding.titleTextView.text = getString(R.string.all_assignment)
-                binding.allTasksCounterTextView.setTextColor(whiteColor)
-                binding.allTasksCounterTextView.setBackgroundResource(R.drawable.circle_green)
+                binding.allTasksSelector.visibility = View.VISIBLE
             }
         }
     }
