@@ -10,6 +10,11 @@ class TaskAdapter(
     private val onCountCommentsClick: (String) -> Unit
 ) : ListAdapter<Task, TaskInfoViewHolder>(TaskDiffItemCallback) {
 
+    companion object {
+        const val EXECUTOR_MODE = 0
+        const val INSPECTOR_MODE = 1
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskInfoViewHolder {
         return TaskInfoViewHolder.inflateFrom(parent)
     }
