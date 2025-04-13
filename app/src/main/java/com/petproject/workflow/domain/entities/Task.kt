@@ -12,7 +12,9 @@ data class Task(
     val destination: String? = null,
     val executor: Employee? = null,
     val inspector: Employee? = null,
-    val comments: List<Comment>? = null
+    val comments: List<Comment>? = null,
+
+    val shouldBeInspected: Boolean
 ) {
     val commentsCount: Int get() = comments?.count() ?: 0
 }
