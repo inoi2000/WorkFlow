@@ -13,4 +13,6 @@ interface TaskRepository {
     suspend fun getInspectorTask(id: String): Task
 
     suspend fun getTaskComments(taskId: String): List<Comment>
+
+    suspend fun assignTask(task: Task): Boolean
 }

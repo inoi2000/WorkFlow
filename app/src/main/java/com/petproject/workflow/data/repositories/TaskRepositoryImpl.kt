@@ -36,4 +36,8 @@ class TaskRepositoryImpl @Inject constructor(
     override suspend fun getInspectorTask(id: String): Task {
         TODO("Not yet implemented")
     }
+
+    override suspend fun assignTask(task: Task): Boolean {
+        TODO("Not yet implemented")
+    }
 }

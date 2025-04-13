@@ -17,8 +17,8 @@ class TaskRepositoryImplTest @Inject constructor(
     private val tokenManager: TokenManager
 ) : TaskRepository {
 
-    private var executionTasksList: List<Task>
-    private var inspectingTasksList: List<Task>
+    private var executionTasksList: MutableList<Task>
+    private var inspectingTasksList: MutableList<Task>
 
     init {
         val employee1 = Employee(
@@ -28,7 +28,8 @@ class TaskRepositoryImplTest @Inject constructor(
             department = null,
             absences = null,
             tasks = null,
-            onApproval = null
+            onApproval = null,
+            canAssignTask = true
         )
 
         val employee2 = Employee(
@@ -38,7 +39,8 @@ class TaskRepositoryImplTest @Inject constructor(
             department = null,
             absences = null,
             tasks = null,
-            onApproval = null
+            onApproval = null,
+            canAssignTask = true
         )
 
         var executionTask1: Task? = null
@@ -65,7 +67,8 @@ class TaskRepositoryImplTest @Inject constructor(
             destination = null,
             executor = employee1,
             inspector = employee2,
-            comments = listOf(comment1ToTask1, comment2ToTask1)
+            comments = listOf(comment1ToTask1, comment2ToTask1),
+            shouldBeInspected = true
         )
 
         val executionTask2 = Task(
@@ -77,7 +80,8 @@ class TaskRepositoryImplTest @Inject constructor(
             priority = TaskPriority.URGENT,
             destination = "г. Москва, ул. Пречистенка, д.7",
             executor = employee1,
-            inspector = employee2
+            inspector = employee2,
+            shouldBeInspected = true
         )
         val inspectionTask = Task(
             id = "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
@@ -88,11 +92,12 @@ class TaskRepositoryImplTest @Inject constructor(
             priority = TaskPriority.COMMON,
             destination = "г. Оренбург, ул. Сенная 2а",
             executor = employee2,
-            inspector = employee1
+            inspector = employee1,
+            shouldBeInspected = true
         )
 
-        executionTasksList = listOf(executionTask1, executionTask2)
-        inspectingTasksList = listOf(inspectionTask)
+        executionTasksList = mutableListOf(executionTask1, executionTask2)
+        inspectingTasksList = mutableListOf(inspectionTask)
     }
 
 
@@ -114,5 +119,10 @@ class TaskRepositoryImplTest @Inject constructor(
 
     override suspend fun getInspectorTask(id: String): Task {
         return inspectingTasksList.first { it.id == id }
+    }
+
+    override suspend fun assignTask(task: Task): Boolean {
+        inspectingTasksList.add(task)
+        return true
     }
 }
