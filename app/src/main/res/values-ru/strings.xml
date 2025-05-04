@@ -81,5 +81,7 @@
     <string name="services">Сервисы</string>
     <string name="helpful_ref">Полезные ссылки</string>
     <string name="others">Другие</string>
+    <string name="position">Position</string>
+    <string name="department">Department</string>
 
 </resources>

@@ -22,4 +22,8 @@ class EmployeeRepositoryImpl @Inject constructor(
         }
         throw AuthException()
     }
+
+    override suspend fun getCurrentEmployee(): Employee {
+        TODO("Not yet implemented")
+    }
 }

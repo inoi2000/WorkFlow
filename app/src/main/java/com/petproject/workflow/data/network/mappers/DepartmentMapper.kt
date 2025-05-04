@@ -16,7 +16,8 @@ class DepartmentMapper @Inject constructor() {
             staff = dto.staff?.map {
                 Employee(
                     id = it.id,
-                    name = it.name
+                    name = it.name,
+                    canAssignTask = it.canAssignTask
                 )
             }
         )
