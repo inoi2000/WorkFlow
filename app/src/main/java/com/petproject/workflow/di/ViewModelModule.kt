@@ -3,6 +3,7 @@ package com.petproject.workflow.di
 import androidx.lifecycle.ViewModel
 import com.petproject.workflow.presentation.viewmodels.AbsenceViewModel
 import com.petproject.workflow.presentation.viewmodels.AccountViewModel
+import com.petproject.workflow.presentation.viewmodels.AnnouncementViewModel
 import com.petproject.workflow.presentation.viewmodels.ExecutorTaskListViewModel
 import com.petproject.workflow.presentation.viewmodels.InspectorTaskListViewModel
 import com.petproject.workflow.presentation.viewmodels.LoginViewModel
@@ -43,4 +44,9 @@ interface ViewModelModule {
     @ViewModelKey(AbsenceViewModel::class)
     @Binds
     fun bindAbsenceViewModel(impl: AbsenceViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(AnnouncementViewModel::class)
+    @Binds
+    fun bindAnnouncementListViewModel(impl: AnnouncementViewModel): ViewModel
 }
