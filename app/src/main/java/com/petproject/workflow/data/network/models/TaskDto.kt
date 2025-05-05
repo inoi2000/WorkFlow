@@ -31,5 +31,8 @@ data class TaskDto(
     val executor: EmployeeDto?,
     @SerializedName("inspector")
     @Expose
-    val inspector: EmployeeDto?
+    val inspector: EmployeeDto?,
+    @SerializedName("shouldBeInspected")
+    @Expose
+    val shouldBeInspected: Boolean
 )

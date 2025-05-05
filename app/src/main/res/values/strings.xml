@@ -84,6 +84,8 @@
     <string name="services">Services</string>
     <string name="helpful_ref">Helpful references</string>
     <string name="others">Others</string>
+    <string name="position">Position</string>
+    <string name="department">Department</string>
 
 
 </resources>

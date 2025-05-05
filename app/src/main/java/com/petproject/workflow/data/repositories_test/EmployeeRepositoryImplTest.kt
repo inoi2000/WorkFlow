@@ -1,11 +1,11 @@
 package com.petproject.workflow.data.repositories_test
 
 import com.petproject.workflow.data.network.MainApiService
-import com.petproject.workflow.data.network.exceptions.AuthException
 import com.petproject.workflow.data.network.mappers.EmployeeMapper
 import com.petproject.workflow.domain.entities.Absence
 import com.petproject.workflow.domain.entities.AbsenceStatus
 import com.petproject.workflow.domain.entities.AbsenceType
+import com.petproject.workflow.domain.entities.Department
 import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.entities.Task
 import com.petproject.workflow.domain.entities.TaskPriority
@@ -46,7 +46,8 @@ class EmployeeRepositoryImplTest @Inject constructor(
             status = TaskStatus.NEW,
             priority = TaskPriority.COMMON,
             executor = null,
-            inspector = null
+            inspector = null,
+            shouldBeInspected = true
         )
         val executionTask2 = Task(
             id = "e58ed763-928c-4155-bee9-fdbaaadc15f3",
@@ -56,7 +57,8 @@ class EmployeeRepositoryImplTest @Inject constructor(
             status = TaskStatus.NEW,
             priority = TaskPriority.COMMON,
             executor = null,
-            inspector = null
+            inspector = null,
+            shouldBeInspected = true
         )
         val inspectionTask = Task(
             id = "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
@@ -66,7 +68,8 @@ class EmployeeRepositoryImplTest @Inject constructor(
             status = TaskStatus.ON_APPROVAL,
             priority = TaskPriority.COMMON,
             executor = null,
-            inspector = null
+            inspector = null,
+            shouldBeInspected = true
         )
         return Employee(
             id = UUID.randomUUID().toString(),
@@ -75,7 +78,24 @@ class EmployeeRepositoryImplTest @Inject constructor(
             department = null,
             absences = listOf(vacation, businessTrip),
             tasks = listOf(executionTask1, executionTask2),
-            onApproval = listOf(inspectionTask)
+            onApproval = listOf(inspectionTask),
+            canAssignTask = true
+        )
+    }
+
+    override suspend fun getCurrentEmployee(): Employee {
+        return Employee(
+            id = UUID.randomUUID().toString(),
+            name = "Иванов Иван Иванович",
+            position = "Администратор",
+            department = Department(
+                id = UUID.randomUUID().toString(),
+                name = "Менеджмент"
+            ),
+            absences = null,
+            tasks = null,
+            onApproval = null,
+            canAssignTask = false
         )
     }
 }

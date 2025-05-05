@@ -22,12 +22,15 @@ class TaskMapper @Inject constructor() {
             destination = dto.destination,
             executor = dto.executor?.let { Employee(
                 id = it.id,
-                name = it.name
+                name = it.name,
+                canAssignTask = it.canAssignTask
             ) },
             inspector = dto.inspector?.let { Employee(
                 id = it.id,
-                name = it.name
-            ) }
+                name = it.name,
+                canAssignTask = it.canAssignTask
+            ) },
+            shouldBeInspected = dto.shouldBeInspected
         )
     }
 }

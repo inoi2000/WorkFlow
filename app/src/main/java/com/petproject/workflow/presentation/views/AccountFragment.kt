@@ -34,6 +34,8 @@ class AccountFragment : Fragment() {
     ): View {
         component.inject(this)
         _binding = FragmentAccountBinding.inflate(inflater, container, false)
+        binding.viewmodel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.btnLogout.setOnClickListener {
             viewModel.signOut()
         }
