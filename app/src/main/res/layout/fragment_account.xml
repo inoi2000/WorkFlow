@@ -29,8 +29,8 @@
 
             <ImageView
                 android:id="@+id/photo_image_view"
-                android:layout_width="116dp"
-                android:layout_height="116dp"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
                 android:layout_margin="8dp"
                 android:src="@drawable/ic_person" />
         </androidx.cardview.widget.CardView>
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:gravity="center"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             android:text="@{viewmodel.employee.name}"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,8 +63,8 @@
             app:layout_constraintTop_toBottomOf="@+id/name_text_view">
 
             <ImageView
-                android:layout_width="26dp"
-                android:layout_height="26dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_margin="12dp"
                 android:contentDescription="@string/component_logo"
                 android:src="@drawable/ic_phone"
@@ -87,8 +87,8 @@
             app:layout_constraintTop_toBottomOf="@+id/name_text_view">
 
             <ImageView
-                android:layout_width="26dp"
-                android:layout_height="26dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_margin="12dp"
                 android:contentDescription="@string/component_logo"
                 android:src="@drawable/ic_mail"
@@ -111,8 +111,8 @@
             app:layout_constraintTop_toBottomOf="@+id/name_text_view">
 
             <ImageView
-                android:layout_width="26dp"
-                android:layout_height="26dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_margin="12dp"
                 android:contentDescription="@string/component_logo"
                 android:src="@drawable/ic_info"
@@ -140,6 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="8dp"
+                    android:textSize="13sp"
                     android:text="@string/position"
                     android:textColor="?attr/colorPrimary"
                     android:textStyle="bold" />
@@ -148,6 +149,7 @@
                     android:id="@+id/task_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="13sp"
                     android:text="@{viewmodel.employee.position}"
                     tools:text="Менеджер" />
 
@@ -161,6 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="8dp"
+                    android:textSize="13sp"
                     android:text="@string/department"
                     android:textColor="?attr/colorPrimary"
                     android:textStyle="bold" />
@@ -169,6 +172,7 @@
                     android:id="@+id/task_inspector"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="13sp"
                     android:text="@{String.valueOf(viewmodel.employee.department.name)}"
                     tools:text="Маркетинг" />
 

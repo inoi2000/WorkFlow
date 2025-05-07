@@ -32,9 +32,9 @@
         android:label="AccountFragment" />
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.petproject.workflow.presentation.views.NewsFragment"
+        android:name="com.petproject.workflow.presentation.views.AnnouncementListFragment"
         android:label="fragment_news"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_announcement_list" />
     <fragment
         android:id="@+id/executingTaskListFragment"
         android:name="com.petproject.workflow.presentation.views.ExecutorTaskListFragment"

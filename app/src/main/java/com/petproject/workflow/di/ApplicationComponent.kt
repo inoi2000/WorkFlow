@@ -4,7 +4,7 @@ import android.content.Context
 import com.petproject.workflow.presentation.views.AccountFragment
 import com.petproject.workflow.presentation.views.ExecutorTaskListFragment
 import com.petproject.workflow.presentation.views.LoginActivity
-import com.petproject.workflow.presentation.views.NewsFragment
+import com.petproject.workflow.presentation.views.AnnouncementListFragment
 import com.petproject.workflow.presentation.views.AbsenceListFragment
 import com.petproject.workflow.presentation.views.InspectorTaskListFragment
 import com.petproject.workflow.presentation.views.ServiceListFragment
@@ -19,7 +19,7 @@ interface ApplicationComponent {
 
     fun inject(accountFragment: AccountFragment)
 
-    fun inject(newsFragment: NewsFragment)
+    fun inject(announcementListFragment: AnnouncementListFragment)
 
     fun inject(serviceListFragment: ServiceListFragment)
 
