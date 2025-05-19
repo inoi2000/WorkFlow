@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentInspectorTaskListBinding
 import com.petproject.workflow.domain.entities.TaskStatus
@@ -53,7 +54,7 @@ class InspectorTaskListFragment : Fragment() {
             choseCardView(binding.onApprovalTasksCardView)
         }
         binding.allTasksCardView.setOnClickListener {
-            viewModel.filteredTaskListByStatus(TaskStatus.COMPLETED)
+            viewModel.filteredTaskListByDefault()
             choseCardView(binding.allTasksCardView)
         }
 
@@ -64,9 +65,9 @@ class InspectorTaskListFragment : Fragment() {
         val adapter = TaskAdapter(
             TaskInfoViewHolder.INSPECTOR_MODE,
             { taskId ->
-//                val action = ExecutorTaskListFragmentDirections
-//                    .actionExecutingTaskListFragmentToExecutingTaskInfoFragment(taskId)
-//                findNavController().navigate(action)
+                val action = InspectorTaskListFragmentDirections
+                    .actionInspectorTaskListFragmentToInspectorTaskInfoFragment(taskId)
+                findNavController().navigate(action)
             },
             { taskId ->
 //                val action = ExecutorTaskListFragmentDirections

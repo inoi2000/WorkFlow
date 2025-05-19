@@ -4,6 +4,7 @@ import com.petproject.workflow.data.network.AuthApiService
 import com.petproject.workflow.data.network.models.SignInRequest
 import com.petproject.workflow.data.network.utils.TokenManager
 import com.petproject.workflow.di.ApplicationScope
+import com.petproject.workflow.domain.entities.Role
 import com.petproject.workflow.domain.repositories.AuthorizationRepository
 import javax.inject.Inject
 
@@ -38,5 +39,9 @@ class AuthorizationRepositoryImpl @Inject constructor(
         token?.let {
             callback(TokenManager.getIdFromToken(it))
         }
+    }
+
+    override suspend fun getRole() : Role {
+        TODO("Not yet implemented")
     }
 }
