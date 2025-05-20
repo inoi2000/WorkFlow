@@ -15,8 +15,8 @@ class TaskMapper @Inject constructor() {
         return Task(
             id = dto.id,
             description = dto.description,
-            status = TaskStatus.fromString(dto.status),
-            priority = TaskPriority.fromString(dto.priority),
+            status = TaskStatus.valueOf(dto.status),
+            priority = TaskPriority.valueOf(dto.priority),
             creation = dto.creation,
             deadline = dto.deadline,
             destination = dto.destination,

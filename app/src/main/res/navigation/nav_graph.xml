@@ -25,11 +25,18 @@
         <action
             android:id="@+id/action_homeFragment_to_absenceListFragment"
             app:destination="@id/absenceListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_inspectorTaskInfoFragment"
+            app:destination="@id/inspectorTaskInfoFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_executingTaskInfoFragment"
+            app:destination="@id/executingTaskInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.petproject.workflow.presentation.views.AccountFragment"
-        android:label="AccountFragment" />
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.petproject.workflow.presentation.views.AnnouncementListFragment"
@@ -95,7 +102,11 @@
         android:id="@+id/inspectorTaskInfoFragment"
         android:name="com.petproject.workflow.presentation.views.InspectorTaskInfoFragment"
         android:label="fragment_inspector_task_info"
-        tools:layout="@layout/fragment_inspector_task_info" />
+        tools:layout="@layout/fragment_inspector_task_info" >
+        <argument
+            android:name="taskId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/serviceListFragment"
         android:name="com.petproject.workflow.presentation.views.ServiceListFragment"
