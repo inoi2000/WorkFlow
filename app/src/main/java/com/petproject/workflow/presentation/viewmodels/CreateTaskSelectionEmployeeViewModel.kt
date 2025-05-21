@@ -9,7 +9,7 @@ import com.petproject.workflow.domain.usecases.GetAllEmployeesForAssignTaskUseCa
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class CreateTaskViewModel @Inject constructor(
+class CreateTaskSelectionEmployeeViewModel @Inject constructor(
     private val getAllEmployeesForAssignTaskUseCase: GetAllEmployeesForAssignTaskUseCase
 ): ViewModel() {
 

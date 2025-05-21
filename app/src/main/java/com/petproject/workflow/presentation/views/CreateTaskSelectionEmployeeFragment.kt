@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentCreateTaskSelectionEmployeeBinding
-import com.petproject.workflow.presentation.viewmodels.CreateTaskViewModel
+import com.petproject.workflow.presentation.viewmodels.CreateTaskSelectionEmployeeViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import com.petproject.workflow.presentation.views.adapters.EmployeeAdapter
 import javax.inject.Inject
@@ -25,7 +25,7 @@ class CreateTaskSelectionEmployeeFragment : Fragment() {
         ViewModelProvider.create(
             viewModelStore,
             viewModelFactory
-        )[CreateTaskViewModel::class]
+        )[CreateTaskSelectionEmployeeViewModel::class]
     }
 
     private val component by lazy {
@@ -44,18 +44,12 @@ class CreateTaskSelectionEmployeeFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.toolbar.setOnClickListener {
+    private fun setRecyclerView() {
+        val adapter = EmployeeAdapter { employee ->
             val action = CreateTaskSelectionEmployeeFragmentDirections
-                .actionCreateTaskSelectionEmployeeFragmentToCreateTaskAddDetailsFragment()
+                .actionCreateTaskSelectionEmployeeFragmentToCreateTaskAddDetailsFragment(employee)
             findNavController().navigate(action)
         }
-    }
-
-    private fun setRecyclerView() {
-        val adapter = EmployeeAdapter();
-
         binding.employeeListRecyclerView.itemAnimator = null
         binding.employeeListRecyclerView.adapter = adapter
         viewModel.employeeList.observe(viewLifecycleOwner) {

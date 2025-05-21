@@ -8,7 +8,7 @@
 
         <variable
             name="viewmodel"
-            type="com.petproject.workflow.presentation.viewmodels.CreateTaskViewModel" />
+            type="com.petproject.workflow.presentation.viewmodels.CreateTaskSelectionEmployeeViewModel" />
     </data>
 
     <LinearLayout

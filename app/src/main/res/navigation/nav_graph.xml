@@ -135,11 +135,20 @@
         tools:layout="@layout/fragment_create_task_add_details" >
         <action
             android:id="@+id/action_createTaskAddDetailsFragment_to_createTaskDoneFragment"
-            app:destination="@id/createTaskDoneFragment" />
+            app:destination="@id/createTaskDoneFragment"
+            app:popUpTo="@id/createTaskAddDetailsFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="employee"
+            app:argType="com.petproject.workflow.domain.entities.Employee" />
     </fragment>
     <fragment
         android:id="@+id/createTaskDoneFragment"
         android:name="com.petproject.workflow.presentation.views.CreateTaskDoneFragment"
         android:label="fragment_create_task_done"
-        tools:layout="@layout/fragment_create_task_done" />
+        tools:layout="@layout/fragment_create_task_done" >
+        <argument
+            android:name="task"
+            app:argType="com.petproject.workflow.domain.entities.Task" />
+    </fragment>
 </navigation>

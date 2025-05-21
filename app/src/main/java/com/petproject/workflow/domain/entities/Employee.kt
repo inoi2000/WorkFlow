@@ -1,6 +1,10 @@
 package com.petproject.workflow.domain.entities
 
-data class Employee(
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class Employee (
     val id: String,
     val name: String,
     val position: String? = null,
@@ -11,4 +15,4 @@ data class Employee(
     val onApproval: List<Task>? = null,
 
     val canAssignTask: Boolean
-)
+) : Parcelable
