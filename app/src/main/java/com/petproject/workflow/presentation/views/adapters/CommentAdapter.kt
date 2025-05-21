@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.petproject.workflow.databinding.ItemCommentInfoBinding
 import com.petproject.workflow.domain.entities.Comment
 
-class CommentAdapter() :
+class CommentAdapter :
     ListAdapter<Comment, CommentAdapter.CommentInfoViewHolder>(CommentDiffItemCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentInfoViewHolder {

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.views.CreateTaskDoneFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_main"
+            android:paddingBottom="20dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/employee_image_view"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_account_ff"
+                    app:layout_constraintEnd_toStartOf="@+id/details_image_view"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="?attr/colorSecondary" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    android:background="?attr/colorSecondary"
+                    app:layout_constraintBottom_toBottomOf="@+id/employee_image_view"
+                    app:layout_constraintEnd_toStartOf="@+id/details_image_view"
+                    app:layout_constraintStart_toEndOf="@+id/employee_image_view"
+                    app:layout_constraintTop_toTopOf="@+id/employee_image_view" />
+
+                <ImageView
+                    android:id="@+id/details_image_view"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_news_ff"
+                    app:layout_constraintEnd_toStartOf="@+id/done_image_view"
+                    app:layout_constraintStart_toEndOf="@+id/employee_image_view"
+                    app:layout_constraintTop_toTopOf="@+id/employee_image_view"
+                    app:tint="?attr/colorSecondary" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    android:background="?attr/colorSecondary"
+                    app:layout_constraintBottom_toBottomOf="@+id/employee_image_view"
+                    app:layout_constraintEnd_toStartOf="@+id/done_image_view"
+                    app:layout_constraintStart_toEndOf="@+id/details_image_view"
+                    app:layout_constraintTop_toTopOf="@+id/employee_image_view" />
+
+                <ImageView
+                    android:id="@+id/done_image_view"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_approval"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/details_image_view"
+                    app:layout_constraintTop_toTopOf="@+id/employee_image_view"
+                    app:tint="?attr/colorSecondary" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <ImageView
+            android:id="@+id/task_created_image_view"
+            android:layout_width="86dp"
+            android:layout_height="86dp"
+            android:layout_marginVertical="12dp"
+            android:src="@drawable/ic_approval"
+            app:layout_constraintBottom_toTopOf="@+id/task_created_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:tint="?attr/colorPrimary" />
+
+        <TextView
+            android:id="@+id/task_created_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/the_task_created_successfully"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/task_created_image_view" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
