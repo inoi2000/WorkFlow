@@ -88,6 +88,11 @@ class HomeFragment : Fragment() {
                 .actionHomeFragmentToCreateTaskSelectionEmployeeFragment()
             findNavController().navigate(action)
         }
+        binding.taskExecution.setOnClickListener {
+            val action = HomeFragmentDirections
+                .actionHomeFragmentToExecutingTaskListFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun observeViewModel() {
@@ -107,7 +112,11 @@ class HomeFragment : Fragment() {
                 taskInfoViewHolder.bind(
                     task,
                     TaskInfoViewHolder.EXECUTOR_MODE,
-                    {},
+                    {
+                        val action = HomeFragmentDirections
+                            .actionHomeFragmentToExecutingTaskInfoFragment(it)
+                        findNavController().navigate(action)
+                    },
                     {}
                 )
             } else {
@@ -120,7 +129,11 @@ class HomeFragment : Fragment() {
                 taskInfoViewHolder.bind(
                     task,
                     TaskInfoViewHolder.EXECUTOR_MODE,
-                    {},
+                    {
+                        val action = HomeFragmentDirections
+                            .actionHomeFragmentToInspectorTaskInfoFragment(it)
+                        findNavController().navigate(action)
+                    },
                     {}
                 )
             } else {

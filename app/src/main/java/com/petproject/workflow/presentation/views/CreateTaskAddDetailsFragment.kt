@@ -14,6 +14,7 @@ import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentCreateTaskAddDetailsBinding
 import com.petproject.workflow.presentation.viewmodels.CreateTaskAddDetailsViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
+import com.petproject.workflow.presentation.views.adapters.EmployeeInfoViewHolder
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -54,7 +55,12 @@ class CreateTaskAddDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val executorEmployee = EmployeeInfoViewHolder(binding.executorEmployee)
+        executorEmployee.bind(args.employee) {}
+
         observeViewModel()
+
         binding.etDeadline.setOnClickListener {
             val datePickerDialog = DatePickerDialog(
                 requireContext(),

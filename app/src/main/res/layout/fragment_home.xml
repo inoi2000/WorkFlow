@@ -116,6 +116,7 @@
                             app:cardCornerRadius="12dp">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/task_execution"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@drawable/gradient_cyan">

@@ -57,12 +57,14 @@ class CreateTaskAddDetailsViewModel @Inject constructor(
             if (validateInput(description, deadline)) {
                 val tempTask = Task(
                     description = description,
+                    status = TaskStatus.NEW,
+                    priority = priority,
+                    creation = LocalDate.now(),
+                    deadline = deadline,
+                    destination = destinationField.get(),
                     executor = executor,
                     inspector = getCurrentEmployeeUseCase(),
-                    deadline = deadline,
-                    status = TaskStatus.NEW,
-                    destination = destinationField.get(),
-                    priority = priority,
+                    comments = emptyList(),
                     shouldBeInspected = shouldBeInspected
                 )
                 _navigateToDoneCreateTaskScreen.value = tempTask
