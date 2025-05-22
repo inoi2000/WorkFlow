@@ -88,5 +88,7 @@
     <string name="deadline">Срок выполнения</string>
     <string name="should_be_inspected">Должна быть проверена</string>
     <string name="is_urgent">Срочная</string>
+    <string name="location_optional">Место (необязательно)</string>
+    <string name="error_input_text">Поле не может быть пустым</string>
 
 </resources>

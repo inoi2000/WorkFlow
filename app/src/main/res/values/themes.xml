@@ -17,6 +17,8 @@
         <item name="hintTextColor">@color/grey</item>
 
         <item name="colorPrimaryVariant">@color/grey_dark</item>
+
+        <item name="android:datePickerDialogTheme">@style/DataPickerTheme</item>
     </style>
 
     <style name="Theme.WorkFlow" parent="Base.Theme.WorkFlow" />
@@ -42,5 +44,9 @@
         <item name="android:textSize">12sp</item>
         <item name="textEndPadding">0dp</item>
         <item name="textStartPadding">0dp</item>
+    </style>
+    <style name="DataPickerTheme" parent="ThemeOverlay.Material3.Dialog">
+        <item name="colorAccent">@color/blue</item>
+        <item name="android:windowBackground">@color/white_dark</item>
     </style>
 </resources>

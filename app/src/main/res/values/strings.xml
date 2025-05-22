@@ -91,6 +91,8 @@
     <string name="deadline">Deadline</string>
     <string name="should_be_inspected">Should be inspected</string>
     <string name="is_urgent">Urgent</string>
+    <string name="location_optional">Location (Optional)</string>
+    <string name="error_input_text">Filed can not be blank</string>
 
 
 </resources>

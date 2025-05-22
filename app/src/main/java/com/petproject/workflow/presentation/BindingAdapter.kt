@@ -33,6 +33,16 @@ fun bindErrorInputCount(textInputLayout: TextInputLayout, isError: Boolean) {
     textInputLayout.error = message
 }
 
+@BindingAdapter("errorInputText")
+fun bindErrorInputText(textInputLayout: TextInputLayout, isError: Boolean) {
+    val message = if (isError) {
+        textInputLayout.context.getString(R.string.error_input_text)
+    } else {
+        null
+    }
+    textInputLayout.error = message
+}
+
 @BindingAdapter("taskStatusColor")
 fun bindTaskStatusColor(view: View, status: TaskStatus) {
     val backgroundId: Int = when (status) {
