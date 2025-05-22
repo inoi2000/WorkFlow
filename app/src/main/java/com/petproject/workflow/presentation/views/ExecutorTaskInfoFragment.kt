@@ -54,7 +54,10 @@ class ExecutorTaskInfoFragment : Fragment() {
         observeViewModel()
         binding.commentsCardView.setOnClickListener {
             val action = ExecutorTaskInfoFragmentDirections
-                .actionExecutingTaskInfoFragmentToTaskCommentListFragment(args.taskId)
+                .actionExecutingTaskInfoFragmentToTaskCommentListFragment(
+                    args.taskId,
+                    TaskCommentListFragment.MODE_FROM_EXECUTOR
+                )
             findNavController().navigate(action)
         }
     }

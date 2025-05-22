@@ -1,10 +1,10 @@
 package com.petproject.workflow.presentation.views
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -16,6 +16,12 @@ import com.petproject.workflow.presentation.views.adapters.CommentAdapter
 import javax.inject.Inject
 
 class TaskCommentListFragment : Fragment() {
+
+    companion object {
+        const val MODE_FROM_INSPECTOR = 1
+        const val MODE_FROM_EXECUTOR = 2
+    }
+
     private var _binding: FragmentTaskCommentListBinding? = null
     private val binding: FragmentTaskCommentListBinding get() = _binding!!
 
@@ -53,8 +59,19 @@ class TaskCommentListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setRecyclerView()
         binding.detailsButton.setOnClickListener {
-            val action = TaskCommentListFragmentDirections
-                .actionTaskCommentListFragmentToExecutingTaskInfoFragment(args.taskId)
+            val action = when (args.modeForm) {
+                MODE_FROM_INSPECTOR -> {
+                    TaskCommentListFragmentDirections
+                        .actionTaskCommentListFragmentToInspectorTaskInfoFragment(args.taskId)
+                }
+                MODE_FROM_EXECUTOR -> {
+                    TaskCommentListFragmentDirections
+                        .actionTaskCommentListFragmentToExecutingTaskInfoFragment(args.taskId)
+                }
+                else -> {
+                    throw RuntimeException()
+                }
+            }
             findNavController().navigate(action)
         }
     }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentInspectorTaskInfoBinding
@@ -51,6 +52,14 @@ class InspectorTaskInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
+        binding.commentsCardView.setOnClickListener {
+            val action = InspectorTaskInfoFragmentDirections
+                .actionInspectorTaskInfoFragmentToTaskCommentListFragment(
+                    args.taskId,
+                    TaskCommentListFragment.MODE_FROM_INSPECTOR
+                )
+            findNavController().navigate(action)
+        }
     }
 
     private fun observeViewModel() {
