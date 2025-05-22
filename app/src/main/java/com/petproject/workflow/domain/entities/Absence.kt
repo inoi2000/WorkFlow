@@ -1,7 +1,10 @@
 package com.petproject.workflow.domain.entities
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import java.time.LocalDate
 
+@Parcelize
 data class Absence(
     val id: String = "",
     val type: AbsenceType,
@@ -10,4 +13,4 @@ data class Absence(
     val end: LocalDate,
     val place: String? = null,
     val isApproval: Boolean = true
-)
+) : Parcelable

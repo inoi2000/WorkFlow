@@ -26,4 +26,8 @@ class EmployeeRepositoryImpl @Inject constructor(
     override suspend fun getCurrentEmployee(): Employee {
         TODO("Not yet implemented")
     }
+
+    override suspend fun getAllEmployeesForAssignTask(): List<Employee> {
+        TODO("Not yet implemented")
+    }
 }

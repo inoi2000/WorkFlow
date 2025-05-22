@@ -98,4 +98,49 @@ class EmployeeRepositoryImplTest @Inject constructor(
             canAssignTask = false
         )
     }
+
+    override suspend fun getAllEmployeesForAssignTask(): List<Employee> {
+        val list = listOf(
+            Employee(
+                id = UUID.randomUUID().toString(),
+                name = "Иванов Иван Иванович",
+                position = "Администратор",
+                department = Department(
+                    id = UUID.randomUUID().toString(),
+                    name = "Менеджмент"
+                ),
+                absences = null,
+                tasks = null,
+                onApproval = null,
+                canAssignTask = false
+            ),
+            Employee(
+                id = UUID.randomUUID().toString(),
+                name = "Петров Иван Иванович",
+                position = "Администратор",
+                department = Department(
+                    id = UUID.randomUUID().toString(),
+                    name = "Менеджмент"
+                ),
+                absences = null,
+                tasks = null,
+                onApproval = null,
+                canAssignTask = false
+            ),
+            Employee(
+                id = UUID.randomUUID().toString(),
+                name = "Сидоров Иван Иванович",
+                position = "Администратор",
+                department = Department(
+                    id = UUID.randomUUID().toString(),
+                    name = "Менеджмент"
+                ),
+                absences = null,
+                tasks = null,
+                onApproval = null,
+                canAssignTask = false
+            )
+        )
+        return list
+    }
 }

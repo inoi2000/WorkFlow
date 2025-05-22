@@ -26,6 +26,7 @@
 
     <color name="blue_button_transparent">#0D3777FC</color>
 
+    <color name="white_transparent">#33FFFFFF</color>
     <color name="blue_transparent">#333777FC</color>
     <color name="green_transparent">#3283B201</color>
     <color name="red_transparent">#33DF0729</color>

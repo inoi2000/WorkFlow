@@ -82,6 +82,12 @@ class HomeFragment : Fragment() {
                 .actionHomeFragmentToServiceListFragment()
             findNavController().navigate(action)
         }
+
+        binding.taskManagement.setOnClickListener {
+            val action = HomeFragmentDirections
+                .actionHomeFragmentToCreateTaskSelectionEmployeeFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun observeViewModel() {

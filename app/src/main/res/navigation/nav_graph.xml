@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_homeFragment_to_executingTaskInfoFragment"
             app:destination="@id/executingTaskInfoFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_createTaskSelectionEmployeeFragment"
+            app:destination="@id/createTaskSelectionEmployeeFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -115,5 +118,37 @@
         <action
             android:id="@+id/action_serviceListFragment_to_absenceListFragment"
             app:destination="@id/absenceListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createTaskSelectionEmployeeFragment"
+        android:name="com.petproject.workflow.presentation.views.CreateTaskSelectionEmployeeFragment"
+        android:label="fragment_create_task_selection_employee"
+        tools:layout="@layout/fragment_create_task_selection_employee" >
+        <action
+            android:id="@+id/action_createTaskSelectionEmployeeFragment_to_createTaskAddDetailsFragment"
+            app:destination="@id/createTaskAddDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createTaskAddDetailsFragment"
+        android:name="com.petproject.workflow.presentation.views.CreateTaskAddDetailsFragment"
+        android:label="fragment_create_task_add_details"
+        tools:layout="@layout/fragment_create_task_add_details" >
+        <action
+            android:id="@+id/action_createTaskAddDetailsFragment_to_createTaskDoneFragment"
+            app:destination="@id/createTaskDoneFragment"
+            app:popUpTo="@id/createTaskAddDetailsFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="employee"
+            app:argType="com.petproject.workflow.domain.entities.Employee" />
+    </fragment>
+    <fragment
+        android:id="@+id/createTaskDoneFragment"
+        android:name="com.petproject.workflow.presentation.views.CreateTaskDoneFragment"
+        android:label="fragment_create_task_done"
+        tools:layout="@layout/fragment_create_task_done" >
+        <argument
+            android:name="task"
+            app:argType="com.petproject.workflow.domain.entities.Task" />
     </fragment>
 </navigation>

@@ -86,6 +86,11 @@
     <string name="others">Others</string>
     <string name="position">Position</string>
     <string name="department">Department</string>
+    <string name="create_task">Create task</string>
+    <string name="the_task_created_successfully">The task created successfully!</string>
+    <string name="deadline">Deadline</string>
+    <string name="should_be_inspected">Should be inspected</string>
+    <string name="is_urgent">Urgent</string>
 
 
 </resources>
