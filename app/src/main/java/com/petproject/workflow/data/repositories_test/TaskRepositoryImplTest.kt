@@ -121,7 +121,7 @@ class TaskRepositoryImplTest @Inject constructor(
         return inspectingTasksList.first { it.id == id }
     }
 
-    override suspend fun assignTask(task: Task): Boolean {
+    override suspend fun createTask(task: Task): Boolean {
         inspectingTasksList.add(task)
         return true
     }

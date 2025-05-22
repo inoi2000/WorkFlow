@@ -14,5 +14,5 @@ interface TaskRepository {
 
     suspend fun getTaskComments(taskId: String): List<Comment>
 
-    suspend fun assignTask(task: Task): Boolean
+    suspend fun createTask(task: Task): Boolean
 }
