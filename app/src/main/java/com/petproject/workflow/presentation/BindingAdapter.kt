@@ -9,6 +9,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.petproject.workflow.R
 import com.petproject.workflow.domain.entities.Absence
 import com.petproject.workflow.domain.entities.AbsenceType
+import com.petproject.workflow.domain.entities.Role
 import com.petproject.workflow.domain.entities.TaskPriority
 import com.petproject.workflow.domain.entities.TaskStatus
 import java.time.LocalDate
@@ -43,37 +44,52 @@ fun bindErrorInputText(textInputLayout: TextInputLayout, isError: Boolean) {
     textInputLayout.error = message
 }
 
-@BindingAdapter("taskStatusColor")
-fun bindTaskStatusColor(view: View, status: TaskStatus) {
-    val backgroundId: Int = when (status) {
-        TaskStatus.NEW -> R.drawable.circle_green
-        TaskStatus.IN_PROGRESS -> R.drawable.circle_blue
-        TaskStatus.COMPLETED -> R.drawable.circle_green
-        TaskStatus.FAILED -> R.drawable.circle_red
-        TaskStatus.ON_APPROVAL -> R.drawable.circle_yellow
-        TaskStatus.NOT_APPROVAL -> R.drawable.circle_orange
+@BindingAdapter("onlyInspectorView")
+fun bindOnlyInspectorView(view: View, role: Role) {
+    if (role == Role.DRIVER) {
+        view.visibility = View.GONE
     }
-    val drawable = ContextCompat.getDrawable(view.context, backgroundId)
-    view.background = drawable
+}
+
+@BindingAdapter("taskStatusColor")
+fun bindTaskStatusColor(view: View, status: TaskStatus?) {
+    status?.let {
+        val backgroundId: Int = when (it) {
+            TaskStatus.NEW -> R.drawable.circle_green
+            TaskStatus.IN_PROGRESS -> R.drawable.circle_blue
+            TaskStatus.COMPLETED -> R.drawable.circle_green
+            TaskStatus.FAILED -> R.drawable.circle_red
+            TaskStatus.ON_APPROVAL -> R.drawable.circle_yellow
+            TaskStatus.NOT_APPROVAL -> R.drawable.circle_orange
+        }
+        val drawable = ContextCompat.getDrawable(view.context, backgroundId)
+        view.background = drawable
+    }
+
 }
 
 @BindingAdapter("taskStatusText")
-fun bindTaskStatusText(textView: TextView, status: TaskStatus) {
-    with(textView) {
-        text = when (status) {
-            TaskStatus.NEW -> context.resources.getString(R.string.new_task)
-            TaskStatus.IN_PROGRESS -> context.resources.getString(R.string.in_progress)
-            TaskStatus.COMPLETED -> context.resources.getString(R.string.completed)
-            TaskStatus.FAILED -> context.resources.getString(R.string.faild)
-            TaskStatus.ON_APPROVAL -> context.resources.getString(R.string.on_approval)
-            TaskStatus.NOT_APPROVAL -> context.resources.getString(R.string.not_approval)
+fun bindTaskStatusText(textView: TextView, status: TaskStatus?) {
+    status?.let {
+        with(textView) {
+            text = when (it) {
+                TaskStatus.NEW -> context.resources.getString(R.string.new_task)
+                TaskStatus.IN_PROGRESS -> context.resources.getString(R.string.in_progress)
+                TaskStatus.COMPLETED -> context.resources.getString(R.string.completed)
+                TaskStatus.FAILED -> context.resources.getString(R.string.faild)
+                TaskStatus.ON_APPROVAL -> context.resources.getString(R.string.on_approval)
+                TaskStatus.NOT_APPROVAL -> context.resources.getString(R.string.not_approval)
+            }
         }
     }
+
 }
 
 @BindingAdapter("taskDeadline")
-fun bindTaskDeadline(textView: TextView, date: LocalDate) {
-    textView.text = date.toString()
+fun bindTaskDeadline(textView: TextView, date: LocalDate?) {
+    date?.let {
+        textView.text = it.toString()
+    }
 }
 
 @BindingAdapter("taskDestination")
@@ -111,35 +127,41 @@ fun bindTaskPriority(textView: TextView, count: Int) {
 }
 
 @BindingAdapter("taskPriority")
-fun bindTaskPriority(textView: TextView, priority: TaskPriority) {
-    when (priority) {
-        TaskPriority.COMMON -> {
-            textView.text = textView.context.resources.getString(R.string.common)
-            textView.setTextColor(
-                ContextCompat.getColor(textView.context, R.color.green)
-            )
-        }
+fun bindTaskPriority(textView: TextView, priority: TaskPriority?) {
+    priority?.let {
+        when (it) {
+            TaskPriority.COMMON -> {
+                textView.text = textView.context.resources.getString(R.string.common)
+                textView.setTextColor(
+                    ContextCompat.getColor(textView.context, R.color.green)
+                )
+            }
 
-        TaskPriority.URGENT -> {
-            textView.text = textView.context.resources.getString(R.string.urgent)
-            textView.setTextColor(
-                ContextCompat.getColor(textView.context, R.color.red)
-            )
+            TaskPriority.URGENT -> {
+                textView.text = textView.context.resources.getString(R.string.urgent)
+                textView.setTextColor(
+                    ContextCompat.getColor(textView.context, R.color.red)
+                )
+            }
         }
     }
+
 }
 
 @BindingAdapter("taskPriority")
-fun bindTaskPriority(imageView: ImageView, priority: TaskPriority) {
-    when (priority) {
-        TaskPriority.COMMON -> {
-            imageView.setImageResource(R.drawable.ic_bolt_green)
-        }
+fun bindTaskPriority(imageView: ImageView, priority: TaskPriority?) {
+    priority?.let {
+        when (it) {
+            TaskPriority.COMMON -> {
+                imageView.setImageResource(R.drawable.ic_bolt_green)
+            }
 
-        TaskPriority.URGENT -> {
-            imageView.setImageResource(R.drawable.ic_bolt_red)
+            TaskPriority.URGENT -> {
+                imageView.setImageResource(R.drawable.ic_bolt_red)
+            }
         }
     }
+
 }
 
 @BindingAdapter("absenceType")

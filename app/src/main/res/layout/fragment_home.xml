@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentation.views.HomeFragment">
 
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.petproject.workflow.presentation.viewmodels.HomeViewModel" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -151,7 +158,9 @@
                             android:layout_width="118dp"
                             android:layout_height="132dp"
                             android:layout_marginEnd="8dp"
-                            app:cardCornerRadius="12dp">
+                            app:cardCornerRadius="12dp"
+                            app:onlyInspectorView="@{viewmodel.role}">
+
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/task_management"
@@ -411,6 +420,8 @@
 
                 <include
                     android:id="@+id/on_approval_task"
+                    android:visibility="gone"
+                    tools:visibility="visible"
                     layout="@layout/item_task_info" />
 
                 <androidx.cardview.widget.CardView
@@ -461,6 +472,8 @@
 
                 <include
                     android:id="@+id/executor_task"
+                    android:visibility="gone"
+                    tools:visibility="visible"
                     layout="@layout/item_task_info" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
