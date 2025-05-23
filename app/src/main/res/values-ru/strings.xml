@@ -90,5 +90,7 @@
     <string name="is_urgent">Срочная</string>
     <string name="location_optional">Место (необязательно)</string>
     <string name="error_input_text">Поле не может быть пустым</string>
+    <string name="comment_text">Текс комментария</string>
+    <string name="create_comment">Создать комментарий</string>
 
 </resources>

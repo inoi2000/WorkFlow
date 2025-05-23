@@ -93,6 +93,8 @@
     <string name="is_urgent">Urgent</string>
     <string name="location_optional">Location (Optional)</string>
     <string name="error_input_text">Filed can not be blank</string>
+    <string name="comment_text">Comment text</string>
+    <string name="create_comment">Create comment</string>
 
 
 </resources>

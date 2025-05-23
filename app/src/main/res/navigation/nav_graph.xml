@@ -92,6 +92,9 @@
         <argument
             android:name="modeForm"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_taskCommentListFragment_to_createTaskCommentFragment"
+            app:destination="@id/createTaskCommentFragment" />
     </fragment>
     <fragment
         android:id="@+id/absenceListFragment"
@@ -165,5 +168,28 @@
         <argument
             android:name="task"
             app:argType="com.petproject.workflow.domain.entities.Task" />
+    </fragment>
+    <fragment
+        android:id="@+id/createTaskCommentFragment"
+        android:name="com.petproject.workflow.presentation.views.CreateTaskCommentFragment"
+        android:label="fragment_create_task_comment"
+        tools:layout="@layout/fragment_create_task_comment" >
+        <action
+            android:id="@+id/action_createTaskCommentFragment_to_inspectorTaskInfoFragment"
+            app:destination="@id/inspectorTaskInfoFragment" />
+        <action
+            android:id="@+id/action_createTaskCommentFragment_to_executingTaskInfoFragment"
+            app:destination="@id/executingTaskInfoFragment" />
+        <action
+            android:id="@+id/action_createTaskCommentFragment_to_taskCommentListFragment"
+            app:destination="@id/taskCommentListFragment"
+            app:popUpTo="@id/createTaskCommentFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="taskId"
+            app:argType="string" />
+        <argument
+            android:name="modeForm"
+            app:argType="integer" />
     </fragment>
 </navigation>
