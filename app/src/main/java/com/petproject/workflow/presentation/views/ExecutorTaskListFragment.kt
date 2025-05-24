@@ -79,7 +79,10 @@ class ExecutorTaskListFragment : Fragment() {
             },
             { taskId ->
                 val action = ExecutorTaskListFragmentDirections
-                    .actionExecutingTaskListFragmentToTaskCommentListFragment(taskId)
+                    .actionExecutingTaskListFragmentToTaskCommentListFragment(
+                        taskId,
+                        TaskCommentListFragment.MODE_FROM_EXECUTOR
+                    )
                 findNavController().navigate(action)
             })
         binding.tasksListRecyclerView.itemAnimator = null

@@ -110,7 +110,10 @@ class TaskRepositoryImplTest @Inject constructor(
     }
 
     override suspend fun getTaskComments(taskId: String): List<Comment> {
-        return executionTasksList.first { it.id == taskId }.comments ?: listOf()
+        val list: MutableList<Task> = mutableListOf()
+        list.addAll(executionTasksList)
+        list.addAll(inspectingTasksList)
+        return list.first { it.id == taskId }.comments ?: listOf()
     }
 
     override suspend fun getAllInspectorTasks(): List<Task> {
@@ -121,7 +124,7 @@ class TaskRepositoryImplTest @Inject constructor(
         return inspectingTasksList.first { it.id == id }
     }
 
-    override suspend fun assignTask(task: Task): Boolean {
+    override suspend fun createTask(task: Task): Boolean {
         inspectingTasksList.add(task)
         return true
     }

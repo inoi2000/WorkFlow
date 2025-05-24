@@ -12,6 +12,7 @@ import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentExecutorTaskInfoBinding
 import com.petproject.workflow.presentation.viewmodels.ExecutorTaskInfoViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
+import com.petproject.workflow.presentation.views.adapters.EmployeeInfoViewHolder
 import javax.inject.Inject
 
 class ExecutorTaskInfoFragment : Fragment() {
@@ -50,10 +51,23 @@ class ExecutorTaskInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeViewModel()
         binding.commentsCardView.setOnClickListener {
             val action = ExecutorTaskInfoFragmentDirections
-                .actionExecutingTaskInfoFragmentToTaskCommentListFragment(args.taskId)
+                .actionExecutingTaskInfoFragmentToTaskCommentListFragment(
+                    args.taskId,
+                    TaskCommentListFragment.MODE_FROM_EXECUTOR
+                )
             findNavController().navigate(action)
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.executingTask.observe(viewLifecycleOwner) {
+            it.inspector?.let { inspector ->
+                val employeeInfoViewHolder = EmployeeInfoViewHolder(binding.taskInspector)
+                employeeInfoViewHolder.bind(inspector) {}
+            }
         }
     }
 

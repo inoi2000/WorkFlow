@@ -1,17 +1,23 @@
 package com.petproject.workflow.presentation.views
 
+import android.app.DatePickerDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentCreateTaskAddDetailsBinding
 import com.petproject.workflow.presentation.viewmodels.CreateTaskAddDetailsViewModel
-import com.petproject.workflow.presentation.viewmodels.CreateTaskSelectionEmployeeViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
+import com.petproject.workflow.presentation.views.adapters.EmployeeInfoViewHolder
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 import javax.inject.Inject
 
 class CreateTaskAddDetailsFragment : Fragment() {
@@ -20,6 +26,10 @@ class CreateTaskAddDetailsFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+
+    private val calendar = Calendar.getInstance()
+
+    private val args by navArgs<CreateTaskAddDetailsFragmentArgs>()
 
     private val viewModel by lazy {
         ViewModelProvider.create(
@@ -38,20 +48,53 @@ class CreateTaskAddDetailsFragment : Fragment() {
     ): View {
         component.inject(this)
         _binding = FragmentCreateTaskAddDetailsBinding.inflate(inflater, container, false)
-        binding.viewmodel = viewModel
+        binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.createTaskButton.setOnClickListener {
 
-            val action = CreateTaskAddDetailsFragmentDirections
-                .actionCreateTaskAddDetailsFragmentToCreateTaskDoneFragment(
-                    TODO()
-                )
-            findNavController().navigate(action)
+        val executorEmployee = EmployeeInfoViewHolder(binding.executorEmployee)
+        executorEmployee.bind(args.employee) {}
+
+        observeViewModel()
+
+        binding.etDeadline.setOnClickListener {
+            val datePickerDialog = DatePickerDialog(
+                requireContext(),
+                { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+                    calendar.set(Calendar.YEAR, year)
+                    calendar.set(Calendar.MONTH, month)
+                    calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+                    val format = viewModel.dateFormatPattern
+                    val dateFormat = SimpleDateFormat(format, Locale.US)
+                    binding.etDeadline.setText(dateFormat.format(calendar.time))
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            )
+            datePickerDialog.show()
+        }
+
+        binding.createTaskButton.setOnClickListener {
+            viewModel.resetErrorInputDeadline()
+            viewModel.resetErrorInputDescription()
+            viewModel.createTask(args.employee)
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.navigateToDoneCreateTaskScreen.observe(viewLifecycleOwner) { task ->
+            task?.let {
+                val action = CreateTaskAddDetailsFragmentDirections
+                    .actionCreateTaskAddDetailsFragmentToCreateTaskDoneFragment(task)
+                findNavController().navigate(action)
+                viewModel.onDoneCreateTaskScreenNavigated()
+            }
         }
     }
 

@@ -14,7 +14,6 @@ import com.petproject.workflow.domain.entities.AbsenceType
 import com.petproject.workflow.presentation.viewmodels.HomeViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import com.petproject.workflow.presentation.views.adapters.TaskInfoViewHolder
-import java.time.LocalDate
 import javax.inject.Inject
 
 class HomeFragment : Fragment() {
@@ -35,19 +34,21 @@ class HomeFragment : Fragment() {
             .create((requireActivity() as MainActivity).employeeId)
     }
 
-    private val employee by lazy {
-        viewModel.employee
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         component.inject(this)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.viewmodel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         observeViewModel()
         setNavigation()
-        return binding.root
     }
 
     private fun setNavigation() {
@@ -77,6 +78,7 @@ class HomeFragment : Fragment() {
                 .actionHomeFragmentToExecutingTaskListFragment()
             findNavController().navigate(action)
         }
+
         binding.othersCardView.setOnClickListener {
             val action = HomeFragmentDirections
                 .actionHomeFragmentToServiceListFragment()
@@ -86,6 +88,11 @@ class HomeFragment : Fragment() {
         binding.taskManagement.setOnClickListener {
             val action = HomeFragmentDirections
                 .actionHomeFragmentToCreateTaskSelectionEmployeeFragment()
+            findNavController().navigate(action)
+        }
+        binding.taskExecution.setOnClickListener {
+            val action = HomeFragmentDirections
+                .actionHomeFragmentToExecutingTaskListFragment()
             findNavController().navigate(action)
         }
     }
@@ -98,16 +105,21 @@ class HomeFragment : Fragment() {
                 requireActivity().finish()
             }
         }
-        employee.observe(viewLifecycleOwner) { employee ->
+        viewModel.employee.observe(viewLifecycleOwner) { employee ->
 
         }
         viewModel.executorTask.observe(viewLifecycleOwner) { task ->
             val taskInfoViewHolder = TaskInfoViewHolder(binding.executorTask)
             if (task != null) {
+                taskInfoViewHolder.binding.root.visibility = View.VISIBLE
                 taskInfoViewHolder.bind(
                     task,
                     TaskInfoViewHolder.EXECUTOR_MODE,
-                    {},
+                    {
+                        val action = HomeFragmentDirections
+                            .actionHomeFragmentToExecutingTaskInfoFragment(it)
+                        findNavController().navigate(action)
+                    },
                     {}
                 )
             } else {
@@ -117,31 +129,21 @@ class HomeFragment : Fragment() {
         viewModel.inspectorTask.observe(viewLifecycleOwner) { task ->
             val taskInfoViewHolder = TaskInfoViewHolder(binding.onApprovalTask)
             if (task != null) {
+                taskInfoViewHolder.binding.root.visibility = View.VISIBLE
                 taskInfoViewHolder.bind(
                     task,
                     TaskInfoViewHolder.EXECUTOR_MODE,
-                    {},
+                    {
+                        val action = HomeFragmentDirections
+                            .actionHomeFragmentToInspectorTaskInfoFragment(it)
+                        findNavController().navigate(action)
+                    },
                     {}
                 )
             } else {
                 taskInfoViewHolder.binding.root.visibility = View.GONE
             }
         }
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    private fun formatingData(data: LocalDate): String {
-//        val dateParser = SimpleDateFormat("dd.MM.yyyy")
-//        val date = dateParser.parse(data) ?: return data
-//        val locale = resources.configuration.getLocales().get(0)
-//        val dateFormatter = SimpleDateFormat("dd MMMM yyyy", locale)
-//        return dateFormatter.format(date)
-
-//        val locale = resources.configuration.getLocales().get(0)
-//        val dateFormatter = SimpleDateFormat("dd MMMM yyyy", locale)
-//        return dateFormatter.format(dateFormatter)
-
-        return data.toString()
     }
 
     override fun onDestroyView() {

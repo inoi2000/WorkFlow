@@ -7,7 +7,7 @@
     <data>
 
         <variable
-            name="viewmodel"
+            name="viewModel"
             type="com.petproject.workflow.presentation.viewmodels.CreateTaskAddDetailsViewModel" />
     </data>
 
@@ -91,22 +91,24 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
             <include
-                android:id="@+id/on_approval_task"
+                android:id="@+id/executor_employee"
                 layout="@layout/item_employee_info" />
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_email"
+                android:id="@+id/til_Description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp">
+                android:layout_marginTop="6dp"
+                app:errorInputText="@{viewModel.errorInputDescription}">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_email"
+                    android:id="@+id/et_Description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start|top"
                     android:hint="@string/description"
+                    android:text="@={viewModel.descriptionField}"
                     android:inputType="textEmailAddress"
                     android:minHeight="124dp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -115,16 +117,39 @@
                 android:id="@+id/til_deadline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp">
+                android:layout_marginTop="6dp"
+                app:errorInputText="@{viewModel.errorInputDeadline}">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_deadline"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:inputType="text"
                     android:gravity="start|top"
                     android:hint="@string/deadline"
-                    android:inputType="date" />
+                    android:text="@={viewModel.deadlineField}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_destination"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_destination"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="start|top"
+                    android:hint="@string/location_optional"
+                    android:inputType="text"
+                    android:text="@={viewModel.destinationField}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.switchmaterial.SwitchMaterial
@@ -132,12 +157,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="6dp"
+                android:checked="@{viewModel.priorityField}"
                 android:text="@string/is_urgent"
                 android:textSize="15sp" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:checked="@{viewModel.shouldBeInspectedField}"
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="6dp"
                 android:text="@string/should_be_inspected"

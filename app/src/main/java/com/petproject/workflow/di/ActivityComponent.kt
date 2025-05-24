@@ -2,6 +2,7 @@ package com.petproject.workflow.di
 
 import com.petproject.workflow.presentation.views.ExecutorTaskInfoFragment
 import com.petproject.workflow.presentation.views.HomeFragment
+import com.petproject.workflow.presentation.views.InspectorTaskInfoFragment
 import com.petproject.workflow.presentation.views.TaskCommentListFragment
 import dagger.BindsInstance
 import dagger.Subcomponent
@@ -12,6 +13,8 @@ interface ActivityComponent {
     fun inject(homeFragment: HomeFragment)
 
     fun inject(executorTaskInfoFragment: ExecutorTaskInfoFragment)
+
+    fun inject(inspectorTaskInfoFragment: InspectorTaskInfoFragment)
 
     fun inject(taskCommentListFragment: TaskCommentListFragment)
 

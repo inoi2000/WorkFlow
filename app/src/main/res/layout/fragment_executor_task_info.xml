@@ -132,16 +132,12 @@
                     android:textColor="?attr/colorPrimary"
                     android:textStyle="bold" />
 
-                <TextView
+                <include
                     android:id="@+id/task_inspector"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{String.valueOf(viewmodel.executingTask.inspector)}"
-                    tools:text="Иванов Иван Иванович" />
+                    layout="@layout/item_employee_info" />
 
                 <View
-                    style="@style/HorizontalLineView"
-                    android:layout_marginTop="12dp" />
+                    style="@style/HorizontalLineView" />
 
                 <TextView
                     android:layout_width="wrap_content"
