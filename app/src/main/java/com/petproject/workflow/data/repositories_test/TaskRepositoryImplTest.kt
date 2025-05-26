@@ -128,4 +128,15 @@ class TaskRepositoryImplTest @Inject constructor(
         inspectingTasksList.add(task)
         return true
     }
+
+    override suspend fun createTaskComment(comment: Comment): Boolean {
+        return true
+    }
+
+    override suspend fun getTaskById(taskId: String): Task {
+        val list: MutableList<Task> = mutableListOf()
+        list.addAll(executionTasksList)
+        list.addAll(inspectingTasksList)
+        return list.first { it.id == taskId }
+    }
 }

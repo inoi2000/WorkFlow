@@ -2,6 +2,7 @@ package com.petproject.workflow.di
 
 import androidx.lifecycle.ViewModel
 import com.petproject.workflow.presentation.viewmodels.AnnouncementViewModel
+import com.petproject.workflow.presentation.viewmodels.CreateTaskCommentViewModel
 import com.petproject.workflow.presentation.viewmodels.ExecutorTaskInfoViewModel
 import com.petproject.workflow.presentation.viewmodels.HomeViewModel
 import com.petproject.workflow.presentation.viewmodels.InspectorTaskInfoViewModel
@@ -32,4 +33,9 @@ interface ActivityViewModelModule {
     @ViewModelKey(TaskCommentListViewModel::class)
     @Binds
     fun bindTaskCommentListViewModel(impl: TaskCommentListViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(CreateTaskCommentViewModel::class)
+    @Binds
+    fun bindCreateTaskCommentViewModel(impl: CreateTaskCommentViewModel): ViewModel
 }

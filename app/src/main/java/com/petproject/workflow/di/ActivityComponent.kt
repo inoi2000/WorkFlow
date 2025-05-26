@@ -1,5 +1,6 @@
 package com.petproject.workflow.di
 
+import com.petproject.workflow.presentation.views.CreateTaskCommentFragment
 import com.petproject.workflow.presentation.views.ExecutorTaskInfoFragment
 import com.petproject.workflow.presentation.views.HomeFragment
 import com.petproject.workflow.presentation.views.InspectorTaskInfoFragment
@@ -17,6 +18,8 @@ interface ActivityComponent {
     fun inject(inspectorTaskInfoFragment: InspectorTaskInfoFragment)
 
     fun inject(taskCommentListFragment: TaskCommentListFragment)
+
+    fun inject(createTaskCommentFragment: CreateTaskCommentFragment)
 
     @Subcomponent.Factory
     interface Factory {

@@ -74,7 +74,6 @@
                             android:layout_gravity="top|end"
                             android:layout_margin="6dp"
                             android:background="@drawable/circle_grey"
-                            android:text="@{viewmodel.commentsCount}"
                             android:textColor="?attr/colorPrimary"
                             android:textSize="12sp"
                             android:textStyle="bold"
@@ -115,7 +114,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/create_task_button"
+                android:id="@+id/create_new_comment_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
