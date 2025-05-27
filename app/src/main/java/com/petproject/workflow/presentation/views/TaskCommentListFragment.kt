@@ -74,6 +74,15 @@ class TaskCommentListFragment : Fragment() {
             }
             findNavController().navigate(action)
         }
+        binding.createCommentButton.setOnClickListener {
+            val action = TaskCommentListFragmentDirections
+                .actionTaskCommentListFragmentToCreateTaskCommentFragment(
+                    args.taskId,
+                    args.modeForm,
+                    viewModel.commentsCount
+                )
+            findNavController().navigate(action)
+        }
     }
 
     private fun setRecyclerView() {

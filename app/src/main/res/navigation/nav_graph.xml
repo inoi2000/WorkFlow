@@ -191,5 +191,8 @@
         <argument
             android:name="modeForm"
             app:argType="integer" />
+        <argument
+            android:name="commentsCount"
+            app:argType="string" />
     </fragment>
 </navigation>
