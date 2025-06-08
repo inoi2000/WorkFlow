@@ -21,19 +21,11 @@ class TaskRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getExecutorTask(id: String): Task {
-        TODO("Not yet implemented")
-    }
-
     override suspend fun getTaskComments(taskId: String): List<Comment> {
         TODO("Not yet implemented")
     }
 
     override suspend fun getAllInspectorTasks(): List<Task> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getInspectorTask(id: String): Task {
         TODO("Not yet implemented")
     }
 

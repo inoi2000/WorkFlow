@@ -12,9 +12,8 @@ import com.petproject.workflow.domain.entities.Role
 import com.petproject.workflow.domain.entities.Task
 import com.petproject.workflow.domain.usecases.GetAbsenceUseCase
 import com.petproject.workflow.domain.usecases.GetEmployeeUseCase
-import com.petproject.workflow.domain.usecases.GetExecutorTaskUseCase
-import com.petproject.workflow.domain.usecases.GetInspectorTaskUseCase
 import com.petproject.workflow.domain.usecases.GetRoleUseCase
+import com.petproject.workflow.domain.usecases.GetTaskByIdUseCase
 import com.petproject.workflow.domain.usecases.SignOutUseCase
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
@@ -26,8 +25,7 @@ class HomeViewModel @Inject constructor(
     private val getRoleUseCase: GetRoleUseCase,
     private val getEmployeeUseCase: GetEmployeeUseCase,
     private val getAbsenceUseCase: GetAbsenceUseCase,
-    private val getExecutorTaskUseCase: GetExecutorTaskUseCase,
-    private val getInspectorTaskUseCase: GetInspectorTaskUseCase,
+    private val getTaskByIdUseCase: GetTaskByIdUseCase,
     private val signOutUseCase: SignOutUseCase
 ): ViewModel() {
 
@@ -67,10 +65,10 @@ class HomeViewModel @Inject constructor(
             val employee = getEmployeeUseCase(employeeId)
             _employee.value = employee
             employee.tasks?.firstOrNull()?.id?.let {
-                _executorTask.value = getExecutorTaskUseCase(it)
+                _executorTask.value = getTaskByIdUseCase(it)
             }
             employee.onApproval?.firstOrNull()?.id?.let {
-                _inspectorTask.value = getInspectorTaskUseCase(it)
+                _inspectorTask.value = getTaskByIdUseCase(it)
             }
             employee.absences?.firstOrNull {
                 it.type == AbsenceType.VACATION
