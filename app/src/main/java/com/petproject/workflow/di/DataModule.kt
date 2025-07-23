@@ -1,11 +1,14 @@
 package com.petproject.workflow.di
 
+import android.content.Context
+import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.data.network.ApiFactory
 import com.petproject.workflow.data.network.AuthApiService
 import com.petproject.workflow.data.network.MainApiService
 import com.petproject.workflow.data.network.utils.AuthInterceptor
 import dagger.Module
 import dagger.Provides
+import net.openid.appauth.AuthorizationService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
@@ -36,5 +39,10 @@ class DataModule {
             .addInterceptor(loggingInterceptor)
 //            .authenticator(authAuthenticator)
             .build()
+    }
+
+    @Provides
+    fun provideAuthService(context: Context): AuthorizationService {
+        return AuthorizationService(context)
     }
 }

@@ -93,4 +93,6 @@
     <string name="comment_text">Текс комментария</string>
     <string name="create_comment">Создать комментарий</string>
 
+    <string name="auth_canceled">Аутентификация не выполнена</string>
+
 </resources>

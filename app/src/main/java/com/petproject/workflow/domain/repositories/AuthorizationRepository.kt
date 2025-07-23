@@ -4,7 +4,7 @@ import com.petproject.workflow.domain.entities.Role
 
 interface AuthorizationRepository {
 
-    suspend fun signIn(username: String, password: String, onFailureListener: (Exception) -> Unit)
+    suspend fun signIn(onFailureListener: (Exception) -> Unit)
 
     suspend fun signOut()
 

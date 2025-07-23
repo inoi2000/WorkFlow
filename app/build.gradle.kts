@@ -17,10 +17,14 @@ android {
 
     defaultConfig {
         applicationId = "com.petproject.workflow"
-        minSdk = 34
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+
+        manifestPlaceholders += mapOf(
+            "appAuthRedirectScheme" to "com.petproject.workflow"
+        )
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -72,6 +76,7 @@ dependencies {
 
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
+    implementation(libs.appauth)
 
     implementation(libs.aith0)
 

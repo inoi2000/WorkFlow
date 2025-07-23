@@ -3,7 +3,7 @@ package com.petproject.workflow.di
 import android.content.Context
 import com.petproject.workflow.presentation.views.AccountFragment
 import com.petproject.workflow.presentation.views.ExecutorTaskListFragment
-import com.petproject.workflow.presentation.views.LoginActivity
+import com.petproject.workflow.presentation.views.AuthActivity
 import com.petproject.workflow.presentation.views.AnnouncementListFragment
 import com.petproject.workflow.presentation.views.AbsenceListFragment
 import com.petproject.workflow.presentation.views.CreateTaskAddDetailsFragment
@@ -18,7 +18,7 @@ import dagger.Component
 @Component(modules = [DomainModule::class, DataModule::class, ViewModelModule::class])
 interface ApplicationComponent {
 
-    fun inject(activity: LoginActivity)
+    fun inject(activity: AuthActivity)
 
     fun inject(accountFragment: AccountFragment)
 

@@ -46,7 +46,7 @@ class AccountFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.navigateToLoginScreen.observe(viewLifecycleOwner) {
             if (it) {
-                val intent = LoginActivity.newIntent(requireContext())
+                val intent = AuthActivity.newIntent(requireContext())
                 startActivity(intent)
                 requireActivity().finish()
             }

@@ -17,7 +17,7 @@ class AuthorizationRepositoryImplTest @Inject constructor(
 
     private var verifySuccessAuthorizationCallback: ((String?) -> Unit)? = null
 
-    override suspend fun signIn(username: String, password: String, onFailureListener: (Exception) -> Unit) {
+    override suspend fun signIn(onFailureListener: (Exception) -> Unit) {
         verifySuccessAuthorizationCallback?.invoke(UUID.randomUUID().toString())
     }
 

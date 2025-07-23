@@ -33,7 +33,7 @@ class CreateTaskCommentViewModel @Inject constructor(
                 text = text,
                 creation = LocalDate.now(),
                 task = task,
-                files = listOf()
+//                files = listOf()
             )
             val isSuccess = createTaskCommentUseCase(comment)
             _isCommentCreated.value = isSuccess

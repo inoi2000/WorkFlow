@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.views.LoginActivity">
+    tools:context=".presentation.views.AuthActivity">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.petproject.workflow.presentation.viewmodels.LoginViewModel" />
+            type="com.petproject.workflow.presentation.viewmodels.AuthViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +34,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            app:errorInputEmail="@{viewModel.errorInputEmail}"
             app:layout_constraintBottom_toTopOf="@+id/til_password"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.7"
@@ -45,8 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email_hint"
-                android:inputType="textEmailAddress"
-                android:text="@={viewModel.emailField}" />
+                android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -54,7 +52,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            app:errorInputPassword="@{viewModel.errorInputPassword}"
             app:layout_constraintBottom_toTopOf="@+id/btn_login"
             app:layout_constraintTop_toBottomOf="@+id/til_email">
 
@@ -63,8 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password_hint"
-                android:inputType="textPassword"
-                android:text="@={viewModel.passwordField}" />
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -72,7 +68,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:onClick="@{() -> viewModel.signIn()}"
             android:text="@string/login_button_text"
             android:textAllCaps="true"
             android:textColor="@color/white"
