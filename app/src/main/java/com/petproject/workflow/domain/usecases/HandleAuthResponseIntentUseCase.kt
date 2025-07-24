@@ -4,12 +4,12 @@ import android.content.Intent
 import com.petproject.workflow.domain.repositories.AuthorizationRepository
 import javax.inject.Inject
 
-class SignInUseCase @Inject constructor(
+class HandleAuthResponseIntentUseCase @Inject constructor(
     private val repository: AuthorizationRepository
 ) {
     suspend operator fun invoke(
-        onOpenLoginPage: (Intent) -> Unit,
+        intent: Intent,
         onSuccessListener: () -> Unit,
         onFailureListener: (Exception) -> Unit
-    ) = repository.signIn(onOpenLoginPage, onSuccessListener, onFailureListener)
+    ) = repository.handleAuthResponseIntent(intent, onSuccessListener, onFailureListener)
 }

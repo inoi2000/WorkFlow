@@ -12,15 +12,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.petproject.workflow.WorkFlowApplication
-
 import com.petproject.workflow.databinding.ActivityLoginBinding
 import com.petproject.workflow.presentation.viewmodels.AuthViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import net.openid.appauth.AuthorizationException
-import net.openid.appauth.AuthorizationResponse
 import javax.inject.Inject
 
 class AuthActivity : AppCompatActivity() {
@@ -39,6 +36,12 @@ class AuthActivity : AppCompatActivity() {
         (application as WorkFlowApplication).component
     }
 
+    private val getAuthResponse =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            val dataIntent = it.data ?: return@registerForActivityResult
+            viewModel.handleAuthResponseIntent(dataIntent)
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         component.inject(this)
 //        checkAuthorization()
@@ -53,11 +56,6 @@ class AuthActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener { viewModel.openLoginPage() }
         viewModel.openAuthPageFlow.launchAndCollectIn(this) { intent ->
             // Open auth page
-            val getAuthResponse =
-                registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                    val dataIntent = it.data ?: return@registerForActivityResult
-                    viewModel.handleAuthResponseIntent(dataIntent)
-                }
             getAuthResponse.launch(intent)
         }
         viewModel.toastFlow.launchAndCollectIn(this) {

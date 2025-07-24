@@ -46,9 +46,4 @@ class DataModule {
     fun provideAuthService(context: Context): AuthorizationService {
         return AuthorizationService(context)
     }
-
-    @Provides
-    fun provideAuthRepository(): AuthRepository {
-        return AuthRepository()
-    }
 }
