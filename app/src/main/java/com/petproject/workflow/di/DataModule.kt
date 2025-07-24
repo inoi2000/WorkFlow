@@ -2,6 +2,7 @@ package com.petproject.workflow.di
 
 import android.content.Context
 import com.petproject.workflow.WorkFlowApplication
+import com.petproject.workflow.data.auth.AuthRepository
 import com.petproject.workflow.data.network.ApiFactory
 import com.petproject.workflow.data.network.AuthApiService
 import com.petproject.workflow.data.network.MainApiService
@@ -44,5 +45,10 @@ class DataModule {
     @Provides
     fun provideAuthService(context: Context): AuthorizationService {
         return AuthorizationService(context)
+    }
+
+    @Provides
+    fun provideAuthRepository(): AuthRepository {
+        return AuthRepository()
     }
 }

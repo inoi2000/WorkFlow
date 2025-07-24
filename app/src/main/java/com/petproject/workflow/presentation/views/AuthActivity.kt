@@ -47,22 +47,18 @@ class AuthActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         setContentView(binding.root)
         bindViewModel()
-//        addTextChangeListeners()
-    }
-
-    private val getAuthResponse =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            val dataIntent = it.data ?: return@registerForActivityResult
-            handleAuthResponseIntent(dataIntent)
     }
 
     private fun bindViewModel() {
         binding.btnLogin.setOnClickListener { viewModel.openLoginPage() }
-        viewModel.loadingFlow.launchAndCollectIn(this) {
-            updateIsLoading(it)
-        }
-        viewModel.openAuthPageFlow.launchAndCollectIn(this) {
-            openAuthPage(it)
+        viewModel.openAuthPageFlow.launchAndCollectIn(this) { intent ->
+            // Open auth page
+            val getAuthResponse =
+                registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                    val dataIntent = it.data ?: return@registerForActivityResult
+                    viewModel.handleAuthResponseIntent(dataIntent)
+                }
+            getAuthResponse.launch(intent)
         }
         viewModel.toastFlow.launchAndCollectIn(this) {
             Toast.makeText(this@AuthActivity, it, Toast.LENGTH_SHORT).show()
@@ -85,30 +81,6 @@ class AuthActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateIsLoading(isLoading: Boolean) = with(binding) {
-//        btnLogin.isVisible = !isLoading
-//        btnLogin.isVisible = isLoading
-    }
-
-    private fun openAuthPage(intent: Intent) {
-        getAuthResponse.launch(intent)
-    }
-
-    private fun handleAuthResponseIntent(intent: Intent) {
-        // пытаемся получить ошибку из ответа. null - если все ок
-        val exception = AuthorizationException.fromIntent(intent)
-        // пытаемся получить запрос для обмена кода на токен, null - если произошла ошибка
-        val tokenExchangeRequest = AuthorizationResponse.fromIntent(intent)
-            ?.createTokenExchangeRequest()
-        when {
-            // авторизация завершались ошибкой
-            exception != null -> viewModel.onAuthCodeFailed(exception)
-            // авторизация прошла успешно, меняем код на токен
-            tokenExchangeRequest != null ->
-                viewModel.onAuthCodeReceived(tokenExchangeRequest)
-        }
-    }
-
 //    private fun checkAuthorization() {
 //        viewModel.navigateToHomeScreen.observe(this) { employeeId ->
 //            employeeId?.let {
@@ -117,27 +89,6 @@ class AuthActivity : AppCompatActivity() {
 //                finish()
 //            }
 //        }
-//    }
-
-//    private fun addTextChangeListeners() {
-//        binding.etEmail.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                viewModel.resetErrorInputEmail()
-//            }
-//
-//            override fun afterTextChanged(s: Editable?) {}
-//        })
-//        binding.etPassword.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                viewModel.resetErrorInputPassword()
-//            }
-//
-//            override fun afterTextChanged(s: Editable?) {}
-//        })
 //    }
 
     companion object {
