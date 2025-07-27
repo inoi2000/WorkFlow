@@ -23,7 +23,8 @@ class TokensManager @Inject constructor(
 
         fun getIdFromAccessToken(accessToken: String): String? {
             val jwt = JWT(accessToken)
-            return jwt.getClaim("id").asString()
+            val id = jwt.getClaim("id").asString()
+            return id
         }
 
         fun getRoleFromAccessToken(accessToken: String): Role {

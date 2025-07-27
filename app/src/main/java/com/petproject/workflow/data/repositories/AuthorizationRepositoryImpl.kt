@@ -62,7 +62,10 @@ class AuthorizationRepositoryImpl @Inject constructor(
                     val tokens = AppAuth.performTokenRequestSuspend(authService, tokenExchangeRequest)
                     //обмен кода на токен произошел успешно, сохраняем токены и завершаем авторизацию
                     tokensManager.saveTokens(tokens)
-                    verifySuccessAuthorizationCallback?.invoke(tokens.accessToken)
+
+                    verifySuccessAuthorizationCallback?.invoke(
+                        TokensManager.getIdFromAccessToken(tokens.accessToken)
+                    )
                     Log.d("Oauth", "6. Tokens accepted:\n access=${tokens.accessToken}\nrefresh=${tokens.refreshToken}\nidToken=${tokens.idToken}")
                     onSuccessListener()
                 } catch (ex: Exception) {
@@ -87,7 +90,8 @@ class AuthorizationRepositoryImpl @Inject constructor(
         verifySuccessAuthorizationCallback = callback
         val token = tokensManager.getAccessToken()
         token?.let {
-            callback(TokensManager.getIdFromAccessToken(it))
+            val id = TokensManager.getIdFromAccessToken(it)
+            callback(id)
         }
     }
 

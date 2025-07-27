@@ -63,7 +63,6 @@ class AuthActivity : AppCompatActivity() {
             Toast.makeText(this@AuthActivity, it, Toast.LENGTH_SHORT).show()
         }
         viewModel.authSuccessFlow.launchAndCollectIn(this) {
-            //навигация к home activity
             Toast.makeText(this@AuthActivity, "Авторизация прощла успешно!", Toast.LENGTH_SHORT).show()
         }
     }
