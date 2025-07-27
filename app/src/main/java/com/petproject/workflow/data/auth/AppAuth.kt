@@ -73,7 +73,6 @@ object AppAuth {
                     ex != null -> {
                         continuation.resumeWith(Result.failure(ex))
                     }
-
                     else -> error("unreachable")
                 }
             }

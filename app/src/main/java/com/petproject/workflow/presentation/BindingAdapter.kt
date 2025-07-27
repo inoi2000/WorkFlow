@@ -46,7 +46,7 @@ fun bindErrorInputText(textInputLayout: TextInputLayout, isError: Boolean) {
 
 @BindingAdapter("onlyInspectorView")
 fun bindOnlyInspectorView(view: View, role: Role) {
-    if (role == Role.DRIVER) {
+    if (role == Role.ROLE_DRIVER) {
         view.visibility = View.GONE
     }
 }

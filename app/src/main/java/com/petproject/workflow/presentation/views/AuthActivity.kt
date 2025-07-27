@@ -21,6 +21,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AuthActivity : AppCompatActivity() {
+
     private val binding: ActivityLoginBinding by lazy {
         ActivityLoginBinding.inflate(layoutInflater)
     }
@@ -44,7 +45,7 @@ class AuthActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         component.inject(this)
-//        checkAuthorization()
+        checkAuthorization()
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -79,15 +80,15 @@ class AuthActivity : AppCompatActivity() {
         }
     }
 
-//    private fun checkAuthorization() {
-//        viewModel.navigateToHomeScreen.observe(this) { employeeId ->
-//            employeeId?.let {
-//                val intent = MainActivity.newIntent(this, it)
-//                startActivity(intent)
-//                finish()
-//            }
-//        }
-//    }
+    private fun checkAuthorization() {
+        viewModel.navigateToHomeScreen.observe(this) { employeeId ->
+            employeeId?.let {
+                val intent = MainActivity.newIntent(this, it)
+                startActivity(intent)
+                finish()
+            }
+        }
+    }
 
     companion object {
         fun newIntent(context: Context): Intent {

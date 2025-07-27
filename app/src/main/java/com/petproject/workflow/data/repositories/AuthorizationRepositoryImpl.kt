@@ -4,22 +4,22 @@ import android.content.Intent
 import android.util.Log
 import androidx.browser.customtabs.CustomTabsIntent
 import com.petproject.workflow.data.auth.AppAuth
-import com.petproject.workflow.data.auth.TokenStorage
-import com.petproject.workflow.data.network.utils.TokenManager
+import com.petproject.workflow.data.network.utils.TokensManager
 import com.petproject.workflow.di.ApplicationScope
 import com.petproject.workflow.domain.entities.Role
 import com.petproject.workflow.domain.repositories.AuthorizationRepository
 import net.openid.appauth.AuthorizationException
 import net.openid.appauth.AuthorizationResponse
 import net.openid.appauth.AuthorizationService
-import net.openid.appauth.TokenRequest
 import javax.inject.Inject
 
 @ApplicationScope
 class AuthorizationRepositoryImpl @Inject constructor(
-    private val tokenManager: TokenManager,
+    private val tokensManager: TokensManager,
     private val authService: AuthorizationService
 ) : AuthorizationRepository {
+
+    private var verifySuccessAuthorizationCallback: ((String?) -> Unit)? = null
 
     override fun startAuthFlow(): Intent {
         val customTabsIntent = CustomTabsIntent.Builder().build()
@@ -59,10 +59,11 @@ class AuthorizationRepositoryImpl @Inject constructor(
                 Log.d("Oauth", "3. Received code = ${tokenExchangeRequest.authorizationCode}")
                 try {
                     Log.d("Oauth", "4. Change code to token. Url = ${tokenExchangeRequest.configuration.tokenEndpoint}, verifier = ${tokenExchangeRequest.codeVerifier}")
-                    performTokenRequest(
-                        authService = authService,
-                        tokenRequest = tokenExchangeRequest
-                    )
+                    val tokens = AppAuth.performTokenRequestSuspend(authService, tokenExchangeRequest)
+                    //обмен кода на токен произошел успешно, сохраняем токены и завершаем авторизацию
+                    tokensManager.saveTokens(tokens)
+                    verifySuccessAuthorizationCallback?.invoke(tokens.accessToken)
+                    Log.d("Oauth", "6. Tokens accepted:\n access=${tokens.accessToken}\nrefresh=${tokens.refreshToken}\nidToken=${tokens.idToken}")
                     onSuccessListener()
                 } catch (ex: Exception) {
                     onFailureListener(ex)
@@ -70,20 +71,6 @@ class AuthorizationRepositoryImpl @Inject constructor(
             }
         }
     }
-
-    private suspend fun performTokenRequest(
-        authService: AuthorizationService,
-        tokenRequest: TokenRequest,
-    ) {
-        val tokens = AppAuth.performTokenRequestSuspend(authService, tokenRequest)
-        //обмен кода на токен произошел успешно, сохраняем токены и завершаем авторизацию
-        TokenStorage.accessToken = tokens.accessToken
-        TokenStorage.refreshToken = tokens.refreshToken
-        TokenStorage.idToken = tokens.idToken
-        Log.d("Oauth", "6. Tokens accepted:\n access=${tokens.accessToken}\nrefresh=${tokens.refreshToken}\nidToken=${tokens.idToken}")
-    }
-
-    private var verifySuccessAuthorizationCallback: ((String?) -> Unit)? = null
 
     override suspend fun signIn(
         onOpenLoginPage: (Intent) -> Unit,
@@ -93,18 +80,23 @@ class AuthorizationRepositoryImpl @Inject constructor(
     }
 
     override suspend fun signOut() {
-        tokenManager.deleteToken()
+        tokensManager.deleteToken()
     }
 
     override suspend fun verifySuccessAuthorization(callback: (String?) -> Unit) {
         verifySuccessAuthorizationCallback = callback
-        val token = tokenManager.getToken()
+        val token = tokensManager.getAccessToken()
         token?.let {
-            callback(TokenManager.getIdFromToken(it))
+            callback(TokensManager.getIdFromAccessToken(it))
         }
     }
 
     override suspend fun getRole() : Role {
-        TODO("Not yet implemented")
+        val token = tokensManager.getAccessToken()
+        token?.let {
+            val role = TokensManager.getRoleFromAccessToken(it)
+            return role
+        }
+        throw NullPointerException("The role not found")
     }
 }
