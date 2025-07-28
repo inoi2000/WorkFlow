@@ -1,6 +1,5 @@
 package com.petproject.workflow.presentation.views
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -100,7 +99,7 @@ class HomeFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.navigateToLoginScreen.observe(viewLifecycleOwner) {
             if (it) {
-                val intent = LoginActivity.newIntent(requireContext())
+                val intent = AuthActivity.newIntent(requireContext())
                 startActivity(intent)
                 requireActivity().finish()
             }

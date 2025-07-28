@@ -1,11 +1,14 @@
 package com.petproject.workflow.di
 
+import android.content.Context
 import com.petproject.workflow.data.network.ApiFactory
 import com.petproject.workflow.data.network.AuthApiService
 import com.petproject.workflow.data.network.MainApiService
+import com.petproject.workflow.data.network.utils.AuthFailedInterceptor
 import com.petproject.workflow.data.network.utils.AuthInterceptor
 import dagger.Module
 import dagger.Provides
+import net.openid.appauth.AuthorizationService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
@@ -26,7 +29,7 @@ class DataModule {
     @Provides
     fun provideOkHttpClient(
         authInterceptor: AuthInterceptor,
-//        authAuthenticator: AuthAuthenticator,
+        authFailedInterceptor: AuthFailedInterceptor
     ): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -34,7 +37,12 @@ class DataModule {
         return OkHttpClient.Builder()
             .addInterceptor(authInterceptor)
             .addInterceptor(loggingInterceptor)
-//            .authenticator(authAuthenticator)
+            .addNetworkInterceptor(authFailedInterceptor)
             .build()
+    }
+
+    @Provides
+    fun provideAuthService(context: Context): AuthorizationService {
+        return AuthorizationService(context)
     }
 }

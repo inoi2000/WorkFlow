@@ -96,5 +96,7 @@
     <string name="comment_text">Comment text</string>
     <string name="create_comment">Create comment</string>
 
+    <string name="auth_canceled">Аутентификация не выполнена</string>
+
 
 </resources>

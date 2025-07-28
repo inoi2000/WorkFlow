@@ -1,6 +1,6 @@
 package com.petproject.workflow.data.repositories_test
 
-import com.petproject.workflow.data.network.utils.TokenManager
+import com.petproject.workflow.data.network.utils.TokensManager
 import com.petproject.workflow.di.ApplicationScope
 import com.petproject.workflow.domain.entities.Comment
 import com.petproject.workflow.domain.entities.Employee
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @ApplicationScope //Only for test in real implementation without scope
 class TaskRepositoryImplTest @Inject constructor(
-    private val tokenManager: TokenManager
+    private val tokensManager: TokensManager
 ) : TaskRepository {
 
     private var executionTasksList: MutableList<Task>

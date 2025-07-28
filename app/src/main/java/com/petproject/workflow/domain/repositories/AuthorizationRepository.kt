@@ -1,10 +1,19 @@
 package com.petproject.workflow.domain.repositories
 
+import android.content.Intent
 import com.petproject.workflow.domain.entities.Role
 
 interface AuthorizationRepository {
 
-    suspend fun signIn(username: String, password: String, onFailureListener: (Exception) -> Unit)
+    fun startAuthFlow() : Intent
+
+    suspend fun handleAuthResponseIntent(
+        intent: Intent,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (Exception) -> Unit
+    )
+
+    fun getLogoutPageIntent(): Intent
 
     suspend fun signOut()
 

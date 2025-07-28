@@ -1,5 +1,7 @@
 package com.petproject.workflow.di
 
+import com.petproject.workflow.data.repositories.AuthorizationRepositoryImpl
+import com.petproject.workflow.data.repositories.EmployeeRepositoryImpl
 import com.petproject.workflow.data.repositories_test.AbsenceRepositoryImplTest
 import com.petproject.workflow.data.repositories_test.AnnouncementRepositoryImplTest
 import com.petproject.workflow.data.repositories_test.AuthorizationRepositoryImplTest
@@ -17,10 +19,10 @@ import dagger.Module
 interface DomainModule {
 
     @Binds
-    fun bindAuthorizationRepository(impl: AuthorizationRepositoryImplTest): AuthorizationRepository
+    fun bindAuthorizationRepository(impl: AuthorizationRepositoryImpl): AuthorizationRepository
 
     @Binds
-    fun bindEmployeeRepository(impl: EmployeeRepositoryImplTest): EmployeeRepository
+    fun bindEmployeeRepository(impl: EmployeeRepositoryImpl): EmployeeRepository
 
     @Binds
     fun bindTaskRepository(impl: TaskRepositoryImplTest): TaskRepository
