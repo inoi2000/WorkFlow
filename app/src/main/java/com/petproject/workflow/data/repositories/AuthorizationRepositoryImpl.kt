@@ -75,11 +75,14 @@ class AuthorizationRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun signIn(
-        onOpenLoginPage: (Intent) -> Unit,
-        onSuccessListener: () -> Unit,
-        onFailureListener: (Exception) -> Unit
-    ) {
+    override fun getLogoutPageIntent(): Intent {
+        val customTabsIntent = CustomTabsIntent.Builder().build()
+        val idToken = tokensManager.getIdToken() ?: ""
+        val logoutPageIntent = authService.getEndSessionRequestIntent(
+            AppAuth.getEndSessionRequest(idToken),
+            customTabsIntent
+        )
+        return logoutPageIntent
     }
 
     override suspend fun signOut() {

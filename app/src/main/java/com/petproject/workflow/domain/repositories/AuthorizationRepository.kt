@@ -13,11 +13,7 @@ interface AuthorizationRepository {
         onFailureListener: (Exception) -> Unit
     )
 
-    suspend fun signIn(
-        onOpenLoginPage: (Intent) -> Unit,
-        onSuccessListener: () -> Unit,
-        onFailureListener: (Exception) -> Unit
-    )
+    fun getLogoutPageIntent(): Intent
 
     suspend fun signOut()
 

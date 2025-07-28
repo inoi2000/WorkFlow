@@ -52,6 +52,14 @@ class TokensManager @Inject constructor(
         return null
     }
 
+    fun getIdToken(): String? {
+        val jsonString = preferences.getString(TOKENS_KEY, null)
+        jsonString?.let {
+            return mapObjectFromJsonString(it).idToken
+        }
+        return null
+    }
+
     fun saveTokens(token: TokensModel) {
         val jsonString = gson.toJson(token)
         editor.putString(TOKENS_KEY, jsonString).commit()

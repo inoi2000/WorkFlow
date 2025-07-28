@@ -6,18 +6,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.ActivityLoginBinding
+import com.petproject.workflow.presentation.utils.launchAndCollectIn
 import com.petproject.workflow.presentation.viewmodels.AuthViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AuthActivity : AppCompatActivity() {
@@ -64,18 +58,6 @@ class AuthActivity : AppCompatActivity() {
         }
         viewModel.authSuccessFlow.launchAndCollectIn(this) {
             Toast.makeText(this@AuthActivity, "Авторизация прощла успешно!", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private inline fun <T> Flow<T>.launchAndCollectIn(
-        owner: LifecycleOwner,
-        minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
-        crossinline action: suspend CoroutineScope.(T) -> Unit
-    ) = owner.lifecycleScope.launch {
-        owner.repeatOnLifecycle(minActiveState) {
-            collect {
-                action(it)
-            }
         }
     }
 

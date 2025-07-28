@@ -27,20 +27,11 @@ class AuthorizationRepositoryImplTest @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun signIn(
-        onOpenLoginPage: (Intent) -> Unit,
-        onSuccessListener: () -> Unit,
-        onFailureListener: (Exception) -> Unit
-    ) {
+    override fun getLogoutPageIntent(): Intent {
         TODO("Not yet implemented")
     }
 
     private var verifySuccessAuthorizationCallback: ((String?) -> Unit)? = null
-
-//    override suspend fun signIn(onFailureListener: (Exception) -> Unit) {
-//        verifySuccessAuthorizationCallback?.invoke(UUID.randomUUID().toString())
-//    }
-
 
     override suspend fun signOut() {
 

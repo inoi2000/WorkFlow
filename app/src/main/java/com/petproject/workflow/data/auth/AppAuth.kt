@@ -33,9 +33,10 @@ object AppAuth {
             .build()
     }
 
-    fun getEndSessionRequest(): EndSessionRequest {
+    fun getEndSessionRequest(idToken: String): EndSessionRequest {
         return EndSessionRequest.Builder(serviceConfiguration)
             .setPostLogoutRedirectUri(AuthConfig.LOGOUT_CALLBACK_URL.toUri())
+            .setIdTokenHint(idToken)
             .build()
     }
 
