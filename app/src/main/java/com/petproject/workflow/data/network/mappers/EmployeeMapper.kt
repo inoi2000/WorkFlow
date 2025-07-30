@@ -21,7 +21,7 @@ class EmployeeMapper @Inject constructor(
             absences = dto.absence?.map { absenceMapper.mapDtoToEntity(it) },
             tasks = dto.executionTasks?.map { taskMapper.mapDtoToEntity(it) },
             onApproval = dto.inspectionTasks?.map { taskMapper.mapDtoToEntity(it)},
-            canAssignTask = dto.canAssignTask
+            canAssignTask = dto.canAssignTask ?: false
         )
     }
 }
