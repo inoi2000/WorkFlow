@@ -27,5 +27,5 @@ data class EmployeeDto(
     val department: DepartmentDto?,
     @SerializedName("canAssignTask")
     @Expose
-    val canAssignTask: Boolean
+    val canAssignTask: Boolean?
 )
