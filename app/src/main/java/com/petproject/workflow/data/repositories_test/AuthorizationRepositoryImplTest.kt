@@ -1,7 +1,6 @@
 package com.petproject.workflow.data.repositories_test
 
 import android.content.Intent
-import com.petproject.workflow.data.network.AuthApiService
 import com.petproject.workflow.data.network.utils.TokensManager
 import com.petproject.workflow.di.ApplicationScope
 import com.petproject.workflow.domain.entities.Role
@@ -12,7 +11,6 @@ import javax.inject.Inject
 @ApplicationScope
 class AuthorizationRepositoryImplTest @Inject constructor(
     private val tokensManager: TokensManager,
-    private val authApiService: AuthApiService
 ) : AuthorizationRepository {
 
     override suspend fun handleAuthResponseIntent(

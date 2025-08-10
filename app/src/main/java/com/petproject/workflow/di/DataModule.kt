@@ -2,8 +2,8 @@ package com.petproject.workflow.di
 
 import android.content.Context
 import com.petproject.workflow.data.network.ApiFactory
-import com.petproject.workflow.data.network.AuthApiService
-import com.petproject.workflow.data.network.MainApiService
+import com.petproject.workflow.data.network.EmployeeApiService
+import com.petproject.workflow.data.network.TaskApiService
 import com.petproject.workflow.data.network.utils.AuthFailedInterceptor
 import com.petproject.workflow.data.network.utils.AuthInterceptor
 import dagger.Module
@@ -16,13 +16,13 @@ import okhttp3.logging.HttpLoggingInterceptor
 class DataModule {
 
     @Provides
-    fun provideAuthApiService(apiFactory: ApiFactory): AuthApiService {
-        return apiFactory.authApiService
+    fun provideEmployeeApiService(apiFactory: ApiFactory): EmployeeApiService {
+        return apiFactory.employeeApiService
     }
 
     @Provides
-    fun provideMainApiService(apiFactory: ApiFactory): MainApiService {
-        return apiFactory.mainApiService
+    fun provideTaskApiService(apiFactory: ApiFactory): TaskApiService {
+        return apiFactory.taskApiService
     }
 
     @ApplicationScope

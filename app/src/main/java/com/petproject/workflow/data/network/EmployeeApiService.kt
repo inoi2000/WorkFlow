@@ -5,7 +5,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface MainApiService {
+interface EmployeeApiService {
     @GET("api/employees/{id}")
     suspend fun getEmployee(
         @Path("id") employeeId: String

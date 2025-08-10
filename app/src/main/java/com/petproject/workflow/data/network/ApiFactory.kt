@@ -12,19 +12,21 @@ class ApiFactory @Inject constructor(
 ) {
 
     companion object {
-        private const val BASE_API = "http://192.168.0.159:8080/"
+        private const val BASE_EMPLOYEE_API = "http://192.168.0.159:8080/"
+        private const val BASE_TASK_API = "http://192.168.0.159:8080/"
     }
 
-    val authApiService = Retrofit.Builder()
+    val employeeApiService = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(BASE_API)
-        .build()
-        .create(AuthApiService::class.java)
-
-    val mainApiService = Retrofit.Builder()
-        .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(BASE_API)
+        .baseUrl(BASE_EMPLOYEE_API)
         .client(okHttpClient)
         .build()
-        .create(MainApiService::class.java)
+        .create(EmployeeApiService::class.java)
+
+    val taskApiService  = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(BASE_TASK_API)
+        .client(okHttpClient)
+        .build()
+        .create(TaskApiService::class.java)
 }

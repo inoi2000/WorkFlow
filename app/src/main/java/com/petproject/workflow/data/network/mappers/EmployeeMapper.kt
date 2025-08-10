@@ -7,6 +7,7 @@ import javax.inject.Inject
 
 @ApplicationScope
 class EmployeeMapper @Inject constructor(
+    private val positionMapper: PositionMapper,
     private val departmentMapper: DepartmentMapper,
     private val taskMapper: TaskMapper,
     private val absenceMapper: AbsenceMapper
@@ -16,7 +17,7 @@ class EmployeeMapper @Inject constructor(
         return Employee(
             id = dto.id,
             name = dto.name,
-            position = dto.position,
+            position = dto.position?.let { positionMapper.mapDtoToEntity(it) },
             department = dto.department?.let { departmentMapper.mapDtoToEntity(it) },
             absences = dto.absence?.map { absenceMapper.mapDtoToEntity(it) },
             tasks = dto.executionTasks?.map { taskMapper.mapDtoToEntity(it) },

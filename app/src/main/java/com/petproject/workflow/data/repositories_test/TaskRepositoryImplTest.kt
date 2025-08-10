@@ -4,6 +4,7 @@ import com.petproject.workflow.data.network.utils.TokensManager
 import com.petproject.workflow.di.ApplicationScope
 import com.petproject.workflow.domain.entities.Comment
 import com.petproject.workflow.domain.entities.Employee
+import com.petproject.workflow.domain.entities.Position
 import com.petproject.workflow.domain.entities.Task
 import com.petproject.workflow.domain.entities.TaskPriority
 import com.petproject.workflow.domain.entities.TaskStatus
@@ -24,7 +25,7 @@ class TaskRepositoryImplTest @Inject constructor(
         val employee1 = Employee(
             id = UUID.randomUUID().toString(),
             name = "Иванов Иван Иванович",
-            position = "Администратор",
+            position = Position(UUID.randomUUID().toString(), "Администратор", 700),
             department = null,
             absences = null,
             tasks = null,
@@ -35,7 +36,7 @@ class TaskRepositoryImplTest @Inject constructor(
         val employee2 = Employee(
             id = UUID.randomUUID().toString(),
             name = "Петров Петр Петрович",
-            position = "Водитель",
+            position = Position(UUID.randomUUID().toString(), "Администратор", 700),
             department = null,
             absences = null,
             tasks = null,

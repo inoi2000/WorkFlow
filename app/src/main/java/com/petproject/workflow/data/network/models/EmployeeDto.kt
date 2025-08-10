@@ -12,7 +12,7 @@ data class EmployeeDto(
     val name: String,
     @SerializedName("position")
     @Expose
-    val position: String?,
+    val position: PositionDto?,
     @SerializedName("inspectionTasks")
     @Expose
     val inspectionTasks: List<TaskDto>?,
