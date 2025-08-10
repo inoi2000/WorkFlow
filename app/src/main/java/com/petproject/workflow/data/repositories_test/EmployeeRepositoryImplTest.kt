@@ -1,12 +1,13 @@
 package com.petproject.workflow.data.repositories_test
 
-import com.petproject.workflow.data.network.MainApiService
+import com.petproject.workflow.data.network.EmployeeApiService
 import com.petproject.workflow.data.network.mappers.EmployeeMapper
 import com.petproject.workflow.domain.entities.Absence
 import com.petproject.workflow.domain.entities.AbsenceStatus
 import com.petproject.workflow.domain.entities.AbsenceType
 import com.petproject.workflow.domain.entities.Department
 import com.petproject.workflow.domain.entities.Employee
+import com.petproject.workflow.domain.entities.Position
 import com.petproject.workflow.domain.entities.Task
 import com.petproject.workflow.domain.entities.TaskPriority
 import com.petproject.workflow.domain.entities.TaskStatus
@@ -17,7 +18,7 @@ import javax.inject.Inject
 
 class EmployeeRepositoryImplTest @Inject constructor(
     private val employeeMapper: EmployeeMapper,
-    private val mainApiService: MainApiService
+    private val employeeApiService: EmployeeApiService
 ) : EmployeeRepository {
 
     override suspend fun getEmployee(id: String): Employee {
@@ -74,7 +75,7 @@ class EmployeeRepositoryImplTest @Inject constructor(
         return Employee(
             id = UUID.randomUUID().toString(),
             name = "Иванов Иван Иванович",
-            position = "Администратор",
+            position = Position(UUID.randomUUID().toString(), "Администратор", 700),
             department = null,
             absences = listOf(vacation, businessTrip),
             tasks = listOf(executionTask1, executionTask2),
@@ -87,7 +88,7 @@ class EmployeeRepositoryImplTest @Inject constructor(
         return Employee(
             id = UUID.randomUUID().toString(),
             name = "Иванов Иван Иванович",
-            position = "Администратор",
+            position = Position(UUID.randomUUID().toString(), "Администратор", 700),
             department = Department(
                 id = UUID.randomUUID().toString(),
                 name = "Менеджмент"
@@ -104,7 +105,7 @@ class EmployeeRepositoryImplTest @Inject constructor(
             Employee(
                 id = UUID.randomUUID().toString(),
                 name = "Иванов Иван Иванович",
-                position = "Администратор",
+                position = Position(UUID.randomUUID().toString(), "Администратор", 700),
                 department = Department(
                     id = UUID.randomUUID().toString(),
                     name = "Менеджмент"
@@ -117,7 +118,7 @@ class EmployeeRepositoryImplTest @Inject constructor(
             Employee(
                 id = UUID.randomUUID().toString(),
                 name = "Петров Иван Иванович",
-                position = "Администратор",
+                position = Position(UUID.randomUUID().toString(), "Администратор", 700),
                 department = Department(
                     id = UUID.randomUUID().toString(),
                     name = "Менеджмент"
@@ -130,7 +131,7 @@ class EmployeeRepositoryImplTest @Inject constructor(
             Employee(
                 id = UUID.randomUUID().toString(),
                 name = "Сидоров Иван Иванович",
-                position = "Администратор",
+                position = Position(UUID.randomUUID().toString(), "Администратор", 700),
                 department = Department(
                     id = UUID.randomUUID().toString(),
                     name = "Менеджмент"

@@ -7,7 +7,8 @@ import kotlinx.parcelize.Parcelize
 data class Employee (
     val id: String,
     val name: String,
-    val position: String? = null,
+    val position: Position? = null,
+
     val department: Department? = null,
 
     val absences: List<Absence>? = null,
