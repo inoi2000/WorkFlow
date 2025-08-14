@@ -39,48 +39,16 @@ class EmployeeRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getAllEmployeesForAssignTask(): List<Employee> {
-//        TODO("Not yet implemented")
-        val list = listOf(
-            Employee(
-                id = UUID.randomUUID().toString(),
-                name = "Иванов Иван Иванович",
-                position = Position(UUID.randomUUID().toString(), "Администратор", 700),
-                department = Department(
-                    id = UUID.randomUUID().toString(),
-                    name = "Менеджмент"
-                ),
-                absences = null,
-                tasks = null,
-                onApproval = null,
-                canAssignTask = false
-            ),
-            Employee(
-                id = UUID.randomUUID().toString(),
-                name = "Петров Иван Иванович",
-                position = Position(UUID.randomUUID().toString(), "Администратор", 700),
-                department = Department(
-                    id = UUID.randomUUID().toString(),
-                    name = "Менеджмент"
-                ),
-                absences = null,
-                tasks = null,
-                onApproval = null,
-                canAssignTask = false
-            ),
-            Employee(
-                id = UUID.randomUUID().toString(),
-                name = "Сидоров Иван Иванович",
-                position = Position(UUID.randomUUID().toString(), "Администратор", 700),
-                department = Department(
-                    id = UUID.randomUUID().toString(),
-                    name = "Менеджмент"
-                ),
-                absences = null,
-                tasks = null,
-                onApproval = null,
-                canAssignTask = false
-            )
-        )
-        return list
+        val accessToken = tokensManager.getAccessToken()
+        accessToken?.let { token ->
+            val employeeId = TokensManager.getIdFromAccessToken(token)
+            employeeId?.let { id ->
+                val employees = employeeApiService.getSubordinateEmployees(id)
+                return employees
+                    .map { dto -> employeeMapper.mapDtoToEntity(dto) }
+                    .toList()
+            }
+        }
+        throw AuthException()
     }
 }

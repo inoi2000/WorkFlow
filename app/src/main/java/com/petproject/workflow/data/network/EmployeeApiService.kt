@@ -10,4 +10,9 @@ interface EmployeeApiService {
     suspend fun getEmployee(
         @Path("id") employeeId: String
     ): Response<EmployeeDto>
+
+    @GET("api/employees/subordinate/{id}")
+    suspend fun getSubordinateEmployees(
+        @Path("id") employeeId: String
+    ): Iterable<EmployeeDto>
 }

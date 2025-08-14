@@ -13,7 +13,7 @@ class ApiFactory @Inject constructor(
 
     companion object {
         private const val BASE_EMPLOYEE_API = "http://192.168.0.159:8080/"
-        private const val BASE_TASK_API = "http://192.168.0.159:8080/"
+        private const val BASE_TASK_API = "http://192.168.0.159:9200/"
     }
 
     val employeeApiService = Retrofit.Builder()
