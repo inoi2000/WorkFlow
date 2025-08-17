@@ -26,5 +26,5 @@ interface TaskApiService {
     @POST("/api/tasks")
     suspend fun createTask(
         @Body taskDto: TaskDto
-    ): TaskDto
+    ): Response<TaskDto>
 }

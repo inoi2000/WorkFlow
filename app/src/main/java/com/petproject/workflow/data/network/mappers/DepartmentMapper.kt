@@ -17,7 +17,6 @@ class DepartmentMapper @Inject constructor() {
                 Employee(
                     id = it.id,
                     name = it.name,
-                    canAssignTask = it.canAssignTask ?: false
                 )
             }
         )

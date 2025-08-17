@@ -2,6 +2,7 @@ package com.petproject.workflow.di
 
 import android.content.Context
 import com.petproject.workflow.data.network.ApiFactory
+import com.petproject.workflow.data.network.CommentApiService
 import com.petproject.workflow.data.network.EmployeeApiService
 import com.petproject.workflow.data.network.TaskApiService
 import com.petproject.workflow.data.network.utils.AuthFailedInterceptor
@@ -23,6 +24,11 @@ class DataModule {
     @Provides
     fun provideTaskApiService(apiFactory: ApiFactory): TaskApiService {
         return apiFactory.taskApiService
+    }
+
+    @Provides
+    fun provideCommentApiService(apiFactory: ApiFactory): CommentApiService {
+        return apiFactory.commentApiService
     }
 
     @ApplicationScope

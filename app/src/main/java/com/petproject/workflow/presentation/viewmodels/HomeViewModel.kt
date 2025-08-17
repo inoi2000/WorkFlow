@@ -64,12 +64,6 @@ class HomeViewModel @Inject constructor(
 
             val employee = getEmployeeUseCase(employeeId)
             _employee.value = employee
-            employee.tasks?.firstOrNull()?.id?.let {
-                _executorTask.value = getTaskByIdUseCase(it)
-            }
-            employee.onApproval?.firstOrNull()?.id?.let {
-                _inspectorTask.value = getTaskByIdUseCase(it)
-            }
             employee.absences?.firstOrNull {
                 it.type == AbsenceType.VACATION
             }?.id?.let {

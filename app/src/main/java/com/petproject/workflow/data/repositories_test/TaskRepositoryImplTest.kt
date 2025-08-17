@@ -28,9 +28,6 @@ class TaskRepositoryImplTest @Inject constructor(
             position = Position(UUID.randomUUID().toString(), "Администратор", 700),
             department = null,
             absences = null,
-            tasks = null,
-            onApproval = null,
-            canAssignTask = true
         )
 
         val employee2 = Employee(
@@ -39,9 +36,6 @@ class TaskRepositoryImplTest @Inject constructor(
             position = Position(UUID.randomUUID().toString(), "Администратор", 700),
             department = null,
             absences = null,
-            tasks = null,
-            onApproval = null,
-            canAssignTask = true
         )
 
         var executionTask1: Task? = null

@@ -77,10 +77,7 @@ class EmployeeRepositoryImplTest @Inject constructor(
             name = "Иванов Иван Иванович",
             position = Position(UUID.randomUUID().toString(), "Администратор", 700),
             department = null,
-            absences = listOf(vacation, businessTrip),
-            tasks = listOf(executionTask1, executionTask2),
-            onApproval = listOf(inspectionTask),
-            canAssignTask = true
+            absences = listOf(vacation, businessTrip)
         )
     }
 
@@ -93,10 +90,7 @@ class EmployeeRepositoryImplTest @Inject constructor(
                 id = UUID.randomUUID().toString(),
                 name = "Менеджмент"
             ),
-            absences = null,
-            tasks = null,
-            onApproval = null,
-            canAssignTask = false
+            absences = null
         )
     }
 
@@ -110,10 +104,7 @@ class EmployeeRepositoryImplTest @Inject constructor(
                     id = UUID.randomUUID().toString(),
                     name = "Менеджмент"
                 ),
-                absences = null,
-                tasks = null,
-                onApproval = null,
-                canAssignTask = false
+                absences = null
             ),
             Employee(
                 id = UUID.randomUUID().toString(),
@@ -123,10 +114,7 @@ class EmployeeRepositoryImplTest @Inject constructor(
                     id = UUID.randomUUID().toString(),
                     name = "Менеджмент"
                 ),
-                absences = null,
-                tasks = null,
-                onApproval = null,
-                canAssignTask = false
+                absences = null
             ),
             Employee(
                 id = UUID.randomUUID().toString(),
@@ -136,10 +124,7 @@ class EmployeeRepositoryImplTest @Inject constructor(
                     id = UUID.randomUUID().toString(),
                     name = "Менеджмент"
                 ),
-                absences = null,
-                tasks = null,
-                onApproval = null,
-                canAssignTask = false
+                absences = null
             )
         )
         return list
