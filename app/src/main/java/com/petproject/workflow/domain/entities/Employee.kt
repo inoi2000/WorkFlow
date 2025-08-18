@@ -12,8 +12,4 @@ data class Employee (
     val department: Department? = null,
 
     val absences: List<Absence>? = null,
-    val tasks: List<Task>? = null,
-    val onApproval: List<Task>? = null,
-
-    val canAssignTask: Boolean
 ) : Parcelable

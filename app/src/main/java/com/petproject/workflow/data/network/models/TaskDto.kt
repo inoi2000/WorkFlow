@@ -22,16 +22,16 @@ data class TaskDto(
     val destination: String?,
     @SerializedName("creation")
     @Expose
-    val creation: LocalDate?,
+    val creation: String?,
     @SerializedName("deadline")
     @Expose
-    val deadline: LocalDate?,
+    val deadline: String?,
     @SerializedName("executor")
     @Expose
-    val executor: EmployeeDto?,
+    val executorId: String?,
     @SerializedName("inspector")
     @Expose
-    val inspector: EmployeeDto?,
+    val inspectorId: String?,
     @SerializedName("shouldBeInspected")
     @Expose
     val shouldBeInspected: Boolean

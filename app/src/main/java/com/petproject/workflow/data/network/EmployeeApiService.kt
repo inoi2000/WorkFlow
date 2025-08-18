@@ -14,5 +14,5 @@ interface EmployeeApiService {
     @GET("api/employees/subordinate/{id}")
     suspend fun getSubordinateEmployees(
         @Path("id") employeeId: String
-    ): Iterable<EmployeeDto>
+    ): List<EmployeeDto>
 }

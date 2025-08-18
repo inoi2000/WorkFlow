@@ -6,31 +6,39 @@ import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.entities.Task
 import com.petproject.workflow.domain.entities.TaskPriority
 import com.petproject.workflow.domain.entities.TaskStatus
+import java.time.LocalDate
 import javax.inject.Inject
 
 @ApplicationScope
 class TaskMapper @Inject constructor() {
 
-    fun mapDtoToEntity(dto: TaskDto): Task {
+    fun mapDtoToEntity(dto: TaskDto, executor: Employee?, inspector: Employee?): Task {
         return Task(
             id = dto.id,
             description = dto.description,
             status = TaskStatus.valueOf(dto.status),
             priority = TaskPriority.valueOf(dto.priority),
-            creation = dto.creation,
-            deadline = dto.deadline,
+            creation = LocalDate.parse(dto.creation),
+            deadline = LocalDate.parse(dto.deadline),
             destination = dto.destination,
-            executor = dto.executor?.let { Employee(
-                id = it.id,
-                name = it.name,
-                canAssignTask = it.canAssignTask ?: false
-            ) },
-            inspector = dto.inspector?.let { Employee(
-                id = it.id,
-                name = it.name,
-                canAssignTask = it.canAssignTask ?: false
-            ) },
+            executor = executor,
+            inspector = inspector,
             shouldBeInspected = dto.shouldBeInspected
+        )
+    }
+
+    fun mapEntityToDto(entity: Task): TaskDto {
+        return TaskDto(
+            id = entity.id,
+            description = entity.description,
+            status = entity.status.name,
+            priority = entity.priority.name,
+            creation = entity.creation.toString(),
+            deadline = entity.deadline.toString(),
+            destination = entity.destination,
+            executorId = entity.executor?.id,
+            inspectorId = entity.inspector?.id,
+            shouldBeInspected = entity.shouldBeInspected
         )
     }
 }
