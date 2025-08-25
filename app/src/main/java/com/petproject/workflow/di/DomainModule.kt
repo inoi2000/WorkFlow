@@ -1,5 +1,6 @@
 package com.petproject.workflow.di
 
+import com.petproject.workflow.data.repositories.AbsenceRepositoryImpl
 import com.petproject.workflow.data.repositories.AuthorizationRepositoryImpl
 import com.petproject.workflow.data.repositories.EmployeeRepositoryImpl
 import com.petproject.workflow.data.repositories.TaskRepositoryImpl
@@ -29,7 +30,7 @@ interface DomainModule {
     fun bindTaskRepository(impl: TaskRepositoryImpl): TaskRepository
 
     @Binds
-    fun bindAbsenceRepository(impl: AbsenceRepositoryImplTest): AbsenceRepository
+    fun bindAbsenceRepository(impl: AbsenceRepositoryImpl): AbsenceRepository
 
     @Binds
     fun bindAnnouncementRepository(impl: AnnouncementRepositoryImplTest): AnnouncementRepository

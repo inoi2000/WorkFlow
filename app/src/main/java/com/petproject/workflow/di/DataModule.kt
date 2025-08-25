@@ -1,6 +1,7 @@
 package com.petproject.workflow.di
 
 import android.content.Context
+import com.petproject.workflow.data.network.AbsenceApiService
 import com.petproject.workflow.data.network.ApiFactory
 import com.petproject.workflow.data.network.CommentApiService
 import com.petproject.workflow.data.network.EmployeeApiService
@@ -29,6 +30,11 @@ class DataModule {
     @Provides
     fun provideCommentApiService(apiFactory: ApiFactory): CommentApiService {
         return apiFactory.commentApiService
+    }
+
+    @Provides
+    fun provideAbsenceApiService(apiFactory: ApiFactory): AbsenceApiService {
+        return apiFactory.absenceApiService
     }
 
     @ApplicationScope

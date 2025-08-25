@@ -1,10 +1,8 @@
 package com.petproject.workflow.data.repositories
 
 import com.petproject.workflow.data.network.CommentApiService
-import com.petproject.workflow.data.network.EmployeeApiService
 import com.petproject.workflow.data.network.TaskApiService
 import com.petproject.workflow.data.network.exceptions.AuthException
-import com.petproject.workflow.data.network.mappers.EmployeeMapper
 import com.petproject.workflow.data.network.mappers.TaskMapper
 import com.petproject.workflow.data.network.utils.DataHelper
 import com.petproject.workflow.domain.entities.Comment
@@ -56,7 +54,8 @@ class TaskRepositoryImpl @Inject constructor(
     }
 
     override suspend fun createTaskComment(comment: Comment): Boolean {
-        TODO("Not yet implemented")
+        val response = commentApiService.createComment(comment)
+        return response.isSuccessful
     }
 
     override suspend fun getTaskById(taskId: String): Task {
