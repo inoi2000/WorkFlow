@@ -3,6 +3,7 @@ package com.petproject.workflow.presentation.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.petproject.workflow.domain.entities.Comment
 import com.petproject.workflow.domain.usecases.GetTaskCommentsUseCase
@@ -17,7 +18,7 @@ class TaskCommentListViewModel @Inject constructor(
     private val _comments = MutableLiveData<List<Comment>>()
     val comments: LiveData<List<Comment>> get() = _comments
 
-    val commentsCount: String get() = comments.value?.count().toString()
+    val commentsCount: LiveData<String> get() = comments.map { it.count().toString() }
 
     init {
         loadData()

@@ -23,7 +23,8 @@ class TaskMapper @Inject constructor() {
             destination = dto.destination,
             executor = executor,
             inspector = inspector,
-            shouldBeInspected = dto.shouldBeInspected
+            shouldBeInspected = dto.shouldBeInspected,
+            comments = dto.comments
         )
     }
 
@@ -38,7 +39,8 @@ class TaskMapper @Inject constructor() {
             destination = entity.destination,
             executorId = entity.executor?.id,
             inspectorId = entity.inspector?.id,
-            shouldBeInspected = entity.shouldBeInspected
+            shouldBeInspected = entity.shouldBeInspected,
+            comments = entity.comments ?: listOf()
         )
     }
 }
