@@ -3,6 +3,7 @@ package com.petproject.workflow.data.repositories
 import com.petproject.workflow.data.network.CommentApiService
 import com.petproject.workflow.data.network.TaskApiService
 import com.petproject.workflow.data.network.exceptions.AuthException
+import com.petproject.workflow.data.network.mappers.CommentMapper
 import com.petproject.workflow.data.network.mappers.TaskMapper
 import com.petproject.workflow.data.network.utils.DataHelper
 import com.petproject.workflow.domain.entities.Comment
@@ -14,6 +15,7 @@ import javax.inject.Inject
 class TaskRepositoryImpl @Inject constructor(
     private val dataHelper: DataHelper,
     private val taskMapper: TaskMapper,
+    private val commentMapper: CommentMapper,
     private val taskApiService: TaskApiService,
     private val commentApiService: CommentApiService,
     private val employeeRepository: EmployeeRepository
@@ -32,7 +34,9 @@ class TaskRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getTaskComments(taskId: String): List<Comment> {
-        return commentApiService.getAllCommentsByTask(taskId)
+        return commentApiService
+            .getAllCommentsByTask(taskId)
+            .map { commentMapper.mapDtoToEntity(it) }
     }
 
     override suspend fun getAllInspectorTasks(): List<Task> {
@@ -54,7 +58,8 @@ class TaskRepositoryImpl @Inject constructor(
     }
 
     override suspend fun createTaskComment(comment: Comment): Boolean {
-        val response = commentApiService.createComment(comment)
+        val dto = commentMapper.mapEntityToDto(comment)
+        val response = commentApiService.createComment(dto)
         return response.isSuccessful
     }
 

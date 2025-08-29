@@ -10,7 +10,9 @@ import java.time.LocalDate
 import javax.inject.Inject
 
 @ApplicationScope
-class TaskMapper @Inject constructor() {
+class TaskMapper @Inject constructor(
+    private val commentMapper: CommentMapper
+) {
 
     fun mapDtoToEntity(dto: TaskDto, executor: Employee?, inspector: Employee?): Task {
         return Task(
@@ -24,7 +26,7 @@ class TaskMapper @Inject constructor() {
             executor = executor,
             inspector = inspector,
             shouldBeInspected = dto.shouldBeInspected,
-            comments = dto.comments
+            comments = dto.comments.map { commentMapper.mapDtoToEntity(it) }
         )
     }
 
@@ -40,7 +42,7 @@ class TaskMapper @Inject constructor() {
             executorId = entity.executor?.id,
             inspectorId = entity.inspector?.id,
             shouldBeInspected = entity.shouldBeInspected,
-            comments = entity.comments ?: listOf()
+            comments = entity.comments?.map { commentMapper.mapEntityToDto(it) } ?: listOf()
         )
     }
 }

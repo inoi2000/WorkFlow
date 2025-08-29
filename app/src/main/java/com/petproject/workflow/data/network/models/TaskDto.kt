@@ -2,8 +2,6 @@ package com.petproject.workflow.data.network.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import com.petproject.workflow.domain.entities.Comment
-import java.time.LocalDate
 
 data class TaskDto(
     @SerializedName("id")
@@ -38,5 +36,5 @@ data class TaskDto(
     val shouldBeInspected: Boolean,
     @SerializedName("comments")
     @Expose
-    val comments: List<Comment>,
+    val comments: List<CommentDto>,
 )
