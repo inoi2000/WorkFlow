@@ -10,7 +10,7 @@ data class Comment(
     val id: String = "",
     val text: String,
     val creation: LocalDate,
-    val commentStatus: CommentStatus? = null,
-    val task: Task? = null,
+    val commentStatus: CommentStatus,
+    val taskId: String,
 //    val files: List<File>? = null
 ) : Parcelable

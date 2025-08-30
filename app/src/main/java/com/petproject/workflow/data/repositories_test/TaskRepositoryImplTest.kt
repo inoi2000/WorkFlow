@@ -3,6 +3,7 @@ package com.petproject.workflow.data.repositories_test
 import com.petproject.workflow.data.network.utils.TokensManager
 import com.petproject.workflow.di.ApplicationScope
 import com.petproject.workflow.domain.entities.Comment
+import com.petproject.workflow.domain.entities.CommentStatus
 import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.entities.Position
 import com.petproject.workflow.domain.entities.Task
@@ -39,19 +40,6 @@ class TaskRepositoryImplTest @Inject constructor(
         )
 
         var executionTask1: Task? = null
-        val comment1ToTask1 = Comment(
-            id = UUID.randomUUID().toString(),
-            text = "Занеси в мой кабинет готовый результат",
-            creation = LocalDate.now(),
-            task = executionTask1
-        )
-
-        val comment2ToTask1 = Comment(
-            id = UUID.randomUUID().toString(),
-            text = "Распечатай в двух экземплярах",
-            creation = LocalDate.now(),
-            task = executionTask1
-        )
         executionTask1 = Task(
             id = "f81d4fae-7dec-11d0-a765-00a0c91e6bf6",
             description = "Распечатать журналы инструкатажа по пожарной безопасности за 2025 год",
@@ -62,7 +50,7 @@ class TaskRepositoryImplTest @Inject constructor(
             destination = null,
             executor = employee1,
             inspector = employee2,
-            comments = listOf(comment1ToTask1, comment2ToTask1),
+            comments = listOf(),
             shouldBeInspected = true
         )
 

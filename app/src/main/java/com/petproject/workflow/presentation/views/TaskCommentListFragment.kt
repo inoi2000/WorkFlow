@@ -79,7 +79,7 @@ class TaskCommentListFragment : Fragment() {
                 .actionTaskCommentListFragmentToCreateTaskCommentFragment(
                     args.taskId,
                     args.modeForm,
-                    viewModel.commentsCount
+                    viewModel.commentsCount.value ?: "0"
                 )
             findNavController().navigate(action)
         }

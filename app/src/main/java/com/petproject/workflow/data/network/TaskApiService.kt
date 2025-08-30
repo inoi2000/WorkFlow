@@ -27,4 +27,9 @@ interface TaskApiService {
     suspend fun createTask(
         @Body taskDto: TaskDto
     ): Response<TaskDto>
+
+    @POST("/api/tasks/{id}/approval")
+    suspend fun approvalTask(
+        @Path("id") taskId: String
+    ): Response<TaskDto>
 }

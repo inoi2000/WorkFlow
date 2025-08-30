@@ -1,6 +1,6 @@
 package com.petproject.workflow.data.network
 
-import com.petproject.workflow.domain.entities.Comment
+import com.petproject.workflow.data.network.models.CommentDto
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -12,12 +12,12 @@ interface CommentApiService {
     @GET("api/comments")
     suspend fun getAllCommentsByTask(
         @Query(QUERY_PARAM_TASK_ID) taskId: String
-    ): List<Comment>
+    ): List<CommentDto>
 
     @POST("/api/comments")
     suspend fun createComment(
-        @Body comment: Comment
-    ): Response<Comment>
+        @Body comment: CommentDto
+    ): Response<CommentDto>
 
     companion object {
         private const val QUERY_PARAM_TASK_ID = "task_id"

@@ -3,6 +3,7 @@ package com.petproject.workflow.data.repositories
 import com.petproject.workflow.data.network.CommentApiService
 import com.petproject.workflow.data.network.TaskApiService
 import com.petproject.workflow.data.network.exceptions.AuthException
+import com.petproject.workflow.data.network.mappers.CommentMapper
 import com.petproject.workflow.data.network.mappers.TaskMapper
 import com.petproject.workflow.data.network.utils.DataHelper
 import com.petproject.workflow.domain.entities.Comment
@@ -14,6 +15,7 @@ import javax.inject.Inject
 class TaskRepositoryImpl @Inject constructor(
     private val dataHelper: DataHelper,
     private val taskMapper: TaskMapper,
+    private val commentMapper: CommentMapper,
     private val taskApiService: TaskApiService,
     private val commentApiService: CommentApiService,
     private val employeeRepository: EmployeeRepository
@@ -23,7 +25,7 @@ class TaskRepositoryImpl @Inject constructor(
         val employeeId = dataHelper.getCurrentEmployeeIdOrAuthException()
         val response = taskApiService.getAllTasksByExecutor(employeeId)
         return response.map { dto ->
-            val inspector = employeeRepository.getEmployee(dto.executorId ?: throw RuntimeException())
+            val inspector = employeeRepository.getEmployee(dto.executorId)
             taskMapper.mapDtoToEntity(
                 dto,
                 executor = null,
@@ -32,14 +34,16 @@ class TaskRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getTaskComments(taskId: String): List<Comment> {
-        return commentApiService.getAllCommentsByTask(taskId)
+        return commentApiService
+            .getAllCommentsByTask(taskId)
+            .map { commentMapper.mapDtoToEntity(it) }
     }
 
     override suspend fun getAllInspectorTasks(): List<Task> {
         val employeeId = dataHelper.getCurrentEmployeeIdOrAuthException()
         val response = taskApiService.getAllTasksByInspector(employeeId)
         return response.map { dto ->
-            val executor = employeeRepository.getEmployee(dto.executorId ?: throw RuntimeException())
+            val executor = employeeRepository.getEmployee(dto.executorId)
             taskMapper.mapDtoToEntity(
                 dto,
                 executor = executor,
@@ -54,15 +58,18 @@ class TaskRepositoryImpl @Inject constructor(
     }
 
     override suspend fun createTaskComment(comment: Comment): Boolean {
-        val response = commentApiService.createComment(comment)
+        val dto = commentMapper.mapEntityToDto(comment)
+        val response = commentApiService.createComment(dto)
         return response.isSuccessful
     }
 
     override suspend fun getTaskById(taskId: String): Task {
         val response = taskApiService.getTask(taskId)
         if (response.isSuccessful) {
-            response.body()?.let {
-                return taskMapper.mapDtoToEntity(it, null, null)
+            response.body()?.let { dto ->
+                val inspector = employeeRepository.getEmployee(dto.inspectorId)
+                val executor = employeeRepository.getEmployee(dto.executorId)
+                return taskMapper.mapDtoToEntity(dto, executor, inspector)
             }
         }
         throw AuthException()

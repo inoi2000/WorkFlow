@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.petproject.workflow.domain.entities.Comment
+import com.petproject.workflow.domain.entities.CommentStatus
 import com.petproject.workflow.domain.usecases.CreateTaskCommentUseCase
 import com.petproject.workflow.domain.usecases.GetTaskByIdUseCase
 import kotlinx.coroutines.launch
@@ -14,7 +15,6 @@ import javax.inject.Inject
 
 class CreateTaskCommentViewModel @Inject constructor(
     private val taskId: String,
-    private val getTaskByIdUseCase: GetTaskByIdUseCase,
     private val createTaskCommentUseCase: CreateTaskCommentUseCase
 ) : ViewModel() {
 
@@ -28,11 +28,11 @@ class CreateTaskCommentViewModel @Inject constructor(
 
     fun createComment(text: String) {
         viewModelScope.launch {
-            val task = getTaskByIdUseCase(taskId)
             val comment = Comment(
                 text = text,
                 creation = LocalDate.now(),
-                task = task,
+                commentStatus = CommentStatus.INFORMATION,
+                taskId = taskId
 //                files = listOf()
             )
             val isSuccess = createTaskCommentUseCase(comment)

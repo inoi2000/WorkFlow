@@ -2,7 +2,6 @@ package com.petproject.workflow.data.network.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import java.time.LocalDate
 
 data class TaskDto(
     @SerializedName("id")
@@ -28,11 +27,14 @@ data class TaskDto(
     val deadline: String?,
     @SerializedName("executor")
     @Expose
-    val executorId: String?,
+    val executorId: String,
     @SerializedName("inspector")
     @Expose
-    val inspectorId: String?,
+    val inspectorId: String,
     @SerializedName("shouldBeInspected")
     @Expose
-    val shouldBeInspected: Boolean
+    val shouldBeInspected: Boolean,
+    @SerializedName("comments")
+    @Expose
+    val comments: List<CommentDto>,
 )

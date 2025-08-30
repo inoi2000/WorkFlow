@@ -9,7 +9,6 @@ import javax.inject.Inject
 class EmployeeMapper @Inject constructor(
     private val positionMapper: PositionMapper,
     private val departmentMapper: DepartmentMapper,
-    private val taskMapper: TaskMapper,
     private val absenceMapper: AbsenceMapper
 )  {
 
