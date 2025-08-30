@@ -15,4 +15,14 @@ interface TaskRepository {
     suspend fun createTask(task: Task): Boolean
 
     suspend fun createTaskComment(comment: Comment): Boolean
+
+    suspend fun acceptTask(taskId: String): Task
+
+    suspend fun submitTask(taskId: String): Task
+
+    suspend fun approveTask(taskId: String): Task
+
+    suspend fun rejectTask(taskId: String): Task
+
+    suspend fun cancelTask(taskId: String): Task
 }

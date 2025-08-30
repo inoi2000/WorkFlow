@@ -92,7 +92,10 @@
     <string name="error_input_text">Поле не может быть пустым</string>
     <string name="comment_text">Текст комментария</string>
     <string name="create_comment">Создать комментарий</string>
-
+    <string name="canceled">Отменена</string>
     <string name="auth_canceled">Аутентификация не выполнена</string>
+    <string name="cancel_task">Отменить задачу</string>
+    <string name="accept_the_task">Принять задачу</string>
+    <string name="reject_task">Отправить задачу на доработку</string>
 
 </resources>

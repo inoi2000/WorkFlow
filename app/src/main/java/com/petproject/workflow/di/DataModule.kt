@@ -49,7 +49,7 @@ class DataModule {
         return OkHttpClient.Builder()
             .addInterceptor(authInterceptor)
             .addInterceptor(loggingInterceptor)
-            .addNetworkInterceptor(authFailedInterceptor)
+            .addInterceptor(authFailedInterceptor)
             .build()
     }
 

@@ -95,8 +95,11 @@
     <string name="error_input_text">Filed can not be blank</string>
     <string name="comment_text">Comment text</string>
     <string name="create_comment">Create comment</string>
-
+    <string name="canceled">Canceled</string>
     <string name="auth_canceled">Аутентификация не выполнена</string>
+    <string name="cancel_task">Cancel task</string>
+    <string name="accept_the_task">Accept the task</string>
+    <string name="reject_task">Reject task</string>
 
 
 </resources>

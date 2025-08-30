@@ -10,6 +10,7 @@ import com.petproject.workflow.domain.entities.Comment
 import com.petproject.workflow.domain.entities.Task
 import com.petproject.workflow.domain.repositories.EmployeeRepository
 import com.petproject.workflow.domain.repositories.TaskRepository
+import java.io.IOException
 import javax.inject.Inject
 
 class TaskRepositoryImpl @Inject constructor(
@@ -72,6 +73,66 @@ class TaskRepositoryImpl @Inject constructor(
                 return taskMapper.mapDtoToEntity(dto, executor, inspector)
             }
         }
-        throw AuthException()
+        throw IOException()
+    }
+
+    override suspend fun acceptTask(taskId: String): Task {
+        val response = taskApiService.acceptTask(taskId)
+        if (response.isSuccessful) {
+            response.body()?.let { dto ->
+                val inspector = employeeRepository.getEmployee(dto.inspectorId)
+                val executor = employeeRepository.getEmployee(dto.executorId)
+                return taskMapper.mapDtoToEntity(dto, executor, inspector)
+            }
+        }
+        throw IOException(response.message())
+    }
+
+    override suspend fun submitTask(taskId: String): Task {
+        val response = taskApiService.submitTask(taskId)
+        if (response.isSuccessful) {
+            response.body()?.let { dto ->
+                val inspector = employeeRepository.getEmployee(dto.inspectorId)
+                val executor = employeeRepository.getEmployee(dto.executorId)
+                return taskMapper.mapDtoToEntity(dto, executor, inspector)
+            }
+        }
+        throw IOException(response.message())
+    }
+
+    override suspend fun approveTask(taskId: String): Task {
+        val response = taskApiService.approvalTask(taskId)
+        if (response.isSuccessful) {
+            response.body()?.let { dto ->
+                val inspector = employeeRepository.getEmployee(dto.inspectorId)
+                val executor = employeeRepository.getEmployee(dto.executorId)
+                return taskMapper.mapDtoToEntity(dto, executor, inspector)
+            }
+        }
+        throw IOException(response.message())
+    }
+
+    override suspend fun rejectTask(taskId: String): Task {
+        val response = taskApiService.rejectTask(taskId)
+        if (response.isSuccessful) {
+            response.body()?.let { dto ->
+                val inspector = employeeRepository.getEmployee(dto.inspectorId)
+                val executor = employeeRepository.getEmployee(dto.executorId)
+                return taskMapper.mapDtoToEntity(dto, executor, inspector)
+            }
+        }
+        throw IOException(response.message())
+    }
+
+    override suspend fun cancelTask(taskId: String): Task {
+        val response = taskApiService.cancelTask(taskId)
+        if (response.isSuccessful) {
+            response.body()?.let { dto ->
+                val inspector = employeeRepository.getEmployee(dto.inspectorId)
+                val executor = employeeRepository.getEmployee(dto.executorId)
+                return taskMapper.mapDtoToEntity(dto, executor, inspector)
+            }
+        }
+        throw IOException(response.message())
     }
 }

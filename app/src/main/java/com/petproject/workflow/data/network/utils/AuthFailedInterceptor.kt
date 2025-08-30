@@ -29,6 +29,7 @@ class AuthFailedInterceptor @Inject constructor(
         originalResponse: Response,
         requestTimestamp: Long
     ): Response {
+        originalResponse.close()
         val latch = getLatch()
         return when {
             latch != null && latch.count > 0 -> handleTokenIsUpdating(chain, latch, requestTimestamp)

@@ -1,15 +1,17 @@
 package com.petproject.workflow.presentation.views
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentExecutorTaskInfoBinding
+import com.petproject.workflow.domain.entities.TaskStatus
 import com.petproject.workflow.presentation.viewmodels.ExecutorTaskInfoViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import com.petproject.workflow.presentation.views.adapters.EmployeeInfoViewHolder
@@ -60,13 +62,41 @@ class ExecutorTaskInfoFragment : Fragment() {
                 )
             findNavController().navigate(action)
         }
+        binding.acceptTaskButton.setOnClickListener {
+            viewModel.acceptTask()
+        }
+        binding.submitTaskButton.setOnClickListener {
+            viewModel.submitTask()
+        }
     }
 
     private fun observeViewModel() {
-        viewModel.executingTask.observe(viewLifecycleOwner) {
-            it.inspector?.let { inspector ->
+        viewModel.executingTask.observe(viewLifecycleOwner) { task ->
+            task.inspector?.let { inspector ->
                 val employeeInfoViewHolder = EmployeeInfoViewHolder(binding.taskInspector)
                 employeeInfoViewHolder.bind(inspector) {}
+            }
+            binding.acceptTaskButton.visibility =
+                if (task.status == TaskStatus.NEW) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
+            binding.submitTaskButton.visibility =
+                if (task.status == TaskStatus.IN_PROGRESS || task.status == TaskStatus.NOT_APPROVAL) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
+        }
+        viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+            errorMessage?.let {
+                Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
+            }
+        }
+        viewModel.successMessage.observe(viewLifecycleOwner) { successMessage ->
+            successMessage?.let {
+                Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
             }
         }
     }

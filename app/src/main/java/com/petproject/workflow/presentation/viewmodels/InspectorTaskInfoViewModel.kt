@@ -6,21 +6,39 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.petproject.workflow.domain.entities.Task
-import com.petproject.workflow.domain.usecases.GetEmployeeUseCase
+import com.petproject.workflow.domain.usecases.ApproveTaskUseCase
+import com.petproject.workflow.domain.usecases.CancelTaskUseCase
 import com.petproject.workflow.domain.usecases.GetTaskByIdUseCase
+import com.petproject.workflow.domain.usecases.RejectTaskUseCase
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
+import java.io.IOException
 import javax.inject.Inject
 
 class InspectorTaskInfoViewModel @Inject constructor(
     private val taskId: String,
     private val getTaskByIdUseCase: GetTaskByIdUseCase,
-    private val getEmployeeUseCase: GetEmployeeUseCase
+    private val rejectTaskUseCase: RejectTaskUseCase,
+    private val approveTaskUseCase: ApproveTaskUseCase,
+    private val cancelTaskUseCase: CancelTaskUseCase
 ): ViewModel() {
+
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?> get() = _errorMessage
+
+    private val _successMessage = MutableLiveData<String?>()
+    val successMessage: LiveData<String?> get() = _successMessage
 
     private val _inspectorTask = MutableLiveData<Task>()
     val inspectorTask: LiveData<Task> get() = _inspectorTask
 
     val commentsCount: LiveData<String> get() = inspectorTask.map { it.commentsCount.toString() }
+
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        if (throwable is IOException) {
+            _errorMessage.value = throwable.message
+        }
+    }
 
     init {
         loadData()
@@ -29,6 +47,27 @@ class InspectorTaskInfoViewModel @Inject constructor(
     fun loadData() {
         viewModelScope.launch {
             _inspectorTask.value = getTaskByIdUseCase(taskId)
+        }
+    }
+
+    fun approvalTask() {
+        viewModelScope.launch(exceptionHandler) {
+            _inspectorTask.value = approveTaskUseCase(taskId)
+            _successMessage.value = "Задача успешно одобрена"
+        }
+    }
+
+    fun rejectTask() {
+        viewModelScope.launch(exceptionHandler) {
+            _inspectorTask.value = rejectTaskUseCase(taskId)
+            _successMessage.value = "Задача отправлена на доработку"
+        }
+    }
+
+    fun cancelTask() {
+        viewModelScope.launch(exceptionHandler) {
+            _inspectorTask.value = cancelTaskUseCase(taskId)
+            _successMessage.value = "Задача отменена"
         }
     }
 }

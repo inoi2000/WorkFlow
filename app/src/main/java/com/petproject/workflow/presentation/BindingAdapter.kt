@@ -61,6 +61,7 @@ fun bindTaskStatusColor(view: View, status: TaskStatus?) {
             TaskStatus.FAILED -> R.drawable.circle_red
             TaskStatus.ON_APPROVAL -> R.drawable.circle_yellow
             TaskStatus.NOT_APPROVAL -> R.drawable.circle_orange
+            TaskStatus.CANCELED -> R.drawable.circle_red
         }
         val drawable = ContextCompat.getDrawable(view.context, backgroundId)
         view.background = drawable
@@ -79,6 +80,7 @@ fun bindTaskStatusText(textView: TextView, status: TaskStatus?) {
                 TaskStatus.FAILED -> context.resources.getString(R.string.faild)
                 TaskStatus.ON_APPROVAL -> context.resources.getString(R.string.on_approval)
                 TaskStatus.NOT_APPROVAL -> context.resources.getString(R.string.not_approval)
+                TaskStatus.CANCELED -> context.resources.getString(R.string.canceled)
             }
         }
     }

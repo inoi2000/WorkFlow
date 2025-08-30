@@ -28,8 +28,28 @@ interface TaskApiService {
         @Body taskDto: TaskDto
     ): Response<TaskDto>
 
-    @POST("/api/tasks/{id}/approval")
+    @POST("/api/tasks/{id}/accept")
+    suspend fun acceptTask(
+        @Path("id") taskId: String
+    ): Response<TaskDto>
+
+    @POST("/api/tasks/{id}/submit")
+    suspend fun submitTask(
+        @Path("id") taskId: String
+    ): Response<TaskDto>
+
+    @POST("/api/tasks/{id}/approve")
     suspend fun approvalTask(
+        @Path("id") taskId: String
+    ): Response<TaskDto>
+
+    @POST("/api/tasks/{id}/reject")
+    suspend fun rejectTask(
+        @Path("id") taskId: String
+    ): Response<TaskDto>
+
+    @POST("/api/tasks/{id}/cancel")
+    suspend fun cancelTask(
         @Path("id") taskId: String
     ): Response<TaskDto>
 }
