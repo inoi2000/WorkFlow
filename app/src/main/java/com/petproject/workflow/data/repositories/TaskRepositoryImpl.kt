@@ -25,7 +25,7 @@ class TaskRepositoryImpl @Inject constructor(
         val employeeId = dataHelper.getCurrentEmployeeIdOrAuthException()
         val response = taskApiService.getAllTasksByExecutor(employeeId)
         return response.map { dto ->
-            val inspector = employeeRepository.getEmployee(dto.executorId ?: throw RuntimeException())
+            val inspector = employeeRepository.getEmployee(dto.executorId)
             taskMapper.mapDtoToEntity(
                 dto,
                 executor = null,
@@ -43,7 +43,7 @@ class TaskRepositoryImpl @Inject constructor(
         val employeeId = dataHelper.getCurrentEmployeeIdOrAuthException()
         val response = taskApiService.getAllTasksByInspector(employeeId)
         return response.map { dto ->
-            val executor = employeeRepository.getEmployee(dto.executorId ?: throw RuntimeException())
+            val executor = employeeRepository.getEmployee(dto.executorId)
             taskMapper.mapDtoToEntity(
                 dto,
                 executor = executor,
@@ -66,8 +66,10 @@ class TaskRepositoryImpl @Inject constructor(
     override suspend fun getTaskById(taskId: String): Task {
         val response = taskApiService.getTask(taskId)
         if (response.isSuccessful) {
-            response.body()?.let {
-                return taskMapper.mapDtoToEntity(it, null, null)
+            response.body()?.let { dto ->
+                val inspector = employeeRepository.getEmployee(dto.inspectorId)
+                val executor = employeeRepository.getEmployee(dto.executorId)
+                return taskMapper.mapDtoToEntity(dto, executor, inspector)
             }
         }
         throw AuthException()

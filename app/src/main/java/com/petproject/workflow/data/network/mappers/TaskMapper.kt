@@ -39,8 +39,8 @@ class TaskMapper @Inject constructor(
             creation = entity.creation.toString(),
             deadline = entity.deadline.toString(),
             destination = entity.destination,
-            executorId = entity.executor?.id,
-            inspectorId = entity.inspector?.id,
+            executorId = entity.executor?.id ?: throw IllegalArgumentException(),
+            inspectorId = entity.inspector?.id ?: throw IllegalArgumentException(),
             shouldBeInspected = entity.shouldBeInspected,
             comments = entity.comments?.map { commentMapper.mapEntityToDto(it) } ?: listOf()
         )
