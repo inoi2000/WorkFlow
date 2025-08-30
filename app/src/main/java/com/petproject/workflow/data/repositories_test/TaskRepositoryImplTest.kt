@@ -114,4 +114,24 @@ class TaskRepositoryImplTest @Inject constructor(
         list.addAll(inspectingTasksList)
         return list.first { it.id == taskId }
     }
+
+    override suspend fun approveTask(taskId: String): Task {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun acceptTask(taskId: String): Task {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun cancelTask(taskId: String): Task {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun rejectTask(taskId: String): Task {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun submitTask(taskId: String): Task {
+        TODO("Not yet implemented")
+    }
 }

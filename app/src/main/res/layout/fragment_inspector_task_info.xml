@@ -196,14 +196,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{String.valueOf(viewmodel.inspectorTask.deadline)}"
+                    android:layout_marginBottom="16dp"
                     tools:text="28.08.2025" />
 
-
                 <Button
+                    android:id="@+id/approval_task_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginTop="2dp"
+                    android:visibility="gone"
+                    tools:visibility="visible"
                     android:text="@string/approval_task" />
+
+                <Button
+                    android:id="@+id/reject_task_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/reject_task"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+                <Button
+                    android:id="@+id/cancel_task_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/cancel_task"
+                    android:visibility="gone" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
