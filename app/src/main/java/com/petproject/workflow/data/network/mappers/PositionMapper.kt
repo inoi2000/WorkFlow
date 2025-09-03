@@ -15,4 +15,12 @@ class PositionMapper @Inject constructor() {
             level = dto.level
         )
     }
+
+    fun mapEntityToDto(entity: Position): PositionDto {
+        return PositionDto(
+            id = entity.id,
+            name = entity.name,
+            level = entity.level
+        )
+    }
 }

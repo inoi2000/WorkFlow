@@ -11,10 +11,11 @@ import javax.inject.Inject
 
 @ApplicationScope
 class TaskMapper @Inject constructor(
+    private val employeeMapper: EmployeeMapper,
     private val commentMapper: CommentMapper
 ) {
 
-    fun mapDtoToEntity(dto: TaskDto, executor: Employee?, inspector: Employee?): Task {
+    fun mapDtoToEntity(dto: TaskDto): Task {
         return Task(
             id = dto.id,
             description = dto.description,
@@ -23,8 +24,8 @@ class TaskMapper @Inject constructor(
             creation = LocalDate.parse(dto.creation),
             deadline = LocalDate.parse(dto.deadline),
             destination = dto.destination,
-            executor = executor,
-            inspector = inspector,
+            executor = dto.executor?.let { employeeMapper.mapDtoToEntity(it) },
+            inspector = dto.inspector?.let { employeeMapper.mapDtoToEntity(it) },
             shouldBeInspected = dto.shouldBeInspected,
             comments = dto.comments.map { commentMapper.mapDtoToEntity(it) }
         )
@@ -39,8 +40,8 @@ class TaskMapper @Inject constructor(
             creation = entity.creation.toString(),
             deadline = entity.deadline.toString(),
             destination = entity.destination,
-            executorId = entity.executor?.id ?: throw IllegalArgumentException(),
-            inspectorId = entity.inspector?.id ?: throw IllegalArgumentException(),
+            executor = entity.executor?.let { employeeMapper.mapEntityToDto(it) },
+            inspector = entity.inspector?.let { employeeMapper.mapEntityToDto(it) },
             shouldBeInspected = entity.shouldBeInspected,
             comments = entity.comments?.map { commentMapper.mapEntityToDto(it) } ?: listOf()
         )

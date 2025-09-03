@@ -27,10 +27,10 @@ data class TaskDto(
     val deadline: String?,
     @SerializedName("executor")
     @Expose
-    val executorId: String,
+    val executor: EmployeeDto?,
     @SerializedName("inspector")
     @Expose
-    val inspectorId: String,
+    val inspector: EmployeeDto?,
     @SerializedName("shouldBeInspected")
     @Expose
     val shouldBeInspected: Boolean,

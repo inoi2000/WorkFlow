@@ -13,19 +13,10 @@ data class EmployeeDto(
     @SerializedName("position")
     @Expose
     val position: PositionDto?,
-    @SerializedName("inspectionTasks")
-    @Expose
-    val inspectionTasks: List<TaskDto>?,
-    @SerializedName("executionTasks")
-    @Expose
-    val executionTasks: List<TaskDto>?,
     @SerializedName("absence")
     @Expose
     val absence: List<AbsenceDto>?,
     @SerializedName("department")
     @Expose
     val department: DepartmentDto?,
-    @SerializedName("canAssignTask")
-    @Expose
-    val canAssignTask: Boolean?
 )

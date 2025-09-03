@@ -12,10 +12,10 @@ class ApiFactory @Inject constructor(
 ) {
 
     companion object {
-        private const val BASE_EMPLOYEE_API = "http://192.168.0.159:8080/"
         private const val BASE_TASK_API = "http://192.168.0.159:9200/"
         private const val BASE_COMMENT_API = "http://192.168.0.159:9200/"
-        private const val BASE_ABSENCE_API = "http://192.168.0.159:9300/"
+        private const val BASE_EMPLOYEE_API = "http://192.168.0.159:9300/"
+        private const val BASE_ABSENCE_API = "http://192.168.0.159:9400/"
     }
 
     val absenceApiService = Retrofit.Builder()
