@@ -21,4 +21,14 @@ class EmployeeMapper @Inject constructor(
             absences = dto.absence?.map { absenceMapper.mapDtoToEntity(it) },
         )
     }
+
+    fun mapEntityToDto(entity: Employee): EmployeeDto {
+        return EmployeeDto(
+            id = entity.id,
+            name = entity.name,
+            position = entity.position?.let { positionMapper.mapEntityToDto(it) },
+            absence = null,
+            department = null
+        )
+    }
 }
