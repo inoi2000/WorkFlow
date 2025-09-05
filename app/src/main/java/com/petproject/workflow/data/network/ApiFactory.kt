@@ -16,6 +16,7 @@ class ApiFactory @Inject constructor(
         private const val BASE_COMMENT_API = "http://192.168.0.159:9200/"
         private const val BASE_EMPLOYEE_API = "http://192.168.0.159:9300/"
         private const val BASE_ABSENCE_API = "http://192.168.0.159:9400/"
+        private const val BASE_ANNOUNCEMENT_API = "http://192.168.0.159:9500/"
     }
 
     val absenceApiService = Retrofit.Builder()
@@ -45,4 +46,11 @@ class ApiFactory @Inject constructor(
         .client(okHttpClient)
         .build()
         .create(CommentApiService::class.java)
+
+    val announcementApiService  = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(BASE_ANNOUNCEMENT_API)
+        .client(okHttpClient)
+        .build()
+        .create(AnnouncementApiService::class.java)
 }
