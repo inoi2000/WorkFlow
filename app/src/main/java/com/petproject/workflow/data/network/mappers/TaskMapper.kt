@@ -2,7 +2,6 @@ package com.petproject.workflow.data.network.mappers
 
 import com.petproject.workflow.data.network.models.TaskDto
 import com.petproject.workflow.di.ApplicationScope
-import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.entities.Task
 import com.petproject.workflow.domain.entities.TaskPriority
 import com.petproject.workflow.domain.entities.TaskStatus

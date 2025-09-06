@@ -1,11 +1,11 @@
 package com.petproject.workflow.data.repositories
 
 import com.petproject.workflow.data.network.AbsenceApiService
-import com.petproject.workflow.data.network.exceptions.AuthException
 import com.petproject.workflow.data.network.mappers.AbsenceMapper
 import com.petproject.workflow.data.network.utils.DataHelper
 import com.petproject.workflow.domain.entities.Absence
 import com.petproject.workflow.domain.repositories.AbsenceRepository
+import okio.IOException
 import javax.inject.Inject
 
 class AbsenceRepositoryImpl @Inject constructor(
@@ -27,6 +27,6 @@ class AbsenceRepositoryImpl @Inject constructor(
                 return absenceMapper.mapDtoToEntity(it)
             }
         }
-        throw AuthException()
+        throw IOException()
     }
 }
