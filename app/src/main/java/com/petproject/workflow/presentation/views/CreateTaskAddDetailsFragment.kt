@@ -61,6 +61,13 @@ class CreateTaskAddDetailsFragment : Fragment() {
 
         observeViewModel()
 
+        binding.shouldBeInspectedSwitchMaterial.setOnCheckedChangeListener { _, shouldBeInspected ->
+            viewModel.shouldBeInspectedField = shouldBeInspected
+        }
+        binding.prioritySwitchMaterial.setOnCheckedChangeListener { _, priority ->
+            viewModel.priorityField = priority
+        }
+
         binding.etDeadline.setOnClickListener {
             val datePickerDialog = DatePickerDialog(
                 requireContext(),

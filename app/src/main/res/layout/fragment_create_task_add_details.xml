@@ -153,18 +153,18 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/priority_SwitchMaterial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="6dp"
-                android:checked="@{viewModel.priorityField}"
                 android:text="@string/is_urgent"
                 android:textSize="15sp" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/shouldBeInspected_SwitchMaterial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="@{viewModel.shouldBeInspectedField}"
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="6dp"
                 android:text="@string/should_be_inspected"
