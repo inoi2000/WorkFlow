@@ -62,6 +62,7 @@ class InspectorTaskListFragment : Fragment() {
     }
 
     private fun setRecyclerView() {
+        viewModel.loadData()
         val adapter = TaskAdapter(
             TaskInfoViewHolder.INSPECTOR_MODE,
             { taskId ->

@@ -33,8 +33,9 @@ class CreateTaskAddDetailsViewModel @Inject constructor(
     var descriptionField: ObservableField<String> = ObservableField()
     var deadlineField: ObservableField<String> = ObservableField()
     var destinationField: ObservableField<String> = ObservableField()
-    var priorityField: ObservableField<Boolean> = ObservableField()
-    var shouldBeInspectedField: ObservableField<Boolean> = ObservableField()
+
+    var priorityField: Boolean = false
+    var shouldBeInspectedField: Boolean = false
 
     fun createTask(executor: Employee) {
         val description = descriptionField.get() ?: ""
@@ -47,14 +48,14 @@ class CreateTaskAddDetailsViewModel @Inject constructor(
             return
         }
 
-        val priority = if (priorityField.get() != false) {
-            TaskPriority.URGENT
-        } else TaskPriority.COMMON
-
-        val shouldBeInspected = shouldBeInspectedField.get() ?: false
-
         viewModelScope.launch {
             if (validateInput(description, deadline)) {
+                val priority = if (priorityField) {
+                    TaskPriority.URGENT
+                } else {
+                    TaskPriority.COMMON
+                }
+
                 val tempTask = Task(
                     description = description,
                     status = TaskStatus.NEW,
@@ -65,7 +66,7 @@ class CreateTaskAddDetailsViewModel @Inject constructor(
                     executor = executor,
                     inspector = getCurrentEmployeeUseCase(),
                     comments = emptyList(),
-                    shouldBeInspected = shouldBeInspected
+                    shouldBeInspected = shouldBeInspectedField
                 )
                 _navigateToDoneCreateTaskScreen.value = tempTask
             }

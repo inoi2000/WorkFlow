@@ -70,6 +70,7 @@ class ExecutorTaskListFragment : Fragment() {
     }
 
     private fun setRecyclerView() {
+        viewModel.loadData()
         val adapter = TaskAdapter(
             TaskInfoViewHolder.EXECUTOR_MODE,
             { taskId ->
