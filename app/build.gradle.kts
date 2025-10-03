@@ -48,6 +48,7 @@ android {
 }
 
 dependencies {
+    implementation("com.google.android.material:material:1.11.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -82,6 +83,7 @@ dependencies {
 
     implementation(libs.dagger)
     implementation(libs.androidx.fragment)
+    implementation(libs.androidx.swiperefreshlayout)
     kapt(libs.dagger.android.processor)
     kapt(libs.dagger.compiler)
 

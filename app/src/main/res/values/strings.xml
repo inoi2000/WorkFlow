@@ -100,6 +100,12 @@
     <string name="cancel_task">Cancel task</string>
     <string name="accept_the_task">Accept the task</string>
     <string name="reject_task">Reject task</string>
+    <string name="phone_icon">phone icon</string>
+    <string name="email_icon">email icon</string>
+    <string name="info_icon">info icon</string>
+    <string name="arrow_forward">arrow forward</string>
+    <string name="accesses">Accesses</string>
+    <string name="instructions">Instructions</string>
 
 
 </resources>

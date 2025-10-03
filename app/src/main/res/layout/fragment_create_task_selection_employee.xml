@@ -5,88 +5,221 @@
     tools:context=".presentation.views.CreateTaskSelectionEmployeeFragment">
 
     <data>
-
         <variable
             name="viewmodel"
             type="com.petproject.workflow.presentation.viewmodels.CreateTaskSelectionEmployeeViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@color/white">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
+        <!-- Упрощенный AppBar с прогресс-баром -->
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/gradient_main"
-            android:paddingBottom="20dp">
+            android:elevation="4dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="?attr/actionBarSize"
+                android:paddingHorizontal="16dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetEnd="0dp"
+                app:title="Выбор сотрудника">
 
-                <ImageView
-                    android:id="@+id/employee_image_view"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginTop="20dp"
-                    android:src="@drawable/ic_account_ff"
-                    app:layout_constraintEnd_toStartOf="@+id/details_image_view"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="?attr/colorSecondary" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Назначение задачи"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="3dp"
-                    android:background="@color/white_transparent"
-                    app:layout_constraintBottom_toBottomOf="@+id/employee_image_view"
-                    app:layout_constraintEnd_toStartOf="@+id/details_image_view"
-                    app:layout_constraintStart_toEndOf="@+id/employee_image_view"
-                    app:layout_constraintTop_toTopOf="@+id/employee_image_view" />
+            </com.google.android.material.appbar.MaterialToolbar>
 
-                <ImageView
-                    android:id="@+id/details_image_view"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_news_ff"
-                    app:layout_constraintEnd_toStartOf="@+id/done_image_view"
-                    app:layout_constraintStart_toEndOf="@+id/employee_image_view"
-                    app:layout_constraintTop_toTopOf="@+id/employee_image_view"
-                    app:tint="@color/white_transparent" />
+            <!-- Прогресс шагов -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="24dp"
+                android:paddingBottom="16dp">
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="3dp"
-                    android:background="@color/white_transparent"
-                    app:layout_constraintBottom_toBottomOf="@+id/employee_image_view"
-                    app:layout_constraintEnd_toStartOf="@+id/done_image_view"
-                    app:layout_constraintStart_toEndOf="@+id/details_image_view"
-                    app:layout_constraintTop_toTopOf="@+id/employee_image_view" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Шаг 1 из 3"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:alpha="0.8"
+                    android:layout_marginBottom="8dp" />
 
-                <ImageView
-                    android:id="@+id/done_image_view"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_approval"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/details_image_view"
-                    app:layout_constraintTop_toTopOf="@+id/employee_image_view"
-                    app:tint="@color/white_transparent" />
+                <!-- Упрощенный индикатор прогресса -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@drawable/bg_progress_track"
+                    android:orientation="horizontal">
 
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:layout_weight="1" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.appbar.MaterialToolbar>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/white_transparent"
+                        android:layout_weight="1" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/employee_list_recycler_view"
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/white_transparent"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="4dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Сотрудник"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:gravity="start" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Детали"
+                        android:textColor="@color/white_transparent"
+                        android:textSize="10sp"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Готово"
+                        android:textColor="@color/white_transparent"
+                        android:textSize="10sp"
+                        android:gravity="end" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- Основной контент -->
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- Поиск -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/searchInputLayout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:hint="Поиск сотрудников"
+                    app:startIconDrawable="@drawable/ic_search"
+                    app:boxBackgroundColor="@color/white"
+                    app:cardCornerRadius="12dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/searchEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionSearch"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Заголовок списка -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Доступные сотрудники"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:paddingHorizontal="16dp"
+                    android:paddingBottom="8dp" />
+
+                <!-- Состояние загрузки -->
+                <include
+                    android:id="@+id/loadingState"
+                    layout="@layout/state_loading"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
+
+                <!-- Пустое состояние -->
+                <include
+                    android:id="@+id/emptyState"
+                    layout="@layout/state_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
+
+                <!-- Ошибка -->
+                <include
+                    android:id="@+id/errorState"
+                    layout="@layout/state_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
+
+                <!-- Список сотрудников -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/employee_list_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:clipToPadding="false"
+                    android:paddingVertical="8dp"
+                    android:scrollbars="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_employee_info" />
+
+            </LinearLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <!-- Кнопка обновления при ошибке -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/retryButton"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="20dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_employee_info" />
-    </LinearLayout>
+            android:layout_gravity="bottom|center"
+            android:layout_margin="16dp"
+            android:text="Повторить"
+            android:visibility="gone"
+            app:icon="@drawable/ic_refresh" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

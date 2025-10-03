@@ -12,7 +12,6 @@ import com.petproject.workflow.databinding.FragmentHomeBinding
 import com.petproject.workflow.domain.entities.AbsenceType
 import com.petproject.workflow.presentation.viewmodels.HomeViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
-import com.petproject.workflow.presentation.views.adapters.TaskInfoViewHolder
 import javax.inject.Inject
 
 class HomeFragment : Fragment() {
@@ -102,45 +101,6 @@ class HomeFragment : Fragment() {
                 val intent = AuthActivity.newIntent(requireContext())
                 startActivity(intent)
                 requireActivity().finish()
-            }
-        }
-        viewModel.employee.observe(viewLifecycleOwner) { employee ->
-
-        }
-        viewModel.executorTask.observe(viewLifecycleOwner) { task ->
-            val taskInfoViewHolder = TaskInfoViewHolder(binding.executorTask)
-            if (task != null) {
-                taskInfoViewHolder.binding.root.visibility = View.VISIBLE
-                taskInfoViewHolder.bind(
-                    task,
-                    TaskInfoViewHolder.EXECUTOR_MODE,
-                    {
-                        val action = HomeFragmentDirections
-                            .actionHomeFragmentToExecutingTaskInfoFragment(it)
-                        findNavController().navigate(action)
-                    },
-                    {}
-                )
-            } else {
-                taskInfoViewHolder.binding.root.visibility = View.GONE
-            }
-        }
-        viewModel.inspectorTask.observe(viewLifecycleOwner) { task ->
-            val taskInfoViewHolder = TaskInfoViewHolder(binding.onApprovalTask)
-            if (task != null) {
-                taskInfoViewHolder.binding.root.visibility = View.VISIBLE
-                taskInfoViewHolder.bind(
-                    task,
-                    TaskInfoViewHolder.EXECUTOR_MODE,
-                    {
-                        val action = HomeFragmentDirections
-                            .actionHomeFragmentToInspectorTaskInfoFragment(it)
-                        findNavController().navigate(action)
-                    },
-                    {}
-                )
-            } else {
-                taskInfoViewHolder.binding.root.visibility = View.GONE
             }
         }
     }
