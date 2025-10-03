@@ -168,6 +168,9 @@
         <argument
             android:name="task"
             app:argType="com.petproject.workflow.domain.entities.Task" />
+        <action
+            android:id="@+id/action_createTaskDoneFragment_to_inspectorTaskListFragment"
+            app:destination="@id/inspectorTaskListFragment" />
     </fragment>
     <fragment
         android:id="@+id/createTaskCommentFragment"

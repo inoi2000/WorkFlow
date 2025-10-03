@@ -16,74 +16,93 @@ import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 class CreateTaskAddDetailsViewModel @Inject constructor(
-    val getCurrentEmployeeUseCase: GetCurrentEmployeeUseCase
-): ViewModel() {
+    private val getCurrentEmployeeUseCase: GetCurrentEmployeeUseCase
+) : ViewModel() {
 
-    val dateFormatPattern = "dd-MM-yyyy"
+    val dateFormatPattern = "dd.MM.yyyy"
 
-    private val _errorInputDescription = MutableLiveData(false)
+    private val _errorInputDescription = MutableLiveData<Boolean>()
     val errorInputDescription: LiveData<Boolean> get() = _errorInputDescription
 
-    private val _errorInputDeadline = MutableLiveData(false)
+    private val _errorInputDeadline = MutableLiveData<Boolean>()
     val errorInputDeadline: LiveData<Boolean> get() = _errorInputDeadline
 
     private val _navigateToDoneCreateTaskScreen = MutableLiveData<Task?>()
     val navigateToDoneCreateTaskScreen: LiveData<Task?> get() = _navigateToDoneCreateTaskScreen
 
-    var descriptionField: ObservableField<String> = ObservableField()
-    var deadlineField: ObservableField<String> = ObservableField()
-    var destinationField: ObservableField<String> = ObservableField()
+    private val _loadingState = MutableLiveData<Boolean>()
+    val loadingState: LiveData<Boolean> get() = _loadingState
+
+    var descriptionField = ObservableField<String>()
+    var deadlineField = ObservableField<String>()
+    var destinationField = ObservableField<String>()
 
     var priorityField: Boolean = false
     var shouldBeInspectedField: Boolean = false
 
     fun createTask(executor: Employee) {
-        val description = descriptionField.get() ?: ""
-
-        val deadlineString = deadlineField.get() ?: ""
-        val deadline: LocalDate = if (deadlineString.isNotBlank()) {
-            LocalDate.parse(deadlineString, DateTimeFormatter.ofPattern(dateFormatPattern))
-        } else {
-            _errorInputDeadline.value = true
-            return
-        }
+        _loadingState.value = true
 
         viewModelScope.launch {
-            if (validateInput(description, deadline)) {
-                val priority = if (priorityField) {
-                    TaskPriority.URGENT
-                } else {
-                    TaskPriority.COMMON
+            try {
+                if (validateInput()) {
+                    val task = buildTask(executor)
+                    _navigateToDoneCreateTaskScreen.value = task
                 }
-
-                val tempTask = Task(
-                    description = description,
-                    status = TaskStatus.NEW,
-                    priority = priority,
-                    creation = LocalDate.now(),
-                    deadline = deadline,
-                    destination = destinationField.get(),
-                    executor = executor,
-                    inspector = getCurrentEmployeeUseCase(),
-                    comments = emptyList(),
-                    shouldBeInspected = shouldBeInspectedField
-                )
-                _navigateToDoneCreateTaskScreen.value = tempTask
+            } catch (e: Exception) {
+                // Обработка ошибок
+            } finally {
+                _loadingState.value = false
             }
         }
     }
 
-    private fun validateInput(description: String, deadline: LocalDate): Boolean {
-        var result = true
-        if (description.isBlank()) {
+    private suspend fun buildTask(executor: Employee): Task {
+        val deadline = LocalDate.parse(
+            deadlineField.get(),
+            DateTimeFormatter.ofPattern(dateFormatPattern)
+        )
+
+        return Task(
+            description = descriptionField.get().orEmpty(),
+            status = TaskStatus.NEW,
+            priority = if (priorityField) TaskPriority.URGENT else TaskPriority.COMMON,
+            creation = LocalDate.now(),
+            deadline = deadline,
+            destination = destinationField.get(),
+            executor = executor,
+            inspector = getCurrentEmployeeUseCase(),
+            comments = emptyList(),
+            shouldBeInspected = shouldBeInspectedField
+        )
+    }
+
+    private fun validateInput(): Boolean {
+        var isValid = true
+
+        if (descriptionField.get().isNullOrBlank()) {
             _errorInputDescription.value = true
-            result = false
+            isValid = false
         }
-        if (deadline < LocalDate.now()) {
+
+        val deadlineString = deadlineField.get()
+        if (deadlineString.isNullOrBlank()) {
             _errorInputDeadline.value = true
-            result = false
+            isValid = false
+        } else {
+            try {
+                val deadline = LocalDate.parse(deadlineString, DateTimeFormatter.ofPattern(dateFormatPattern))
+                if (deadline < LocalDate.now()) {
+                    _errorInputDeadline.value = true
+                    isValid = false
+                }
+            } catch (e: Exception) {
+                _errorInputDeadline.value = true
+                isValid = false
+            }
         }
-        return result
+
+        return isValid
     }
 
     fun resetErrorInputDescription() {
