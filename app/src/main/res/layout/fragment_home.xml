@@ -418,12 +418,6 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
-                <include
-                    android:id="@+id/on_approval_task"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    layout="@layout/item_task_info" />
-
                 <androidx.cardview.widget.CardView
                     android:id="@+id/executor_tasks_card_view"
                     android:layout_width="match_parent"
@@ -469,12 +463,6 @@
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
-
-                <include
-                    android:id="@+id/executor_task"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    layout="@layout/item_task_info" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
