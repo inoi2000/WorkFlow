@@ -76,122 +76,142 @@
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="8dp">
 
-                        <androidx.cardview.widget.CardView
+                        <!-- Planning Service -->
+                        <com.google.android.material.card.MaterialCardView
                             android:layout_width="118dp"
                             android:layout_height="132dp"
                             android:layout_marginEnd="8dp"
-                            app:cardCornerRadius="12dp">
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground">
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/gradient_blue">
+                                android:orientation="vertical"
+                                android:background="@drawable/gradient_blue"
+                                android:padding="12dp">
 
                                 <ImageView
                                     android:id="@+id/planning_service_image_view"
                                     android:layout_width="64dp"
                                     android:layout_height="64dp"
-                                    android:layout_margin="12dp"
-                                    android:src="@drawable/color_calendar"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    android:layout_gravity="end"
+                                    android:src="@drawable/color_calendar" />
+
+                                <Space
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/planning_service_text_view"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="12dp"
-                                    android:layout_marginStart="8dp"
                                     android:text="Планирование"
                                     android:textColor="?attr/colorOnPrimary"
                                     android:textSize="12sp"
                                     android:textStyle="bold"
-                                    android:textAlignment="center"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintBottom_toBottomOf="parent" />
+                                    android:textAlignment="viewStart" />
 
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-                        </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
 
-                        <androidx.cardview.widget.CardView
+                        <!-- Tasks Service -->
+                        <com.google.android.material.card.MaterialCardView
                             android:layout_width="118dp"
                             android:layout_height="132dp"
                             android:layout_marginEnd="8dp"
-                            app:cardCornerRadius="12dp">
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground">
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
+                            <LinearLayout
                                 android:id="@+id/task_execution"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/gradient_cyan">
+                                android:orientation="vertical"
+                                android:background="@drawable/gradient_cyan"
+                                android:padding="12dp">
 
                                 <ImageView
                                     android:id="@+id/tasks_service_image_view"
                                     android:layout_width="64dp"
                                     android:layout_height="64dp"
-                                    android:layout_margin="12dp"
-                                    android:src="@drawable/color_text_book"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    android:layout_gravity="end"
+                                    android:src="@drawable/color_text_book" />
+
+                                <Space
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/tasks_service_text_view"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="12dp"
-                                    android:layout_marginStart="8dp"
                                     android:text="Мои задачи"
                                     android:textColor="?attr/colorOnPrimary"
                                     android:textSize="12sp"
                                     android:textStyle="bold"
-                                    android:textAlignment="center"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintBottom_toBottomOf="parent" />
+                                    android:textAlignment="viewStart" />
 
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-                        </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
 
-                        <androidx.cardview.widget.CardView
+                        <!-- Management Service -->
+                        <com.google.android.material.card.MaterialCardView
                             android:layout_width="118dp"
                             android:layout_height="132dp"
                             android:layout_marginEnd="8dp"
                             app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
                             app:onlyInspectorView="@{viewmodel.role}">
 
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
+                            <LinearLayout
                                 android:id="@+id/task_management"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/gradient_purple">
+                                android:orientation="vertical"
+                                android:background="@drawable/gradient_purple"
+                                android:padding="12dp">
 
                                 <ImageView
                                     android:id="@+id/management_service_image_view"
                                     android:layout_width="64dp"
                                     android:layout_height="64dp"
-                                    android:layout_margin="12dp"
-                                    android:src="@drawable/color_group"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    android:layout_gravity="end"
+                                    android:src="@drawable/color_group" />
+
+                                <Space
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/management_service_text_view"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="12dp"
-                                    android:layout_marginStart="8dp"
                                     android:text="Управление персоналом"
                                     android:textColor="?attr/colorOnPrimary"
                                     android:textSize="12sp"
                                     android:textStyle="bold"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintBottom_toBottomOf="parent" />
+                                    android:textAlignment="viewStart" />
 
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-                        </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
                     </LinearLayout>
                 </androidx.core.widget.NestedScrollView>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -209,203 +229,237 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    app:cardCornerRadius="12dp">
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@android:color/white">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="12dp"
-                        android:paddingTop="12dp"
-                        android:paddingBottom="28dp">
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
                         <TextView
                             android:id="@+id/services_text_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
                             android:text="@string/services"
                             android:textSize="18sp"
-                            android:textStyle="bold"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textStyle="bold" />
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/vacations_card_view"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            app:cardCornerRadius="28dp"
-                            app:layout_constraintEnd_toStartOf="@+id/sick_leaves_card_view"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintHorizontal_chainStyle="spread"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/services_text_view">
+                            android:orientation="horizontal"
+                            android:layout_marginTop="12dp"
+                            android:weightSum="4">
 
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:layout_margin="12dp"
-                                android:contentDescription="@string/component_logo"
-                                android:src="@drawable/ic_vacation"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:tint="?attr/colorPrimary" />
-
-                        </androidx.cardview.widget.CardView>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:textSize="13sp"
-                            android:text="@string/vacations"
-
-                            app:layout_constraintEnd_toEndOf="@+id/vacations_card_view"
-                            app:layout_constraintStart_toStartOf="@+id/vacations_card_view"
-                            app:layout_constraintTop_toBottomOf="@+id/vacations_card_view" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/sick_leaves_card_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:cardCornerRadius="28dp"
-                            app:layout_constraintEnd_toStartOf="@+id/days_off_card_view"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/vacations_card_view"
-                            app:layout_constraintTop_toTopOf="@+id/vacations_card_view">
-
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:layout_margin="12dp"
-                                android:contentDescription="@string/component_logo"
-                                android:src="@drawable/ic_sick"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:tint="?attr/colorPrimary" />
-
-                        </androidx.cardview.widget.CardView>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:textSize="13sp"
-                            android:text="@string/sick_leaves"
-
-                            app:layout_constraintEnd_toEndOf="@+id/sick_leaves_card_view"
-                            app:layout_constraintStart_toStartOf="@+id/sick_leaves_card_view"
-                            app:layout_constraintTop_toBottomOf="@+id/sick_leaves_card_view" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/days_off_card_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:cardCornerRadius="28dp"
-                            app:layout_constraintEnd_toStartOf="@+id/others_card_view"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/sick_leaves_card_view"
-                            app:layout_constraintTop_toTopOf="@+id/vacations_card_view">
-
-                            <ImageView
-                                android:layout_width="24dp"
+                            <!-- Vacation -->
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="12dp"
-                                android:contentDescription="@string/component_logo"
-                                android:src="@drawable/ic_day_off"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:tint="?attr/colorPrimary" />
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal">
 
-                        </androidx.cardview.widget.CardView>
+                                <com.google.android.material.card.MaterialCardView
+                                    android:id="@+id/vacations_card_view"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:cardCornerRadius="28dp"
+                                    app:cardElevation="1dp"
+                                    app:cardBackgroundColor="@android:color/white"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:foreground="?attr/selectableItemBackground">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:textSize="13sp"
-                            android:text="@string/days_off"
+                                    <ImageView
+                                        android:id="@+id/vacations_icon"
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:layout_margin="12dp"
+                                        android:contentDescription="@string/component_logo"
+                                        android:src="@drawable/ic_vacation"
+                                        app:tint="?attr/colorPrimary" />
 
-                            app:layout_constraintEnd_toEndOf="@+id/days_off_card_view"
-                            app:layout_constraintStart_toStartOf="@+id/days_off_card_view"
-                            app:layout_constraintTop_toBottomOf="@+id/days_off_card_view" />
+                                </com.google.android.material.card.MaterialCardView>
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/others_card_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:cardCornerRadius="28dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/days_off_card_view"
-                            app:layout_constraintTop_toTopOf="@+id/vacations_card_view">
+                                <TextView
+                                    android:id="@+id/vacations_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:textSize="13sp"
+                                    android:text="@string/vacations" />
 
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:layout_margin="12dp"
-                                android:contentDescription="@string/component_logo"
-                                android:src="@drawable/ic_others"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:tint="?attr/colorPrimary" />
-                        </androidx.cardview.widget.CardView>
+                            </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:textSize="13sp"
-                            android:text="@string/others"
+                            <!-- Sick Leaves -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal">
 
-                            app:layout_constraintEnd_toEndOf="@+id/others_card_view"
-                            app:layout_constraintStart_toStartOf="@+id/others_card_view"
-                            app:layout_constraintTop_toBottomOf="@+id/others_card_view" />
+                                <com.google.android.material.card.MaterialCardView
+                                    android:id="@+id/sick_leaves_card_view"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:cardCornerRadius="28dp"
+                                    app:cardElevation="1dp"
+                                    app:cardBackgroundColor="@android:color/white"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:foreground="?attr/selectableItemBackground">
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.cardview.widget.CardView>
+                                    <ImageView
+                                        android:id="@+id/sick_leaves_icon"
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:layout_margin="12dp"
+                                        android:contentDescription="@string/component_logo"
+                                        android:src="@drawable/ic_sick"
+                                        app:tint="?attr/colorPrimary" />
 
-                <androidx.cardview.widget.CardView
+                                </com.google.android.material.card.MaterialCardView>
+
+                                <TextView
+                                    android:id="@+id/sick_leaves_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:textSize="13sp"
+                                    android:text="@string/sick_leaves" />
+
+                            </LinearLayout>
+
+                            <!-- Days Off -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal">
+
+                                <com.google.android.material.card.MaterialCardView
+                                    android:id="@+id/days_off_card_view"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:cardCornerRadius="28dp"
+                                    app:cardElevation="1dp"
+                                    app:cardBackgroundColor="@android:color/white"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:foreground="?attr/selectableItemBackground">
+
+                                    <ImageView
+                                        android:id="@+id/days_off_icon"
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:layout_margin="12dp"
+                                        android:contentDescription="@string/component_logo"
+                                        android:src="@drawable/ic_day_off"
+                                        app:tint="?attr/colorPrimary" />
+
+                                </com.google.android.material.card.MaterialCardView>
+
+                                <TextView
+                                    android:id="@+id/days_off_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:textSize="13sp"
+                                    android:text="@string/days_off" />
+
+                            </LinearLayout>
+
+                            <!-- Others -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal">
+
+                                <com.google.android.material.card.MaterialCardView
+                                    android:id="@+id/others_card_view"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:cardCornerRadius="28dp"
+                                    app:cardElevation="1dp"
+                                    app:cardBackgroundColor="@android:color/white"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:foreground="?attr/selectableItemBackground">
+
+                                    <ImageView
+                                        android:id="@+id/others_icon"
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:layout_margin="12dp"
+                                        android:contentDescription="@string/component_logo"
+                                        android:src="@drawable/ic_others"
+                                        app:tint="?attr/colorPrimary" />
+
+                                </com.google.android.material.card.MaterialCardView>
+
+                                <TextView
+                                    android:id="@+id/others_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:textSize="13sp"
+                                    android:text="@string/others" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/on_approval_tasks_card_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    app:cardCornerRadius="12dp">
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="12dp">
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical">
 
                         <ImageView
                             android:id="@+id/on_approval_tasks_logo"
-                            app:tint="?attr/colorPrimary"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:contentDescription="@string/component_logo"
                             android:src="@drawable/ic_approval"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:tint="?attr/colorPrimary" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/on_approval_tasks_text"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
                             android:text="@string/on_your_approval"
                             android:textSize="16sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/on_approval_tasks_logo"
-                            app:layout_constraintStart_toEndOf="@+id/on_approval_tasks_logo"
-                            app:layout_constraintTop_toTopOf="@+id/on_approval_tasks_logo" />
+                            android:textStyle="bold" />
 
                         <ImageView
                             android:id="@+id/on_approval_tasks_ref_ic"
@@ -413,44 +467,47 @@
                             android:layout_height="wrap_content"
                             android:contentDescription="@string/component_logo"
                             android:src="@drawable/ic_arrow_forward"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.cardview.widget.CardView>
+                            app:tint="?attr/colorOnSurface" />
 
-                <androidx.cardview.widget.CardView
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/executor_tasks_card_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    app:cardCornerRadius="12dp">
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="12dp">
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical">
 
                         <ImageView
                             android:id="@+id/executor_tasks_logo"
-                            app:tint="?attr/colorPrimary"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:contentDescription="@string/component_logo"
                             android:src="@drawable/ic_task"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:tint="?attr/colorPrimary" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/executor_tasks_text"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
                             android:text="@string/tasks"
                             android:textSize="16sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/executor_tasks_logo"
-                            app:layout_constraintStart_toEndOf="@+id/executor_tasks_logo"
-                            app:layout_constraintTop_toTopOf="@+id/executor_tasks_logo" />
+                            android:textStyle="bold" />
 
                         <ImageView
                             android:id="@+id/executor_tasks_ref_ic"
@@ -458,11 +515,10 @@
                             android:layout_height="wrap_content"
                             android:contentDescription="@string/component_logo"
                             android:src="@drawable/ic_arrow_forward"
-                            app:layout_constraintEnd_toEndOf="parent"
+                            app:tint="?attr/colorOnSurface" />
 
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>

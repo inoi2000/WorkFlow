@@ -51,4 +51,12 @@
         <item name="colorAccent">@color/blue</item>
         <item name="android:windowBackground">@color/white_dark</item>
     </style>
+
+    <style name="SearchTextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@android:color/transparent</item>
+        <item name="android:background">@color/white</item>
+        <item name="hintTextColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="boxBackgroundMode">outline</item>
+    </style>
 </resources>
