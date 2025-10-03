@@ -97,5 +97,9 @@
     <string name="cancel_task">Отменить задачу</string>
     <string name="accept_the_task">Принять задачу</string>
     <string name="reject_task">Отправить задачу на доработку</string>
+    <string name="phone_icon">phone icon</string>
+    <string name="arrow_forward">arrow forward</string>
+    <string name="accesses">Accesses</string>
+    <string name="instructions">Instructions</string>
 
 </resources>

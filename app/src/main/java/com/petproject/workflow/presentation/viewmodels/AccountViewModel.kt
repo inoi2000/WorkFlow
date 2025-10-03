@@ -44,13 +44,6 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-//    fun signOut() {
-//        viewModelScope.launch {
-//            signOutUseCase()
-//            _navigateToLoginScreen.value = true
-//        }
-//    }
-
     fun logout() {
         val logoutPageIntent = getLogoutPageIntentUseCase()
         logoutPageEventChannel.trySendBlocking(logoutPageIntent)
