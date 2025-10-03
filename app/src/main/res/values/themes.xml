@@ -21,9 +21,19 @@
         <item name="colorPrimaryVariant">@color/grey_dark</item>
 
         <item name="android:datePickerDialogTheme">@style/DataPickerTheme</item>
+
+        <item name="materialCardViewStyle">@style/AppMaterialCardViewStyle</item>
     </style>
 
     <style name="Theme.WorkFlow" parent="Base.Theme.WorkFlow" />
+
+    <style name="AppMaterialCardViewStyle" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardElevation">1dp</item>
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="strokeColor">@color/grey_dark</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
 
     <style name="BottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="android:background">@color/white</item>
