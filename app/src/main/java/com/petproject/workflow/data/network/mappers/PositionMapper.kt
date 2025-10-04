@@ -12,7 +12,8 @@ class PositionMapper @Inject constructor() {
         return Position(
             id = dto.id,
             name = dto.name,
-            level = dto.level
+            level = dto.level,
+            requiresSpecialDocuments = dto.requiresSpecialDocuments
         )
     }
 
@@ -20,7 +21,8 @@ class PositionMapper @Inject constructor() {
         return PositionDto(
             id = entity.id,
             name = entity.name,
-            level = entity.level
+            level = entity.level,
+            requiresSpecialDocuments = entity.requiresSpecialDocuments
         )
     }
 }

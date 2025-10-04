@@ -7,5 +7,6 @@ import kotlinx.parcelize.Parcelize
 data class Position(
     val id: String,
     val name: String,
-    val level: Int
+    val level: Int,
+    val requiresSpecialDocuments: Boolean
 ) : Parcelable

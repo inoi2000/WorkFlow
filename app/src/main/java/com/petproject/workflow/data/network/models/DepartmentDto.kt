@@ -12,5 +12,5 @@ data class DepartmentDto(
     val name: String,
     @SerializedName("staff")
     @Expose
-    val staff: List<EmployeeDto>?
+    val staff: List<EmployeeDto>? = null
 )

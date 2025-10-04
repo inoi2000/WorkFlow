@@ -12,5 +12,8 @@ data class PositionDto(
     val name: String,
     @SerializedName("level")
     @Expose
-    val level: Int
+    val level: Int,
+    @SerializedName("requires_special_documents")
+    @Expose
+    val requiresSpecialDocuments: Boolean,
 )

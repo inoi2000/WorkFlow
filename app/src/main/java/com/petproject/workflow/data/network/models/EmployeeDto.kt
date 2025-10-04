@@ -10,13 +10,16 @@ data class EmployeeDto(
     @SerializedName("name")
     @Expose
     val name: String,
+    @SerializedName("phone")
+    @Expose
+    val phone: String,
+    @SerializedName("email")
+    @Expose
+    val email: String,
     @SerializedName("position")
     @Expose
-    val position: PositionDto?,
-    @SerializedName("absence")
-    @Expose
-    val absence: List<AbsenceDto>?,
+    val position: PositionDto? = null,
     @SerializedName("department")
     @Expose
-    val department: DepartmentDto?,
+    val department: DepartmentDto? = null
 )

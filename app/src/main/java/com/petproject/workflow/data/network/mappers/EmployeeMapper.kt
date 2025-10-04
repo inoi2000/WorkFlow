@@ -9,16 +9,16 @@ import javax.inject.Inject
 class EmployeeMapper @Inject constructor(
     private val positionMapper: PositionMapper,
     private val departmentMapper: DepartmentMapper,
-    private val absenceMapper: AbsenceMapper
 )  {
 
     fun mapDtoToEntity(dto: EmployeeDto): Employee {
         return Employee(
             id = dto.id,
             name = dto.name,
+            phone = dto.phone,
+            email = dto.email,
             position = dto.position?.let { positionMapper.mapDtoToEntity(it) },
-            department = dto.department?.let { departmentMapper.mapDtoToEntity(it) },
-            absences = dto.absence?.map { absenceMapper.mapDtoToEntity(it) },
+            department = dto.department?.let { departmentMapper.mapDtoToEntity(it) }
         )
     }
 
@@ -26,9 +26,10 @@ class EmployeeMapper @Inject constructor(
         return EmployeeDto(
             id = entity.id,
             name = entity.name,
+            phone = entity.phone,
+            email = entity.email,
             position = entity.position?.let { positionMapper.mapEntityToDto(it) },
-            absence = null,
-            department = null
+            department = entity.department?.let { departmentMapper.mapEntityToDto(it) }
         )
     }
 }

@@ -4,5 +4,7 @@ enum class Role {
     ROLE_DIRECTOR,
     ROLE_HR,
     ROLE_DRIVER,
-    ROLE_ADMIN
+    ROLE_INDUSTRIAL_SECURITY,
+    ROLE_ADMIN,
+    ROLE_USER
 }
