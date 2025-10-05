@@ -11,7 +11,7 @@ import java.time.LocalDateTime
 data class AccessDto(
     @SerializedName("id")
     @Expose
-    val id: String,
+    val id: String = "",
     @SerializedName("created_at")
     @Expose
     val createdAt: LocalDateTime,

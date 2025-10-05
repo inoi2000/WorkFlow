@@ -6,35 +6,35 @@ import com.google.gson.annotations.SerializedName
 data class TaskDto(
     @SerializedName("id")
     @Expose
-    val id: String,
+    val id: String = "",
     @SerializedName("description")
     @Expose
-    val description: String,
+    val description: String = "",
     @SerializedName("status")
     @Expose
-    val status: String,
+    val status: String = "",
     @SerializedName("priority")
     @Expose
-    val priority: String,
+    val priority: String = "",
     @SerializedName("destination")
     @Expose
-    val destination: String?,
+    val destination: String? = null,
     @SerializedName("creation")
     @Expose
-    val creation: String?,
+    val creation: String? = null,
     @SerializedName("deadline")
     @Expose
-    val deadline: String?,
+    val deadline: String? = null,
     @SerializedName("executor")
     @Expose
-    val executor: EmployeeDto?,
+    val executor: EmployeeDto? = null,
     @SerializedName("inspector")
     @Expose
-    val inspector: EmployeeDto?,
+    val inspector: EmployeeDto? = null,
     @SerializedName("shouldBeInspected")
     @Expose
-    val shouldBeInspected: Boolean,
+    val shouldBeInspected: Boolean = false,
     @SerializedName("comments")
     @Expose
-    val comments: List<CommentDto>,
+    val comments: List<CommentDto> = listOf(),
 )
