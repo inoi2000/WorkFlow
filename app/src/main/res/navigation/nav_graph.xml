@@ -39,7 +39,11 @@
         android:id="@+id/accountFragment"
         android:name="com.petproject.workflow.presentation.views.AccountFragment"
         android:label="fragment_account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_accessListFragment"
+            app:destination="@id/accessListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.petproject.workflow.presentation.views.AnnouncementListFragment"
@@ -198,4 +202,9 @@
             android:name="commentsCount"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/accessListFragment"
+        android:name="com.petproject.workflow.presentation.views.AccessListFragment"
+        android:label="fragment_access_list"
+        tools:layout="@layout/fragment_access_list" />
 </navigation>

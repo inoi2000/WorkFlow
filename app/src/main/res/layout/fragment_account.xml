@@ -180,7 +180,7 @@
 
                     <!-- Permissions Item -->
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/permissions_layout"
+                        android:id="@+id/access_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="12dp"
@@ -196,12 +196,12 @@
                             android:textSize="15sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/permissions_arrow"
+                            app:layout_constraintEnd_toStartOf="@+id/access_arrow"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
-                            android:id="@+id/permissions_arrow"
+                            android:id="@+id/access_arrow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:contentDescription="@string/arrow_forward"

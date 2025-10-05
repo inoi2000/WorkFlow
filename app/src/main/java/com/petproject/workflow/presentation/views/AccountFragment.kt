@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentAccountBinding
+import com.petproject.workflow.domain.entities.AbsenceType
 import com.petproject.workflow.presentation.utils.launchAndCollectIn
 import com.petproject.workflow.presentation.viewmodels.AccountViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
@@ -55,6 +57,15 @@ class AccountFragment : Fragment() {
         }
         observeViewModel()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.accessLayout.setOnClickListener {
+            val action = AccountFragmentDirections
+                .actionAccountFragmentToAccessListFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun observeViewModel() {

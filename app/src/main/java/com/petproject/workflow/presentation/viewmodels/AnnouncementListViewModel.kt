@@ -9,7 +9,7 @@ import com.petproject.workflow.domain.usecases.GetAllAnnouncementUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AnnouncementViewModel @Inject constructor(
+class AnnouncementListViewModel @Inject constructor(
     private val getAllAnnouncementUseCase: GetAllAnnouncementUseCase
 ): ViewModel() {
 

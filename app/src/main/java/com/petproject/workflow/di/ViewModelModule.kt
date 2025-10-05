@@ -2,14 +2,16 @@ package com.petproject.workflow.di
 
 import androidx.lifecycle.ViewModel
 import com.petproject.workflow.presentation.viewmodels.AbsenceViewModel
+import com.petproject.workflow.presentation.viewmodels.AccessListViewModel
 import com.petproject.workflow.presentation.viewmodels.AccountViewModel
-import com.petproject.workflow.presentation.viewmodels.AnnouncementViewModel
+import com.petproject.workflow.presentation.viewmodels.AnnouncementListViewModel
+import com.petproject.workflow.presentation.viewmodels.AuthViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateTaskAddDetailsViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateTaskDoneViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateTaskSelectionEmployeeViewModel
 import com.petproject.workflow.presentation.viewmodels.ExecutorTaskListViewModel
 import com.petproject.workflow.presentation.viewmodels.InspectorTaskListViewModel
-import com.petproject.workflow.presentation.viewmodels.AuthViewModel
+import com.petproject.workflow.presentation.viewmodels.InstructionListViewModel
 import com.petproject.workflow.presentation.viewmodels.ServiceListViewModel
 import dagger.Binds
 import dagger.Module
@@ -49,9 +51,19 @@ interface ViewModelModule {
     fun bindAbsenceViewModel(impl: AbsenceViewModel): ViewModel
 
     @IntoMap
-    @ViewModelKey(AnnouncementViewModel::class)
+    @ViewModelKey(AnnouncementListViewModel::class)
     @Binds
-    fun bindAnnouncementListViewModel(impl: AnnouncementViewModel): ViewModel
+    fun bindAnnouncementListViewModel(impl: AnnouncementListViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(AccessListViewModel::class)
+    @Binds
+    fun bindAccessListViewModel(impl: AccessListViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(InstructionListViewModel::class)
+    @Binds
+    fun bindInstructionListViewModel(impl: InstructionListViewModel): ViewModel
 
     @IntoMap
     @ViewModelKey(CreateTaskSelectionEmployeeViewModel::class)

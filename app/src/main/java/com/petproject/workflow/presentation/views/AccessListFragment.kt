@@ -7,15 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.petproject.workflow.WorkFlowApplication
-import com.petproject.workflow.databinding.FragmentAnnouncementListBinding
-import com.petproject.workflow.presentation.viewmodels.AnnouncementListViewModel
+import com.petproject.workflow.databinding.FragmentAccessListBinding
+import com.petproject.workflow.presentation.viewmodels.AccessListViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
-import com.petproject.workflow.presentation.views.adapters.AnnouncementAdapter
+import com.petproject.workflow.presentation.views.adapters.AccessAdapter
 import javax.inject.Inject
 
-class AnnouncementListFragment : Fragment() {
-    private var _binding: FragmentAnnouncementListBinding? = null
-    private val binding: FragmentAnnouncementListBinding get() = _binding!!
+class AccessListFragment : Fragment() {
+    private var _binding: FragmentAccessListBinding? = null
+    private val binding: FragmentAccessListBinding get() = _binding!!
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -24,7 +24,7 @@ class AnnouncementListFragment : Fragment() {
         ViewModelProvider.create(
             viewModelStore,
             viewModelFactory
-        )[AnnouncementListViewModel::class]
+        )[AccessListViewModel::class]
     }
 
     private val component by lazy {
@@ -36,17 +36,17 @@ class AnnouncementListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         component.inject(this)
-        _binding = FragmentAnnouncementListBinding.inflate(inflater, container, false)
+        _binding = FragmentAccessListBinding.inflate(inflater, container, false)
         setRecyclerView()
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     private fun setRecyclerView() {
-        val adapter = AnnouncementAdapter()
-        binding.announcementListRecyclerView.itemAnimator = null
-        binding.announcementListRecyclerView.adapter = adapter
-        viewModel.announcementList.observe(viewLifecycleOwner) {
+        val adapter = AccessAdapter()
+        binding.accessListRecyclerView.itemAnimator = null
+        binding.accessListRecyclerView.adapter = adapter
+        viewModel.accessList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
     }
@@ -55,4 +55,5 @@ class AnnouncementListFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

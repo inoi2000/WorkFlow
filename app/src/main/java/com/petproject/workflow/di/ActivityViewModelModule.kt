@@ -1,7 +1,6 @@
 package com.petproject.workflow.di
 
 import androidx.lifecycle.ViewModel
-import com.petproject.workflow.presentation.viewmodels.AnnouncementViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateTaskCommentViewModel
 import com.petproject.workflow.presentation.viewmodels.ExecutorTaskInfoViewModel
 import com.petproject.workflow.presentation.viewmodels.HomeViewModel
