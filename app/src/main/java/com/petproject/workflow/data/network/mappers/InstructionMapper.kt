@@ -13,13 +13,12 @@ class InstructionMapper @Inject constructor() {
             id = dto.id,
             createdAt = dto.createdAt,
             updatedAt = dto.updatedAt,
-            data = dto.data,
             status = dto.status,
-            isConfirmed = dto.isConfirmed,
             instructorId = dto.instructorId,
-            employeeId = dto.employeeId,
-            confirmedAt = dto.confirmedAt,
-            validUntil = dto.validUntil
+            data = dto.data,
+            validUntil = dto.validUntil,
+            instructionConfirmation = dto.instructionConfirmation,
+            instructionConfirmations = dto.instructionConfirmations
         )
     }
 
@@ -28,13 +27,12 @@ class InstructionMapper @Inject constructor() {
             id = entity.id,
             createdAt = entity.createdAt,
             updatedAt = entity.updatedAt,
-            data = entity.data,
             status = entity.status,
-            isConfirmed = entity.isConfirmed,
             instructorId = entity.instructorId,
-            employeeId = entity.employeeId,
-            confirmedAt = entity.confirmedAt,
-            validUntil = entity.validUntil
+            data = entity.data,
+            validUntil = entity.validUntil,
+            instructionConfirmation = entity.instructionConfirmation,
+            instructionConfirmations = entity.instructionConfirmations
         )
     }
 }

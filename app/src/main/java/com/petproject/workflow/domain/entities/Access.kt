@@ -11,9 +11,9 @@ data class Access(
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime,
     val type: AccessDurationType,
-    val data: String,
     val status: DocumentStatus,
     val issuerId: String,
     val holderId: String,
+    val data: Data,
     val validUntil: LocalDate? = null,
 ): Parcelable

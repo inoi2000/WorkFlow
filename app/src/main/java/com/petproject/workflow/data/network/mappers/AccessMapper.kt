@@ -14,10 +14,10 @@ class AccessMapper @Inject constructor() {
             createdAt = dto.createdAt,
             updatedAt = dto.updatedAt,
             type = dto.type,
-            data = dto.data,
             status = dto.status,
             issuerId = dto.issuerId,
             holderId = dto.holderId,
+            data = dto.data,
             validUntil = dto.validUntil
         )
     }
@@ -28,10 +28,10 @@ class AccessMapper @Inject constructor() {
             createdAt = entity.createdAt,
             updatedAt = entity.updatedAt,
             type = entity.type,
-            data = entity.data,
             status = entity.status,
             issuerId = entity.issuerId,
             holderId = entity.holderId,
+            data = entity.data,
             validUntil = entity.validUntil
         )
     }

@@ -2,7 +2,9 @@ package com.petproject.workflow.data.network.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.petproject.workflow.domain.entities.Data
 import com.petproject.workflow.domain.entities.DocumentStatus
+import com.petproject.workflow.domain.entities.InstructionConfirmation
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -16,25 +18,22 @@ data class InstructionDto(
     @SerializedName("updated_at")
     @Expose
     val updatedAt: LocalDateTime,
-    @SerializedName("data")
-    @Expose
-    val data: String,
     @SerializedName("status")
     @Expose
     val status: DocumentStatus,
-    @SerializedName("is_confirmed")
-    @Expose
-    val isConfirmed: Boolean,
     @SerializedName("instructor_id")
     @Expose
     val instructorId: String,
-    @SerializedName("employee_id")
+    @SerializedName("data")
     @Expose
-    val employeeId: String,
-    @SerializedName("confirmed_at")
-    @Expose
-    val confirmedAt: LocalDateTime? = null,
+    val data: Data,
     @SerializedName("valid_until")
     @Expose
-    val validUntil: LocalDate? = null
+    val validUntil: LocalDate? = null,
+    @SerializedName("confirmation")
+    @Expose
+    val instructionConfirmation: InstructionConfirmation? = null,
+    @SerializedName("confirmations")
+    @Expose
+    val instructionConfirmations: List<InstructionConfirmation>? = null
 )

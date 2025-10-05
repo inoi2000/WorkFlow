@@ -7,14 +7,13 @@ import java.time.LocalDateTime
 
 @Parcelize
 class Instruction(
-    val id: String,
+    val id: String = "",
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime,
-    val data: String,
     val status: DocumentStatus,
-    val isConfirmed: Boolean,
     val instructorId: String,
-    val employeeId: String,
-    val confirmedAt: LocalDateTime? = null,
-    val validUntil: LocalDate? = null
+    val data: Data,
+    val validUntil: LocalDate? = null,
+    val instructionConfirmation: InstructionConfirmation?,
+    val instructionConfirmations: List<InstructionConfirmation>?
 ): Parcelable

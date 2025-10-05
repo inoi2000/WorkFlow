@@ -3,6 +3,7 @@ package com.petproject.workflow.data.network.models
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.petproject.workflow.domain.entities.AccessDurationType
+import com.petproject.workflow.domain.entities.Data
 import com.petproject.workflow.domain.entities.DocumentStatus
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -20,9 +21,6 @@ data class AccessDto(
     @SerializedName("type")
     @Expose
     val type: AccessDurationType,
-    @SerializedName("data")
-    @Expose
-    val data: String,
     @SerializedName("status")
     @Expose
     val status: DocumentStatus,
@@ -32,6 +30,9 @@ data class AccessDto(
     @SerializedName("holder_id")
     @Expose
     val holderId: String,
+    @SerializedName("data")
+    @Expose
+    val data: Data,
     @SerializedName("valid_until")
     @Expose
     val validUntil: LocalDate? = null
