@@ -6,11 +6,14 @@ import com.google.gson.annotations.SerializedName
 data class PositionDto(
     @SerializedName("id")
     @Expose
-    val id: String,
+    val id: String = "",
     @SerializedName("name")
     @Expose
-    val name: String,
+    val name: String = "",
     @SerializedName("level")
     @Expose
-    val level: Int
+    val level: Int = 0,
+    @SerializedName("requires_special_documents")
+    @Expose
+    val requiresSpecialDocuments: Boolean = false,
 )

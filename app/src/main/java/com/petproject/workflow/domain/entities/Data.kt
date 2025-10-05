@@ -4,9 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Position(
-    val id: String,
-    val name: String,
-    val level: Int,
-    val requiresSpecialDocuments: Boolean
+data class Data(
+    val id: String = "",
+    val text: String
 ) : Parcelable

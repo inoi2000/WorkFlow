@@ -1,6 +1,7 @@
 package com.petproject.workflow.data.network.mappers
 
 import com.petproject.workflow.data.network.models.DepartmentDto
+import com.petproject.workflow.data.network.models.EmployeeDto
 import com.petproject.workflow.di.ApplicationScope
 import com.petproject.workflow.domain.entities.Department
 import com.petproject.workflow.domain.entities.Employee
@@ -17,6 +18,23 @@ class DepartmentMapper @Inject constructor() {
                 Employee(
                     id = it.id,
                     name = it.name,
+                    phone = it.phone,
+                    email = it.email
+                )
+            }
+        )
+    }
+
+    fun mapEntityToDto(entity: Department): DepartmentDto {
+        return DepartmentDto(
+            id = entity.id,
+            name = entity.name,
+            staff = entity.staff?.map {
+                EmployeeDto(
+                    id = it.id,
+                    name = it.name,
+                    phone = it.phone,
+                    email = it.email
                 )
             }
         )

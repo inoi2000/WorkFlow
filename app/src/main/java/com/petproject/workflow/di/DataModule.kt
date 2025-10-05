@@ -2,10 +2,12 @@ package com.petproject.workflow.di
 
 import android.content.Context
 import com.petproject.workflow.data.network.AbsenceApiService
+import com.petproject.workflow.data.network.AccessApiService
 import com.petproject.workflow.data.network.AnnouncementApiService
 import com.petproject.workflow.data.network.ApiFactory
 import com.petproject.workflow.data.network.CommentApiService
 import com.petproject.workflow.data.network.EmployeeApiService
+import com.petproject.workflow.data.network.InstructionApiService
 import com.petproject.workflow.data.network.TaskApiService
 import com.petproject.workflow.data.network.utils.AuthFailedInterceptor
 import com.petproject.workflow.data.network.utils.AuthInterceptor
@@ -21,6 +23,16 @@ class DataModule {
     @Provides
     fun provideEmployeeApiService(apiFactory: ApiFactory): EmployeeApiService {
         return apiFactory.employeeApiService
+    }
+
+    @Provides
+    fun provideAccessApiService(apiFactory: ApiFactory): AccessApiService {
+        return apiFactory.accessApiService
+    }
+
+    @Provides
+    fun provideInstructionApiService(apiFactory: ApiFactory): InstructionApiService {
+        return apiFactory.instructionApiService
     }
 
     @Provides
