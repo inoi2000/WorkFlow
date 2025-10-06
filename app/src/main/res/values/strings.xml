@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">WorkFlow</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="email_hint">Your email:</string>
     <string name="login_button_text">login</string>
     <string name="forgot_password">Forgot password ?</string>
@@ -15,7 +13,6 @@
     <string name="account">Account</string>
     <string name="colleagues_services_news">Colleagues, services, news</string>
     <string name="component_logo">component logo</string>
-
     <string name="on_your_approval">On your approval</string>
     <string name="tasks">Tasks</string>
     <string name="mentoring">Mentoring</string>
@@ -24,10 +21,8 @@
     <string name="more">more</string>
     <string name="tasks_count">%d task(s)</string>
     <string name="business_trips_text">%s, %s</string>
-
     <string name="approval">Approval</string>
     <string name="not_approval">Not approval</string>
-
     <string name="completed">Completed</string>
     <string name="not_completed">Not completed</string>
     <string name="in_progress">In progress</string>
@@ -48,7 +43,6 @@
     <string name="priority">Priority</string>
     <string name="inspector">Inspector</string>
     <string name="send_for_approval">Send for approval</string>
-
     <string-array name="task_status_array">
         <item>Status</item>
         <item>New</item>
@@ -74,7 +68,6 @@
     <string name="vacations">Vacations</string>
     <string name="day_off">Day off</string>
     <string name="days_off">Days off</string>
-
     <string name="from_to_template">From %s to %s</string>
     <string name="all_assignment">All assignment</string>
     <string name="my_assignment">My assignment</string>
@@ -107,5 +100,24 @@
     <string name="accesses">Accesses</string>
     <string name="instructions">Instructions</string>
 
+    <!-- Статусы документов -->
+    <string name="status_valid">Автивный</string>
+    <string name="status_expired">Истек</string>
+    <string name="status_expiring">Истекает</string>
+
+    <!-- Типы доступа -->
+    <string name="access_type_temporary">Временный</string>
+    <string name="access_type_permanent">Постоянный</string>
+    <string name="access_type_one_time">Одноразовый</string>
+
+    <!-- Форматы дат -->
+    <string name="created_at_format">Создан: %s</string>
+    <string name="updated_at_format">Обновлен: %s</string>
+    <string name="valid_until_format">Действует до: %s</string>
+
+    <!-- Сообщения -->
+    <string name="no_accesses_title">Нет допусков</string>
+    <string name="no_accesses_message">У вас пока нет активных допусков. Они появятся здесь после создания.</string>
+    <string name="retry">Повторить</string>
 
 </resources>

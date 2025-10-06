@@ -44,7 +44,6 @@
     <string name="priority">Приоритет</string>
     <string name="inspector">Инспектор</string>
     <string name="send_for_approval">Отправить на утверждение</string>
-
     <string-array name="task_status_array">
         <item>Статус</item>
         <item>Новая</item>
@@ -70,9 +69,7 @@
     <string name="vacations">Отпуска</string>
     <string name="day_off">Отгул</string>
     <string name="days_off">Отгулы</string>
-
     <string name="from_to_template">От %s по %s</string>
-
     <string name="all_assignment">Все поручения</string>
     <string name="my_assignment">Мои поручения</string>
     <string name="add_comment">Add comment</string>
@@ -99,8 +96,29 @@
     <string name="reject_task">Отправить задачу на доработку</string>
     <string name="phone_icon">Иконка телефона</string>
     <string name="email_icon">Иконка почты</string>
+    <string name="info_icon">Иконка информации</string>
     <string name="arrow_forward">Направленная стрелка</string>
     <string name="accesses">Допуски</string>
     <string name="instructions">Инструктажи</string>
+
+    <!-- Статусы документов -->
+    <string name="status_valid">Действует</string>
+    <string name="status_expired">Истек</string>
+    <string name="status_expiring">Истекает</string>
+
+    <!-- Типы доступа -->
+    <string name="access_type_temporary">Временный</string>
+    <string name="access_type_permanent">Постоянный</string>
+    <string name="access_type_one_time">Одноразовый</string>
+
+    <!-- Форматы дат -->
+    <string name="created_at_format">Создан: %s</string>
+    <string name="updated_at_format">Обновлен: %s</string>
+    <string name="valid_until_format">Действует до: %s</string>
+
+    <!-- Сообщения -->
+    <string name="no_accesses_title">Нет допусков</string>
+    <string name="no_accesses_message">У вас пока нет активных допусков. Они появятся здесь после создания.</string>
+    <string name="retry">Повторить</string>
 
 </resources>

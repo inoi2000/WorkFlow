@@ -14,16 +14,16 @@ data class AccessDto(
     val id: String = "",
     @SerializedName("created_at")
     @Expose
-    val createdAt: LocalDateTime,
+    val createdAt: String,
     @SerializedName("updated_at")
     @Expose
-    val updatedAt: LocalDateTime,
+    val updatedAt: String,
     @SerializedName("type")
     @Expose
-    val type: AccessDurationType,
+    val type: String,
     @SerializedName("status")
     @Expose
-    val status: DocumentStatus,
+    val status: String,
     @SerializedName("issuer_id")
     @Expose
     val issuerId: String,
@@ -35,5 +35,5 @@ data class AccessDto(
     val data: Data,
     @SerializedName("valid_until")
     @Expose
-    val validUntil: LocalDate? = null
+    val validUntil: String? = null
 )

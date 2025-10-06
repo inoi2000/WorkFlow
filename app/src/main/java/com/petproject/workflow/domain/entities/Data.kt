@@ -6,5 +6,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Data(
     val id: String = "",
-    val text: String
+    val title: String = "",
+    val content: String = ""
 ) : Parcelable
