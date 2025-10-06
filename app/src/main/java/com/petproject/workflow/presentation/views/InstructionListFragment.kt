@@ -1,60 +1,58 @@
 package com.petproject.workflow.presentation.views
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.petproject.workflow.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.petproject.workflow.WorkFlowApplication
+import com.petproject.workflow.databinding.FragmentInstructionListBinding
+import com.petproject.workflow.presentation.viewmodels.InstructionListViewModel
+import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
+import com.petproject.workflow.presentation.views.adapters.InstructionAdapter
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [InstructionListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class InstructionListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentInstructionListBinding? = null
+    private val binding: FragmentInstructionListBinding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val viewModel by lazy {
+        ViewModelProvider.create(
+            viewModelStore,
+            viewModelFactory
+        )[InstructionListViewModel::class]
+    }
+
+    private val component by lazy {
+        (requireActivity().application as WorkFlowApplication).component
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_instruction_list, container, false)
+    ): View {
+        component.inject(this)
+        _binding = FragmentInstructionListBinding.inflate(inflater, container, false)
+        setRecyclerView()
+        binding.lifecycleOwner = viewLifecycleOwner
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment InstructionListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            InstructionListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun setRecyclerView() {
+        val adapter = InstructionAdapter()
+        binding.instructionListRecyclerView.itemAnimator = null
+        binding.instructionListRecyclerView.adapter = adapter
+        viewModel.instructionList.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

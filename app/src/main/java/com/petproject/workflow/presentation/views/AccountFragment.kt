@@ -66,6 +66,11 @@ class AccountFragment : Fragment() {
                 .actionAccountFragmentToAccessListFragment()
             findNavController().navigate(action)
         }
+        binding.instructionsLayout.setOnClickListener {
+            val action = AccountFragmentDirections
+                .actionAccountFragmentToInstructionListFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun observeViewModel() {

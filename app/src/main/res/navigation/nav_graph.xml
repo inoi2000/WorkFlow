@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_accountFragment_to_accessListFragment"
             app:destination="@id/accessListFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_instructionListFragment"
+            app:destination="@id/instructionListFragment" />
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
@@ -207,4 +210,9 @@
         android:name="com.petproject.workflow.presentation.views.AccessListFragment"
         android:label="fragment_access_list"
         tools:layout="@layout/fragment_access_list" />
+    <fragment
+        android:id="@+id/instructionListFragment"
+        android:name="com.petproject.workflow.presentation.views.InstructionListFragment"
+        android:label="fragment_instruction_list"
+        tools:layout="@layout/fragment_instruction_list" />
 </navigation>

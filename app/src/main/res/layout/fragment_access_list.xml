@@ -127,7 +127,9 @@
                         android:paddingVertical="8dp"
                         android:visibility="gone"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_access_info" />
+                        tools:listitem="@layout/item_access_info"
+                        tools:visibility="visible"
+                        tools:itemCount="5"/>
 
                 </LinearLayout>
 
