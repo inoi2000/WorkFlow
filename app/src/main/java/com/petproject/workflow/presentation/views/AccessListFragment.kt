@@ -37,23 +37,96 @@ class AccessListFragment : Fragment() {
     ): View {
         component.inject(this)
         _binding = FragmentAccessListBinding.inflate(inflater, container, false)
-        setRecyclerView()
-        binding.lifecycleOwner = viewLifecycleOwner
+        setupUI()
+        observeViewModel()
         return binding.root
     }
 
-    private fun setRecyclerView() {
+    private fun setupUI() {
+        setupRecyclerView()
+        setupSwipeRefresh()
+        setupErrorHandling()
+    }
+
+    private fun setupRecyclerView() {
         val adapter = AccessAdapter()
-        binding.accessListRecyclerView.itemAnimator = null
         binding.accessListRecyclerView.adapter = adapter
-        viewModel.accessList.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+        binding.accessListRecyclerView.itemAnimator = null
+    }
+
+    private fun setupSwipeRefresh() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.refreshData()
         }
+
+        binding.swipeRefreshLayout.setColorSchemeColors(
+            requireContext().getColor(com.petproject.workflow.R.color.main_blue)
+        )
+    }
+
+    private fun setupErrorHandling() {
+        binding.retryButton.setOnClickListener {
+            viewModel.refreshData()
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.accessList.observe(viewLifecycleOwner) { accesses ->
+            binding.swipeRefreshLayout.isRefreshing = false
+
+            if (accesses.isNullOrEmpty()) {
+                showEmptyState()
+            } else {
+                showContent()
+                (binding.accessListRecyclerView.adapter as AccessAdapter).submitList(accesses)
+            }
+        }
+
+        viewModel.loadingState.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading && (viewModel.accessList.value.isNullOrEmpty())) {
+                showLoading()
+            }
+        }
+
+        viewModel.errorState.observe(viewLifecycleOwner) { error ->
+            binding.swipeRefreshLayout.isRefreshing = false
+            error?.let {
+                showError(it)
+            }
+        }
+    }
+
+    private fun showLoading() {
+        binding.loadingState.visibility = View.VISIBLE
+        binding.errorState.visibility = View.GONE
+        binding.emptyState.visibility = View.GONE
+        binding.accessListRecyclerView.visibility = View.GONE
+    }
+
+    private fun showContent() {
+        binding.loadingState.visibility = View.GONE
+        binding.errorState.visibility = View.GONE
+        binding.emptyState.visibility = View.GONE
+        binding.accessListRecyclerView.visibility = View.VISIBLE
+    }
+
+    private fun showError(errorMessage: String) {
+        binding.loadingState.visibility = View.GONE
+        binding.errorState.visibility = View.VISIBLE
+        binding.emptyState.visibility = View.GONE
+        binding.accessListRecyclerView.visibility = View.GONE
+        binding.errorText.text = errorMessage
+    }
+
+    private fun showEmptyState() {
+        binding.loadingState.visibility = View.GONE
+        binding.errorState.visibility = View.GONE
+        binding.emptyState.visibility = View.VISIBLE
+        binding.accessListRecyclerView.visibility = View.GONE
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }
