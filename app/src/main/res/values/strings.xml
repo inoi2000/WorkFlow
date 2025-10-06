@@ -100,5 +100,24 @@
     <string name="accesses">Accesses</string>
     <string name="instructions">Instructions</string>
 
+    <!-- Статусы документов -->
+    <string name="status_valid">Автивный</string>
+    <string name="status_expired">Истек</string>
+    <string name="status_expiring">Истекает</string>
+
+    <!-- Типы доступа -->
+    <string name="access_type_temporary">Временный</string>
+    <string name="access_type_permanent">Постоянный</string>
+    <string name="access_type_one_time">Одноразовый</string>
+
+    <!-- Форматы дат -->
+    <string name="created_at_format">Создан: %s</string>
+    <string name="updated_at_format">Обновлен: %s</string>
+    <string name="valid_until_format">Действует до: %s</string>
+
+    <!-- Сообщения -->
+    <string name="no_accesses_title">Нет допусков</string>
+    <string name="no_accesses_message">У вас пока нет активных допусков. Они появятся здесь после создания.</string>
+    <string name="retry">Повторить</string>
 
 </resources>

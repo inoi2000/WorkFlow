@@ -10,109 +10,144 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
+        style="@style/AppMaterialCardViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="4dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="2dp"
-        app:strokeWidth="1dp">
+        android:layout_marginVertical="4dp">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:padding="16dp">
 
-            <!-- Индикатор статуса -->
-            <View
-                android:id="@+id/statusIndicator"
-                android:layout_width="4dp"
-                android:layout_height="match_parent"
-                android:background="@color/grey_light" />
-
-            <LinearLayout
+            <!-- Заголовок и статус -->
+            <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{access.data.title}"
+                android:textColor="@color/grey_for_text"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/status_chip"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Допуск к работе на высоте" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/status_chip"
+                style="@style/StatusChip"
+                app:chipIconTint="@color/white"
+                app:iconEndPadding="3dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_title"
+                tools:backgroundTint="@color/green"
+                tools:chipIcon="@drawable/ic_person"
+                tools:text="Активный"
+                tools:textColor="@color/white" />
+
+            <!-- Описание -->
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{access.data.content}"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                tools:text="Разрешение на проведение работ на высоте более 1.8 метра" />
+
+            <!-- Разделитель -->
+            <View
+                android:id="@+id/divider"
+                style="@style/HorizontalLineView"
+                android:layout_marginVertical="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+
+            <!-- Информация о датах -->
+            <LinearLayout
+                android:id="@+id/layout_dates"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical"
-                android:padding="16dp">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider">
 
-                <!-- Заголовок и статус -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/accessTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@{access.data.text}"
-                        android:textAppearance="?attr/textAppearanceTitleMedium"
-                        android:textColor="?attr/colorOnSurface"
-                        tools:text="Допуск к работе на высоте" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/statusChip"
-                        style="@style/StatusChip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="Активен" />
-
-                </LinearLayout>
-
-                <!-- Тип допуска -->
                 <TextView
-                    android:id="@+id/accessType"
+                    android:id="@+id/tv_created_at"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textAppearance="?attr/textAppearanceBodySmall"
+                    android:textAppearance="?attr/textAppearanceCaption"
                     android:textColor="?attr/colorOnSurfaceVariant"
-                    tools:text="Временный" />
+                    tools:text="Создан: 15.11.2023 14:30" />
 
-                <!-- Срок действия -->
                 <TextView
-                    android:id="@+id/validUntil"
+                    android:id="@+id/tv_updated_at"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textAppearance="?attr/textAppearanceBodySmall"
+                    android:textAppearance="?attr/textAppearanceCaption"
                     android:textColor="?attr/colorOnSurfaceVariant"
-                    tools:text="Действует до: 15.12.2024" />
+                    tools:text="Обновлен: 20.11.2023 10:15" />
 
-                <!-- Даты создания и обновления -->
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tv_valid_until"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/createdAt"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textAppearance="?attr/textAppearanceLabelSmall"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        tools:text="Создан: 01.11.2024 10:30" />
-
-                    <TextView
-                        android:id="@+id/updatedAt"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:textAppearance="?attr/textAppearanceLabelSmall"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        tools:text="Обновлен: 10.11.2024 14:20" />
-
-                </LinearLayout>
+                    android:textAppearance="?attr/textAppearanceCaption"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    tools:text="Действует до: 15.11.2024" />
 
             </LinearLayout>
 
-        </LinearLayout>
+            <!-- Тип доступа и идентификаторы -->
+            <LinearLayout
+                android:id="@+id/layout_meta"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_dates">
+
+                <TextView
+                    android:id="@+id/tv_access_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="?attr/textAppearanceCaption"
+                    android:textColor="?attr/colorPrimary"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    tools:text="Временный доступ" />
+
+                <TextView
+                    android:id="@+id/tv_access_id"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textAppearance="?attr/textAppearanceCaption"
+                    android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    tools:text="#550e8400" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
