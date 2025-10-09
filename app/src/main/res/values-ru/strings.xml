@@ -121,4 +121,14 @@
     <string name="no_accesses_message">У вас пока нет активных допусков. Они появятся здесь после создания.</string>
     <string name="retry">Повторить</string>
 
+    <!-- strings.xml -->
+    <string name="search_instructions">Поиск инструктажей…</string>
+    <string name="no_instructions_available">Нет доступных инструктажей</string>
+    <string name="error_loading_instructions">Ошибка загрузки инструктажей</string>
+    <string name="confirmed">Подтверждено</string>
+    <string name="not_confirmed">Не подтверждено</string>
+    <string name="confirmation_status">Статус подтверждения</string>
+    <string name="no_results_found">По запросу \"%s\" ничего не найдено</string>
+    <string name="confirmed_at_format">Подтверждено: %s</string>
+
 </resources>

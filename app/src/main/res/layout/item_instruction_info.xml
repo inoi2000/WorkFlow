@@ -4,23 +4,120 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="instruction"
             type="com.petproject.workflow.domain.entities.Instruction" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
+        style="@style/AppMaterialCardViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="8dp"
-        app:cardCornerRadius="12dp">
+        android:layout_marginVertical="4dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground">
 
-        <TextView
-            android:id="@+id/title_text_view"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="@{instruction.data.content}" />
-    </androidx.cardview.widget.CardView>
+            android:orientation="horizontal">
+
+            <!-- Status Indicator Line -->
+            <View
+                android:id="@+id/status_line_view"
+                style="@style/StatusLineView"
+                android:layout_marginStart="4dp" />
+
+            <!-- Content Area -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Header Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/title_text_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        tools:text="Инструктаж по технике безопасности" />
+
+                    <ImageView
+                        android:id="@+id/confirmation_status"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="8dp"
+                        tools:src="@drawable/ic_check_circle" />
+
+                </LinearLayout>
+
+                <!-- Status Chip and Date -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="8dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/status_chip"
+                        style="@style/StatusChip"
+                        app:chipCornerRadius="18dp"
+                        tools:text="Действует" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/updated_at_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="12sp"
+                        tools:text="15 дек 2024, 14:30" />
+
+                </LinearLayout>
+
+                <!-- Confirmation Date -->
+                <TextView
+                    android:id="@+id/confirmed_at_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="12sp"
+                    tools:text="Подтверждено: 15 дек 2024, 14:30" />
+
+                <!-- Valid Until Date -->
+                <TextView
+                    android:id="@+id/valid_until_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="12sp"
+                    tools:text="Действует до: 31 дек 2024" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </layout>

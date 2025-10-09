@@ -122,9 +122,9 @@ class AccessAdapter(
         private fun setupAccessType(type: AccessDurationType) {
             with(binding) {
                 tvAccessType.text = when (type) {
-                    AccessDurationType.TEMPORARY -> root.context.getString(R.string.access_type_temporary)
                     AccessDurationType.PERMANENT -> root.context.getString(R.string.access_type_permanent)
                     AccessDurationType.ONETIME -> root.context.getString(R.string.access_type_one_time)
+                    else -> root.context.getString(R.string.access_type_temporary)
                 }
             }
         }
