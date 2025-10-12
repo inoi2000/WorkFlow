@@ -129,4 +129,8 @@
     <string name="confirmation_status">Статус подтверждения</string>
     <string name="no_results_found">По запросу \"%s\" ничего не найдено</string>
     <string name="confirmed_at_format">Подтверждено: %s</string>
+
+    <string name="journeys">Journeys</string>
+    <string name="statements">Statements</string>
+    <string name="fuellings">Fuellings</string>
 </resources>
