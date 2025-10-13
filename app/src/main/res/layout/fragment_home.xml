@@ -40,17 +40,17 @@
                     android:inputType="textEmailAddress"
                     android:paddingVertical="8dp"
                     android:paddingStart="15dp"
-                    app:layout_constraintEnd_toStartOf="@+id/setting_image_view"
+                    app:layout_constraintEnd_toStartOf="@+id/notifications_image_view"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/setting_image_view"
+                    android:id="@+id/notifications_image_view"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="20dp"
                     android:contentDescription="@string/component_logo"
-                    android:src="@drawable/ic_settings"
+                    android:src="@drawable/ic_notifications"
                     app:layout_constraintBottom_toBottomOf="@+id/search_edit_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/search_edit_text"
@@ -421,7 +421,8 @@
                     android:layout_marginTop="16dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground">
+                    android:foreground="?attr/selectableItemBackground"
+                    app:onlyInspectorView="@{viewmodel.role}">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -495,6 +496,144 @@
 
                         <ImageView
                             android:id="@+id/executor_tasks_ref_ic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/component_logo"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:tint="?attr/colorOnSurface" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/statements_card_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:onlyLogistView="@{viewmodel.role}">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:id="@+id/statements_logo"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="@string/component_logo"
+                            android:src="@drawable/ic_statement"
+                            app:tint="?attr/colorPrimary" />
+
+                        <TextView
+                            android:id="@+id/statements_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:text="@string/statements"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/statements_ref_ic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/component_logo"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:tint="?attr/colorOnSurface" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/fuellings_card_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:onlyDriverView="@{viewmodel.role}">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:id="@+id/fuellings_logo"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="@string/component_logo"
+                            android:src="@drawable/ic_fuelling"
+                            app:tint="?attr/colorPrimary" />
+
+                        <TextView
+                            android:id="@+id/fuellings_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:text="@string/fuellings"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/fuellings_ref_ic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/component_logo"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:tint="?attr/colorOnSurface" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/journeys_card_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:onlyDriverView="@{viewmodel.role}">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:id="@+id/journeys_logo"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="@string/component_logo"
+                            android:src="@drawable/ic_journey"
+                            app:tint="?attr/colorPrimary" />
+
+                        <TextView
+                            android:id="@+id/journeys_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:text="@string/journeys"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/journeys_ref_ic"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:contentDescription="@string/component_logo"

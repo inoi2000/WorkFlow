@@ -76,6 +76,15 @@ class HomeFragment : Fragment() {
                 .actionHomeFragmentToExecutingTaskListFragment()
             findNavController().navigate(action)
         }
+        binding.journeysCardView.setOnClickListener {
+
+        }
+        binding.statementsCardView.setOnClickListener {
+
+        }
+        binding.fuellingsCardView.setOnClickListener {
+
+        }
 
         binding.othersCardView.setOnClickListener {
             val action = HomeFragmentDirections

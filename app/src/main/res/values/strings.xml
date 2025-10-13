@@ -11,7 +11,6 @@
     <string name="home">Home</string>
     <string name="announcements">Announcements</string>
     <string name="account">Account</string>
-    <string name="colleagues_services_news">Colleagues, services, news</string>
     <string name="component_logo">component logo</string>
     <string name="on_your_approval">On your approval</string>
     <string name="tasks">Tasks</string>
@@ -26,21 +25,14 @@
     <string name="completed">Completed</string>
     <string name="not_completed">Not completed</string>
     <string name="in_progress">In progress</string>
-    <string name="on_approval">On approval</string>
     <string name="app_logo">app logo</string>
     <string name="new_task">New</string>
     <string name="faild">Faild</string>
-    <string name="my_tasks">My tasks</string>
-    <string name="overdue_tasks">Overdue tasks</string>
-    <string name="urgent_tasks">Urgent tasks</string>
-    <string name="finished">Finished</string>
     <string name="urgent">Urgent</string>
     <string name="common">Common</string>
     <string name="details">Details</string>
     <string name="comments">Comments</string>
     <string name="description">Description</string>
-    <string name="status">Status</string>
-    <string name="priority">Priority</string>
     <string name="inspector">Inspector</string>
     <string name="send_for_approval">Send for approval</string>
     <string-array name="task_status_array">
@@ -129,4 +121,34 @@
     <string name="confirmation_status">Статус подтверждения</string>
     <string name="no_results_found">По запросу \"%s\" ничего не найдено</string>
     <string name="confirmed_at_format">Подтверждено: %s</string>
+
+    <string name="journeys">Journeys</string>
+    <string name="statements">Statements</string>
+    <string name="fuellings">Fuellings</string>
+
+    <!-- Existing strings -->
+    <string name="colleagues_services_news">Search tasks…</string>
+    <string name="my_tasks">My Tasks</string>
+    <string name="overdue_tasks">Overdue</string>
+    <string name="urgent_tasks">Urgent</string>
+    <string name="on_approval">On Approval</string>
+    <string name="finished">Finished</string>
+
+    <!-- Status strings -->
+    <string name="status_new">New</string>
+    <string name="status_in_progress">In Progress</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_failed">Failed</string>
+    <string name="status_on_approval">On Approval</string>
+    <string name="status_not_approval">Not Approved</string>
+    <string name="status_canceled">Canceled</string>
+
+    <!-- Priority strings -->
+    <string name="priority_common">Common</string>
+    <string name="priority_urgent">Urgent</string>
+
+    <!-- Filter strings -->
+    <string name="all">All</string>
+    <string name="status">Status</string>
+    <string name="priority">Priority</string>
 </resources>

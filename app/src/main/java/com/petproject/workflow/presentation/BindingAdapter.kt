@@ -51,6 +51,27 @@ fun bindOnlyInspectorView(view: View, role: Role) {
     }
 }
 
+@BindingAdapter("onlyDriverView")
+fun bindOnlyDriverView(view: View, role: Role) {
+    if (role != Role.ROLE_DRIVER) {
+        view.visibility = View.GONE
+    }
+}
+
+@BindingAdapter("onlyOperatorView")
+fun bindOnlyOperatorView(view: View, role: Role) {
+    if (role != Role.ROLE_OPERATOR) {
+        view.visibility = View.GONE
+    }
+}
+
+@BindingAdapter("onlyLogistView")
+fun bindOnlyLogistView(view: View, role: Role) {
+    if (role != Role.ROLE_LOGIST) {
+        view.visibility = View.GONE
+    }
+}
+
 @BindingAdapter("taskStatusColor")
 fun bindTaskStatusColor(view: View, status: TaskStatus?) {
     status?.let {

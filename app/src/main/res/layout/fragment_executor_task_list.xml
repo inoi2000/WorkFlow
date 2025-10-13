@@ -5,7 +5,6 @@
     tools:context=".presentation.views.ExecutorTaskListFragment">
 
     <data>
-
         <variable
             name="viewmodel"
             type="com.petproject.workflow.presentation.viewmodels.ExecutorTaskListViewModel" />
@@ -39,6 +38,7 @@
                     android:background="?attr/background"
                     app:layout_collapseMode="parallax">
 
+                    <!-- Improved Toolbar with better search -->
                     <com.google.android.material.appbar.MaterialToolbar
                         android:id="@+id/toolbar"
                         android:layout_width="match_parent"
@@ -49,27 +49,62 @@
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="RtlSymmetry">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_search"
+                        <com.google.android.material.card.MaterialCardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
                             android:layout_marginTop="12dp"
-                            android:layout_marginBottom="20dp"
-                            android:background="?attr/colorOnPrimary"
-                            android:hint="@string/colleagues_services_news"
-                            android:inputType="textEmailAddress"
-                            android:paddingVertical="8dp"
-                            android:paddingStart="15dp" />
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="12dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="2dp"
+                            app:strokeColor="?attr/colorOnPrimary"
+                            app:strokeWidth="1dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="8dp"
+                                android:paddingVertical="8dp">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginEnd="8dp"
+                                    android:src="@drawable/ic_search"
+                                    app:tint="?attr/colorOnPrimary" />
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/et_search"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@null"
+                                    android:hint="@string/colleagues_services_news"
+                                    android:inputType="text"
+                                    android:maxLines="1"
+                                    android:textColor="?attr/colorOnPrimary"
+                                    android:textColorHint="?attr/colorOnPrimary" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
                     </com.google.android.material.appbar.MaterialToolbar>
 
+                    <!-- Stats Cards - Completely original selector design -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/overdue_tasks_card_view"
                         android:layout_width="0dp"
                         android:layout_height="86dp"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="8dp"
                         app:cardCornerRadius="12dp"
+                        app:cardElevation="2dp"
                         app:layout_constraintBottom_toTopOf="@+id/on_approval_tasks_card_view"
                         app:layout_constraintEnd_toStartOf="@+id/guideline"
                         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -120,7 +155,6 @@
 
                         </FrameLayout>
 
-
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -129,9 +163,10 @@
                         android:layout_height="86dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="12dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginEnd="16dp"
                         android:minHeight="72dp"
                         app:cardCornerRadius="12dp"
+                        app:cardElevation="2dp"
                         app:layout_constraintBottom_toTopOf="@+id/finished_tasks_card_view"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/guideline"
@@ -142,6 +177,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/gradient_red">
+
                             <View
                                 android:id="@+id/urgent_tasks_selector"
                                 android:layout_width="match_parent"
@@ -155,7 +191,7 @@
                                 android:layout_width="26dp"
                                 android:layout_height="26dp"
                                 android:layout_margin="10dp"
-                                android:contentDescription="@string/overdue_tasks"
+                                android:contentDescription="@string/urgent_tasks"
                                 android:src="@drawable/ic_urgent" />
 
                             <TextView
@@ -179,17 +215,19 @@
                                 tools:text="0" />
 
                         </FrameLayout>
+
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/on_approval_tasks_card_view"
                         android:layout_width="0dp"
                         android:layout_height="86dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:minHeight="72dp"
                         app:cardCornerRadius="12dp"
+                        app:cardElevation="2dp"
                         app:layout_constraintEnd_toStartOf="@+id/guideline"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/overdue_tasks_card_view">
@@ -212,7 +250,7 @@
                                 android:layout_width="26dp"
                                 android:layout_height="26dp"
                                 android:layout_margin="10dp"
-                                android:contentDescription="@string/overdue_tasks"
+                                android:contentDescription="@string/on_approval"
                                 android:src="@drawable/ic_on_approval" />
 
                             <TextView
@@ -234,7 +272,9 @@
                                 android:text="@{viewmodel.onApprovalTasksCount.toString()}"
                                 android:textStyle="bold"
                                 tools:text="0" />
+
                         </FrameLayout>
+
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -242,10 +282,11 @@
                         android:layout_width="0dp"
                         android:layout_height="86dp"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
                         android:minHeight="72dp"
                         app:cardCornerRadius="12dp"
+                        app:cardElevation="2dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/guideline"
                         app:layout_constraintTop_toBottomOf="@+id/urgent_tasks_card_view">
@@ -268,7 +309,7 @@
                                 android:layout_width="26dp"
                                 android:layout_height="26dp"
                                 android:layout_margin="10dp"
-                                android:contentDescription="@string/overdue_tasks"
+                                android:contentDescription="@string/finished"
                                 android:src="@drawable/ic_done" />
 
                             <TextView
@@ -290,7 +331,9 @@
                                 android:text="@{viewmodel.finishedTasksCount.toString()}"
                                 android:textStyle="bold"
                                 tools:text="0" />
+
                         </FrameLayout>
+
                     </androidx.cardview.widget.CardView>
 
                     <androidx.constraintlayout.widget.Guideline
@@ -304,23 +347,27 @@
                         android:id="@+id/my_tasks_text_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
                         android:text="@string/my_tasks"
-                        android:textSize="27sp"
+                        android:textSize="22sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/on_approval_tasks_card_view" />
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/task_status_filter_card_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="12dp"
-                        app:cardCornerRadius="12dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardCornerRadius="18dp"
+                        app:cardElevation="1dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/my_tasks_text_view">
+                        app:layout_constraintTop_toBottomOf="@+id/my_tasks_text_view"
+                        app:layout_constraintEnd_toStartOf="@+id/task_priority_filter_card_view">
 
                         <Spinner
                             android:id="@+id/task_status_spinner"
@@ -331,29 +378,32 @@
                             android:background="@null"
                             android:entries="@array/task_status_array"
                             android:popupBackground="?attr/colorSecondary" />
+
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/task_priority_filter_card_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="4dp"
                         android:layout_marginTop="12dp"
-                        app:cardCornerRadius="12dp"
+                        android:layout_marginEnd="16dp"
+                        app:cardCornerRadius="18dp"
+                        app:cardElevation="1dp"
                         app:layout_constraintStart_toEndOf="@+id/task_status_filter_card_view"
-                        app:layout_constraintTop_toBottomOf="@+id/my_tasks_text_view">
+                        app:layout_constraintTop_toBottomOf="@+id/my_tasks_text_view"
+                        app:layout_constraintEnd_toEndOf="parent">
 
                         <Spinner
                             android:id="@+id/task_priority_spinner"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginHorizontal="6dp"
                             android:layout_marginVertical="4dp"
                             android:background="@null"
                             android:entries="@array/task_priority_array"
                             android:popupBackground="?attr/colorSecondary" />
                     </androidx.cardview.widget.CardView>
-
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

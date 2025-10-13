@@ -13,7 +13,6 @@
     <string name="home">Главная</string>
     <string name="announcements">Объявления</string>
     <string name="account">Профиль</string>
-    <string name="colleagues_services_news">Коллеги, сервисы, новости</string>
     <string name="component_logo">логотип компонента</string>
     <string name="on_your_approval">На вашем согласовании</string>
     <string name="tasks">Задачи</string>
@@ -22,26 +21,14 @@
     <string name="more">подробнее</string>
     <string name="tasks_count">%d задач(а)</string>
     <string name="business_trips_text">%s, %s</string>
-    <string name="approval">Согласованно</string>
-    <string name="not_approval">Не согласованно</string>
-    <string name="completed">Выполненно</string>
-    <string name="not_completed">Не выполненно</string>
-    <string name="in_progress">В работе</string>
-    <string name="on_approval">На согласовании</string>
     <string name="app_logo">Логотип</string>
     <string name="new_task">Новая</string>
     <string name="faild">Просрочено</string>
-    <string name="my_tasks">Мои задачи</string>
-    <string name="overdue_tasks">Просроченные задачи</string>
-    <string name="urgent_tasks">Срочные задачи</string>
-    <string name="finished">Завершенные</string>
     <string name="urgent">Срочная</string>
     <string name="common">Обычная</string>
     <string name="details">Детали</string>
     <string name="comments">Комментарии</string>
     <string name="description">Описание</string>
-    <string name="status">Статус</string>
-    <string name="priority">Приоритет</string>
     <string name="inspector">Инспектор</string>
     <string name="send_for_approval">Отправить на утверждение</string>
     <string-array name="task_status_array">
@@ -130,5 +117,41 @@
     <string name="confirmation_status">Статус подтверждения</string>
     <string name="no_results_found">По запросу \"%s\" ничего не найдено</string>
     <string name="confirmed_at_format">Подтверждено: %s</string>
+
+    <string name="journeys">Выезды</string>
+    <string name="statements">Заявки</string>
+    <string name="fuellings">Заправки</string>
+
+    <!-- Existing strings -->
+    <string name="colleagues_services_news">Коллеги, сервисы, новости</string>
+    <string name="my_tasks">Мои задачи</string>
+    <string name="overdue_tasks">Просроченные задачи</string>
+    <string name="urgent_tasks">Срочные задачи</string>
+    <string name="on_approval">На согласовании</string>
+    <string name="finished">Завершенные</string>
+
+    <!-- Status strings -->
+    <string name="status_new">Новые</string>
+    <string name="status_in_progress">In Progress</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_failed">Failed</string>
+    <string name="status_on_approval">On Approval</string>
+    <string name="status_not_approval">Not Approved</string>
+    <string name="status_canceled">Canceled</string>
+
+    <!-- Priority strings -->
+    <string name="priority_common">Common</string>
+    <string name="priority_urgent">Urgent</string>
+
+    <!-- Filter strings -->
+    <string name="all">Все</string>
+    <string name="status">Статус</string>
+    <string name="priority">Приоритет</string>
+
+    <string name="approval">Согласованно</string>
+    <string name="not_approval">Не согласованно</string>
+    <string name="completed">Выполненно</string>
+    <string name="not_completed">Не выполненно</string>
+    <string name="in_progress">В работе</string>
 
 </resources>
