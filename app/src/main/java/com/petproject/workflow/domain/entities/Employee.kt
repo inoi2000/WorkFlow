@@ -7,8 +7,8 @@ import kotlinx.parcelize.Parcelize
 data class Employee (
     val id: String,
     val name: String,
-    val phone: String,
-    val email: String,
+    val phone: String?,
+    val email: String?,
     val position: Position? = null,
     val department: Department? = null,
 ) : Parcelable

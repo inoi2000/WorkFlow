@@ -559,7 +559,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    app:onlyDriverView="@{viewmodel.role}">
+                    app:onlyOperatorView="@{viewmodel.role}">
 
                     <LinearLayout
                         android:layout_width="match_parent"
