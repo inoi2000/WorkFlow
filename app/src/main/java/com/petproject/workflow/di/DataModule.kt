@@ -5,10 +5,15 @@ import com.petproject.workflow.data.network.AbsenceApiService
 import com.petproject.workflow.data.network.AccessApiService
 import com.petproject.workflow.data.network.AnnouncementApiService
 import com.petproject.workflow.data.network.ApiFactory
+import com.petproject.workflow.data.network.CarApiService
 import com.petproject.workflow.data.network.CommentApiService
 import com.petproject.workflow.data.network.EmployeeApiService
+import com.petproject.workflow.data.network.FuellingApiService
 import com.petproject.workflow.data.network.InstructionApiService
+import com.petproject.workflow.data.network.JourneyApiService
+import com.petproject.workflow.data.network.StatementApiService
 import com.petproject.workflow.data.network.TaskApiService
+import com.petproject.workflow.data.network.TrailerApiService
 import com.petproject.workflow.data.network.utils.AuthFailedInterceptor
 import com.petproject.workflow.data.network.utils.AuthInterceptor
 import dagger.Module
@@ -53,6 +58,31 @@ class DataModule {
     @Provides
     fun provideAnnouncementApiService(apiFactory: ApiFactory): AnnouncementApiService {
         return apiFactory.announcementApiService
+    }
+
+    @Provides
+    fun provideCarApiService(apiFactory: ApiFactory): CarApiService {
+        return apiFactory.carApiService
+    }
+
+    @Provides
+    fun provideTrailerApiService(apiFactory: ApiFactory): TrailerApiService {
+        return apiFactory.trailerApiService
+    }
+
+    @Provides
+    fun provideFuellingApiService(apiFactory: ApiFactory): FuellingApiService {
+        return apiFactory.fuellingApiService
+    }
+
+    @Provides
+    fun provideJourneyApiService(apiFactory: ApiFactory): JourneyApiService {
+        return apiFactory.journeyApiService
+    }
+
+    @Provides
+    fun provideStatementApiService(apiFactory: ApiFactory): StatementApiService {
+        return apiFactory.statementApiService
     }
 
     @ApplicationScope
