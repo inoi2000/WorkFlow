@@ -14,7 +14,7 @@ class AbsenceRepositoryImpl @Inject constructor(
     private val absenceApiService: AbsenceApiService
 ) : AbsenceRepository {
 
-    override suspend fun getAllAbsence(): List<Absence> {
+    override suspend fun getAllCurrentAbsence(): List<Absence> {
         val employeeId = dataHelper.getCurrentEmployeeIdOrAuthException()
         val response = absenceApiService.getAllAbsence(employeeId)
         return response.map { absenceMapper.mapDtoToEntity(it) }

@@ -1,0 +1,15 @@
+package com.petproject.workflow.data.repositories
+
+import com.petproject.workflow.data.network.mappers.FuellingMapper
+import com.petproject.workflow.domain.entities.Fuelling
+import com.petproject.workflow.domain.repositories.FuellingRepository
+import javax.inject.Inject
+
+class FuellingRepositoryImpl @Inject constructor(
+    private val fuellingMapper: FuellingMapper
+): FuellingRepository {
+
+    override suspend fun getAllFuellings(): List<Fuelling> {
+        TODO("Not yet implemented")
+    }
+}

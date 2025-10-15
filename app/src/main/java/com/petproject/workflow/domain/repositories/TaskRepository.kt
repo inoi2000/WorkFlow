@@ -6,9 +6,9 @@ import com.petproject.workflow.domain.entities.Task
 interface TaskRepository {
     suspend fun getTaskById(taskId: String): Task
 
-    suspend fun getAllExecutorTasks(): List<Task>
+    suspend fun getAllCurrentExecutorTasks(): List<Task>
 
-    suspend fun getAllInspectorTasks(): List<Task>
+    suspend fun getAllCurrentInspectorTasks(): List<Task>
 
     suspend fun getTaskComments(taskId: String): List<Comment>
 
