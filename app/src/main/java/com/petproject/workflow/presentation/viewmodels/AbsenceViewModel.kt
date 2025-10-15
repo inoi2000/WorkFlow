@@ -7,12 +7,12 @@ import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.petproject.workflow.domain.entities.Absence
 import com.petproject.workflow.domain.entities.AbsenceType
-import com.petproject.workflow.domain.usecases.GetAllAbsenceUseCase
+import com.petproject.workflow.domain.usecases.GetAllCurrentAbsenceUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AbsenceViewModel @Inject constructor(
-    private val getAllAbsenceUseCase: GetAllAbsenceUseCase
+    private val getAllCurrentAbsenceUseCase: GetAllCurrentAbsenceUseCase
 ) : ViewModel() {
 
     private val _absenceList = MutableLiveData<List<Absence>>()
@@ -42,7 +42,7 @@ class AbsenceViewModel @Inject constructor(
 
     fun loadData() {
         viewModelScope.launch {
-            _absenceList.value = getAllAbsenceUseCase.invoke()
+            _absenceList.value = getAllCurrentAbsenceUseCase.invoke()
             filteredAbsenceListByDefault()
         }
     }

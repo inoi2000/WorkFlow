@@ -19,7 +19,7 @@ class TaskRepositoryImpl @Inject constructor(
     private val commentApiService: CommentApiService,
 ) : TaskRepository {
 
-    override suspend fun getAllExecutorTasks(): List<Task> {
+    override suspend fun getAllCurrentExecutorTasks(): List<Task> {
         val employeeId = dataHelper.getCurrentEmployeeIdOrAuthException()
         val response = taskApiService.getAllTasksByExecutor(employeeId)
         return response.map { taskMapper.mapDtoToEntity(it) }
@@ -31,7 +31,7 @@ class TaskRepositoryImpl @Inject constructor(
             .map { commentMapper.mapDtoToEntity(it) }
     }
 
-    override suspend fun getAllInspectorTasks(): List<Task> {
+    override suspend fun getAllCurrentInspectorTasks(): List<Task> {
         val employeeId = dataHelper.getCurrentEmployeeIdOrAuthException()
         val response = taskApiService.getAllTasksByInspector(employeeId)
         return response.map { taskMapper.mapDtoToEntity(it) }

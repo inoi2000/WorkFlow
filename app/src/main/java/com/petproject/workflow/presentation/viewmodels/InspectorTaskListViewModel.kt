@@ -10,12 +10,12 @@ import com.petproject.workflow.R
 import com.petproject.workflow.domain.entities.Task
 import com.petproject.workflow.domain.entities.TaskPriority
 import com.petproject.workflow.domain.entities.TaskStatus
-import com.petproject.workflow.domain.usecases.GetAllInspectorTasksUseCase
+import com.petproject.workflow.domain.usecases.GetAllCurrentInspectorTasksUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class InspectorTaskListViewModel @Inject constructor(
-    private val getAllInspectorTasksUseCase: GetAllInspectorTasksUseCase
+    private val getAllCurrentInspectorTasksUseCase: GetAllCurrentInspectorTasksUseCase
 ) : ViewModel() {
 
     private val _tasksList = MutableLiveData<List<Task>>()
@@ -45,7 +45,7 @@ class InspectorTaskListViewModel @Inject constructor(
         _isLoading.value = true
         viewModelScope.launch {
             try {
-                _tasksList.value = getAllInspectorTasksUseCase()
+                _tasksList.value = getAllCurrentInspectorTasksUseCase()
                 applyFilters()
             } catch (e: Exception) {
                 // Handle error appropriately

@@ -19,6 +19,11 @@ class ApiFactory @Inject constructor(
         private const val BASE_ACCESS_API = "http://192.168.0.159:9300/"
         private const val BASE_ABSENCE_API = "http://192.168.0.159:9400/"
         private const val BASE_ANNOUNCEMENT_API = "http://192.168.0.159:9500/"
+        private const val BASE_CAR_API = "http://192.168.0.159:9600/"
+        private const val BASE_TRAILER_API = "http://192.168.0.159:9600/"
+        private const val BASE_FUELLING_API = "http://192.168.0.159:9600/"
+        private const val BASE_JOURNEY_API = "http://192.168.0.159:9600/"
+        private const val BASE_STATEMENT_API = "http://192.168.0.159:9600/"
     }
 
     val absenceApiService = Retrofit.Builder()
@@ -70,5 +75,38 @@ class ApiFactory @Inject constructor(
         .build()
         .create(AnnouncementApiService::class.java)
 
+    val carApiService  = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(BASE_CAR_API)
+        .client(okHttpClient)
+        .build()
+        .create(CarApiService::class.java)
 
+    val trailerApiService  = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(BASE_TRAILER_API)
+        .client(okHttpClient)
+        .build()
+        .create(TrailerApiService::class.java)
+
+    val fuellingApiService  = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(BASE_FUELLING_API)
+        .client(okHttpClient)
+        .build()
+        .create(FuellingApiService::class.java)
+
+    val journeyApiService  = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(BASE_JOURNEY_API)
+        .client(okHttpClient)
+        .build()
+        .create(JourneyApiService::class.java)
+
+    val statementApiService  = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(BASE_STATEMENT_API)
+        .client(okHttpClient)
+        .build()
+        .create(StatementApiService::class.java)
 }

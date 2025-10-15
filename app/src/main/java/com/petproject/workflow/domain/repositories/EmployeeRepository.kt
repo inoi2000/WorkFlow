@@ -9,4 +9,6 @@ interface EmployeeRepository {
     suspend fun getCurrentEmployee(): Employee
 
     suspend fun getAllEmployeesForAssignTask(): List<Employee>
+
+    suspend fun getDriverEmployees(): List<Employee>
 }
