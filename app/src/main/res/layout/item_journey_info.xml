@@ -4,16 +4,297 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="journey"
             type="com.petproject.workflow.domain.entities.Journey" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardJourneyItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="12dp">
-    </androidx.cardview.widget.CardView>
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="6dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="1dp"
+        app:strokeColor="@color/grey_light"
+        app:strokeWidth="0.5dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground">
+
+        <LinearLayout
+            android:id="@+id/containerMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- First row: Time and Status -->
+            <LinearLayout
+                android:id="@+id/rowHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <LinearLayout
+                    android:id="@+id/containerTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textDay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main_blue"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:text="СЕГОДНЯ" />
+
+                    <TextView
+                        android:id="@+id/textDateTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        tools:text="14:30 • 12 дек" />
+
+                </LinearLayout>
+
+                <!-- Status Chip -->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    app:chipStrokeColor="@color/white"
+                    app:chipStrokeWidth="1dp"
+                    app:chipCornerRadius="20dp"
+                    app:chipMinTouchTargetSize="0dp"
+                    tools:text="ПОДТВЕРЖДЕН" />
+
+            </LinearLayout>
+
+            <!-- Address section -->
+            <LinearLayout
+                android:id="@+id/rowAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="14dp">
+
+                <ImageView
+                    android:id="@+id/iconLocation"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ic_location"
+                    app:tint="@color/main_blue"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/textAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{journey.statement.destinationAddress}"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="13sp"
+                    android:lineSpacingExtra="2sp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    tools:text="г. Москва, ул. Примерная, д. 123, бизнес-центр 'Парус'" />
+
+            </LinearLayout>
+
+            <!-- Info grid -->
+            <GridLayout
+                android:id="@+id/gridInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:rowCount="2"
+                android:alignmentMode="alignMargins"
+                android:columnOrderPreserved="false"
+                android:layout_marginBottom="14dp">
+
+                <!-- Contact -->
+                <LinearLayout
+                    android:id="@+id/rowContact"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="6dp">
+
+                    <ImageView
+                        android:id="@+id/iconPhone"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginEnd="6dp"
+                        android:src="@drawable/ic_phone"
+                        app:tint="@color/grey_for_text"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/textPhone"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/grey_for_text"
+                        android:textSize="12sp"
+                        tools:text="+7 999 123-45-67" />
+
+                </LinearLayout>
+
+                <!-- Car -->
+                <LinearLayout
+                    android:id="@+id/rowCar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="6dp">
+
+                    <ImageView
+                        android:id="@+id/iconCar"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginEnd="6dp"
+                        android:src="@drawable/ic_car"
+                        app:tint="@color/grey_for_text"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/textCarLicense"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{journey.car.licensePlate}"
+                        android:textColor="@color/grey_for_text"
+                        android:textSize="12sp"
+                        tools:text="A123BC777" />
+
+                </LinearLayout>
+
+                <!-- Logistician -->
+                <LinearLayout
+                    android:id="@+id/rowLogist"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="6dp">
+
+                    <ImageView
+                        android:id="@+id/iconPerson"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginEnd="6dp"
+                        android:src="@drawable/ic_person"
+                        app:tint="@color/grey_for_text"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/textLogistName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{journey.statement.logist.name}"
+                        android:textColor="@color/grey_for_text"
+                        android:textSize="12sp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        tools:text="Иванов А.С." />
+
+                </LinearLayout>
+
+                <!-- Trailer -->
+                <LinearLayout
+                    android:id="@+id/rowTrailer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="6dp">
+
+                    <ImageView
+                        android:id="@+id/iconTrailer"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginEnd="6dp"
+                        android:src="@drawable/ic_trailer"
+                        app:tint="@color/main_blue"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/textTrailerLicense"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{journey.trailer.licensePlate}"
+                        android:textColor="@color/main_blue"
+                        android:textSize="12sp"
+                        android:textStyle="normal"
+                        tools:text="П123ТР777" />
+
+                </LinearLayout>
+
+            </GridLayout>
+
+            <!-- Bottom action row -->
+            <LinearLayout
+                android:id="@+id/rowBottomActions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <!-- Additional info -->
+                <TextView
+                    android:id="@+id/textAdditionalInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/grey_for_text"
+                    android:textSize="11sp"
+                    tools:text="Создано: 12.12.2023 10:30" />
+
+                <!-- Action button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="@string/more"
+                    android:textSize="11sp"
+                    android:backgroundTint="@color/blue_button_transparent"
+                    android:textColor="?attr/colorPrimary"
+                    app:icon="@drawable/ic_arrow_forward"
+                    app:iconTint="?attr/colorPrimary"
+                    app:iconSize="14dp"
+                    app:iconGravity="textEnd"
+                    app:iconPadding="5dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 </layout>

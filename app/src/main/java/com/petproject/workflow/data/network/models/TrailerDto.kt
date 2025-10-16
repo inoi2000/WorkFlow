@@ -10,10 +10,10 @@ data class TrailerDto(
     @SerializedName("brand")
     @Expose
     val brand: String,
-    @SerializedName("licensePlate")
+    @SerializedName("license_plate")
     @Expose
     val licensePlate: String,
-    @SerializedName("volumeLiter")
+    @SerializedName("volume_liter")
     @Expose
     val volumeLiter: Double,
     @SerializedName("material")
