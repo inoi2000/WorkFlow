@@ -10,9 +10,12 @@ import com.petproject.workflow.presentation.viewmodels.CreateTaskAddDetailsViewM
 import com.petproject.workflow.presentation.viewmodels.CreateTaskDoneViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateTaskSelectionEmployeeViewModel
 import com.petproject.workflow.presentation.viewmodels.ExecutorTaskListViewModel
+import com.petproject.workflow.presentation.viewmodels.FuellingListViewModel
 import com.petproject.workflow.presentation.viewmodels.InspectorTaskListViewModel
 import com.petproject.workflow.presentation.viewmodels.InstructionListViewModel
+import com.petproject.workflow.presentation.viewmodels.JourneyListViewModel
 import com.petproject.workflow.presentation.viewmodels.ServiceListViewModel
+import com.petproject.workflow.presentation.viewmodels.StatementListViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -79,4 +82,19 @@ interface ViewModelModule {
     @ViewModelKey(CreateTaskDoneViewModel::class)
     @Binds
     fun bindCreateTaskDoneViewModel(impl: CreateTaskDoneViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(FuellingListViewModel::class)
+    @Binds
+    fun bindFuellingListViewModel(impl: FuellingListViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(JourneyListViewModel::class)
+    @Binds
+    fun bindJourneyListViewModel(impl: JourneyListViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(StatementListViewModel::class)
+    @Binds
+    fun bindStatementListViewModel(impl: StatementListViewModel): ViewModel
 }

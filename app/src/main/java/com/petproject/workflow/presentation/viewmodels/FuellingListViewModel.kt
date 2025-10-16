@@ -3,7 +3,7 @@ package com.petproject.workflow.presentation.viewmodels
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject
 
-class JourneyListViewModel @Inject constructor(
+class FuellingListViewModel @Inject constructor(
 
-): ViewModel() {
+) : ViewModel() {
 }

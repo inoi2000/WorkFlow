@@ -77,13 +77,19 @@ class HomeFragment : Fragment() {
             findNavController().navigate(action)
         }
         binding.journeysCardView.setOnClickListener {
-
+            val action = HomeFragmentDirections
+                .actionHomeFragmentToJourneyListFragment()
+            findNavController().navigate(action)
         }
         binding.statementsCardView.setOnClickListener {
-
+            val action = HomeFragmentDirections
+                .actionHomeFragmentToStatementListFragment()
+            findNavController().navigate(action)
         }
         binding.fuellingsCardView.setOnClickListener {
-
+            val action = HomeFragmentDirections
+                .actionHomeFragmentToFuellingListFragment()
+            findNavController().navigate(action)
         }
 
         binding.othersCardView.setOnClickListener {
