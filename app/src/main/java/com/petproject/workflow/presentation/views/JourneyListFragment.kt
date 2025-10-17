@@ -5,15 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentJourneyListBinding
+import com.petproject.workflow.domain.entities.Journey
 import com.petproject.workflow.presentation.viewmodels.JourneyListViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import com.petproject.workflow.presentation.views.adapters.JourneyAdapter
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class JourneyListFragment : Fragment() {
@@ -43,13 +49,19 @@ class JourneyListFragment : Fragment() {
         component.inject(this)
         _binding = FragmentJourneyListBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        setupUI()
         setupObservers()
+    }
+
+    private fun setupUI() {
+        setupSwipeRefresh()
     }
 
     private fun setupRecyclerView() {
@@ -67,50 +79,77 @@ class JourneyListFragment : Fragment() {
         }
     }
 
+    private fun setupSwipeRefresh() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.loadData()
+        }
+
+        binding.swipeRefreshLayout.setColorSchemeResources(
+            R.color.main_blue,
+            R.color.green,
+            R.color.orange
+        )
+    }
+
+
     private fun setupObservers() {
-        viewModel.journeyList.observe(viewLifecycleOwner) { journeys ->
-            adapter.submitList(journeys)
-
-            // Показываем empty state если список пустой
-            if (journeys.isNullOrEmpty()) {
-                showEmptyState()
-            } else {
-                hideEmptyState()
-            }
-        }
-
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-        }
-
-        viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
-            errorMessage?.let {
-                showError(it)
-                viewModel.errorMessageShown()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { uiState ->
+                    handleUiState(uiState)
+                }
             }
         }
     }
 
-    private fun navigateToJourneyDetails(journeyId: String) {
-        // Навигация к деталям выезда
-//        findNavController().navigate(
-//            JourneyListFragmentDirections.actionJourneyListFragmentToJourneyDetailFragment(journeyId)
-//        )
+    private fun handleUiState(uiState: JourneyListViewModel.JourneyListUiState) {
+        binding.swipeRefreshLayout.isRefreshing = false
+
+        when (uiState) {
+            is JourneyListViewModel.JourneyListUiState.Loading -> {
+                showLoading()
+            }
+            is JourneyListViewModel.JourneyListUiState.Success -> {
+                showJourneys(uiState.journeys)
+            }
+            is JourneyListViewModel.JourneyListUiState.Error -> {
+                showError(uiState.message)
+            }
+        }
     }
 
-    private fun showEmptyState() {
-        // Показываем состояние пустого списка
-        binding.emptyStateView.visibility = View.VISIBLE
+    private fun showLoading() {
+        binding.progressBar.visibility = View.VISIBLE
         binding.journeyListRecyclerView.visibility = View.GONE
+        binding.emptyStateLayout.visibility = View.GONE
+        binding.errorLayout.visibility = View.GONE
     }
 
-    private fun hideEmptyState() {
-        binding.emptyStateView.visibility = View.GONE
-        binding.journeyListRecyclerView.visibility = View.VISIBLE
+    private fun showJourneys(journeys: List<Journey>) {
+        binding.progressBar.visibility = View.GONE
+        binding.errorLayout.visibility = View.GONE
+
+        adapter.submitList(journeys)
+
+        if (journeys.isEmpty()) {
+            binding.journeyListRecyclerView.visibility = View.GONE
+            binding.emptyStateLayout.visibility = View.VISIBLE
+        } else {
+            binding.journeyListRecyclerView.visibility = View.VISIBLE
+            binding.emptyStateLayout.visibility = View.GONE
+        }
     }
 
     private fun showError(message: String) {
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
+        binding.progressBar.visibility = View.GONE
+        binding.journeyListRecyclerView.visibility = View.GONE
+        binding.emptyStateLayout.visibility = View.GONE
+        binding.errorLayout.visibility = View.VISIBLE
+        binding.errorText.text = message
+    }
+
+    private fun navigateToJourneyDetails(journeyId: String) {
+        // TODO: Навигация к деталям выезда
     }
 
     override fun onDestroyView() {

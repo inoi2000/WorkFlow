@@ -10,101 +10,149 @@
             type="com.petproject.workflow.presentation.viewmodels.JourneyListViewModel" />
     </data>
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar">
 
-            <com.google.android.material.appbar.AppBarLayout
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar">
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:title="Мои выезды"
+                app:menu="@menu/journey_list_menu" />
 
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimary"
-                    app:title="Мои выезды"
-                    app:menu="@menu/journey_list_menu" />
+        </com.google.android.material.appbar.AppBarLayout>
 
-            </com.google.android.material.appbar.AppBarLayout>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/swipeRefreshLayout"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <!-- Progress Bar -->
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
 
-                    <!-- Progress Bar -->
-                    <ProgressBar
-                        android:id="@+id/progressBar"
+                <!-- RecyclerView -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/journey_list_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:paddingVertical="8dp"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_journey_info"
+                    tools:visibility="visible" />
+
+                <!-- Empty State -->
+                <LinearLayout
+                    android:id="@+id/empty_state_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:padding="32dp">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_empty"
+                        app:tint="@color/grey_for_text"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/empty_state_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:visibility="gone" />
+                        android:text="Нет активных выездов"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:layout_marginTop="16dp" />
 
-                    <!-- Empty State -->
-                    <LinearLayout
-                        android:id="@+id/emptyStateView"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:visibility="gone"
-                        android:padding="32dp">
+                        android:text="Здесь будут отображаться ваши текущие выезды"
+                        android:textSize="14sp"
+                        android:textColor="@color/grey_for_text"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center" />
 
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/ic_empty"
-                            app:tint="@color/grey_for_text"
-                            tools:ignore="ContentDescription" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Нет активных выездов"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:textColor="?android:attr/textColorPrimary"
-                            android:layout_marginTop="16dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Здесь будут отображаться ваши текущие выезды"
-                            android:textSize="14sp"
-                            android:textColor="@color/grey_for_text"
-                            android:layout_marginTop="8dp"
-                            android:gravity="center" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Обновить"
-                            android:layout_marginTop="24dp"
-                            android:onClick="@{() -> viewModel.refreshData()}" />
-
-                    </LinearLayout>
-
-                    <!-- RecyclerView -->
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/journey_list_recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:clipToPadding="false"
-                        android:paddingVertical="8dp"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_journey_info" />
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Обновить"
+                        android:layout_marginTop="24dp"
+                        android:onClick="@{() -> viewModel.loadData()}" />
 
                 </LinearLayout>
 
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                <!-- Error State -->
+                <LinearLayout
+                    android:id="@+id/error_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:padding="32dp">
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    </layout>
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_error"
+                        app:tint="@color/main_blue"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/error_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ошибка при загрузке выездов"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:layout_marginTop="16dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Попробуйте обновить данные"
+                        android:textSize="14sp"
+                        android:textColor="@color/grey_for_text"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/retry_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Повторить"
+                        android:layout_marginTop="24dp"
+                        android:onClick="@{() -> viewModel.retry()}" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

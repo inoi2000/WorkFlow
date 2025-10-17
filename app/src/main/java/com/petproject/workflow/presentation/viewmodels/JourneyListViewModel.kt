@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.petproject.workflow.domain.entities.Journey
 import com.petproject.workflow.domain.usecases.GetAllCurrentJourneysUseCase
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -13,41 +16,35 @@ class JourneyListViewModel @Inject constructor(
     private val getAllCurrentJourneysUseCase: GetAllCurrentJourneysUseCase
 ) : ViewModel() {
 
-    private val _journeyList = MutableLiveData<List<Journey>>()
-    val journeyList: LiveData<List<Journey>> get() = _journeyList
+    sealed class JourneyListUiState {
+        object Loading : JourneyListUiState()
+        data class Success(val journeys: List<Journey>) : JourneyListUiState()
+        data class Error(val message: String) : JourneyListUiState()
+    }
 
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> get() = _isLoading
-
-    private val _errorMessage = MutableLiveData<String?>()
-    val errorMessage: LiveData<String?> get() = _errorMessage
+    private val _uiState = MutableStateFlow<JourneyListUiState>(JourneyListUiState.Loading)
+    val uiState: StateFlow<JourneyListUiState> = _uiState.asStateFlow()
 
     init {
         loadData()
     }
 
     fun loadData() {
-        _isLoading.value = true
-        _errorMessage.value = null
-
         viewModelScope.launch {
+            _uiState.value = JourneyListUiState.Loading
+
             try {
                 val journeys = getAllCurrentJourneysUseCase()
-                _journeyList.value = journeys
+                _uiState.value = JourneyListUiState.Success(journeys)
             } catch (e: Exception) {
-                _errorMessage.value = "Не удалось загрузить список выездов: ${e.localizedMessage}"
-                _journeyList.value = emptyList()
-            } finally {
-                _isLoading.value = false
+                _uiState.value = JourneyListUiState.Error(
+                    "Не удалось загрузить список выездов: ${e.localizedMessage}"
+                )
             }
         }
     }
 
-    fun refreshData() {
+    fun retry() {
         loadData()
-    }
-
-    fun errorMessageShown() {
-        _errorMessage.value = null
     }
 }

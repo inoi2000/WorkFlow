@@ -8,5 +8,10 @@ object JourneyDiffItemCallback : DiffUtil.ItemCallback<Journey>() {
         oldItem.id == newItem.id
 
     override fun areContentsTheSame(oldItem: Journey, newItem: Journey): Boolean =
-        oldItem == newItem
+        oldItem.id == newItem.id &&
+                oldItem.status == newItem.status &&
+                oldItem.statement?.destinationAddress == newItem.statement?.destinationAddress &&
+                oldItem.statement?.destinationTime == newItem.statement?.destinationTime &&
+                oldItem.car.licensePlate == newItem.car.licensePlate &&
+                oldItem.trailer?.licensePlate == newItem.trailer?.licensePlate
 }
