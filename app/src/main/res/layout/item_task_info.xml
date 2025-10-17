@@ -90,8 +90,8 @@
 
             <ImageView
                 android:id="@+id/deadline_image_view"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/ic_calendar"
                 app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +101,7 @@
                 android:id="@+id/deadline_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/deadline_image_view"
                 app:layout_constraintStart_toStartOf="@+id/comment_count_text_view"
                 app:layout_constraintTop_toTopOf="@+id/deadline_image_view"
@@ -110,8 +110,8 @@
 
             <ImageView
                 android:id="@+id/destination_image_view"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/ic_location"
                 app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +121,7 @@
             <TextView
                 android:id="@+id/destination_text_view"
                 android:layout_width="wrap_content"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@+id/destination_image_view"
                 app:layout_constraintStart_toStartOf="@+id/comment_count_text_view"
@@ -131,8 +131,8 @@
 
             <ImageView
                 android:id="@+id/inspector_image_view"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/ic_person"
                 app:layout_constraintStart_toStartOf="parent"
@@ -142,7 +142,7 @@
                 android:id="@+id/name_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/inspector_image_view"
                 app:layout_constraintStart_toStartOf="@+id/comment_count_text_view"
                 app:layout_constraintTop_toTopOf="@+id/inspector_image_view"
@@ -172,10 +172,10 @@
                 tools:text="@string/urgent"
                 tools:textColor="@color/red" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/item_ref_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:backgroundTint="@color/blue_button_transparent"
                 android:text="@string/more"
                 android:textColor="?attr/colorPrimary"

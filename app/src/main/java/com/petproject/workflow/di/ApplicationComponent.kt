@@ -10,9 +10,12 @@ import com.petproject.workflow.presentation.views.AccessListFragment
 import com.petproject.workflow.presentation.views.CreateTaskAddDetailsFragment
 import com.petproject.workflow.presentation.views.CreateTaskDoneFragment
 import com.petproject.workflow.presentation.views.CreateTaskSelectionEmployeeFragment
+import com.petproject.workflow.presentation.views.FuellingListFragment
 import com.petproject.workflow.presentation.views.InspectorTaskListFragment
 import com.petproject.workflow.presentation.views.InstructionListFragment
+import com.petproject.workflow.presentation.views.JourneyListFragment
 import com.petproject.workflow.presentation.views.ServiceListFragment
+import com.petproject.workflow.presentation.views.StatementListFragment
 import dagger.BindsInstance
 import dagger.Component
 
@@ -43,6 +46,12 @@ interface ApplicationComponent {
     fun inject(createTaskAddDetailsFragment: CreateTaskAddDetailsFragment)
 
     fun inject(createTaskDoneFragment: CreateTaskDoneFragment)
+
+    fun inject(fuellingListFragment: FuellingListFragment)
+
+    fun inject(journeyListFragment: JourneyListFragment)
+
+    fun inject(statementListFragment: StatementListFragment)
 
     fun activityComponentFactory(): ActivityComponent.Factory
 

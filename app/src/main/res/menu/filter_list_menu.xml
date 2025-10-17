@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_calendar"
+        android:title="Календарь"
+        android:icon="@drawable/ic_calendar"
+        app:iconTint="?attr/colorOnPrimary"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_filter_off"
+        android:title="Отменить фильтр"
+        android:icon="@drawable/ic_filter_off"
+        app:iconTint="?attr/colorOnPrimary"
+        app:showAsAction="ifRoom" />
+</menu>

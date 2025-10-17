@@ -2,6 +2,7 @@ package com.petproject.workflow.data.network.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.time.LocalDateTime
 
 data class StatementDto(
     @SerializedName("id")
@@ -16,9 +17,12 @@ data class StatementDto(
     @SerializedName("contact_phone")
     @Expose
     val contactPhone: String,
-    @SerializedName("address")
+    @SerializedName("destination_time")
     @Expose
-    val address: String,
+    val destinationTime: String,
+    @SerializedName("destination_address")
+    @Expose
+    val destinationAddress: String,
     @SerializedName("created_at")
     @Expose
     val createdAt: String,

@@ -22,7 +22,8 @@ class StatementJourneyMapper @Inject constructor(
             logist = employeeMapper.mapDtoToEntity(dto.logist),
             data = dto.data,
             contactPhone = dto.contactPhone,
-            address = dto.address,
+            destinationTime = LocalDateTime.parse(dto.destinationTime),
+            destinationAddress = dto.destinationAddress,
             createdAt = LocalDateTime.parse(dto.createdAt),
             updatedAt = LocalDateTime.parse(dto.updatedAt),
             journey = dto.journey?.let { mapDtoToEntity(it) }
@@ -35,7 +36,8 @@ class StatementJourneyMapper @Inject constructor(
             logist = employeeMapper.mapEntityToDto(entity.logist),
             data = entity.data,
             contactPhone = entity.contactPhone,
-            address = entity.address,
+            destinationTime = entity.destinationTime.toString(),
+            destinationAddress = entity.destinationAddress,
             createdAt = entity.createdAt.toString(),
             updatedAt = entity.updatedAt.toString(),
             journey = entity.journey?.let { mapEntityToDto(it) }

@@ -34,6 +34,15 @@
         <action
             android:id="@+id/action_homeFragment_to_createTaskSelectionEmployeeFragment"
             app:destination="@id/createTaskSelectionEmployeeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_journeyListFragment"
+            app:destination="@id/journeyListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_fuellingListFragment"
+            app:destination="@id/fuellingListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_statementListFragment"
+            app:destination="@id/statementListFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -215,4 +224,19 @@
         android:name="com.petproject.workflow.presentation.views.InstructionListFragment"
         android:label="fragment_instruction_list"
         tools:layout="@layout/fragment_instruction_list" />
+    <fragment
+        android:id="@+id/journeyListFragment"
+        android:name="com.petproject.workflow.presentation.views.JourneyListFragment"
+        android:label="fragment_journey_list"
+        tools:layout="@layout/fragment_journey_list" />
+    <fragment
+        android:id="@+id/fuellingListFragment"
+        android:name="com.petproject.workflow.presentation.views.FuellingListFragment"
+        android:label="fragment_fuelling_list"
+        tools:layout="@layout/fragment_fuelling_list" />
+    <fragment
+        android:id="@+id/statementListFragment"
+        android:name="com.petproject.workflow.presentation.views.StatementListFragment"
+        android:label="fragment_statement_list"
+        tools:layout="@layout/fragment_statement_list" />
 </navigation>
