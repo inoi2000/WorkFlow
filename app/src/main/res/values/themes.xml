@@ -94,4 +94,12 @@
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">end</item>
     </style>
+
+    <style name="CalendarDateText" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="CalendarWeekDayText" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textColor">@color/grey_for_text</item>
+    </style>
 </resources>

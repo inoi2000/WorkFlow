@@ -48,9 +48,17 @@
                     android:layout_gravity="center"
                     android:visibility="gone" />
 
-<!--                <CalendarView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content" />-->
+                <!-- Calendar View -->
+                <CalendarView
+                    android:id="@+id/calendar_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_margin="8dp"
+                    android:background="@color/white"
+                    android:dateTextAppearance="@style/CalendarDateText"
+                    android:weekDayTextAppearance="@style/CalendarWeekDayText"
+                    tools:visibility="visible"/>
 
                 <!-- RecyclerView -->
                 <androidx.recyclerview.widget.RecyclerView

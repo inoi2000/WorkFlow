@@ -2,8 +2,13 @@ package com.petproject.workflow.presentation.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +24,8 @@ import com.petproject.workflow.presentation.viewmodels.JourneyListViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import com.petproject.workflow.presentation.views.adapters.JourneyAdapter
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.ZoneId
 import javax.inject.Inject
 
 class JourneyListFragment : Fragment() {
@@ -54,9 +61,63 @@ class JourneyListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Устанавливаем Toolbar как ActionBar
+        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
+
+        // Добавляем MenuProvider
+        setupMenuProvider()
+
         setupRecyclerView()
         setupUI()
         setupObservers()
+        setupCalendar()
+    }
+
+    private fun setupMenuProvider() {
+        // Создаем MenuProvider
+        val menuProvider = object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                println("DEBUG: onCreateMenu called")
+                menuInflater.inflate(R.menu.filter_list_menu, menu)
+
+                // Проверка что меню создано
+                val calendarItem = menu.findItem(R.id.action_calendar)
+                val filterItem = menu.findItem(R.id.action_filter_off)
+                println("DEBUG: Calendar item found: ${calendarItem != null}")
+                println("DEBUG: Filter item found: ${filterItem != null}")
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                println("DEBUG: onMenuItemSelected: ${menuItem.title} (ID: ${menuItem.itemId})")
+
+                return when (menuItem.itemId) {
+                    R.id.action_calendar -> {
+                        println("DEBUG: Calendar button clicked!")
+                        viewModel.toggleCalendar()
+                        true
+                    }
+                    R.id.action_filter_off -> {
+                        println("DEBUG: Clear filter button clicked!")
+                        viewModel.clearFilter()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }
+
+        // Добавляем MenuProvider к Activity
+        requireActivity().addMenuProvider(menuProvider, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    private fun setupCalendar() {
+        binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            println("DEBUG: Date selected: $dayOfMonth.${month + 1}.$year")
+            val selectedDate = LocalDate.of(year, month + 1, dayOfMonth)
+            val dateMillis = selectedDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
+            viewModel.onDateSelected(dateMillis)
+        }
     }
 
     private fun setupUI() {
@@ -64,14 +125,13 @@ class JourneyListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = JourneyAdapter() { journeyId ->
+        adapter = JourneyAdapter { journeyId ->
             navigateToJourneyDetails(journeyId)
         }
 
-        binding.journeyListRecyclerView.adapter = adapter
-        binding.journeyListRecyclerView.itemAnimator = null
         with(binding.journeyListRecyclerView) {
-            // Добавляем разделители между элементами
+            adapter = this@JourneyListFragment.adapter
+            itemAnimator = null
             if (itemDecorationCount == 0) {
                 addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
             }
@@ -90,14 +150,37 @@ class JourneyListFragment : Fragment() {
         )
     }
 
-
     private fun setupObservers() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState.collect { uiState ->
-                    handleUiState(uiState)
+                launch {
+                    viewModel.uiState.collect { uiState ->
+                        handleUiState(uiState)
+                    }
+                }
+                launch {
+                    viewModel.showCalendar.collect { show ->
+                        println("DEBUG: showCalendar changed to: $show")
+                        binding.calendarView.visibility = if (show) View.VISIBLE else View.GONE
+
+                        if (show) {
+                            binding.journeyListRecyclerView.visibility = View.VISIBLE
+                            binding.emptyStateLayout.visibility = View.GONE
+                            binding.errorLayout.visibility = View.GONE
+                        } else {
+                            handleCurrentUiState()
+                        }
+                    }
                 }
             }
+        }
+    }
+
+    private fun handleCurrentUiState() {
+        when (val currentState = viewModel.uiState.value) {
+            is JourneyListViewModel.JourneyListUiState.Loading -> showLoading()
+            is JourneyListViewModel.JourneyListUiState.Success -> showJourneys(currentState.journeys)
+            is JourneyListViewModel.JourneyListUiState.Error -> showError(currentState.message)
         }
     }
 
@@ -120,6 +203,7 @@ class JourneyListFragment : Fragment() {
     private fun showLoading() {
         binding.progressBar.visibility = View.VISIBLE
         binding.journeyListRecyclerView.visibility = View.GONE
+        binding.calendarView.visibility = View.GONE
         binding.emptyStateLayout.visibility = View.GONE
         binding.errorLayout.visibility = View.GONE
     }
@@ -142,6 +226,7 @@ class JourneyListFragment : Fragment() {
     private fun showError(message: String) {
         binding.progressBar.visibility = View.GONE
         binding.journeyListRecyclerView.visibility = View.GONE
+        binding.calendarView.visibility = View.GONE
         binding.emptyStateLayout.visibility = View.GONE
         binding.errorLayout.visibility = View.VISIBLE
         binding.errorText.text = message
