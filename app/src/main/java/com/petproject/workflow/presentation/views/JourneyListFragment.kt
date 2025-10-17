@@ -132,9 +132,6 @@ class JourneyListFragment : Fragment() {
         with(binding.journeyListRecyclerView) {
             adapter = this@JourneyListFragment.adapter
             itemAnimator = null
-            if (itemDecorationCount == 0) {
-                addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
-            }
         }
     }
 

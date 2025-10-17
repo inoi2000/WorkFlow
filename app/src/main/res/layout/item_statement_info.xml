@@ -4,16 +4,262 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="statement"
             type="com.petproject.workflow.domain.entities.Statement" />
+
+        <import type="com.petproject.workflow.domain.entities.JourneyStatus" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:cardCornerRadius="12dp">
-    </androidx.cardview.widget.CardView>
+        android:layout_marginHorizontal="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Заголовок с ID и статусом -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/grey_for_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:text="Заявка #A1B2C3D4" />
+
+                <!-- Status Chip -->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:chipCornerRadius="20dp"
+                    app:chipMinTouchTargetSize="30dp"
+                    app:chipStrokeColor="@color/white"
+                    app:chipStrokeWidth="1dp"
+                    tools:text="ПОДТВЕРЖДЕНА" />
+
+            </LinearLayout>
+
+            <!-- Разделитель -->
+            <View
+                style="@style/HorizontalLineView"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Основная информация -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <!-- Дата и Время назначения -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_time"
+                        app:tint="@color/grey_for_text" />
+
+                    <TextView
+                        android:id="@+id/textDestinationTime"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/grey_for_text"
+                        android:textSize="13sp"
+                        tools:text="15.12.2023 10:30" />
+                </LinearLayout>
+
+
+                <!-- Адрес назначения -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_location"
+                        app:tint="@color/grey_for_text" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@{statement.destinationAddress}"
+                        android:textColor="@color/grey_for_text"
+                        android:textSize="13sp"
+                        tools:text="г. Москва, ул. Примерная, д. 123" />
+                </LinearLayout>
+
+                <!-- Контактный телефон -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_phone"
+                        app:tint="@color/grey_for_text" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{statement.contactPhone}"
+                        android:textColor="@color/grey_for_text"
+                        android:textSize="13sp"
+                        tools:text="+7 (999) 123-45-67" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Информация о поездке (если есть) -->
+            <LinearLayout
+                android:id="@+id/journeyInfoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="Информация о выезде"
+                    android:textColor="@color/main_blue"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <!-- Водитель -->
+                <LinearLayout
+                    style="@style/TaskDetailItem"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        style="@style/TaskDetailLabel"
+                        android:layout_weight="1"
+                        android:text="Водитель:"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        style="@style/TaskDetailValue"
+                        android:layout_weight="2"
+                        android:text="@{statement.journey.driver.name}"
+                        android:textSize="13sp"
+                        tools:text="Иван Иванов" />
+                </LinearLayout>
+
+                <!-- Автомобиль -->
+                <LinearLayout
+                    style="@style/TaskDetailItem"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        style="@style/TaskDetailLabel"
+                        android:layout_weight="1"
+                        android:text="Автомобиль:"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        style="@style/TaskDetailValue"
+                        android:layout_weight="2"
+                        android:text="@{statement.journey.car.licensePlate}"
+                        android:textSize="13sp"
+                        tools:text="A123BC777" />
+                </LinearLayout>
+
+                <!-- Прицеп (если есть) -->
+                <LinearLayout
+                    android:id="@+id/trailerLayout"
+                    style="@style/TaskDetailItem"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        style="@style/TaskDetailLabel"
+                        android:layout_weight="1"
+                        android:text="Прицеп:"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        style="@style/TaskDetailValue"
+                        android:layout_weight="2"
+                        android:text="@{statement.journey.trailer.licensePlate}"
+                        android:textSize="13sp"
+                        tools:text="ПТ12345" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Футер с датами -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textCreatedAt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    tools:text="Создана: 14.12.2023 15:30" />
+
+                <TextView
+                    android:id="@+id/textUpdatedAt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    tools:text="Обновлена: 15.12.2023 09:15" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 </layout>
