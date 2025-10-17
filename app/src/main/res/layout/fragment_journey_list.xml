@@ -25,7 +25,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 app:title="Мои выезды"
-                app:menu="@menu/journey_list_menu" />
+                app:menu="@menu/filter_list_menu" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -47,6 +47,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:visibility="gone" />
+
+<!--                <CalendarView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content" />-->
 
                 <!-- RecyclerView -->
                 <androidx.recyclerview.widget.RecyclerView
