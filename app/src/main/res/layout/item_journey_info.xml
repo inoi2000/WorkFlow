@@ -78,7 +78,8 @@
                     app:chipStrokeColor="@color/white"
                     app:chipStrokeWidth="1dp"
                     app:chipCornerRadius="20dp"
-                    app:chipMinTouchTargetSize="0dp"
+                    app:chipMinTouchTargetSize="30dp"
+                    tools:backgroundTint="@color/green"
                     tools:text="ПОДТВЕРЖДЕН" />
 
             </LinearLayout>

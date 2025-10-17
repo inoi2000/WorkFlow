@@ -120,10 +120,10 @@ class JourneyAdapter(
 
         private fun getStatusColor(status: JourneyStatus): Int {
             return when (status) {
-                JourneyStatus.NEW -> R.color.grey
+                JourneyStatus.NEW -> R.color.green
                 JourneyStatus.CONFIRMED -> R.color.main_blue
                 JourneyStatus.STARTED -> R.color.orange
-                JourneyStatus.FINISHED -> R.color.green
+                JourneyStatus.FINISHED -> R.color.grey
                 JourneyStatus.CANCELED -> R.color.red
             }
         }
