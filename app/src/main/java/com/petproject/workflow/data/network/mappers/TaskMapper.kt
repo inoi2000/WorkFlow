@@ -6,6 +6,7 @@ import com.petproject.workflow.domain.entities.Task
 import com.petproject.workflow.domain.entities.TaskPriority
 import com.petproject.workflow.domain.entities.TaskStatus
 import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 @ApplicationScope
@@ -20,9 +21,8 @@ class TaskMapper @Inject constructor(
             description = dto.description,
             status = TaskStatus.valueOf(dto.status),
             priority = TaskPriority.valueOf(dto.priority),
-            creation = LocalDate.parse(dto.creation),
+            createdAt = LocalDateTime.parse(dto.createdAt),
             deadline = LocalDate.parse(dto.deadline),
-            destination = dto.destination,
             executor = dto.executor?.let { employeeMapper.mapDtoToEntity(it) },
             inspector = dto.inspector?.let { employeeMapper.mapDtoToEntity(it) },
             shouldBeInspected = dto.shouldBeInspected,
@@ -36,9 +36,8 @@ class TaskMapper @Inject constructor(
             description = entity.description,
             status = entity.status.name,
             priority = entity.priority.name,
-            creation = entity.creation.toString(),
+            createdAt = entity.createdAt.toString(),
             deadline = entity.deadline.toString(),
-            destination = entity.destination,
             executor = entity.executor?.let { employeeMapper.mapEntityToDto(it) },
             inspector = entity.inspector?.let { employeeMapper.mapEntityToDto(it) },
             shouldBeInspected = entity.shouldBeInspected,

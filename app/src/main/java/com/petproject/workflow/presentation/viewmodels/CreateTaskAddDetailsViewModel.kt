@@ -12,6 +12,7 @@ import com.petproject.workflow.domain.entities.TaskStatus
 import com.petproject.workflow.domain.usecases.GetCurrentEmployeeUseCase
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
@@ -35,7 +36,6 @@ class CreateTaskAddDetailsViewModel @Inject constructor(
 
     var descriptionField = ObservableField<String>()
     var deadlineField = ObservableField<String>()
-    var destinationField = ObservableField<String>()
 
     var priorityField: Boolean = false
     var shouldBeInspectedField: Boolean = false
@@ -67,9 +67,8 @@ class CreateTaskAddDetailsViewModel @Inject constructor(
             description = descriptionField.get().orEmpty(),
             status = TaskStatus.NEW,
             priority = if (priorityField) TaskPriority.URGENT else TaskPriority.COMMON,
-            creation = LocalDate.now(),
+            createdAt = LocalDateTime.now(),
             deadline = deadline,
-            destination = destinationField.get(),
             executor = executor,
             inspector = getCurrentEmployeeUseCase(),
             comments = emptyList(),

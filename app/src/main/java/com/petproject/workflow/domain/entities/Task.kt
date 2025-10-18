@@ -3,6 +3,7 @@ package com.petproject.workflow.domain.entities
 import java.time.LocalDate
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import java.time.LocalDateTime
 
 @Parcelize
 data class Task(
@@ -10,9 +11,8 @@ data class Task(
     val description: String,
     val status: TaskStatus,
     val priority: TaskPriority,
-    val creation: LocalDate? = null,
+    val createdAt: LocalDateTime? = null,
     val deadline: LocalDate? = null,
-    val destination: String? = null,
     val executor: Employee? = null,
     val inspector: Employee? = null,
     val comments: List<Comment>? = null,

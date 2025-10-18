@@ -16,12 +16,9 @@ data class TaskDto(
     @SerializedName("priority")
     @Expose
     val priority: String = "",
-    @SerializedName("destination")
-    @Expose
-    val destination: String? = null,
     @SerializedName("creation")
     @Expose
-    val creation: String? = null,
+    val createdAt: String? = null,
     @SerializedName("deadline")
     @Expose
     val deadline: String? = null,

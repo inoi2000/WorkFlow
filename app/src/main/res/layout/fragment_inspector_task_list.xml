@@ -69,14 +69,6 @@
                                 android:paddingEnd="8dp"
                                 android:paddingVertical="8dp">
 
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_marginEnd="8dp"
-                                    android:src="@drawable/ic_search"
-                                    app:tint="?attr/colorOnPrimary" />
-
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/et_search"
                                     android:layout_width="0dp"
@@ -85,10 +77,15 @@
                                     android:background="@null"
                                     android:hint="@string/colleagues_services_news"
                                     android:inputType="text"
-                                    android:maxLines="1"
-                                    android:textColor="?attr/colorOnPrimary"
-                                    android:textColorHint="?attr/colorOnPrimary" />
+                                    android:maxLines="1" />
 
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginEnd="8dp"
+                                    android:src="@drawable/ic_search"
+                                    app:tint="@color/grey" />
                             </LinearLayout>
 
                         </com.google.android.material.card.MaterialCardView>

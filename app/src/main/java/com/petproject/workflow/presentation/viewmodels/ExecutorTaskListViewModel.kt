@@ -96,7 +96,6 @@ class ExecutorTaskListViewModel @Inject constructor(
         if (currentSearchQuery.isNotBlank()) {
             filtered = filtered.filter { task ->
                 task.description.contains(currentSearchQuery, true) ||
-                        task.destination?.contains(currentSearchQuery, true) == true ||
                         task.executor?.name?.contains(currentSearchQuery, true) == true ||
                         task.inspector?.name?.contains(currentSearchQuery, true) == true
             }
