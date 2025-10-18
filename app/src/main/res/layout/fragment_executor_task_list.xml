@@ -49,16 +49,24 @@
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="RtlSymmetry">
 
-                        <com.google.android.material.card.MaterialCardView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/search_edit_text"
+                            android:layout_width="0dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="12dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_weight="1"
                             app:cardCornerRadius="5dp"
                             app:cardElevation="2dp"
                             app:strokeColor="?attr/colorOnPrimary"
+                            android:paddingVertical="8dp"
+                            android:paddingStart="15dp"
                             app:strokeWidth="1dp">
 
                             <LinearLayout
@@ -69,14 +77,6 @@
                                 android:paddingEnd="8dp"
                                 android:paddingVertical="8dp">
 
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_marginEnd="8dp"
-                                    android:src="@drawable/ic_search"
-                                    app:tint="?attr/colorOnPrimary" />
-
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/et_search"
                                     android:layout_width="0dp"
@@ -85,17 +85,32 @@
                                     android:background="@null"
                                     android:hint="@string/colleagues_services_news"
                                     android:inputType="text"
-                                    android:maxLines="1"
-                                    android:textColor="?attr/colorOnPrimary"
-                                    android:textColorHint="?attr/colorOnPrimary" />
+                                    android:imeOptions="actionDone"
+                                    android:maxLines="1" />
 
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginEnd="8dp"
+                                    android:src="@drawable/ic_search"
+                                    app:tint="@color/grey" />
                             </LinearLayout>
 
                         </com.google.android.material.card.MaterialCardView>
 
+                            <ImageView
+                                android:id="@+id/filter_off_image_view"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="4dp"
+                                android:contentDescription="@string/component_logo"
+                                android:src="@drawable/ic_filter_off"
+                                app:tint="@color/white" />
+                        </LinearLayout>
                     </com.google.android.material.appbar.MaterialToolbar>
 
-                    <!-- Stats Cards - Completely original selector design -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/overdue_tasks_card_view"
                         android:layout_width="0dp"
