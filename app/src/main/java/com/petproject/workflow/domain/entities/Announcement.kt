@@ -1,11 +1,11 @@
 package com.petproject.workflow.domain.entities
 
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 data class Announcement(
-    val id: String = "",
+    val id: String,
     val title: String,
-    val postData: LocalDate,
+    val createdAt: LocalDateTime,
     val content: String,
     val imgUrl: String?
 )

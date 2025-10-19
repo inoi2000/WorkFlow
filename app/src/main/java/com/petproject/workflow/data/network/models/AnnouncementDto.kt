@@ -10,9 +10,9 @@ data class AnnouncementDto(
     @SerializedName("title")
     @Expose
     val title: String,
-    @SerializedName("postData")
+    @SerializedName("created_at")
     @Expose
-    val postData: String,
+    val createdAt: String,
     @SerializedName("content")
     @Expose
     val content: String,

@@ -105,7 +105,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/deadline_image_view"
                 app:layout_constraintStart_toStartOf="@+id/comment_count_text_view"
                 app:layout_constraintTop_toTopOf="@+id/deadline_image_view"
-                app:taskDeadline="@{task.deadline}"
+                app:localDate="@{task.deadline}"
                 tools:text="25 декабря 2025" />
 
             <ImageView

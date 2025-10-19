@@ -189,7 +189,9 @@
             app:argType="com.petproject.workflow.domain.entities.Task" />
         <action
             android:id="@+id/action_createTaskDoneFragment_to_inspectorTaskListFragment"
-            app:destination="@id/inspectorTaskListFragment" />
+            app:destination="@id/inspectorTaskListFragment"
+            app:popUpTo="@id/createTaskDoneFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/createTaskCommentFragment"

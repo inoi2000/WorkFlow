@@ -5,6 +5,7 @@ import com.petproject.workflow.di.ApplicationScope
 import com.petproject.workflow.domain.entities.Comment
 import com.petproject.workflow.domain.entities.CommentStatus
 import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 @ApplicationScope
@@ -14,7 +15,7 @@ class CommentMapper @Inject constructor() {
         return Comment(
             id = dto.id,
             text = dto.text,
-            creation = LocalDate.parse(dto.creation),
+            createdAt = LocalDateTime.parse(dto.createdAt),
             commentStatus = CommentStatus.valueOf(dto.commentStatus),
             taskId = dto.taskId
         )
@@ -25,7 +26,7 @@ class CommentMapper @Inject constructor() {
             id = entity.id,
             text = entity.text,
             commentStatus = entity.commentStatus.name,
-            creation = entity.creation.toString(),
+            createdAt = entity.createdAt.toString(),
             taskId = entity.taskId
         )
     }

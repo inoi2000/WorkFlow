@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 
 @Parcelize
 data class Statement(
-    val id: String = "",
+    val id: String,
     val logist: Employee,
     val data: String,
     val contactPhone: String,

@@ -9,19 +9,19 @@ data class TaskDto(
     val id: String = "",
     @SerializedName("description")
     @Expose
-    val description: String = "",
+    val description: String,
     @SerializedName("status")
     @Expose
-    val status: String = "",
+    val status: String,
     @SerializedName("priority")
     @Expose
-    val priority: String = "",
+    val priority: String,
     @SerializedName("created_at")
     @Expose
-    val createdAt: String? = null,
+    val createdAt: String,
     @SerializedName("deadline")
     @Expose
-    val deadline: String? = null,
+    val deadline: String,
     @SerializedName("executor")
     @Expose
     val executor: EmployeeDto? = null,

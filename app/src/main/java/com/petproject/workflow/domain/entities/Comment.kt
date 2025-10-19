@@ -2,14 +2,13 @@ package com.petproject.workflow.domain.entities
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.io.File
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Parcelize
 data class Comment(
-    val id: String = "",
+    val id: String,
     val text: String,
-    val creation: LocalDate,
+    val createdAt: LocalDateTime,
     val commentStatus: CommentStatus,
     val taskId: String,
 //    val files: List<File>? = null

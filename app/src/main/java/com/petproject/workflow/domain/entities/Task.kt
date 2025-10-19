@@ -7,12 +7,12 @@ import java.time.LocalDateTime
 
 @Parcelize
 data class Task(
-    val id: String = "",
+    val id: String,
     val description: String,
     val status: TaskStatus,
     val priority: TaskPriority,
-    val createdAt: LocalDateTime? = null,
-    val deadline: LocalDate? = null,
+    val createdAt: LocalDateTime,
+    val deadline: LocalDate,
     val executor: Employee? = null,
     val inspector: Employee? = null,
     val comments: List<Comment>? = null,

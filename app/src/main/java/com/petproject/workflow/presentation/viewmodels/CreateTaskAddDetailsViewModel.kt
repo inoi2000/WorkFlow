@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.UUID
 import javax.inject.Inject
 
 class CreateTaskAddDetailsViewModel @Inject constructor(
@@ -64,6 +65,7 @@ class CreateTaskAddDetailsViewModel @Inject constructor(
         )
 
         return Task(
+            id = UUID.randomUUID().toString(),
             description = descriptionField.get().orEmpty(),
             status = TaskStatus.NEW,
             priority = if (priorityField) TaskPriority.URGENT else TaskPriority.COMMON,

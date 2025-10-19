@@ -6,7 +6,7 @@ import java.time.LocalDateTime
 
 @Parcelize
 data class Fuelling(
-    val id: String = "",
+    val id: String,
     val driver: Employee,
     val operator: Employee,
     val car: Car,

@@ -4,6 +4,7 @@ import com.petproject.workflow.data.network.models.AnnouncementDto
 import com.petproject.workflow.di.ApplicationScope
 import com.petproject.workflow.domain.entities.Announcement
 import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 @ApplicationScope
@@ -13,7 +14,7 @@ class AnnouncementMapper @Inject constructor() {
         return Announcement(
             id = dto.id,
             title = dto.title,
-            postData = LocalDate.parse(dto.postData),
+            createdAt = LocalDateTime.parse(dto.createdAt),
             content = dto.content,
             imgUrl = dto.imgUrl
         )
@@ -23,7 +24,7 @@ class AnnouncementMapper @Inject constructor() {
         return AnnouncementDto(
             id = entity.id,
             title = entity.title,
-            postData = entity.postData.toString(),
+            createdAt = entity.createdAt.toString(),
             content = entity.content,
             imgUrl = entity.imgUrl
         )
