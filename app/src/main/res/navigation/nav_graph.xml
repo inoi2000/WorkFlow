@@ -132,6 +132,9 @@
         <action
             android:id="@+id/action_inspectorTaskListFragment_to_inspectorTaskInfoFragment"
             app:destination="@id/inspectorTaskInfoFragment" />
+        <action
+            android:id="@+id/action_inspectorTaskListFragment_to_taskCommentListFragment"
+            app:destination="@id/taskCommentListFragment" />
     </fragment>
     <fragment
         android:id="@+id/inspectorTaskInfoFragment"

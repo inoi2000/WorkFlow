@@ -186,9 +186,11 @@ class InspectorTaskListFragment : Fragment() {
             },
             { taskId ->
                 // Navigate to comments if needed
-                // val action = InspectorTaskListFragmentDirections
-                //     .actionInspectorTaskListFragmentToTaskCommentListFragment(taskId)
-                // findNavController().navigate(action)
+                 val action = InspectorTaskListFragmentDirections
+                     .actionInspectorTaskListFragmentToTaskCommentListFragment(
+                         taskId,
+                         TaskCommentListFragment.MODE_FROM_INSPECTOR)
+                 findNavController().navigate(action)
             }
         )
         binding.tasksListRecyclerView.itemAnimator = null
