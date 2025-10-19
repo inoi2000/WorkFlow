@@ -151,4 +151,5 @@
     <string name="all">All</string>
     <string name="status">Status</string>
     <string name="priority">Priority</string>
+    <string name="clear_filters">Clear filters</string>
 </resources>
