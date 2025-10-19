@@ -13,6 +13,7 @@ import com.petproject.workflow.domain.entities.Role
 import com.petproject.workflow.domain.entities.TaskPriority
 import com.petproject.workflow.domain.entities.TaskStatus
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 @BindingAdapter("errorInputEmail")
 fun bindErrorInputName(textInputLayout: TextInputLayout, isError: Boolean) {
@@ -108,8 +109,15 @@ fun bindTaskStatusText(textView: TextView, status: TaskStatus?) {
 
 }
 
-@BindingAdapter("taskDeadline")
-fun bindTaskDeadline(textView: TextView, date: LocalDate?) {
+@BindingAdapter("localDateTime")
+fun bindLocalDateTime(textView: TextView, date: LocalDateTime?) {
+    date?.let {
+        textView.text = it.toString()
+    }
+}
+
+@BindingAdapter("localDate")
+fun bindLocalDate(textView: TextView, date: LocalDate?) {
     date?.let {
         textView.text = it.toString()
     }

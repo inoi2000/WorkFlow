@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 
 @Parcelize
 data class Instruction(
-    val id: String = "",
+    val id: String,
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime,
     val status: DocumentStatus,

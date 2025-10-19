@@ -10,9 +10,9 @@ data class CommentDto(
     @SerializedName("text")
     @Expose
     val text: String,
-    @SerializedName("creation")
+    @SerializedName("created_at")
     @Expose
-    val creation: String,
+    val createdAt: String,
     @SerializedName("commentStatus")
     @Expose
     val commentStatus: String,

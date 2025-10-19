@@ -153,5 +153,6 @@
     <string name="completed">Выполненно</string>
     <string name="not_completed">Не выполненно</string>
     <string name="in_progress">В работе</string>
+    <string name="clear_filters">Clear filters</string>
 
 </resources>

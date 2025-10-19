@@ -27,17 +27,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:paddingHorizontal="16dp"
-                app:contentInsetStart="0dp"
+                app:contentInsetStart="22dp"
+                app:titleTextColor="?attr/colorOnPrimary"
                 app:contentInsetEnd="0dp"
-                app:title="Детали задачи">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Назначение задачи"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                app:title="Создание задачи">
 
             </com.google.android.material.appbar.MaterialToolbar>
 
@@ -190,10 +183,9 @@
                             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Описание задачи"
                             app:errorEnabled="true"
                             app:errorInputText="@{viewModel.errorInputDescription}"
-                            app:startIconDrawable="@drawable/ic_description"
+                            app:endIconDrawable="@drawable/ic_description"
                             app:boxBackgroundColor="@color/white"
                             app:cardCornerRadius="8dp">
 
@@ -202,7 +194,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="120dp"
                                 android:gravity="top"
-                                android:hint="Подробно опишите задачу..."
+                                android:hint="Описание задачи"
                                 android:inputType="textMultiLine"
                                 android:maxLines="5"
                                 android:scrollbars="vertical"
@@ -216,11 +208,9 @@
                             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:hint="Дедлайн"
+                            android:layout_marginTop="6dp"
                             app:errorEnabled="true"
                             app:errorInputText="@{viewModel.errorInputDeadline}"
-                            app:startIconDrawable="@drawable/ic_calendar"
                             app:endIconMode="custom"
                             app:endIconDrawable="@drawable/ic_calendar"
                             app:boxBackgroundColor="@color/white"
@@ -232,32 +222,9 @@
                                 android:layout_height="wrap_content"
                                 android:clickable="true"
                                 android:focusable="false"
-                                android:hint="Выберите дату..."
+                                android:hint="Срок выполнения задачи"
                                 android:inputType="none"
                                 android:text="@={viewModel.deadlineField}" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <!-- Местоположение -->
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/til_destination"
-                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:hint="Местоположение (необязательно)"
-                            app:startIconDrawable="@drawable/ic_location"
-                            app:boxBackgroundColor="@color/white"
-                            app:cardCornerRadius="8dp">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/et_destination"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Укажите место выполнения..."
-                                android:inputType="text"
-                                android:maxLines="2"
-                                android:text="@={viewModel.destinationField}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 

@@ -6,7 +6,7 @@ import java.time.LocalDateTime
 
 @Parcelize
 data class Journey(
-    val id: String = "",
+    val id: String,
     val car: Car,
     val driver: Employee,
     val status: JourneyStatus,

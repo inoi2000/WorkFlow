@@ -11,6 +11,8 @@ import com.petproject.workflow.domain.usecases.CreateTaskCommentUseCase
 import com.petproject.workflow.domain.usecases.GetTaskByIdUseCase
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.UUID
 import javax.inject.Inject
 
 class CreateTaskCommentViewModel @Inject constructor(
@@ -29,8 +31,9 @@ class CreateTaskCommentViewModel @Inject constructor(
     fun createComment(text: String) {
         viewModelScope.launch {
             val comment = Comment(
+                id = UUID.randomUUID().toString(),
                 text = text,
-                creation = LocalDate.now(),
+                createdAt = LocalDateTime.now(),
                 commentStatus = CommentStatus.INFORMATION,
                 taskId = taskId
 //                files = listOf()

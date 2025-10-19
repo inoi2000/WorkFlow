@@ -14,6 +14,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +28,7 @@ import com.petproject.workflow.presentation.viewmodels.ExecutorTaskListViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import com.petproject.workflow.presentation.views.adapters.TaskAdapter
 import com.petproject.workflow.presentation.views.adapters.TaskInfoViewHolder
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ExecutorTaskListFragment : Fragment() {
@@ -63,31 +66,57 @@ class ExecutorTaskListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupClickListeners()
+        setupSwipeRefresh()
         observeViewModel()
     }
 
     private fun setupClickListeners() {
         binding.overdueTasksCardView.setOnClickListener {
+            // При клике на карточку - устанавливаем фильтр по статусу и сбрасываем спиннеры
+            resetSpinners()
             viewModel.filteredTaskListByStatus(TaskStatus.FAILED)
-            choseCardView(binding.overdueTasksCardView)
+            updateCardSelection()
         }
         binding.urgentTasksCardView.setOnClickListener {
+            // При клике на карточку - устанавливаем фильтр по приоритету и сбрасываем спиннеры
+            resetSpinners()
             viewModel.filteredTaskListByPriority(TaskPriority.URGENT)
-            choseCardView(binding.urgentTasksCardView)
+            updateCardSelection()
         }
         binding.onApprovalTasksCardView.setOnClickListener {
+            // При клике на карточку - устанавливаем фильтр по статусу и сбрасываем спиннеры
+            resetSpinners()
             viewModel.filteredTaskListByStatus(TaskStatus.ON_APPROVAL)
-            choseCardView(binding.onApprovalTasksCardView)
+            updateCardSelection()
         }
         binding.finishedTasksCardView.setOnClickListener {
+            // При клике на карточку - устанавливаем фильтр по статусу и сбрасываем спиннеры
+            resetSpinners()
             viewModel.filteredTaskListByStatus(TaskStatus.COMPLETED)
-            choseCardView(binding.finishedTasksCardView)
+            updateCardSelection()
         }
+
+        // Clear filters when filter icon is clicked
+        binding.filterOffImageView.setOnClickListener {
+            clearAllFilters()
+        }
+    }
+
+    private fun setupSwipeRefresh() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.loadData()
+        }
+
+        binding.swipeRefreshLayout.setColorSchemeResources(
+            R.color.main_blue,
+            R.color.green,
+            R.color.orange
+        )
     }
 
     private fun setupSearch() {
         binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE) {
                 val query = binding.etSearch.text?.toString()?.trim()
                 if (!query.isNullOrEmpty()) {
                     viewModel.searchTasks(query)
@@ -121,12 +150,14 @@ class ExecutorTaskListFragment : Fragment() {
                         else -> null
                     }
                     status?.let {
-                        viewModel.filteredTaskListByStatus(it)
+                        // При выборе в спиннере - сбрасываем выделение карточек
                         clearCardSelection()
+                        viewModel.filteredTaskListByStatus(it)
                     }
                 } else {
-                    viewModel.filteredTaskListByDefault()
+                    // "All" selected - сбрасываем фильтры
                     clearCardSelection()
+                    viewModel.filteredTaskListByDefault()
                 }
             }
 
@@ -143,12 +174,14 @@ class ExecutorTaskListFragment : Fragment() {
                         else -> null
                     }
                     priority?.let {
-                        viewModel.filteredTaskListByPriority(it)
+                        // При выборе в спиннере - сбрасываем выделение карточек
                         clearCardSelection()
+                        viewModel.filteredTaskListByPriority(it)
                     }
                 } else {
-                    viewModel.filteredTaskListByDefault()
+                    // "All" selected - сбрасываем фильтры
                     clearCardSelection()
+                    viewModel.filteredTaskListByDefault()
                 }
             }
 
@@ -157,7 +190,6 @@ class ExecutorTaskListFragment : Fragment() {
     }
 
     private fun setRecyclerView() {
-        viewModel.loadData()
         val adapter = TaskAdapter(
             TaskInfoViewHolder.EXECUTOR_MODE,
             { taskId ->
@@ -172,32 +204,85 @@ class ExecutorTaskListFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.filteredTaskList.observe(viewLifecycleOwner) { tasks ->
-            (binding.tasksListRecyclerView.adapter as? TaskAdapter)?.submitList(tasks)
-        }
-
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            // You can show/hide progress bar here if needed
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(androidx.lifecycle.Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
+                        handleUiState(uiState)
+                    }
+                }
+                launch {
+                    viewModel.filteredTaskList.observe(viewLifecycleOwner) { tasks ->
+                        (binding.tasksListRecyclerView.adapter as? TaskAdapter)?.submitList(tasks)
+                        // Обновляем выделение карточек при изменении фильтрованных данных
+                        updateCardSelection()
+                    }
+                }
+            }
         }
     }
 
-    private fun choseCardView(cardView: CardView) {
-        clearCardSelection()
+    private fun handleUiState(uiState: ExecutorTaskListViewModel.TaskListUiState) {
+        binding.swipeRefreshLayout.isRefreshing = false
 
-        when (cardView) {
-            binding.overdueTasksCardView -> {
-                binding.overdueTasksSelector.visibility = View.VISIBLE
+        when (uiState) {
+            is ExecutorTaskListViewModel.TaskListUiState.Loading -> {
+                showLoading()
             }
-            binding.urgentTasksCardView -> {
-                binding.urgentTasksSelector.visibility = View.VISIBLE
+            is ExecutorTaskListViewModel.TaskListUiState.Success -> {
+                showTasks(uiState.tasks)
             }
-            binding.onApprovalTasksCardView -> {
-                binding.onApprovalTasksSelector.visibility = View.VISIBLE
-            }
-            binding.finishedTasksCardView -> {
-                binding.finishedTasksSelector.visibility = View.VISIBLE
+            is ExecutorTaskListViewModel.TaskListUiState.Error -> {
+                showError(uiState.message)
             }
         }
+    }
+
+    private fun showLoading() {
+        binding.progressBar.visibility = View.VISIBLE
+        binding.tasksListRecyclerView.visibility = View.GONE
+        binding.emptyStateLayout.visibility = View.GONE
+        binding.errorLayout.visibility = View.GONE
+    }
+
+    private fun showTasks(tasks: List<com.petproject.workflow.domain.entities.Task>) {
+        binding.progressBar.visibility = View.GONE
+        binding.errorLayout.visibility = View.GONE
+
+        val filteredTasks = viewModel.filteredTaskList.value ?: tasks
+
+        if (filteredTasks.isEmpty()) {
+            binding.tasksListRecyclerView.visibility = View.GONE
+            binding.emptyStateLayout.visibility = View.VISIBLE
+        } else {
+            binding.tasksListRecyclerView.visibility = View.VISIBLE
+            binding.emptyStateLayout.visibility = View.GONE
+        }
+    }
+
+    private fun showError(message: String) {
+        binding.progressBar.visibility = View.GONE
+        binding.tasksListRecyclerView.visibility = View.GONE
+        binding.emptyStateLayout.visibility = View.GONE
+        binding.errorLayout.visibility = View.VISIBLE
+        binding.errorText.text = message
+    }
+
+    private fun clearAllFilters() {
+        // Clear search
+        binding.etSearch.text?.clear()
+
+        // Reset spinners to "All" position
+        resetSpinners()
+
+        // Clear card selection
+        clearCardSelection()
+
+        // Reset filters in ViewModel
+        viewModel.clearAllFilters()
+
+        // Hide keyboard
+        hideKeyboard()
     }
 
     private fun clearCardSelection() {
@@ -205,6 +290,30 @@ class ExecutorTaskListFragment : Fragment() {
         binding.urgentTasksSelector.visibility = View.GONE
         binding.onApprovalTasksSelector.visibility = View.GONE
         binding.finishedTasksSelector.visibility = View.GONE
+    }
+
+    private fun updateCardSelection() {
+        clearCardSelection()
+
+        // Определяем какая карточка должна быть выделена на основе активного фильтра
+        when (viewModel.getActiveStatusFilter()) {
+            TaskStatus.FAILED -> binding.overdueTasksSelector.visibility = View.VISIBLE
+            TaskStatus.ON_APPROVAL -> binding.onApprovalTasksSelector.visibility = View.VISIBLE
+            TaskStatus.COMPLETED -> binding.finishedTasksSelector.visibility = View.VISIBLE
+            else -> {
+                when (viewModel.getActivePriorityFilter()) {
+                    TaskPriority.URGENT -> binding.urgentTasksSelector.visibility = View.VISIBLE
+                    else -> {
+                        // Нет активного фильтра - ничего не выделяем
+                    }
+                }
+            }
+        }
+    }
+
+    private fun resetSpinners() {
+        binding.taskStatusSpinner.setSelection(0)
+        binding.taskPrioritySpinner.setSelection(0)
     }
 
     private fun navigateToTaskDetails(taskId: String) {
@@ -229,7 +338,7 @@ class ExecutorTaskListFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        _binding = null
         super.onDestroyView()
+        _binding = null
     }
 }

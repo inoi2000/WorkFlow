@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Data(
-    val id: String = "",
-    val title: String = "",
-    val content: String = ""
+    val id: String,
+    val title: String,
+    val content: String
 ) : Parcelable

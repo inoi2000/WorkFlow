@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Trailer(
-    val id: String = "",
+    val id: String,
     val brand: String,
     val licensePlate: String,
     val volumeLiter: Double,

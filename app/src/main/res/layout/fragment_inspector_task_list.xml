@@ -49,53 +49,69 @@
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="RtlSymmetry">
 
-                        <com.google.android.material.card.MaterialCardView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="12dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="12dp"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="2dp"
-                            app:strokeColor="?attr/colorOnPrimary"
-                            app:strokeWidth="1dp">
+                            android:orientation="horizontal">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/search_card_view"
+                                android:layout_width="0dp"
+                                android:layout_marginEnd="8dp"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:paddingStart="16dp"
-                                android:paddingEnd="8dp"
-                                android:paddingVertical="8dp">
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_weight="1"
+                                app:cardCornerRadius="5dp"
+                                app:cardElevation="2dp"
+                                app:strokeColor="?attr/colorOnPrimary"
+                                android:paddingVertical="8dp"
+                                android:paddingStart="15dp"
+                                app:strokeWidth="1dp">
 
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_marginEnd="8dp"
-                                    android:src="@drawable/ic_search"
-                                    app:tint="?attr/colorOnPrimary" />
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/et_search"
-                                    android:layout_width="0dp"
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:background="@null"
-                                    android:hint="@string/colleagues_services_news"
-                                    android:inputType="text"
-                                    android:maxLines="1"
-                                    android:textColor="?attr/colorOnPrimary"
-                                    android:textColorHint="?attr/colorOnPrimary" />
+                                    android:orientation="horizontal"
+                                    android:paddingStart="16dp"
+                                    android:paddingEnd="8dp"
+                                    android:paddingVertical="8dp">
 
-                            </LinearLayout>
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/et_search"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:background="@null"
+                                        android:hint="@string/colleagues_services_news"
+                                        android:inputType="text"
+                                        android:imeOptions="actionDone"
+                                        android:maxLines="1" />
 
-                        </com.google.android.material.card.MaterialCardView>
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginEnd="8dp"
+                                        android:src="@drawable/ic_search"
+                                        app:tint="@color/grey" />
+                                </LinearLayout>
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <ImageView
+                                android:id="@+id/filter_off_image_view"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="4dp"
+                                android:contentDescription="@string/clear_filters"
+                                android:src="@drawable/ic_filter_off"
+                                app:tint="@color/white" />
+                        </LinearLayout>
 
                     </com.google.android.material.appbar.MaterialToolbar>
 
-                    <!-- Stats Cards -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/on_approval_tasks_card_view"
                         android:layout_width="0dp"
@@ -284,16 +300,132 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tasks_list_recycler_view"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingTop="8dp"
-            android:paddingBottom="16dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:listitem="@layout/item_task_info" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- Progress Bar -->
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/tasks_list_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="16dp"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    tools:listitem="@layout/item_task_info"
+                    tools:visibility="visible"/>
+
+                <!-- Empty State -->
+                <LinearLayout
+                    android:id="@+id/empty_state_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:visibility="gone"
+                    android:padding="32dp">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_empty"
+                        app:tint="@color/grey_for_text"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/empty_state_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Нет назначений"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:layout_marginTop="16dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Здесь будут отображаться ваши текущие назначения"
+                        android:textSize="14sp"
+                        android:textColor="@color/grey_for_text"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Обновить"
+                        android:layout_marginTop="24dp"
+                        android:onClick="@{() -> viewmodel.loadData()}" />
+
+                </LinearLayout>
+
+                <!-- Error State -->
+                <LinearLayout
+                    android:id="@+id/error_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:visibility="gone"
+                    android:padding="32dp">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_error"
+                        app:tint="@color/main_blue"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/error_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ошибка при загрузке назначений"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:layout_marginTop="16dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Попробуйте обновить данные"
+                        android:textSize="14sp"
+                        android:textColor="@color/grey_for_text"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/retry_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Повторить"
+                        android:layout_marginTop="24dp"
+                        android:onClick="@{() -> viewmodel.retry()}" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

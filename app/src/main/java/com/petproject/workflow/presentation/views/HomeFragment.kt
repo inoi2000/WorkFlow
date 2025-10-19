@@ -1,9 +1,12 @@
 package com.petproject.workflow.presentation.views
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -50,6 +53,23 @@ class HomeFragment : Fragment() {
     }
 
     private fun setNavigation() {
+        binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                // Скрываем клавиатуру
+                val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(binding.etSearch.windowToken, 0)
+                // Получаем текст для передачи в следующий фрагмент
+                val searchQuery = binding.etSearch.text.toString().trim()
+                // Переходим к другому фрагменту
+                if(searchQuery.isNotBlank()){
+                    val action = HomeFragmentDirections
+                        .actionHomeFragmentToSearchFragment(searchQuery)
+                    findNavController().navigate(action)
+                }
+                return@setOnEditorActionListener true
+            }
+            false
+        }
         binding.vacationsCardView.setOnClickListener {
             val action = HomeFragmentDirections
                 .actionHomeFragmentToAbsenceListFragment(AbsenceType.VACATION)

@@ -6,7 +6,7 @@ import java.time.LocalDate
 
 @Parcelize
 data class Absence(
-    val id: String = "",
+    val id: String,
     val type: AbsenceType,
     val status: AbsenceStatus,
     val start: LocalDate,

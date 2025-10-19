@@ -67,7 +67,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/created_image_view"
                 app:layout_constraintStart_toEndOf="@+id/created_image_view"
                 app:layout_constraintTop_toTopOf="@+id/created_image_view"
-                app:taskDeadline="@{comment.creation}"
+                app:localDateTime="@{comment.createdAt}"
                 tools:text="25 декабря 2025" />
 
 

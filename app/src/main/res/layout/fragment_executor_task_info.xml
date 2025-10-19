@@ -189,7 +189,7 @@
                     android:id="@+id/task_creation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{String.valueOf(viewmodel.executingTask.creation)}"
+                    android:text="@{String.valueOf(viewmodel.executingTask.createdAt)}"
                     tools:text="20.08.2025" />
 
                 <TextView

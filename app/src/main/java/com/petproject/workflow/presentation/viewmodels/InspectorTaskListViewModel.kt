@@ -18,12 +18,19 @@ class InspectorTaskListViewModel @Inject constructor(
     private val getAllCurrentInspectorTasksUseCase: GetAllCurrentInspectorTasksUseCase
 ) : ViewModel() {
 
+    sealed class TaskListUiState {
+        object Loading : TaskListUiState()
+        data class Success(val tasks: List<Task>) : TaskListUiState()
+        data class Error(val message: String) : TaskListUiState()
+    }
+
+    private val _uiState = MutableLiveData<TaskListUiState>(TaskListUiState.Loading)
+    val uiState: MutableLiveData<TaskListUiState> get() = _uiState
+
     private val _tasksList = MutableLiveData<List<Task>>()
     private val _filteredTaskList = MutableLiveData<List<Task>>()
-    private val _isLoading = MutableLiveData<Boolean>()
 
     val filteredTaskList: LiveData<List<Task>> get() = _filteredTaskList
-    val isLoading: LiveData<Boolean> get() = _isLoading
 
     val onApprovalTasksCount: LiveData<Int> = _tasksList.map { taskList ->
         taskList.count { it.status == TaskStatus.ON_APPROVAL }
@@ -33,45 +40,65 @@ class InspectorTaskListViewModel @Inject constructor(
         taskList.count()
     }
 
+    // Текущие активные фильтры
     private var currentSearchQuery: String = ""
-    private var currentStatusFilter: TaskStatus? = null
-    private var currentPriorityFilter: TaskPriority? = null
+    private var currentActiveFilter: ActiveFilter? = null
+
+    private var allTasks: List<Task> = emptyList()
+
+    sealed class ActiveFilter {
+        data class StatusFilter(val status: TaskStatus) : ActiveFilter()
+        data class PriorityFilter(val priority: TaskPriority) : ActiveFilter()
+        object AllTasksFilter : ActiveFilter()
+    }
 
     init {
         loadData()
     }
 
     fun loadData() {
-        _isLoading.value = true
+        _uiState.value = TaskListUiState.Loading
         viewModelScope.launch {
             try {
-                _tasksList.value = getAllCurrentInspectorTasksUseCase()
+                val tasks = getAllCurrentInspectorTasksUseCase()
+                allTasks = tasks
+                _tasksList.value = tasks
                 applyFilters()
+                _uiState.value = TaskListUiState.Success(tasks)
             } catch (e: Exception) {
-                // Handle error appropriately
+                _uiState.value = TaskListUiState.Error(
+                    "Не удалось загрузить список назначений: ${e.localizedMessage}"
+                )
                 _tasksList.value = emptyList()
                 _filteredTaskList.value = emptyList()
-            } finally {
-                _isLoading.value = false
             }
         }
     }
 
+    fun retry() {
+        loadData()
+    }
+
+    fun clearAllFilters() {
+        currentSearchQuery = ""
+        currentActiveFilter = null
+        applyFilters()
+    }
+
     fun filteredTaskListByDefault() {
-        currentStatusFilter = null
-        currentPriorityFilter = null
+        currentActiveFilter = ActiveFilter.AllTasksFilter
         applyFilters()
     }
 
     fun filteredTaskListByStatus(status: TaskStatus) {
-        currentStatusFilter = status
-        currentPriorityFilter = null
+        // Устанавливаем только один активный фильтр - статус
+        currentActiveFilter = ActiveFilter.StatusFilter(status)
         applyFilters()
     }
 
     fun filteredTaskListByPriority(priority: TaskPriority) {
-        currentPriorityFilter = priority
-        currentStatusFilter = null
+        // Устанавливаем только один активный фильтр - приоритет
+        currentActiveFilter = ActiveFilter.PriorityFilter(priority)
         applyFilters()
     }
 
@@ -81,34 +108,62 @@ class InspectorTaskListViewModel @Inject constructor(
     }
 
     private fun applyFilters() {
-        val tasks = _tasksList.value ?: emptyList()
+        var filtered = allTasks.asSequence()
 
-        var filtered = tasks.asSequence()
-
-        // Apply search filter
+        // Apply search filter (работает вместе с другими фильтрами)
         if (currentSearchQuery.isNotBlank()) {
             filtered = filtered.filter { task ->
                 task.description.contains(currentSearchQuery, true) ||
-                        task.destination?.contains(currentSearchQuery, true) == true ||
                         task.executor?.name?.contains(currentSearchQuery, true) == true ||
                         task.inspector?.name?.contains(currentSearchQuery, true) == true
             }
         }
 
-        // Apply status filter
-        currentStatusFilter?.let { status ->
-            filtered = filtered.filter { it.status == status }
+        // Apply active filter (только один активный фильтр за раз)
+        currentActiveFilter?.let { filter ->
+            when (filter) {
+                is ActiveFilter.StatusFilter -> {
+                    filtered = filtered.filter { it.status == filter.status }
+                }
+                is ActiveFilter.PriorityFilter -> {
+                    filtered = filtered.filter { it.priority == filter.priority }
+                }
+                ActiveFilter.AllTasksFilter -> {
+                    // No additional filtering for all tasks
+                }
+            }
         }
 
-        // Apply priority filter
-        currentPriorityFilter?.let { priority ->
-            filtered = filtered.filter { it.priority == priority }
-        }
+        val result = filtered.toList()
+        _filteredTaskList.value = result
 
-        _filteredTaskList.value = filtered.toList()
+        // Update UI state based on filtered results
+        if (result.isEmpty() && (currentSearchQuery.isNotBlank() || currentActiveFilter != null)) {
+            _uiState.value = TaskListUiState.Success(emptyList())
+        } else if (result.isNotEmpty()) {
+            _uiState.value = TaskListUiState.Success(result)
+        }
     }
 
-    // Helper method to get display name for status
+    // Методы для определения текущего активного фильтра (для выделения карточек во Fragment)
+    fun getActiveStatusFilter(): TaskStatus? {
+        return when (currentActiveFilter) {
+            is ActiveFilter.StatusFilter -> (currentActiveFilter as ActiveFilter.StatusFilter).status
+            else -> null
+        }
+    }
+
+    fun getActivePriorityFilter(): TaskPriority? {
+        return when (currentActiveFilter) {
+            is ActiveFilter.PriorityFilter -> (currentActiveFilter as ActiveFilter.PriorityFilter).priority
+            else -> null
+        }
+    }
+
+    fun isAllTasksFilterActive(): Boolean {
+        return currentActiveFilter is ActiveFilter.AllTasksFilter
+    }
+
     fun getStatusDisplayName(status: TaskStatus, context: Context): String {
         return when (status) {
             TaskStatus.NEW -> context.getString(R.string.status_new)
@@ -121,7 +176,6 @@ class InspectorTaskListViewModel @Inject constructor(
         }
     }
 
-    // Helper method to get display name for priority
     fun getPriorityDisplayName(priority: TaskPriority, context: Context): String {
         return when (priority) {
             TaskPriority.COMMON -> context.getString(R.string.priority_common)
