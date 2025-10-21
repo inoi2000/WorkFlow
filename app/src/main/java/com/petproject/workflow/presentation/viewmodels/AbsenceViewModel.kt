@@ -3,11 +3,15 @@ package com.petproject.workflow.presentation.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.petproject.workflow.domain.entities.Absence
 import com.petproject.workflow.domain.entities.AbsenceType
 import com.petproject.workflow.domain.usecases.GetAllCurrentAbsenceUseCase
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,43 +19,96 @@ class AbsenceViewModel @Inject constructor(
     private val getAllCurrentAbsenceUseCase: GetAllCurrentAbsenceUseCase
 ) : ViewModel() {
 
-    private val _absenceList = MutableLiveData<List<Absence>>()
-
-    private val _filteredAbsenceList = MutableLiveData<List<Absence>>()
-    val filteredAbsenceList: LiveData<List<Absence>> get() = _filteredAbsenceList
-
-    val vacationCount: LiveData<Int> = _absenceList.map { taskList ->
-        taskList.count { it.type == AbsenceType.VACATION }
+    sealed class AbsenceListUiState {
+        object Loading : AbsenceListUiState()
+        data class Success(val absences: List<Absence>) : AbsenceListUiState()
+        data class Error(val message: String) : AbsenceListUiState()
     }
 
-    val businessTripCount: LiveData<Int> = _absenceList.map { taskList ->
-        taskList.count { it.type == AbsenceType.BUSINESS_TRIP }
+    private val _uiState = MutableStateFlow<AbsenceListUiState>(AbsenceListUiState.Loading)
+    val uiState: StateFlow<AbsenceListUiState> get() = _uiState
+
+    private val allAbsencesFlow = MutableStateFlow<List<Absence>>(emptyList())
+    private val searchQueryFlow = MutableStateFlow("")
+    private val activeFilterFlow = MutableStateFlow<AbsenceType?>(null)
+
+    // Комбинируем все фильтры
+    val filteredAbsenceList = combine(
+        allAbsencesFlow,
+        searchQueryFlow,
+        activeFilterFlow
+    ) { absences, query, filter ->
+        absences
+            .filter { absence ->
+                // Фильтр по типу
+                filter?.let { absence.policy.type == it } ?: true
+            }
+            .filter { absence ->
+                // Поиск по имени сотрудника
+                query.isBlank() || absence.employee.name.contains(query, ignoreCase = true)
+            }
     }
 
-    val sickLeaveCount: LiveData<Int> = _absenceList.map { taskList ->
-        taskList.count { it.type == AbsenceType.SICK_LEAVE }
-    }
+    // Счетчики для карточек
+    val vacationCount = allAbsencesFlow.map { absences ->
+        absences.count { it.policy.type == AbsenceType.VACATION }
+    }.asLiveData()
 
-    val dayOffCount: LiveData<Int> = _absenceList.map { taskList ->
-        taskList.count { it.type == AbsenceType.DAY_OFF }
-    }
+    val businessTripCount = allAbsencesFlow.map { absences ->
+        absences.count { it.policy.type == AbsenceType.BUSINESS_TRIP }
+    }.asLiveData()
+
+    val sickLeaveCount = allAbsencesFlow.map { absences ->
+        absences.count { it.policy.type == AbsenceType.SICK_LEAVE }
+    }.asLiveData()
+
+    val dayOffCount = allAbsencesFlow.map { absences ->
+        absences.count { it.policy.type == AbsenceType.DAY_OFF }
+    }.asLiveData()
 
     init {
         loadData()
     }
 
     fun loadData() {
+        _uiState.value = AbsenceListUiState.Loading
         viewModelScope.launch {
-            _absenceList.value = getAllCurrentAbsenceUseCase.invoke()
-            filteredAbsenceListByDefault()
+            try {
+                val absences = getAllCurrentAbsenceUseCase.invoke()
+                allAbsencesFlow.value = absences
+                _uiState.value = AbsenceListUiState.Success(absences)
+            } catch (e: Exception) {
+                _uiState.value = AbsenceListUiState.Error(
+                    "Не удалось загрузить список отсутствий: ${e.localizedMessage}"
+                )
+                allAbsencesFlow.value = emptyList()
+            }
         }
     }
 
-    fun filteredAbsenceListByDefault() {
-        _filteredAbsenceList.value = _absenceList.value
+    fun retry() {
+        loadData()
+    }
+
+    fun clearAllFilters() {
+        searchQueryFlow.value = ""
+        activeFilterFlow.value = null
     }
 
     fun filteredAbsenceListByType(type: AbsenceType) {
-        _filteredAbsenceList.value = _absenceList.value?.filter { it.type == type }
+        activeFilterFlow.value = type
+    }
+
+    fun searchAbsences(query: String) {
+        searchQueryFlow.value = query
+    }
+
+    // Методы для получения текущего состояния
+    fun getActiveAbsenceType(): AbsenceType? {
+        return activeFilterFlow.value
+    }
+
+    fun getCurrentSearchQuery(): String {
+        return searchQueryFlow.value
     }
 }
