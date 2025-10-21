@@ -402,11 +402,10 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:src="@drawable/ic_empty"
-                        app:tint="@color/grey_for_text"
-                        tools:ignore="ContentDescription" />
+                        app:tint="@color/grey_for_text" />
 
                     <TextView
-                        android:id="@+id/empty_state_text"
+                        android:id="@+id/empty_state_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Нет отсутствий"
@@ -416,6 +415,7 @@
                         android:layout_marginTop="16dp" />
 
                     <TextView
+                        android:id="@+id/empty_state_subtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Здесь будут отображаться ваши текущие отсутствия"
@@ -429,7 +429,7 @@
                         android:layout_height="wrap_content"
                         android:text="Обновить"
                         android:layout_marginTop="24dp"
-                        android:onClick="@{() -> viewmodel.loadData()}" />
+                        android:onClick="@{() -> viewmodel.retry()}" />
 
                 </LinearLayout>
 

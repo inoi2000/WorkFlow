@@ -3,11 +3,15 @@ package com.petproject.workflow.presentation.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.petproject.workflow.domain.entities.Absence
 import com.petproject.workflow.domain.entities.AbsenceType
 import com.petproject.workflow.domain.usecases.GetAllCurrentAbsenceUseCase
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,34 +25,46 @@ class AbsenceViewModel @Inject constructor(
         data class Error(val message: String) : AbsenceListUiState()
     }
 
-    private val _uiState = MutableLiveData<AbsenceListUiState>(AbsenceListUiState.Loading)
-    val uiState: MutableLiveData<AbsenceListUiState> get() = _uiState
+    private val _uiState = MutableStateFlow<AbsenceListUiState>(AbsenceListUiState.Loading)
+    val uiState: StateFlow<AbsenceListUiState> get() = _uiState
 
-    private val _absenceList = MutableLiveData<List<Absence>>()
-    private val _filteredAbsenceList = MutableLiveData<List<Absence>>()
-    val filteredAbsenceList: LiveData<List<Absence>> get() = _filteredAbsenceList
+    private val allAbsencesFlow = MutableStateFlow<List<Absence>>(emptyList())
+    private val searchQueryFlow = MutableStateFlow("")
+    private val activeFilterFlow = MutableStateFlow<AbsenceType?>(null)
 
-    val vacationCount: LiveData<Int> = _absenceList.map { taskList ->
-        taskList.count { it.type == AbsenceType.VACATION }
+    // Комбинируем все фильтры
+    val filteredAbsenceList = combine(
+        allAbsencesFlow,
+        searchQueryFlow,
+        activeFilterFlow
+    ) { absences, query, filter ->
+        absences
+            .filter { absence ->
+                // Фильтр по типу
+                filter?.let { absence.policy.type == it } ?: true
+            }
+            .filter { absence ->
+                // Поиск по имени сотрудника
+                query.isBlank() || absence.employee.name.contains(query, ignoreCase = true)
+            }
     }
 
-    val businessTripCount: LiveData<Int> = _absenceList.map { taskList ->
-        taskList.count { it.type == AbsenceType.BUSINESS_TRIP }
-    }
+    // Счетчики для карточек
+    val vacationCount = allAbsencesFlow.map { absences ->
+        absences.count { it.policy.type == AbsenceType.VACATION }
+    }.asLiveData()
 
-    val sickLeaveCount: LiveData<Int> = _absenceList.map { taskList ->
-        taskList.count { it.type == AbsenceType.SICK_LEAVE }
-    }
+    val businessTripCount = allAbsencesFlow.map { absences ->
+        absences.count { it.policy.type == AbsenceType.BUSINESS_TRIP }
+    }.asLiveData()
 
-    val dayOffCount: LiveData<Int> = _absenceList.map { taskList ->
-        taskList.count { it.type == AbsenceType.DAY_OFF }
-    }
+    val sickLeaveCount = allAbsencesFlow.map { absences ->
+        absences.count { it.policy.type == AbsenceType.SICK_LEAVE }
+    }.asLiveData()
 
-    // Текущие активные фильтры
-    private var currentSearchQuery: String = ""
-    private var currentActiveFilter: AbsenceType? = null
-
-    private var allAbsences: List<Absence> = emptyList()
+    val dayOffCount = allAbsencesFlow.map { absences ->
+        absences.count { it.policy.type == AbsenceType.DAY_OFF }
+    }.asLiveData()
 
     init {
         loadData()
@@ -59,16 +75,13 @@ class AbsenceViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val absences = getAllCurrentAbsenceUseCase.invoke()
-                allAbsences = absences
-                _absenceList.value = absences
-                applyFilters()
+                allAbsencesFlow.value = absences
                 _uiState.value = AbsenceListUiState.Success(absences)
             } catch (e: Exception) {
                 _uiState.value = AbsenceListUiState.Error(
                     "Не удалось загрузить список отсутствий: ${e.localizedMessage}"
                 )
-                _absenceList.value = emptyList()
-                _filteredAbsenceList.value = emptyList()
+                allAbsencesFlow.value = emptyList()
             }
         }
     }
@@ -78,66 +91,24 @@ class AbsenceViewModel @Inject constructor(
     }
 
     fun clearAllFilters() {
-        currentSearchQuery = ""
-        currentActiveFilter = null
-        applyFilters()
-    }
-
-    fun filteredAbsenceListByDefault() {
-        currentActiveFilter = null
-        applyFilters()
+        searchQueryFlow.value = ""
+        activeFilterFlow.value = null
     }
 
     fun filteredAbsenceListByType(type: AbsenceType) {
-        currentActiveFilter = type
-        applyFilters()
+        activeFilterFlow.value = type
     }
 
     fun searchAbsences(query: String) {
-        currentSearchQuery = query
-        applyFilters()
+        searchQueryFlow.value = query
     }
 
-    private fun applyFilters() {
-        var filtered = allAbsences.asSequence()
-
-        // Apply search filter
-        if (currentSearchQuery.isNotBlank()) {
-//            filtered = filtered.filter { absence ->
-//                absence.employee?.name?.contains(currentSearchQuery, true) == true ||
-//                        absence.reason?.contains(currentSearchQuery, true) == true ||
-//                        absence.destination?.contains(currentSearchQuery, true) == true
-//            }
-        }
-
-        // Apply type filter
-        currentActiveFilter?.let { type ->
-            filtered = filtered.filter { it.type == type }
-        }
-
-        val result = filtered.toList()
-        _filteredAbsenceList.value = result
-
-        // Update UI state based on filtered results
-        if (result.isEmpty() && (currentSearchQuery.isNotBlank() || currentActiveFilter != null)) {
-            _uiState.value = AbsenceListUiState.Success(emptyList())
-        } else if (result.isNotEmpty()) {
-            _uiState.value = AbsenceListUiState.Success(result)
-        }
-    }
-
-    // Методы для определения текущего активного фильтра (для выделения карточек во Fragment)
+    // Методы для получения текущего состояния
     fun getActiveAbsenceType(): AbsenceType? {
-        return currentActiveFilter
+        return activeFilterFlow.value
     }
 
-    fun getTitleForAbsenceType(type: AbsenceType?): String {
-        return when (type) {
-            AbsenceType.VACATION -> "Отпуска"
-            AbsenceType.BUSINESS_TRIP -> "Командировки"
-            AbsenceType.SICK_LEAVE -> "Больничные"
-            AbsenceType.DAY_OFF -> "Отгулы"
-            null -> "Все отсутствия"
-        }
+    fun getCurrentSearchQuery(): String {
+        return searchQueryFlow.value
     }
 }

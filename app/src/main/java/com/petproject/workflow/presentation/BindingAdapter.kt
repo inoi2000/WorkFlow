@@ -211,15 +211,3 @@ fun bindAbsenceType(textView: TextView, type: AbsenceType) {
             textView.context.resources.getString(R.string.day_off)
     }
 }
-
-@BindingAdapter("absenceDuration")
-fun bindAbsenceDuration(textView: TextView, absence: Absence) {
-    with(textView.context) {
-        val template = resources.getString(R.string.from_to_template)
-        textView.text = String.format(
-            template,
-            absence.start.toString(),
-            absence.end.toString()
-        )
-    }
-}
