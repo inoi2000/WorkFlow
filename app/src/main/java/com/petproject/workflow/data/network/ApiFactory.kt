@@ -12,18 +12,18 @@ class ApiFactory @Inject constructor(
 ) {
 
     companion object {
-        private const val BASE_TASK_API = "http://192.168.0.159:9200/"
-        private const val BASE_COMMENT_API = "http://192.168.0.159:9200/"
-        private const val BASE_EMPLOYEE_API = "http://192.168.0.159:9300/"
-        private const val BASE_INSTRUCTION_API = "http://192.168.0.159:9300/"
-        private const val BASE_ACCESS_API = "http://192.168.0.159:9300/"
-        private const val BASE_ABSENCE_API = "http://192.168.0.159:9400/"
-        private const val BASE_ANNOUNCEMENT_API = "http://192.168.0.159:9500/"
-        private const val BASE_CAR_API = "http://192.168.0.159:9600/"
-        private const val BASE_TRAILER_API = "http://192.168.0.159:9600/"
-        private const val BASE_FUELLING_API = "http://192.168.0.159:9600/"
-        private const val BASE_JOURNEY_API = "http://192.168.0.159:9600/"
-        private const val BASE_STATEMENT_API = "http://192.168.0.159:9600/"
+        private const val BASE_TASK_API = "http://192.168.1.23:9200/"
+        private const val BASE_COMMENT_API = "http://192.168.1.23:9200/"
+        private const val BASE_EMPLOYEE_API = "http://192.168.1.23:9300/"
+        private const val BASE_INSTRUCTION_API = "http://192.168.1.23:9300/"
+        private const val BASE_ACCESS_API = "http://192.168.1.23:9300/"
+        private const val BASE_ABSENCE_API = "http://192.168.1.23:9400/"
+        private const val BASE_ANNOUNCEMENT_API = "http://192.168.1.23:9500/"
+        private const val BASE_CAR_API = "http://192.168.1.23:9600/"
+        private const val BASE_TRAILER_API = "http://192.168.1.23:9600/"
+        private const val BASE_FUELLING_API = "http://192.168.1.23:9600/"
+        private const val BASE_JOURNEY_API = "http://192.168.1.23:9600/"
+        private const val BASE_STATEMENT_API = "http://192.168.1.23:9600/"
     }
 
     val absenceApiService = Retrofit.Builder()
