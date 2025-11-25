@@ -1,6 +1,10 @@
 package com.petproject.workflow.di
 
 import android.content.Context
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
+import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
+import com.bumptech.glide.load.model.GlideUrl
 import com.petproject.workflow.data.network.AbsenceApiService
 import com.petproject.workflow.data.network.AccessApiService
 import com.petproject.workflow.data.network.AnnouncementApiService
@@ -21,6 +25,7 @@ import dagger.Provides
 import net.openid.appauth.AuthorizationService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import java.io.InputStream
 
 @Module
 class DataModule {
@@ -99,6 +104,20 @@ class DataModule {
             .addInterceptor(authInterceptor)
             .addInterceptor(authFailedInterceptor)
             .build()
+    }
+
+    @ApplicationScope
+    @Provides
+    fun provideGlide(
+        context: Context,
+        okHttpClient: OkHttpClient
+    ): RequestManager {
+        Glide.get(context).registry.replace(
+            GlideUrl::class.java,
+            InputStream::class.java,
+            OkHttpUrlLoader.Factory(okHttpClient)
+        )
+        return Glide.with(context)
     }
 
     @Provides

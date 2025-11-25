@@ -1,14 +1,15 @@
 package com.petproject.workflow.presentation.viewmodels
 
 import android.content.Intent
-import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bumptech.glide.RequestManager
 import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.usecases.GetCurrentEmployeeUseCase
 import com.petproject.workflow.domain.usecases.GetLogoutPageIntentUseCase
+import com.petproject.workflow.domain.usecases.LoadCurrentEmployeePhoto
 import com.petproject.workflow.domain.usecases.SignOutUseCase
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.trySendBlocking
@@ -20,7 +21,9 @@ import javax.inject.Inject
 class AccountViewModel @Inject constructor(
     private val signOutUseCase: SignOutUseCase,
     private val getLogoutPageIntentUseCase: GetLogoutPageIntentUseCase,
-    private val getCurrentEmployeeUseCase: GetCurrentEmployeeUseCase
+    private val getCurrentEmployeeUseCase: GetCurrentEmployeeUseCase,
+    private val loadCurrentEmployeePhoto: LoadCurrentEmployeePhoto,
+    val requestManager: RequestManager
 ) : ViewModel() {
 
     private val logoutPageEventChannel = Channel<Intent>(Channel.BUFFERED)
@@ -41,6 +44,12 @@ class AccountViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             _employee.value = getCurrentEmployeeUseCase.invoke()
+        }
+    }
+
+    fun loadPhoto(callback: (String) -> Unit) {
+        viewModelScope.launch {
+            loadCurrentEmployeePhoto(callback);
         }
     }
 

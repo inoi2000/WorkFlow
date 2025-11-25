@@ -18,6 +18,7 @@ class DepartmentMapper @Inject constructor() {
                 Employee(
                     id = it.id,
                     name = it.name,
+                    photoKey = it.photoKey,
                     phone = it.phone,
                     email = it.email
                 )
@@ -33,6 +34,7 @@ class DepartmentMapper @Inject constructor() {
                 EmployeeDto(
                     id = it.id,
                     name = it.name,
+                    photoKey = it.photoKey,
                     phone = it.phone,
                     email = it.email
                 )

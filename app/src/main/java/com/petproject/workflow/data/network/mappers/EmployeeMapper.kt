@@ -15,6 +15,7 @@ class EmployeeMapper @Inject constructor(
         return Employee(
             id = dto.id,
             name = dto.name,
+            photoKey = dto.photoKey,
             phone = dto.phone,
             email = dto.email,
             position = dto.position?.let { positionMapper.mapDtoToEntity(it) },
@@ -26,6 +27,7 @@ class EmployeeMapper @Inject constructor(
         return EmployeeDto(
             id = entity.id,
             name = entity.name,
+            photoKey = entity.photoKey,
             phone = entity.phone,
             email = entity.email,
             position = entity.position?.let { positionMapper.mapEntityToDto(it) },
