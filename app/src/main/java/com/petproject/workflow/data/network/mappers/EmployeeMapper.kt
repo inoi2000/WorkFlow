@@ -1,5 +1,6 @@
 package com.petproject.workflow.data.network.mappers
 
+import com.petproject.workflow.data.network.ApiConfig
 import com.petproject.workflow.data.network.models.EmployeeDto
 import com.petproject.workflow.di.ApplicationScope
 import com.petproject.workflow.domain.entities.Employee
@@ -15,7 +16,7 @@ class EmployeeMapper @Inject constructor(
         return Employee(
             id = dto.id,
             name = dto.name,
-            photoKey = dto.photoKey,
+            photoUrl = fromKeyToUrl(dto.id),
             phone = dto.phone,
             email = dto.email,
             position = dto.position?.let { positionMapper.mapDtoToEntity(it) },
@@ -27,11 +28,16 @@ class EmployeeMapper @Inject constructor(
         return EmployeeDto(
             id = entity.id,
             name = entity.name,
-            photoKey = entity.photoKey,
             phone = entity.phone,
             email = entity.email,
             position = entity.position?.let { positionMapper.mapEntityToDto(it) },
             department = entity.department?.let { departmentMapper.mapEntityToDto(it) }
         )
+    }
+
+    private fun fromKeyToUrl(photoKey: String?): String? {
+        return photoKey?.let {
+            String.format(ApiConfig.EMPLOYEE_PHOTO_URI_PATTERN, it)
+        }
     }
 }

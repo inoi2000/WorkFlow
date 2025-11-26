@@ -10,9 +10,6 @@ data class EmployeeDto(
     @SerializedName("name")
     @Expose
     val name: String = "",
-    @SerializedName("photo_key")
-    @Expose
-    val photoKey: String? = null,
     @SerializedName("phone")
     @Expose
     val phone: String? = null,

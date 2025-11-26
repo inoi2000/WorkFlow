@@ -76,7 +76,9 @@ class InspectorTaskInfoFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.inspectorTask.observe(viewLifecycleOwner) { task ->
             task.executor?.let { executor ->
-                val employeeInfoViewHolder = EmployeeInfoViewHolder(binding.taskExecutor)
+                val employeeInfoViewHolder = EmployeeInfoViewHolder(
+                    binding.taskExecutor,
+                    viewModel.requestManager)
                 employeeInfoViewHolder.bind(executor) {}
             }
 

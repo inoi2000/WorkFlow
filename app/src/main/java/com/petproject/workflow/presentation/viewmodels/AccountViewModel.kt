@@ -9,7 +9,6 @@ import com.bumptech.glide.RequestManager
 import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.usecases.GetCurrentEmployeeUseCase
 import com.petproject.workflow.domain.usecases.GetLogoutPageIntentUseCase
-import com.petproject.workflow.domain.usecases.LoadCurrentEmployeePhoto
 import com.petproject.workflow.domain.usecases.SignOutUseCase
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.trySendBlocking
@@ -22,7 +21,6 @@ class AccountViewModel @Inject constructor(
     private val signOutUseCase: SignOutUseCase,
     private val getLogoutPageIntentUseCase: GetLogoutPageIntentUseCase,
     private val getCurrentEmployeeUseCase: GetCurrentEmployeeUseCase,
-    private val loadCurrentEmployeePhoto: LoadCurrentEmployeePhoto,
     val requestManager: RequestManager
 ) : ViewModel() {
 
@@ -36,7 +34,7 @@ class AccountViewModel @Inject constructor(
         get() = logoutCompletedEventChannel.receiveAsFlow()
 
     private val _employee = MutableLiveData<Employee>()
-    public val employee: LiveData<Employee> get() = _employee
+    val employee: LiveData<Employee> get() = _employee
 
     private val _navigateToLoginScreen = MutableLiveData(false)
     val navigateToLoginScreen: LiveData<Boolean> get() = _navigateToLoginScreen
@@ -44,12 +42,6 @@ class AccountViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             _employee.value = getCurrentEmployeeUseCase.invoke()
-        }
-    }
-
-    fun loadPhoto(callback: (String) -> Unit) {
-        viewModelScope.launch {
-            loadCurrentEmployeePhoto(callback);
         }
     }
 

@@ -28,7 +28,7 @@ class CreateTaskSelectionEmployeeFragment : Fragment() {
     private lateinit var viewModel: CreateTaskSelectionEmployeeViewModel
 
     private val employeeAdapter by lazy {
-        EmployeeAdapter { employee ->
+        EmployeeAdapter(viewModel.requestManager) { employee ->
             navigateToDetails(employee)
         }
     }

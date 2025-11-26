@@ -1,7 +1,5 @@
 package com.petproject.workflow.data.repositories
 
-import com.bumptech.glide.RequestManager
-import com.petproject.workflow.data.network.ApiConfig
 import com.petproject.workflow.data.network.EmployeeApiService
 import com.petproject.workflow.data.network.exceptions.AuthException
 import com.petproject.workflow.data.network.mappers.EmployeeMapper
@@ -40,15 +38,5 @@ class EmployeeRepositoryImpl @Inject constructor(
 
     override suspend fun getDriverEmployees(): List<Employee> {
         TODO("Not yet implemented")
-    }
-
-    override suspend fun loadEmployeePhoto(employeeId: String, callback: (String) -> Unit) {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun loadCurrentEmployeePhoto(callback: (String) -> Unit) {
-        val employeeId = dataHelper.getCurrentEmployeeIdOrAuthException()
-        val uri = String.format(ApiConfig.EMPLOYEE_PHOTO_URI_PATTERN, employeeId)
-        callback(uri)
     }
 }

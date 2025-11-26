@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import com.bumptech.glide.RequestManager
 import com.petproject.workflow.domain.entities.Task
 import com.petproject.workflow.domain.usecases.ApproveTaskUseCase
 import com.petproject.workflow.domain.usecases.CancelTaskUseCase
@@ -20,7 +21,8 @@ class InspectorTaskInfoViewModel @Inject constructor(
     private val getTaskByIdUseCase: GetTaskByIdUseCase,
     private val rejectTaskUseCase: RejectTaskUseCase,
     private val approveTaskUseCase: ApproveTaskUseCase,
-    private val cancelTaskUseCase: CancelTaskUseCase
+    private val cancelTaskUseCase: CancelTaskUseCase,
+    val requestManager: RequestManager
 ): ViewModel() {
 
     private val _errorMessage = MutableLiveData<String?>()

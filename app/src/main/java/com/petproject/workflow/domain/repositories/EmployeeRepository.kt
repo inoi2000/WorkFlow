@@ -11,8 +11,4 @@ interface EmployeeRepository {
     suspend fun getAllEmployeesForAssignTask(): List<Employee>
 
     suspend fun getDriverEmployees(): List<Employee>
-
-    suspend fun loadEmployeePhoto(employeeId: String, callback: (String) -> Unit)
-
-    suspend fun loadCurrentEmployeePhoto(callback: (String) -> Unit)
 }

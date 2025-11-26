@@ -69,7 +69,9 @@ class CreateTaskAddDetailsFragment : Fragment() {
     }
 
     private fun setupEmployeeInfo() {
-        val executorEmployee = EmployeeInfoViewHolder(binding.executorEmployee)
+        val executorEmployee = EmployeeInfoViewHolder(
+            binding.executorEmployee,
+            viewModel.requestManager)
         executorEmployee.bind(args.employee) {}
     }
 

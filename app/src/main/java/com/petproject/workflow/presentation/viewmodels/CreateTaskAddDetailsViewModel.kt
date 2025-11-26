@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bumptech.glide.RequestManager
 import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.entities.Task
 import com.petproject.workflow.domain.entities.TaskPriority
@@ -18,7 +19,8 @@ import java.util.UUID
 import javax.inject.Inject
 
 class CreateTaskAddDetailsViewModel @Inject constructor(
-    private val getCurrentEmployeeUseCase: GetCurrentEmployeeUseCase
+    private val getCurrentEmployeeUseCase: GetCurrentEmployeeUseCase,
+    val requestManager: RequestManager
 ) : ViewModel() {
 
     val dateFormatPattern = "dd.MM.yyyy"
