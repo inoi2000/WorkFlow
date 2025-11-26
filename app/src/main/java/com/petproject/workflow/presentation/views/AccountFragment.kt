@@ -9,9 +9,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentAccountBinding
-import com.petproject.workflow.domain.entities.AbsenceType
 import com.petproject.workflow.presentation.utils.launchAndCollectIn
 import com.petproject.workflow.presentation.viewmodels.AccountViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
@@ -83,6 +83,16 @@ class AccountFragment : Fragment() {
                 startActivity(intent)
                 requireActivity().finish()
             }
+        }
+        viewModel.employee.observe(viewLifecycleOwner) { employee ->
+            if (employee.photoUrl != null) {
+                viewModel.requestManager
+                    .load(employee.photoUrl)
+                    .into(binding.photoImageView)
+            } else {
+                binding.photoImageView.setImageResource(R.drawable.ic_person)
+            }
+            viewModel.requestManager
         }
     }
 

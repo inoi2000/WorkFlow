@@ -1,6 +1,7 @@
 package com.petproject.workflow.data.network
 
 import com.petproject.workflow.data.network.models.EmployeeDto
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -17,6 +18,11 @@ interface EmployeeApiService {
     suspend fun getSubordinateEmployees(
         @Path("id") employeeId: String
     ): List<EmployeeDto>
+
+    @GET("api/employees/{id}/photo")
+    suspend fun getEmployeePhoto(
+        @Path("id") employeeId: String
+    ): Response<ResponseBody>
 
     @POST("/api/employees/batch")
     suspend fun getBatchEmployees(

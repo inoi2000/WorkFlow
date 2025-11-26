@@ -75,6 +75,10 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
 
+    implementation(libs.glide)
+    implementation(libs.okhttp3.integration)
+    kapt(libs.compiler)
+
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
     implementation(libs.appauth)

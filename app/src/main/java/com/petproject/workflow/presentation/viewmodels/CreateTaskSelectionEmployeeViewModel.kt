@@ -4,13 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bumptech.glide.RequestManager
 import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.usecases.GetAllEmployeesForAssignTaskUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CreateTaskSelectionEmployeeViewModel @Inject constructor(
-    private val getAllEmployeesForAssignTaskUseCase: GetAllEmployeesForAssignTaskUseCase
+    private val getAllEmployeesForAssignTaskUseCase: GetAllEmployeesForAssignTaskUseCase,
+    val requestManager: RequestManager
 ) : ViewModel() {
 
     private val _employeeList = MutableLiveData<List<Employee>>()

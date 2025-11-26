@@ -32,9 +32,8 @@
 
                 <ImageView
                     android:id="@+id/photo_image_view"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_margin="8dp"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
                     android:src="@drawable/ic_person" />
             </androidx.cardview.widget.CardView>
 

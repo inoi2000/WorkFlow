@@ -1,11 +1,11 @@
 package com.petproject.workflow.presentation.viewmodels
 
 import android.content.Intent
-import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bumptech.glide.RequestManager
 import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.usecases.GetCurrentEmployeeUseCase
 import com.petproject.workflow.domain.usecases.GetLogoutPageIntentUseCase
@@ -20,7 +20,8 @@ import javax.inject.Inject
 class AccountViewModel @Inject constructor(
     private val signOutUseCase: SignOutUseCase,
     private val getLogoutPageIntentUseCase: GetLogoutPageIntentUseCase,
-    private val getCurrentEmployeeUseCase: GetCurrentEmployeeUseCase
+    private val getCurrentEmployeeUseCase: GetCurrentEmployeeUseCase,
+    val requestManager: RequestManager
 ) : ViewModel() {
 
     private val logoutPageEventChannel = Channel<Intent>(Channel.BUFFERED)
@@ -33,7 +34,7 @@ class AccountViewModel @Inject constructor(
         get() = logoutCompletedEventChannel.receiveAsFlow()
 
     private val _employee = MutableLiveData<Employee>()
-    public val employee: LiveData<Employee> get() = _employee
+    val employee: LiveData<Employee> get() = _employee
 
     private val _navigateToLoginScreen = MutableLiveData(false)
     val navigateToLoginScreen: LiveData<Boolean> get() = _navigateToLoginScreen

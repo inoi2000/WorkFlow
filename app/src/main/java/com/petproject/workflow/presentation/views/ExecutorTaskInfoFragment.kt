@@ -73,7 +73,9 @@ class ExecutorTaskInfoFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.executingTask.observe(viewLifecycleOwner) { task ->
             task.inspector?.let { inspector ->
-                val employeeInfoViewHolder = EmployeeInfoViewHolder(binding.taskInspector)
+                val employeeInfoViewHolder = EmployeeInfoViewHolder(
+                    binding.taskInspector,
+                    viewModel.requestManager)
                 employeeInfoViewHolder.bind(inspector) {}
             }
             binding.acceptTaskButton.visibility =

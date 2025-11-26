@@ -1,5 +1,6 @@
 package com.petproject.workflow.data.network.mappers
 
+import com.petproject.workflow.data.network.ApiConfig
 import com.petproject.workflow.data.network.models.DepartmentDto
 import com.petproject.workflow.data.network.models.EmployeeDto
 import com.petproject.workflow.di.ApplicationScope
@@ -18,6 +19,7 @@ class DepartmentMapper @Inject constructor() {
                 Employee(
                     id = it.id,
                     name = it.name,
+                    photoUrl = fromKeyToUrl(it.id),
                     phone = it.phone,
                     email = it.email
                 )
@@ -38,5 +40,11 @@ class DepartmentMapper @Inject constructor() {
                 )
             }
         )
+    }
+
+    private fun fromKeyToUrl(photoKey: String?): String? {
+        return photoKey?.let {
+            String.format(ApiConfig.EMPLOYEE_PHOTO_URI_PATTERN, it)
+        }
     }
 }
