@@ -20,6 +20,7 @@ import com.petproject.workflow.data.network.TaskApiService
 import com.petproject.workflow.data.network.TrailerApiService
 import com.petproject.workflow.data.network.utils.AuthFailedInterceptor
 import com.petproject.workflow.data.network.utils.AuthInterceptor
+import com.petproject.workflow.data.network.utils.FileUploadHelper
 import dagger.Module
 import dagger.Provides
 import net.openid.appauth.AuthorizationService
@@ -123,5 +124,12 @@ class DataModule {
     @Provides
     fun provideAuthService(context: Context): AuthorizationService {
         return AuthorizationService(context)
+    }
+
+    @Provides
+    fun provideFileUploadHelper(
+        context: Context
+    ): FileUploadHelper {
+        return FileUploadHelper(context)
     }
 }

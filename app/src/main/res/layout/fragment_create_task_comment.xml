@@ -114,6 +114,13 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:id="@+id/upload_file_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="Загрузить файл" />
+
+            <Button
                 android:id="@+id/create_new_comment_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

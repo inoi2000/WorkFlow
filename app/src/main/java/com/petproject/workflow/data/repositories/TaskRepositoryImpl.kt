@@ -1,11 +1,8 @@
 package com.petproject.workflow.data.repositories
 
-import com.petproject.workflow.data.network.CommentApiService
 import com.petproject.workflow.data.network.TaskApiService
-import com.petproject.workflow.data.network.mappers.CommentMapper
 import com.petproject.workflow.data.network.mappers.TaskMapper
 import com.petproject.workflow.data.network.utils.DataHelper
-import com.petproject.workflow.domain.entities.Comment
 import com.petproject.workflow.domain.entities.Task
 import com.petproject.workflow.domain.repositories.TaskRepository
 import java.io.IOException
@@ -14,21 +11,13 @@ import javax.inject.Inject
 class TaskRepositoryImpl @Inject constructor(
     private val dataHelper: DataHelper,
     private val taskMapper: TaskMapper,
-    private val commentMapper: CommentMapper,
     private val taskApiService: TaskApiService,
-    private val commentApiService: CommentApiService,
 ) : TaskRepository {
 
     override suspend fun getAllCurrentExecutorTasks(): List<Task> {
         val employeeId = dataHelper.getCurrentEmployeeIdOrAuthException()
         val response = taskApiService.getAllTasksByExecutor(employeeId)
         return response.map { taskMapper.mapDtoToEntity(it) }
-    }
-
-    override suspend fun getTaskComments(taskId: String): List<Comment> {
-        return commentApiService
-            .getAllCommentsByTask(taskId)
-            .map { commentMapper.mapDtoToEntity(it) }
     }
 
     override suspend fun getAllCurrentInspectorTasks(): List<Task> {
@@ -40,12 +29,6 @@ class TaskRepositoryImpl @Inject constructor(
     override suspend fun createTask(task: Task): Boolean {
         val taskDto = taskMapper.mapEntityToDto(task)
         val response = taskApiService.createTask(taskDto)
-        return response.isSuccessful
-    }
-
-    override suspend fun createTaskComment(comment: Comment): Boolean {
-        val dto = commentMapper.mapEntityToDto(comment)
-        val response = commentApiService.createComment(dto)
         return response.isSuccessful
     }
 
