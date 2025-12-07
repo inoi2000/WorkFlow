@@ -5,6 +5,7 @@
     tools:context=".presentation.views.CreateTaskCommentFragment">
 
     <data>
+        <import type="android.view.View" />
 
         <variable
             name="viewmodel"
@@ -14,13 +15,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp">
+        android:background="?attr/colorSurface">
 
+        <!-- Существующая карточка -->
         <androidx.cardview.widget.CardView
             android:id="@+id/details_comments_card_view"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
             app:cardCornerRadius="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
@@ -71,9 +77,10 @@
                             android:id="@+id/comments_counter_text_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="top|end"
                             android:layout_margin="6dp"
                             android:background="@drawable/circle_grey"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="4dp"
                             android:textColor="?attr/colorPrimary"
                             android:textSize="12sp"
                             android:textStyle="bold"
@@ -84,51 +91,120 @@
                             tools:text="0" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
-
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
+        <!-- Основной контент -->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/details_comments_card_view">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_text"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:errorInputText="@{viewmodel.errorInputCommentText}">
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_text"
+                <!-- Заголовок -->
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="start|top"
-                    android:hint="@string/comment_text"
-                    android:inputType="textEmailAddress"
-                    android:minHeight="124dp"
-                    android:text="@={viewmodel.commentTextField}" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginBottom="16dp"
+                    android:text="Создание комментария"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:textColor="?attr/colorOnSurface" />
 
-            <Button
-                android:id="@+id/upload_file_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:text="Загрузить файл" />
+                <!-- Поле ввода текста -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_text"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Текст комментария"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:startIconDrawable="@drawable/ic_comment">
 
-            <Button
-                android:id="@+id/create_new_comment_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:text="@string/create_comment" />
-        </LinearLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:maxLines="8"
+                        android:minHeight="120dp"
+                        android:text="@={viewmodel.commentTextField}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Загруженные файлы -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical"
+                    android:visibility="@{viewmodel.hasAttachedFiles ? View.VISIBLE : View.GONE}">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Прикрепленные файлы"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_uploaded_files"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:nestedScrollingEnabled="false" />
+
+                </LinearLayout>
+
+                <!-- Кнопка прикрепления файла -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_attach_file"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:drawableStart="@drawable/ic_upload_file"
+                    android:drawablePadding="8dp"
+                    android:text="Прикрепить файл"
+                    app:iconGravity="start"
+                    app:strokeColor="?attr/colorOutline" />
+
+                <!-- Кнопка создания комментария -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_create_comment"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:enabled="@{viewmodel.commentTextField != null &amp;&amp; viewmodel.commentTextField.length() > 0}"
+                    android:text="Создать комментарий"
+                    app:icon="@drawable/ic_plus"
+                    app:iconGravity="end" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- Прогресс бар -->
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/details_comments_card_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </layout>
