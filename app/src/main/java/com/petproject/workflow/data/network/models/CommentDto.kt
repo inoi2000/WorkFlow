@@ -2,6 +2,7 @@ package com.petproject.workflow.data.network.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.petproject.workflow.domain.entities.FileKey
 
 data class CommentDto(
     @SerializedName("id")
@@ -19,4 +20,7 @@ data class CommentDto(
     @SerializedName("taskId")
     @Expose
     val taskId: String,
+    @SerializedName("file_keys")
+    @Expose
+    val fileKeys: List<FileKey>?
 )

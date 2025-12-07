@@ -5,6 +5,7 @@ import com.petproject.workflow.data.repositories.AccessRepositoryImpl
 import com.petproject.workflow.data.repositories.AnnouncementRepositoryImpl
 import com.petproject.workflow.data.repositories.AuthorizationRepositoryImpl
 import com.petproject.workflow.data.repositories.CarRepositoryImpl
+import com.petproject.workflow.data.repositories.CommentRepositoryImpl
 import com.petproject.workflow.data.repositories.EmployeeRepositoryImpl
 import com.petproject.workflow.data.repositories.FuellingRepositoryImpl
 import com.petproject.workflow.data.repositories.InstructionRepositoryImpl
@@ -17,6 +18,7 @@ import com.petproject.workflow.domain.repositories.AccessRepository
 import com.petproject.workflow.domain.repositories.AnnouncementRepository
 import com.petproject.workflow.domain.repositories.AuthorizationRepository
 import com.petproject.workflow.domain.repositories.CarRepository
+import com.petproject.workflow.domain.repositories.CommentRepository
 import com.petproject.workflow.domain.repositories.EmployeeRepository
 import com.petproject.workflow.domain.repositories.FuellingRepository
 import com.petproject.workflow.domain.repositories.InstructionRepository
@@ -41,6 +43,9 @@ interface DomainModule {
 
     @Binds
     fun bindInstructionRepository(impl: InstructionRepositoryImpl): InstructionRepository
+
+    @Binds
+    fun bindCommentRepository(impl: CommentRepositoryImpl): CommentRepository
 
     @Binds
     fun bindTaskRepository(impl: TaskRepositoryImpl): TaskRepository

@@ -11,5 +11,5 @@ data class Comment(
     val createdAt: LocalDateTime,
     val commentStatus: CommentStatus,
     val taskId: String,
-//    val files: List<File>? = null
+    val fileKeys: List<FileKey>? = null
 ) : Parcelable

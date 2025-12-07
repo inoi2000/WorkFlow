@@ -4,7 +4,6 @@ import com.petproject.workflow.data.network.models.CommentDto
 import com.petproject.workflow.di.ApplicationScope
 import com.petproject.workflow.domain.entities.Comment
 import com.petproject.workflow.domain.entities.CommentStatus
-import java.time.LocalDate
 import java.time.LocalDateTime
 import javax.inject.Inject
 
@@ -17,7 +16,8 @@ class CommentMapper @Inject constructor() {
             text = dto.text,
             createdAt = LocalDateTime.parse(dto.createdAt),
             commentStatus = CommentStatus.valueOf(dto.commentStatus),
-            taskId = dto.taskId
+            taskId = dto.taskId,
+            fileKeys = dto.fileKeys
         )
     }
 
@@ -27,7 +27,8 @@ class CommentMapper @Inject constructor() {
             text = entity.text,
             commentStatus = entity.commentStatus.name,
             createdAt = entity.createdAt.toString(),
-            taskId = entity.taskId
+            taskId = entity.taskId,
+            fileKeys = entity.fileKeys
         )
     }
 }
