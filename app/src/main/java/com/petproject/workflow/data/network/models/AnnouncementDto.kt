@@ -2,6 +2,7 @@ package com.petproject.workflow.data.network.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.petproject.workflow.domain.entities.FileKey
 
 data class AnnouncementDto(
     @SerializedName("id")
@@ -16,7 +17,7 @@ data class AnnouncementDto(
     @SerializedName("content")
     @Expose
     val content: String,
-    @SerializedName("imgUrl")
+    @SerializedName("file_key")
     @Expose
-    val imgUrl: String?
+    val fileKey: FileKey?,
 )

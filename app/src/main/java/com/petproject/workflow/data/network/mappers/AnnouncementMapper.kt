@@ -1,9 +1,9 @@
 package com.petproject.workflow.data.network.mappers
 
+import com.petproject.workflow.data.network.ApiConfig
 import com.petproject.workflow.data.network.models.AnnouncementDto
 import com.petproject.workflow.di.ApplicationScope
 import com.petproject.workflow.domain.entities.Announcement
-import java.time.LocalDate
 import java.time.LocalDateTime
 import javax.inject.Inject
 
@@ -16,7 +16,8 @@ class AnnouncementMapper @Inject constructor() {
             title = dto.title,
             createdAt = LocalDateTime.parse(dto.createdAt),
             content = dto.content,
-            imgUrl = dto.imgUrl
+            fileKey = dto.fileKey,
+            photoUrl = fromKeyToUrl(dto.id)
         )
     }
 
@@ -26,7 +27,13 @@ class AnnouncementMapper @Inject constructor() {
             title = entity.title,
             createdAt = entity.createdAt.toString(),
             content = entity.content,
-            imgUrl = entity.imgUrl
+            fileKey = entity.fileKey
         )
+    }
+
+    private fun fromKeyToUrl(photoKey: String?): String? {
+        return photoKey?.let {
+            String.format(ApiConfig.ANNOUNCEMENT_PHOTO_URI_PATTERN, it)
+        }
     }
 }

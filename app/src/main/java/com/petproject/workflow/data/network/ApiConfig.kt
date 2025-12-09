@@ -16,4 +16,5 @@ object ApiConfig {
     const val BASE_STATEMENT_API = "http://192.168.1.23:9600/"
 
     const val EMPLOYEE_PHOTO_URI_PATTERN = BASE_EMPLOYEE_API + "api/employees/%s/photo"
+    const val ANNOUNCEMENT_PHOTO_URI_PATTERN = BASE_ANNOUNCEMENT_API + "api/announcements/%s/poster"
 }

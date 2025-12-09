@@ -7,5 +7,6 @@ data class Announcement(
     val title: String,
     val createdAt: LocalDateTime,
     val content: String,
-    val imgUrl: String?
+    val fileKey: FileKey?,
+    val photoUrl: String?
 )
