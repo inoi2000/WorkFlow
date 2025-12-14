@@ -45,6 +45,13 @@ fun bindErrorInputText(textInputLayout: TextInputLayout, isError: Boolean) {
     textInputLayout.error = message
 }
 
+@BindingAdapter("onlyDirectorAndHrView")
+fun bindOnlyDirectorAndHrView(view: View, role: Role) {
+    if (role != Role.ROLE_DIRECTOR && role != Role.ROLE_HR) {
+        view.visibility = View.GONE
+    }
+}
+
 @BindingAdapter("onlyInspectorView")
 fun bindOnlyInspectorView(view: View, role: Role) {
     if (role == Role.ROLE_DRIVER) {

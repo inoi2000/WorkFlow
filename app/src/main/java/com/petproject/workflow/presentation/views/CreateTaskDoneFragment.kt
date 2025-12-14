@@ -29,7 +29,10 @@ class CreateTaskDoneFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelFactory
 
     private val args by navArgs<CreateTaskDoneFragmentArgs>()
-    private lateinit var viewModel: CreateTaskDoneViewModel
+
+    private val viewModel by lazy {
+        ViewModelProvider.create (viewModelStore, viewModelFactory)[CreateTaskDoneViewModel::class.java]
+    }
 
     private val component by lazy {
         (requireActivity().application as WorkFlowApplication).component
@@ -53,10 +56,8 @@ class CreateTaskDoneFragment : Fragment() {
     }
 
     private fun setupViewModel() {
-        viewModel = ViewModelProvider(this, viewModelFactory)[CreateTaskDoneViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
         viewModel.setTaskData(args.task)
     }
 

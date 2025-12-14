@@ -6,6 +6,7 @@ import com.petproject.workflow.presentation.viewmodels.AccessListViewModel
 import com.petproject.workflow.presentation.viewmodels.AccountViewModel
 import com.petproject.workflow.presentation.viewmodels.AnnouncementListViewModel
 import com.petproject.workflow.presentation.viewmodels.AuthViewModel
+import com.petproject.workflow.presentation.viewmodels.CreateAnnouncementViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateTaskAddDetailsViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateTaskDoneViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateTaskSelectionEmployeeViewModel
@@ -97,4 +98,9 @@ interface ViewModelModule {
     @ViewModelKey(StatementListViewModel::class)
     @Binds
     fun bindStatementListViewModel(impl: StatementListViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(CreateAnnouncementViewModel::class)
+    @Binds
+    fun bindCreateAnnouncementViewModel(impl: CreateAnnouncementViewModel): ViewModel
 }

@@ -8,5 +8,5 @@ data class Announcement(
     val createdAt: LocalDateTime,
     val content: String,
     val fileKey: FileKey?,
-    val photoUrl: String?
+    val photoUrl: String? = null
 )

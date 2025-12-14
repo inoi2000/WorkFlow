@@ -7,6 +7,7 @@ import com.petproject.workflow.presentation.views.AuthActivity
 import com.petproject.workflow.presentation.views.AnnouncementListFragment
 import com.petproject.workflow.presentation.views.AbsenceListFragment
 import com.petproject.workflow.presentation.views.AccessListFragment
+import com.petproject.workflow.presentation.views.CreateAnnouncementFragment
 import com.petproject.workflow.presentation.views.CreateTaskAddDetailsFragment
 import com.petproject.workflow.presentation.views.CreateTaskDoneFragment
 import com.petproject.workflow.presentation.views.CreateTaskSelectionEmployeeFragment
@@ -52,6 +53,8 @@ interface ApplicationComponent {
     fun inject(journeyListFragment: JourneyListFragment)
 
     fun inject(statementListFragment: StatementListFragment)
+
+    fun inject(createAnnouncementFragment: CreateAnnouncementFragment)
 
     fun activityComponentFactory(): ActivityComponent.Factory
 

@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_createAnnouncementFragment"
+            app:destination="@id/createAnnouncementFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -256,4 +259,9 @@
             android:name="query"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/createAnnouncementFragment"
+        android:name="com.petproject.workflow.presentation.views.CreateAnnouncementFragment"
+        android:label="fragment_create_announcement"
+        tools:layout="@layout/fragment_create_announcement" />
 </navigation>
