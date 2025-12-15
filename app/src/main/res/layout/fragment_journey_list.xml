@@ -25,6 +25,8 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 app:title="Мои выезды"
+                app:navigationIcon="@drawable/ic_arrow_back"
+                app:navigationIconTint="?attr/colorOnPrimary"
                 app:menu="@menu/filter_list_menu" />
 
         </com.google.android.material.appbar.AppBarLayout>

@@ -13,13 +13,24 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="8dp"
+        android:layout_marginTop="12dp"
         app:cardCornerRadius="12dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp">
+            android:layout_marginBottom="12dp">
+
+            <ImageView
+                android:id="@+id/poster_image_view"
+                android:scaleType="centerCrop"
+                android:layout_width="0dp"
+                android:layout_height="124dp"
+                android:contentDescription="TODO"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/app_logo2" />
 
             <TextView
                 android:id="@+id/title_text_view"
@@ -28,10 +39,10 @@
                 android:layout_marginTop="4dp"
                 android:text="@{announcement.title}"
                 android:textStyle="bold"
+                android:layout_marginHorizontal="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/poster_image_view"
                 tools:text="Проводится планновая вакцинация от COVID-19" />
 
             <TextView
@@ -42,12 +53,11 @@
                 android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="@+id/title_text_view"
                 app:layout_constraintTop_toBottomOf="@+id/title_text_view"
-                app:localDateTime="@{announcement.createdAt}"
                 tools:text="25 декабря 2025" />
 
             <TextView
                 android:id="@+id/content_text_view"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:ellipsize="end"
@@ -55,7 +65,9 @@
                 android:lineSpacingMultiplier="1.2"
                 android:text="@{announcement.content}"
                 android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/title_text_view"
+                android:layout_marginHorizontal="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/post_data_text_view"
                 tools:text="Просьба всем сотрудникам 25.12.2025 прибыть в пунк вакцинациии и получить привиыку от вирусв COVID-19. Данное мероприятие является обязательным к исполнению. При неявки необходимо предоставить объяснительную" />
 

@@ -128,6 +128,11 @@ class HomeFragment : Fragment() {
                 .actionHomeFragmentToExecutingTaskListFragment()
             findNavController().navigate(action)
         }
+        binding.announcementCreation.setOnClickListener {
+            val action = HomeFragmentDirections
+                .actionHomeFragmentToCreateAnnouncementFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun observeViewModel() {

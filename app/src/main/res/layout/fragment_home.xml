@@ -98,9 +98,10 @@
                     app:layout_constraintStart_toStartOf="@+id/search_edit_text"
                     app:layout_constraintTop_toBottomOf="@+id/search_edit_text" />
 
-                <androidx.core.widget.NestedScrollView
+                <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:scrollbars="none"
                     android:layout_marginTop="12dp"
                     android:orientation="horizontal"
                     app:layout_constraintTop_toBottomOf="@+id/helpful_ref_text_view">
@@ -153,7 +154,7 @@
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>
 
-                        <!-- Tasks Service -->
+                        <!-- My Tasks Service -->
                         <com.google.android.material.card.MaterialCardView
                             android:layout_width="118dp"
                             android:layout_height="132dp"
@@ -196,7 +197,7 @@
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>
 
-                        <!-- Management Service -->
+                        <!-- Task Management Service -->
                         <com.google.android.material.card.MaterialCardView
                             android:layout_width="118dp"
                             android:layout_height="132dp"
@@ -240,8 +241,51 @@
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>
 
+                        <!-- Announcement Creation Service -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="118dp"
+                            android:layout_height="132dp"
+                            android:layout_marginEnd="8dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:cardElevation="4dp"
+                            app:onlyDirectorAndHrView="@{viewmodel.role}">
+
+                            <LinearLayout
+                                android:id="@+id/announcement_creation"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/gradient_yellow"
+                                android:orientation="vertical"
+                                android:padding="12dp">
+
+                                <ImageView
+                                    android:id="@+id/announcement_creation_service_image_view"
+                                    android:layout_width="64dp"
+                                    android:layout_height="64dp"
+                                    android:layout_gravity="end"
+                                    android:src="@drawable/color_announcement" />
+
+                                <Space
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:id="@+id/announcement_creation_service_text_view"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Создание объявлений"
+                                    android:textAlignment="viewStart"
+                                    android:textColor="?attr/colorOnPrimary"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
                     </LinearLayout>
-                </androidx.core.widget.NestedScrollView>
+                </HorizontalScrollView>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
