@@ -11,10 +11,10 @@ import com.petproject.workflow.domain.repositories.CommentRepository
 import javax.inject.Inject
 
 class CommentRepositoryImpl @Inject constructor(
-    private val dataHelper: DataHelper,
-    private val fileUploadHelper: FileUploadHelper,
     private val commentMapper: CommentMapper,
     private val commentApiService: CommentApiService,
+    private val dataHelper: DataHelper,
+    private val fileUploadHelper: FileUploadHelper,
 ) : CommentRepository {
 
     override suspend fun getTaskComments(taskId: String): List<Comment> {

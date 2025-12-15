@@ -5,6 +5,7 @@ import com.petproject.workflow.domain.entities.FileKey
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
@@ -27,8 +28,13 @@ interface AnnouncementApiService {
     ): Response<AnnouncementDto>
 
     @Multipart
-    @POST("/api/announcements/upload")
+    @POST("/api/announcements/posters/upload")
     suspend fun uploadFile(
         @Part file: MultipartBody.Part
     ): Response<FileKey>
+
+    @DELETE("/api/announcements/file_keys/{fileKeyId}")
+    suspend fun deleteFile(
+        @Path("fileKeyId") fileKeyId: String
+    ): Response<Boolean>
 }
