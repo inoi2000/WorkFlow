@@ -18,15 +18,16 @@
         <!-- Top App Bar -->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorSurface"
+            android:background="?attr/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:title="Создание объявления"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:titleTextColor="?attr/colorOnSurface"
+            app:navigationIconTint="?attr/colorOnPrimary"
+            app:titleTextColor="?attr/colorOnPrimary"
             app:elevation="0dp" />
 
         <!-- Scrollable content -->
@@ -47,7 +48,7 @@
                 <!-- Title Input -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/titleInputLayout"
-                    style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
@@ -74,7 +75,7 @@
                 <!-- Content Input -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/contentInputLayout"
-                    style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -88,7 +89,7 @@
                         android:id="@+id/contentEditText"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
-                        android:gravity="top"
+                        android:gravity="top|start"
                         android:hint="Текст объявления"
                         android:inputType="textMultiLine|textCapSentences"
                         android:minLines="5"
@@ -220,7 +221,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
