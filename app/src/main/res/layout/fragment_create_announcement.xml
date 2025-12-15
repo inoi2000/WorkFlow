@@ -5,6 +5,7 @@
 
     <data>
         <import type="android.view.View" />
+        <import type="com.petproject.workflow.presentation.viewmodels.CreateAnnouncementViewModel.FileUploadState" />
 
         <variable
             name="viewModel"
@@ -99,52 +100,66 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- File Attachment Section -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/attachmentCard"
+                <FrameLayout
+                    android:id="@+id/uploaded_file_container"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    app:cardElevation="1dp"
+                    android:visibility="@{viewModel.hasAttachedFile ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintTop_toBottomOf="@+id/contentInputLayout"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/contentInputLayout"
-                    android:visibility="@{viewModel.hasAttachedFile ? View.VISIBLE : View.GONE}">
+                    app:layout_constraintStart_toStartOf="parent">
 
-                    <LinearLayout
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="16dp"
-                        android:gravity="center_vertical">
+                        android:layout_marginBottom="8dp"
+                        app:cardCornerRadius="8dp"
+                        app:strokeColor="?attr/colorOutline"
+                        app:strokeWidth="1dp">
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginEnd="12dp"
-                            android:src="@drawable/ic_attach_file"
-                            app:tint="?attr/colorPrimary" />
-
-                        <TextView
-                            android:id="@+id/attachedFileName"
-                            android:layout_width="0dp"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@{viewModel.uploadState instanceof com.petproject.workflow.presentation.viewmodels.CreateAnnouncementViewModel.FileUploadState.Success ? ((com.petproject.workflow.presentation.viewmodels.CreateAnnouncementViewModel.FileUploadState.Success)viewModel.uploadState).fileKey : `Файл загружается...`}"
-                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge" />
+                            android:padding="12dp">
 
-                        <ImageView
-                            android:id="@+id/deleteAttachmentButton"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:padding="12dp"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            android:contentDescription="Удалить файл"
-                            android:src="@drawable/ic_close"
-                            app:tint="?attr/colorError" />
+                            <ImageView
+                                android:id="@+id/iv_file_icon"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="12dp"
+                                android:src="@drawable/ic_attach_file"
+                                app:tint="?attr/colorPrimary"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                    </LinearLayout>
+                            <TextView
+                                android:id="@+id/tv_file_name"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="@{viewModel.uploadState instanceof FileUploadState.Success ? ((FileUploadState.Success)viewModel.uploadState).fileKey : (viewModel.uploadState instanceof FileUploadState.Loading ? `Файл загружается...` : ``)}"
+                                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/deleteAttachmentButton"
+                                app:layout_constraintStart_toEndOf="@+id/iv_file_icon"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                </com.google.android.material.card.MaterialCardView>
+                            <ImageButton
+                                android:id="@+id/deleteAttachmentButton"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:src="@drawable/ic_close"
+                                app:tint="?attr/colorError"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </FrameLayout>
 
                 <!-- Attach File Button -->
                 <com.google.android.material.button.MaterialButton
@@ -154,13 +169,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Прикрепить файл"
+                    android:visibility="@{viewModel.hasAttachedFile ? View.GONE : View.VISIBLE}"
                     app:icon="@drawable/ic_add"
                     app:iconGravity="start"
                     app:iconTint="?attr/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/attachmentCard"
-                    android:visibility="@{viewModel.hasAttachedFile ? View.GONE : View.VISIBLE}" />
+                    app:layout_constraintTop_toBottomOf="@id/uploaded_file_container" />
 
                 <ProgressBar
                     android:id="@+id/uploadProgress"
@@ -169,10 +184,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:indeterminate="true"
+                    android:visibility="@{viewModel.uploadState instanceof FileUploadState.Loading ? View.VISIBLE : View.GONE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/attachFileButton"
-                    android:visibility="@{viewModel.uploadState instanceof com.petproject.workflow.presentation.viewmodels.CreateAnnouncementViewModel.FileUploadState.Loading ? View.VISIBLE : View.GONE}" />
+                    app:layout_constraintTop_toBottomOf="@id/attachFileButton" />
 
                 <!-- Error Message -->
                 <com.google.android.material.textview.MaterialTextView
