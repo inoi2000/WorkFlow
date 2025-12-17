@@ -49,6 +49,12 @@
         <action
             android:id="@+id/action_homeFragment_to_createAnnouncementFragment"
             app:destination="@id/createAnnouncementFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_createAbsenceFragment"
+            app:destination="@id/createAbsenceFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_createApprovalFragment"
+            app:destination="@id/createApprovalFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -258,10 +264,32 @@
         <argument
             android:name="query"
             app:argType="string" />
+        <action
+            android:id="@+id/action_searchFragment_to_employeeInfoFragment"
+            app:destination="@id/employeeInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/createAnnouncementFragment"
         android:name="com.petproject.workflow.presentation.views.CreateAnnouncementFragment"
         android:label="fragment_create_announcement"
         tools:layout="@layout/fragment_create_announcement" />
+    <fragment
+        android:id="@+id/employeeInfoFragment"
+        android:name="com.petproject.workflow.presentation.views.EmployeeInfoFragment"
+        android:label="fragment_employee_info"
+        tools:layout="@layout/fragment_employee_info" >
+        <argument
+            android:name="employeeId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAbsenceFragment"
+        android:name="com.petproject.workflow.presentation.views.CreateAbsenceFragment"
+        android:label="fragment_create_absence"
+        tools:layout="@layout/fragment_create_absence" />
+    <fragment
+        android:id="@+id/createApprovalFragment"
+        android:name="com.petproject.workflow.presentation.views.CreateApprovalFragment"
+        android:label="fragment_create_approval"
+        tools:layout="@layout/fragment_create_approval" />
 </navigation>

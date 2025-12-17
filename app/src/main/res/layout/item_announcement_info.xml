@@ -30,7 +30,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/app_logo2" />
+                tools:src="@drawable/default_announcement_poster" />
 
             <TextView
                 android:id="@+id/title_text_view"
