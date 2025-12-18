@@ -7,6 +7,6 @@ import kotlinx.parcelize.Parcelize
 data class Approval(
     val id: String,
     val absence: Absence,
-    val approver:Employee,
+    val approver: Employee,
     val description: String
 ) : Parcelable

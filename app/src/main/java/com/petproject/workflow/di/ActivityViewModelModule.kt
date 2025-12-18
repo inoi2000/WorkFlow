@@ -2,9 +2,11 @@ package com.petproject.workflow.di
 
 import androidx.lifecycle.ViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateTaskCommentViewModel
+import com.petproject.workflow.presentation.viewmodels.EmployeeInfoViewModel
 import com.petproject.workflow.presentation.viewmodels.ExecutorTaskInfoViewModel
 import com.petproject.workflow.presentation.viewmodels.HomeViewModel
 import com.petproject.workflow.presentation.viewmodels.InspectorTaskInfoViewModel
+import com.petproject.workflow.presentation.viewmodels.SearchViewModel
 import com.petproject.workflow.presentation.viewmodels.TaskCommentListViewModel
 import dagger.Binds
 import dagger.Module
@@ -17,6 +19,11 @@ interface ActivityViewModelModule {
     @ViewModelKey(HomeViewModel::class)
     @Binds
     fun bindHomeViewModel(impl: HomeViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(SearchViewModel::class)
+    @Binds
+    fun bindSearchViewModel(impl: SearchViewModel): ViewModel
 
     @IntoMap
     @ViewModelKey(ExecutorTaskInfoViewModel::class)
@@ -37,4 +44,10 @@ interface ActivityViewModelModule {
     @ViewModelKey(CreateTaskCommentViewModel::class)
     @Binds
     fun bindCreateTaskCommentViewModel(impl: CreateTaskCommentViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(EmployeeInfoViewModel::class)
+    @Binds
+    fun bindEmployeeInfoViewModel(impl: EmployeeInfoViewModel): ViewModel
+
 }

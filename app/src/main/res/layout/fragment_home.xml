@@ -256,7 +256,7 @@
                                 android:id="@+id/announcement_creation"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/gradient_yellow"
+                                android:background="@drawable/gradient_gray"
                                 android:orientation="vertical"
                                 android:padding="12dp">
 
@@ -283,6 +283,141 @@
                                     android:textStyle="bold" />
 
                             </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Approval Creation Service -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="118dp"
+                            android:layout_height="132dp"
+                            android:layout_marginEnd="8dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:cardElevation="4dp"
+                            app:exceptDirectorView="@{viewmodel.role}">
+
+                            <LinearLayout
+                                android:id="@+id/approval_creation"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/gradient_yellow"
+                                android:orientation="vertical"
+                                android:padding="12dp">
+
+                                <ImageView
+                                    android:id="@+id/approval_creation_service_image_view"
+                                    android:layout_width="64dp"
+                                    android:layout_height="64dp"
+                                    android:layout_gravity="end"
+                                    android:src="@drawable/color_contract" />
+
+                                <Space
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:id="@+id/approval_creation_service_text_view"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Написать заявление"
+                                    android:textAlignment="viewStart"
+                                    android:textColor="?attr/colorOnPrimary"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Access Creation Service -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="118dp"
+                            android:layout_height="132dp"
+                            android:layout_marginEnd="8dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:cardElevation="4dp"
+                            app:onlyIndustrialSecurityView="@{viewmodel.role}">
+
+                            <LinearLayout
+                                android:id="@+id/access_creation"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/gradient_birch"
+                                android:orientation="vertical"
+                                android:padding="12dp">
+
+                                <ImageView
+                                    android:id="@+id/access_creation_service_image_view"
+                                    android:layout_width="64dp"
+                                    android:layout_height="64dp"
+                                    android:layout_gravity="end"
+                                    android:src="@drawable/color_card" />
+
+                                <Space
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:id="@+id/access_creation_service_text_view"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Выдача допусков"
+                                    android:textAlignment="viewStart"
+                                    android:textColor="?attr/colorOnPrimary"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Providing Instruction Service -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="118dp"
+                            android:layout_height="132dp"
+                            android:layout_marginEnd="8dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:cardElevation="4dp"
+                            app:onlyIndustrialSecurityView="@{viewmodel.role}">
+
+                            <LinearLayout
+                                android:id="@+id/providing_instruction"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/gradient_gray"
+                                android:orientation="vertical"
+                                android:padding="12dp">
+
+                                <ImageView
+                                    android:id="@+id/providing_instruction_service_image_view"
+                                    android:layout_width="64dp"
+                                    android:layout_height="64dp"
+                                    android:layout_gravity="end"
+                                    android:src="@drawable/color_meeting" />
+
+                                <Space
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:id="@+id/providing_instruction_service_text_view"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Проведение инструктажей"
+                                    android:textAlignment="viewStart"
+                                    android:textColor="?attr/colorOnPrimary"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
                         </com.google.android.material.card.MaterialCardView>
                     </LinearLayout>
                 </HorizontalScrollView>

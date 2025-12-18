@@ -11,6 +11,7 @@ import com.petproject.workflow.presentation.views.CreateAnnouncementFragment
 import com.petproject.workflow.presentation.views.CreateTaskAddDetailsFragment
 import com.petproject.workflow.presentation.views.CreateTaskDoneFragment
 import com.petproject.workflow.presentation.views.CreateTaskSelectionEmployeeFragment
+import com.petproject.workflow.presentation.views.EmployeeInfoFragment
 import com.petproject.workflow.presentation.views.FuellingListFragment
 import com.petproject.workflow.presentation.views.InspectorTaskListFragment
 import com.petproject.workflow.presentation.views.InstructionListFragment

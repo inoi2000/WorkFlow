@@ -52,6 +52,20 @@ fun bindOnlyDirectorAndHrView(view: View, role: Role) {
     }
 }
 
+@BindingAdapter("exceptDirectorView")
+fun bindExceptDirectorView(view: View, role: Role) {
+    if (role == Role.ROLE_DIRECTOR) {
+        view.visibility = View.GONE
+    }
+}
+
+@BindingAdapter("onlyIndustrialSecurityView")
+fun bindOnlyIndustrialSecurityView(view: View, role: Role) {
+    if (role != Role.ROLE_INDUSTRIAL_SECURITY) {
+        view.visibility = View.GONE
+    }
+}
+
 @BindingAdapter("onlyInspectorView")
 fun bindOnlyInspectorView(view: View, role: Role) {
     if (role == Role.ROLE_DRIVER) {
