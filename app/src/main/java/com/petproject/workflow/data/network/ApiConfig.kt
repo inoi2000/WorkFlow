@@ -5,10 +5,11 @@ object ApiConfig {
     const val BASE_INSTRUCTION_API = "https://e-workflow.ru:9300/"
     const val BASE_ACCESS_API = "https://e-workflow.ru:9300/"
 
+    const val BASE_ANNOUNCEMENT_API = "https://e-workflow.ru:9500/"
+
     const val BASE_TASK_API = "http://192.168.1.23:9200/"
     const val BASE_COMMENT_API = "http://192.168.1.23:9200/"
     const val BASE_ABSENCE_API = "http://192.168.1.23:9400/"
-    const val BASE_ANNOUNCEMENT_API = "http://192.168.1.23:9500/"
     const val BASE_CAR_API = "http://192.168.1.23:9600/"
     const val BASE_TRAILER_API = "http://192.168.1.23:9600/"
     const val BASE_FUELLING_API = "http://192.168.1.23:9600/"
