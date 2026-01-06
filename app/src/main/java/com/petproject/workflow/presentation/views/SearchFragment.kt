@@ -1,11 +1,15 @@
 package com.petproject.workflow.presentation.views
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentSearchBinding
@@ -31,8 +35,10 @@ class SearchFragment : Fragment() {
     }
 
     private val adapter by lazy {
-        EmployeeAdapter(viewModel.requestManager) {
-            // TODO Реакция на клик
+        EmployeeAdapter(viewModel.requestManager) { employee ->
+            val action = SearchFragmentDirections
+                .actionSearchFragmentToEmployeeInfoFragment(employee.id)
+            findNavController().navigate(action)
         }
     }
 
@@ -58,10 +64,12 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.etSearch.setText(viewModel.queryText.value ?: "")
     }
 
     private fun setupUI() {
         setupRecyclerView()
+        setupEditQuery()
         setupSwipeRefresh()
         setupErrorHandling()
     }
@@ -69,6 +77,23 @@ class SearchFragment : Fragment() {
     private fun setupRecyclerView() {
         binding.employeeListRecyclerView.adapter = adapter
         binding.employeeListRecyclerView.itemAnimator = null
+    }
+
+    private fun setupEditQuery() {
+        binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                val imm = requireContext()
+                    .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(binding.etSearch.windowToken, 0)
+                val searchQuery = binding.etSearch.text.toString().trim()
+                if(searchQuery.isNotBlank()){
+                    viewModel.updateQuery(searchQuery)
+                    viewModel.refreshData()
+                }
+                return@setOnEditorActionListener true
+            }
+            false
+        }
     }
 
     private fun setupSwipeRefresh() {
