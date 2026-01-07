@@ -14,6 +14,11 @@ interface EmployeeApiService {
         @Path("id") employeeId: String
     ): Response<EmployeeDto>
 
+    @GET("api/employees/search/{query}")
+    suspend fun getAllEmployeesByQuery(
+        @Path("query") query: String
+    ): List<EmployeeDto>
+
     @GET("api/employees/subordinate/{id}")
     suspend fun getSubordinateEmployees(
         @Path("id") employeeId: String

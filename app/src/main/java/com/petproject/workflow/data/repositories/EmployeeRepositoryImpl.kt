@@ -29,11 +29,15 @@ class EmployeeRepositoryImpl @Inject constructor(
         return getEmployee(employeeId)
     }
 
+    override suspend fun getAllEmployeesByQuery(query: String): List<Employee> {
+        val employees = employeeApiService.getAllEmployeesByQuery(query)
+        return employees.map { dto -> employeeMapper.mapDtoToEntity(dto) }
+    }
+
     override suspend fun getAllEmployeesForAssignTask(): List<Employee> {
         val employeeId = dataHelper.getCurrentEmployeeIdOrAuthException()
         val employees = employeeApiService.getSubordinateEmployees(employeeId)
-        return employees
-            .map { dto -> employeeMapper.mapDtoToEntity(dto) }
+        return employees.map { dto -> employeeMapper.mapDtoToEntity(dto) }
     }
 
     override suspend fun getDriverEmployees(): List<Employee> {

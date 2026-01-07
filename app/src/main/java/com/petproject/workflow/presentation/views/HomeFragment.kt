@@ -65,6 +65,7 @@ class HomeFragment : Fragment() {
                     val action = HomeFragmentDirections
                         .actionHomeFragmentToSearchFragment(searchQuery)
                     findNavController().navigate(action)
+                    binding.etSearch.setText("")
                 }
                 return@setOnEditorActionListener true
             }
