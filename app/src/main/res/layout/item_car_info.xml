@@ -33,17 +33,27 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/chipStatus"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/chipStatus"
+                app:layout_constraintBottom_toBottomOf="@+id/chipStatus"
+
                 tools:text="Toyota Camry" />
 
             <!-- Статус автомобиля (чип справа сверху) -->
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipStatus"
-                style="@style/StatusChip"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                app:chipStrokeColor="@color/white"
+                app:chipStrokeWidth="1dp"
+                app:chipCornerRadius="20dp"
+                app:chipMinTouchTargetSize="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                tools:backgroundTint="@color/green"
                 tools:text="ACTIVE" />
 
             <!-- Разделитель -->

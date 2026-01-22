@@ -57,7 +57,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Загрузка допусков..."
+                            android:text="Загрузка прицепов..."
                             android:textAppearance="?attr/textAppearanceBodyMedium" />
 
                     </LinearLayout>
