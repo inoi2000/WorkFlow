@@ -6,7 +6,9 @@ import com.petproject.workflow.presentation.viewmodels.AccessListViewModel
 import com.petproject.workflow.presentation.viewmodels.AccountViewModel
 import com.petproject.workflow.presentation.viewmodels.AnnouncementListViewModel
 import com.petproject.workflow.presentation.viewmodels.AuthViewModel
+import com.petproject.workflow.presentation.viewmodels.CarListViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateAnnouncementViewModel
+import com.petproject.workflow.presentation.viewmodels.CreateStatementViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateTaskAddDetailsViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateTaskDoneViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateTaskSelectionEmployeeViewModel
@@ -17,6 +19,7 @@ import com.petproject.workflow.presentation.viewmodels.InstructionListViewModel
 import com.petproject.workflow.presentation.viewmodels.JourneyListViewModel
 import com.petproject.workflow.presentation.viewmodels.ServiceListViewModel
 import com.petproject.workflow.presentation.viewmodels.StatementListViewModel
+import com.petproject.workflow.presentation.viewmodels.TrailerListViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -33,6 +36,11 @@ interface ViewModelModule {
     @ViewModelKey(AuthViewModel::class)
     @Binds
     fun bindAuthViewModel(impl: AuthViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(AnnouncementListViewModel::class)
+    @Binds
+    fun bindAnnouncementListViewModel(impl: AnnouncementListViewModel): ViewModel
 
     @IntoMap
     @ViewModelKey(ServiceListViewModel::class)
@@ -55,9 +63,14 @@ interface ViewModelModule {
     fun bindAbsenceViewModel(impl: AbsenceViewModel): ViewModel
 
     @IntoMap
-    @ViewModelKey(AnnouncementListViewModel::class)
+    @ViewModelKey(CarListViewModel::class)
     @Binds
-    fun bindAnnouncementListViewModel(impl: AnnouncementListViewModel): ViewModel
+    fun bindCarListViewModel(impl: CarListViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(TrailerListViewModel::class)
+    @Binds
+    fun bindTrailerListViewModel(impl: TrailerListViewModel): ViewModel
 
     @IntoMap
     @ViewModelKey(AccessListViewModel::class)
@@ -103,4 +116,9 @@ interface ViewModelModule {
     @ViewModelKey(CreateAnnouncementViewModel::class)
     @Binds
     fun bindCreateAnnouncementViewModel(impl: CreateAnnouncementViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(CreateStatementViewModel::class)
+    @Binds
+    fun bindCreateStatementViewModel(impl: CreateStatementViewModel): ViewModel
 }

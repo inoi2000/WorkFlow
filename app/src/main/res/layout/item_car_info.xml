@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="car"
+            type="com.petproject.workflow.domain.entities.Car" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/AppMaterialCardViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        app:cardElevation="1dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Бренд и модель (основная информация) -->
+            <TextView
+                android:id="@+id/tvBrandModel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{car.brand}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/chipStatus"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Toyota Camry" />
+
+            <!-- Статус автомобиля (чип справа сверху) -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipStatus"
+                style="@style/StatusChip"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="ACTIVE" />
+
+            <!-- Разделитель -->
+            <View
+                android:id="@+id/divider"
+                style="@style/HorizontalLineView"
+                android:layout_marginVertical="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvBrandModel" />
+
+            <!-- Госномер -->
+            <TextView
+                android:id="@+id/tvLicensePlate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/main_blue"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:text="@{car.licensePlate}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider"
+                tools:text="A123BC 777" />
+
+            <!-- Год и цвет -->
+            <LinearLayout
+                android:id="@+id/layoutYearColor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLicensePlate">
+
+                <TextView
+                    android:id="@+id/tvYear"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/grey_for_text"
+                    android:textSize="12sp"
+                    tools:text="2020 год" />
+
+                <TextView
+                    android:id="@+id/tvColor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textColor="@color/grey_for_text"
+                    android:textSize="12sp"
+                    tools:text="Черный" />
+            </LinearLayout>
+
+            <!-- VIN -->
+            <TextView
+                android:id="@+id/tvVin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/grey_for_text"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutYearColor"
+                tools:text="VIN: 1HGBH41JXMN109186" />
+
+            <!-- Пробег -->
+            <TextView
+                android:id="@+id/tvOdometer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvVin"
+                tools:text="Пробег: 45 230 км" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

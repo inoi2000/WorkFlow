@@ -55,6 +55,12 @@
         <action
             android:id="@+id/action_homeFragment_to_createApprovalFragment"
             app:destination="@id/createApprovalFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_carListFragment"
+            app:destination="@id/carListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_trailerListFragment"
+            app:destination="@id/trailerListFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -167,6 +173,12 @@
         <action
             android:id="@+id/action_serviceListFragment_to_absenceListFragment"
             app:destination="@id/absenceListFragment" />
+        <action
+            android:id="@+id/action_serviceListFragment_to_carListFragment"
+            app:destination="@id/carListFragment" />
+        <action
+            android:id="@+id/action_serviceListFragment_to_trailerListFragment"
+            app:destination="@id/trailerListFragment" />
     </fragment>
     <fragment
         android:id="@+id/createTaskSelectionEmployeeFragment"
@@ -292,4 +304,14 @@
         android:name="com.petproject.workflow.presentation.views.CreateApprovalFragment"
         android:label="fragment_create_approval"
         tools:layout="@layout/fragment_create_approval" />
+    <fragment
+        android:id="@+id/carListFragment"
+        android:name="com.petproject.workflow.presentation.views.CarListFragment"
+        android:label="fragment_car_list"
+        tools:layout="@layout/fragment_car_list" />
+    <fragment
+        android:id="@+id/trailerListFragment"
+        android:name="com.petproject.workflow.presentation.views.TrailerListFragment"
+        android:label="fragment_trailer_list"
+        tools:layout="@layout/fragment_trailer_list" />
 </navigation>

@@ -91,6 +91,11 @@
     <string name="arrow_forward">arrow forward</string>
     <string name="accesses">Accesses</string>
     <string name="instructions">Instructions</string>
+    <string name="year_pattern">%d year</string>
+    <string name="vin_pattern">VIN: %s</string>
+    <string name="odometer_pattern">Odometer: %.2f km</string>
+    <string name="material_pattern">Material: %s</string>
+    <string name="volume_pattern">Volume: %.2f м³</string>
 
     <!-- Статусы документов -->
     <string name="status_valid">Автивный</string>
