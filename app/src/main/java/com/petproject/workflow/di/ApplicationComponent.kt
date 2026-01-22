@@ -7,7 +7,9 @@ import com.petproject.workflow.presentation.views.AuthActivity
 import com.petproject.workflow.presentation.views.AnnouncementListFragment
 import com.petproject.workflow.presentation.views.AbsenceListFragment
 import com.petproject.workflow.presentation.views.AccessListFragment
+import com.petproject.workflow.presentation.views.CarListFragment
 import com.petproject.workflow.presentation.views.CreateAnnouncementFragment
+import com.petproject.workflow.presentation.views.CreateStatementSelectionTransportFragment
 import com.petproject.workflow.presentation.views.CreateTaskAddDetailsFragment
 import com.petproject.workflow.presentation.views.CreateTaskDoneFragment
 import com.petproject.workflow.presentation.views.CreateTaskSelectionEmployeeFragment
@@ -18,6 +20,7 @@ import com.petproject.workflow.presentation.views.InstructionListFragment
 import com.petproject.workflow.presentation.views.JourneyListFragment
 import com.petproject.workflow.presentation.views.ServiceListFragment
 import com.petproject.workflow.presentation.views.StatementListFragment
+import com.petproject.workflow.presentation.views.TrailerListFragment
 import dagger.BindsInstance
 import dagger.Component
 
@@ -39,6 +42,10 @@ interface ApplicationComponent {
 
     fun inject(absenceListFragment: AbsenceListFragment)
 
+    fun inject(carListFragment: CarListFragment)
+
+    fun inject(trailerListFragment: TrailerListFragment)
+
     fun inject(executorTaskListFragment: ExecutorTaskListFragment)
 
     fun inject(inspectorTaskFragment: InspectorTaskListFragment)
@@ -56,6 +63,8 @@ interface ApplicationComponent {
     fun inject(statementListFragment: StatementListFragment)
 
     fun inject(createAnnouncementFragment: CreateAnnouncementFragment)
+
+    fun inject(createStatementSelectionTransportFragment: CreateStatementSelectionTransportFragment)
 
     fun activityComponentFactory(): ActivityComponent.Factory
 

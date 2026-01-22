@@ -67,6 +67,16 @@ class ServiceListFragment : Fragment() {
             viewModel.navigateToAbsenceListScreen(AbsenceType.BUSINESS_TRIP)
             viewModel.onAbsenceScreenNavigated()
         }
+        binding.carsCardView.setOnClickListener {
+            val action = ServiceListFragmentDirections
+                .actionServiceListFragmentToCarListFragment()
+            findNavController().navigate(action)
+        }
+        binding.trailersCardView.setOnClickListener {
+            val action = ServiceListFragmentDirections
+                .actionServiceListFragmentToTrailerListFragment()
+            findNavController().navigate(action)
+        }
     }
 
     override fun onDestroyView() {

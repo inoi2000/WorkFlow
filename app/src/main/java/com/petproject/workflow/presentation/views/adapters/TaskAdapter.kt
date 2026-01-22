@@ -15,9 +15,8 @@ class TaskAdapter(
         const val INSPECTOR_MODE = 1
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskInfoViewHolder {
-        return TaskInfoViewHolder.inflateFrom(parent)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskInfoViewHolder =
+        TaskInfoViewHolder.inflateFrom(parent)
 
     override fun onBindViewHolder(holder: TaskInfoViewHolder, position: Int) {
         val task = getItem(position)

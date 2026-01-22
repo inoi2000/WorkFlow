@@ -87,6 +87,11 @@
     <string name="arrow_forward">Направленная стрелка</string>
     <string name="accesses">Допуски</string>
     <string name="instructions">Инструктажи</string>
+    <string name="year_pattern">%d год</string>
+    <string name="vin_pattern">VIN: %s</string>
+    <string name="odometer_pattern">Пробег: %.2f км</string>
+    <string name="material_pattern">Материал: %s</string>
+    <string name="volume_pattern">Объем: %.2f м³</string>
 
     <!-- Статусы документов -->
     <string name="status_valid">Действует</string>
