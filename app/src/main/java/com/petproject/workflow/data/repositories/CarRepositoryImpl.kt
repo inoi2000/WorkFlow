@@ -11,6 +11,7 @@ class CarRepositoryImpl @Inject constructor(
     private val carMapper: CarMapper,
     private val carApiService: CarApiService
 ): CarRepository {
+
     override suspend fun getAllCars(): List<Car> {
         val response = carApiService.getAllCars()
         return response.map { carMapper.mapDtoToEntity(it) }

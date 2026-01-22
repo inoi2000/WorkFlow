@@ -8,16 +8,20 @@ import java.io.IOException
 import javax.inject.Inject
 
 class TrailerRepositoryImpl @Inject constructor(
-    val trailerMapper: TrailerMapper,
-    val trailerApiService: TrailerApiService
+    private val trailerMapper: TrailerMapper,
+    private val trailerApiService: TrailerApiService
 ): TrailerRepository {
 
     override suspend fun getAllTrailers(): List<Trailer> {
-        TODO("Not yet implemented")
+        val response = trailerApiService.getAllTrailers()
+        return response.map { trailerMapper.mapDtoToEntity(it) }
     }
 
     override suspend fun getTrailerById(id: String): Trailer {
-        TODO("Not yet implemented")
+        val response = trailerApiService.getTrailerById(id)
+        if (response.isSuccessful) {
+            response.body()?.let { return  trailerMapper.mapDtoToEntity(it) }
+        }
+        throw IOException(response.message())
     }
-
 }

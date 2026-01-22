@@ -87,6 +87,9 @@
     <string name="arrow_forward">Направленная стрелка</string>
     <string name="accesses">Допуски</string>
     <string name="instructions">Инструктажи</string>
+    <string name="car_status_active">АКТИВЕН</string>
+    <string name="car_status_maintenance">ОБСЛУЖИВАНИЕ</string>
+    <string name="car_status_inactive">НЕ АКТИВЕН</string>
     <string name="year_pattern">%d год</string>
     <string name="vin_pattern">VIN: %s</string>
     <string name="odometer_pattern">Пробег: %.2f км</string>
