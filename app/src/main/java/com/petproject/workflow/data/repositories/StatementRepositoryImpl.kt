@@ -24,4 +24,13 @@ class StatementRepositoryImpl @Inject constructor(
         }
         throw IOException(response.message())
     }
+
+    override suspend fun createStatement(statement: Statement): Statement {
+        val statementDto = statementJourneyMapper.mapEntityToDto(statement)
+        val response = statementApiService.createStatement(statementDto)
+        if (response.isSuccessful) {
+            response.body()?.let { return statementJourneyMapper.mapDtoToEntity(it) }
+        }
+        throw IOException()
+    }
 }

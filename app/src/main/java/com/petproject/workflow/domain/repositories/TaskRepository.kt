@@ -3,6 +3,7 @@ package com.petproject.workflow.domain.repositories
 import com.petproject.workflow.domain.entities.Task
 
 interface TaskRepository {
+
     suspend fun getTaskById(taskId: String): Task
 
     suspend fun getAllCurrentExecutorTasks(): List<Task>

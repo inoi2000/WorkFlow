@@ -52,6 +52,7 @@ class CarInfoViewHolder(
     private fun getCarStatusText(status: CarStatus): String {
         return when (status) {
             CarStatus.ACTIVE -> binding.root.context.getString(R.string.car_status_active)
+            CarStatus.ON_JOURNEY -> binding.root.context.getString(R.string.car_status_on_journey)
             CarStatus.MAINTENANCE -> binding.root.context.getString(R.string.car_status_maintenance)
             CarStatus.INACTIVE -> binding.root.context.getString(R.string.car_status_inactive)
         }
@@ -60,6 +61,7 @@ class CarInfoViewHolder(
     private fun getCarStatusColor(status: CarStatus): Int {
         return when (status) {
             CarStatus.ACTIVE -> R.color.green
+            CarStatus.ON_JOURNEY -> R.color.blue
             CarStatus.MAINTENANCE -> R.color.orange
             CarStatus.INACTIVE -> R.color.red
         }

@@ -92,6 +92,7 @@
     <string name="accesses">Accesses</string>
     <string name="instructions">Instructions</string>
     <string name="car_status_active">ACTIVE</string>
+    <string name="car_status_on_journey">ON JOURNEY</string>
     <string name="car_status_maintenance">MAINTENANCE</string>
     <string name="car_status_inactive">INACTIVE</string>
     <string name="year_pattern">%d year</string>
