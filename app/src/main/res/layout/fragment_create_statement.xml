@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.views.CreateStatementFragment">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.petproject.workflow.presentation.viewmodels.CreateStatementViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <!-- AppBar с компактным прогресс-баром -->
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_main"
+            android:elevation="4dp">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:contentInsetStart="16dp"
+                app:title="Создание заявки на выезд"
+                app:titleTextColor="@color/white" />
+
+            <!-- Единый ConstraintLayout для всего прогресс-бара -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="12dp">
+
+                <!-- Текст шага -->
+                <TextView
+                    android:id="@+id/stepTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Шаг 1 из 5: Выбор машины"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Точка шага 1 -->
+                <View
+                    android:id="@+id/step1Indicator"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_progress_dot_active"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/stepTextView" />
+
+                <!-- Линия между шагами 1 и 2 -->
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:background="@drawable/bg_progress_line_active"
+                    app:layout_constraintBottom_toBottomOf="@id/step1Indicator"
+                    app:layout_constraintEnd_toStartOf="@id/step2Indicator"
+                    app:layout_constraintStart_toEndOf="@id/step1Indicator"
+                    app:layout_constraintTop_toTopOf="@id/step1Indicator" />
+
+                <!-- Точка шага 2 -->
+                <View
+                    android:id="@+id/step2Indicator"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/bg_progress_dot_inactive"
+                    app:layout_constraintBottom_toBottomOf="@id/step1Indicator"
+                    app:layout_constraintEnd_toStartOf="@id/line2"
+                    app:layout_constraintStart_toEndOf="@id/line1"
+                    app:layout_constraintTop_toTopOf="@id/step1Indicator" />
+
+                <!-- Линия между шагами 2 и 3 -->
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:background="@drawable/bg_progress_line_inactive"
+                    app:layout_constraintBottom_toBottomOf="@id/step1Indicator"
+                    app:layout_constraintEnd_toStartOf="@id/step3Indicator"
+                    app:layout_constraintStart_toEndOf="@id/step2Indicator"
+                    app:layout_constraintTop_toTopOf="@id/step1Indicator" />
+
+                <!-- Точка шага 3 -->
+                <View
+                    android:id="@+id/step3Indicator"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/bg_progress_dot_inactive"
+                    app:layout_constraintBottom_toBottomOf="@id/step1Indicator"
+                    app:layout_constraintEnd_toStartOf="@id/line3"
+                    app:layout_constraintStart_toEndOf="@id/line2"
+                    app:layout_constraintTop_toTopOf="@id/step1Indicator" />
+
+                <!-- Линия между шагами 3 и 4 -->
+                <View
+                    android:id="@+id/line3"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:background="@drawable/bg_progress_line_inactive"
+                    app:layout_constraintBottom_toBottomOf="@id/step1Indicator"
+                    app:layout_constraintEnd_toStartOf="@id/step4Indicator"
+                    app:layout_constraintStart_toEndOf="@id/step3Indicator"
+                    app:layout_constraintTop_toTopOf="@id/step1Indicator" />
+
+                <!-- Точка шага 4 -->
+                <View
+                    android:id="@+id/step4Indicator"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/bg_progress_dot_inactive"
+                    app:layout_constraintBottom_toBottomOf="@id/step1Indicator"
+                    app:layout_constraintEnd_toStartOf="@id/line4"
+                    app:layout_constraintStart_toEndOf="@id/line3"
+                    app:layout_constraintTop_toTopOf="@id/step1Indicator" />
+
+                <!-- Линия между шагами 4 и 5 -->
+                <View
+                    android:id="@+id/line4"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:background="@drawable/bg_progress_line_inactive"
+                    app:layout_constraintBottom_toBottomOf="@id/step1Indicator"
+                    app:layout_constraintEnd_toStartOf="@id/step5Indicator"
+                    app:layout_constraintStart_toEndOf="@id/step4Indicator"
+                    app:layout_constraintTop_toTopOf="@id/step1Indicator" />
+
+                <!-- Точка шага 5 -->
+                <View
+                    android:id="@+id/step5Indicator"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/bg_progress_dot_inactive"
+                    app:layout_constraintBottom_toBottomOf="@id/step1Indicator"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/line4"
+                    app:layout_constraintTop_toTopOf="@id/step1Indicator" />
+
+                <!-- Название шага 1 -->
+                <TextView
+                    android:id="@+id/step1Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Детали"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/step1Indicator"
+                    app:layout_constraintTop_toBottomOf="@id/step1Indicator" />
+
+                <!-- Название шага 2 -->
+                <TextView
+                    android:id="@+id/step2Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Машина"
+                    android:textColor="@color/white_transparent"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="@id/step2Indicator"
+                    app:layout_constraintStart_toStartOf="@id/step2Indicator"
+                    app:layout_constraintTop_toTopOf="@id/step1Text" />
+
+                <!-- Название шага 3 -->
+                <TextView
+                    android:id="@+id/step3Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Прицеп"
+                    android:textColor="@color/white_transparent"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="@id/step3Indicator"
+                    app:layout_constraintStart_toStartOf="@id/step3Indicator"
+                    app:layout_constraintTop_toTopOf="@id/step1Text" />
+
+                <!-- Название шага 4 -->
+                <TextView
+                    android:id="@+id/step4Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Водитель"
+                    android:textColor="@color/white_transparent"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="@id/step4Indicator"
+                    app:layout_constraintStart_toStartOf="@id/step4Indicator"
+                    app:layout_constraintTop_toTopOf="@id/step1Text" />
+
+                <!-- Название шага 5 -->
+                <TextView
+                    android:id="@+id/step5Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Готово"
+                    android:textColor="@color/white_transparent"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="@id/step5Indicator"
+                    app:layout_constraintTop_toTopOf="@id/step1Text" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- Основной контент -->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Форма создания заявки -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:letterSpacing="0.1"
+                            android:text="Детали заявки"
+                            android:textAllCaps="true"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="12sp" />
+
+                        <!-- Описание выезда -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_description"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:boxBackgroundColor="@color/white"
+                            app:cardCornerRadius="8dp"
+                            app:endIconDrawable="@drawable/ic_description"
+                            app:errorEnabled="true">
+<!--                            app:errorInputText="@{viewmodel.errorInputDescription}">-->
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_description"
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:gravity="top"
+                                android:hint="Описание выезда"
+                                android:inputType="textMultiLine"
+                                android:maxLines="5"
+                                android:scrollbars="vertical"/>
+<!--                                android:text="@={viewmodel.descriptionField}" />-->
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <!-- Контактный телефон -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_contact_phone"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:boxBackgroundColor="@color/white"
+                            app:cardCornerRadius="8dp"
+                            app:endIconDrawable="@drawable/ic_phone"
+                            app:endIconMode="custom"
+                            app:errorEnabled="true">
+<!--                            app:errorInputText="@{viewmodel.errorInputContactPhone}">-->
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_contact_phone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Контактный телефон"
+                                android:inputType="phone"/>
+<!--                                android:text="@={viewmodel.contactPhoneField}" />-->
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Адрес назначения -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_destination_address"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:boxBackgroundColor="@color/white"
+                            app:cardCornerRadius="8dp"
+                            app:endIconDrawable="@drawable/ic_location"
+                            app:endIconMode="custom"
+                            app:errorEnabled="true">
+<!--                            app:errorInputText="@{viewmodel.errorInputDestinationAddress}">-->
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_destination_address"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Адрес назначения"
+                                android:inputType="text"/>
+<!--                                android:text="@={viewmodel.destinationAddressField}" />-->
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Время назначения -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_destination_time"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:boxBackgroundColor="@color/white"
+                            app:cardCornerRadius="8dp"
+                            app:endIconDrawable="@drawable/ic_time"
+                            app:endIconMode="custom"
+                            app:errorEnabled="true">
+<!--                            app:errorInputText="@{viewmodel.errorInputDestinationTime}">-->
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_destination_time"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:focusable="false"
+                                android:hint="Время назначения"
+                                android:inputType="none"/>
+<!--                                android:text="@={viewmodel.destinationTimeField}" />-->
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Карточка выбранного транспорта -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/carCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="?attr/colorPrimary"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <!-- Заголовок "Машина" -->
+                        <TextView
+                            android:id="@+id/tvCarTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:letterSpacing="0.1"
+                            android:text="Машина"
+                            android:textAllCaps="true"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toStartOf="@+id/btnRemoveCar"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <!-- Кнопка удаления (крестик) -->
+                        <ImageButton
+                            android:id="@+id/btnRemoveCar"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Удалить машину"
+                            android:src="@drawable/ic_close"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@id/tvCarTitle"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tvCarTitle"
+                            app:tint="?attr/colorError" />
+
+                        <!-- Состояние: нет машины - кнопка добавления -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAddCar"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="Добавить машину"
+                            android:visibility="visible"
+                            app:icon="@drawable/ic_add"
+                            app:iconGravity="textStart"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvCarTitle" />
+
+                        <!-- Состояние: есть машина - информация о машине -->
+                        <include
+                            android:id="@+id/car_info"
+                            layout="@layout/item_car_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvCarTitle" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Карточка выбранного прицепа -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/trailerCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="?attr/colorPrimary"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <!-- Заголовок "Прицеп" -->
+                        <TextView
+                            android:id="@+id/tvTrailerTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:letterSpacing="0.1"
+                            android:text="Прицеп"
+                            android:textAllCaps="true"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toStartOf="@+id/btnRemoveTrailer"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <!-- Кнопка удаления (крестик) -->
+                        <ImageButton
+                            android:id="@+id/btnRemoveTrailer"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Удалить прицеп"
+                            android:src="@drawable/ic_close"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@id/tvTrailerTitle"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tvTrailerTitle"
+                            app:tint="?attr/colorError" />
+
+                        <!-- Состояние: нет прицепа - кнопка добавления -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAddTrailer"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="Добавить прицеп"
+                            android:visibility="visible"
+                            app:icon="@drawable/ic_add"
+                            app:iconGravity="textStart"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvTrailerTitle" />
+
+                        <!-- Состояние: есть прицеп - информация о прицепе -->
+                        <include
+                            android:id="@+id/trailer_info"
+                            layout="@layout/item_trailer_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvTrailerTitle" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Карточка выбранного водителя -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/employeeCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="?attr/colorPrimary"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <!-- Заголовок "Водитель" -->
+                        <TextView
+                            android:id="@+id/tvEmployeeTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:letterSpacing="0.1"
+                            android:text="Водитель"
+                            android:textAllCaps="true"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toStartOf="@+id/btnRemoveEmployee"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <!-- Кнопка удаления (крестик) -->
+                        <ImageButton
+                            android:id="@+id/btnRemoveEmployee"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Удалить прицеп"
+                            android:src="@drawable/ic_close"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@id/tvEmployeeTitle"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tvEmployeeTitle"
+                            app:tint="?attr/colorError" />
+
+                        <!-- Состояние: нет водителя - кнопка добавления -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAddEmployee"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="Добавить прицеп"
+                            android:visibility="visible"
+                            app:icon="@drawable/ic_add"
+                            app:iconGravity="textStart"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvEmployeeTitle" />
+
+                        <!-- Состояние: есть водитель - информация о водителе -->
+                        <include
+                            android:id="@+id/employee_info"
+                            layout="@layout/item_employee_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvEmployeeTitle" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Кнопка создания -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/create_statement_button"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Создать заявку"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    app:icon="@drawable/ic_add"
+                    app:iconGravity="textStart" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <!-- AppBar с прогресс-баром -->
+        <!-- AppBar с компактным прогресс-баром -->
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,130 +26,189 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:paddingHorizontal="16dp"
-                app:contentInsetStart="22dp"
-                app:titleTextColor="?attr/colorOnPrimary"
-                app:contentInsetEnd="0dp"
-                app:title="Создание заявки на выезд">
+                app:contentInsetStart="16dp"
+                app:titleTextColor="@color/white"
+                app:title="Создание заявки на выезд" />
 
-            </com.google.android.material.appbar.MaterialToolbar>
-
-            <!-- Прогресс шагов (5 шагов) -->
-            <LinearLayout
+            <!-- Единый ConstraintLayout для всего прогресс-бара -->
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingHorizontal="24dp"
-                android:paddingBottom="16dp">
+                android:paddingHorizontal="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="12dp">
 
+                <!-- Текст шага -->
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/stepTextView"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Шаг 1 из 5"
+                    android:text="Шаг 1 из 5: Выбор машины"
                     android:textColor="@color/white"
                     android:textSize="12sp"
-                    android:alpha="0.8"
-                    android:layout_marginBottom="8dp" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- Индикатор прогресса (5 шагов) -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:background="@drawable/bg_progress_track"
-                    android:orientation="horizontal">
+                <!-- Точка шага 1 -->
+                <View
+                    android:id="@+id/step1Indicator"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:background="@drawable/bg_progress_dot_active"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/stepTextView"
+                    android:layout_marginTop="8dp" />
 
-                    <View
-                        android:id="@+id/step1Indicator"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:layout_weight="1" />
+                <!-- Линия между шагами 1 и 2 -->
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:background="@drawable/bg_progress_line_active"
+                    app:layout_constraintStart_toEndOf="@id/step1Indicator"
+                    app:layout_constraintEnd_toStartOf="@id/step2Indicator"
+                    app:layout_constraintTop_toTopOf="@id/step1Indicator"
+                    app:layout_constraintBottom_toBottomOf="@id/step1Indicator" />
 
-                    <View
-                        android:id="@+id/step2Indicator"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@color/white_transparent" />
+                <!-- Точка шага 2 -->
+                <View
+                    android:id="@+id/step2Indicator"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/bg_progress_dot_inactive"
+                    app:layout_constraintStart_toEndOf="@id/line1"
+                    app:layout_constraintEnd_toStartOf="@id/line2"
+                    app:layout_constraintTop_toTopOf="@id/step1Indicator"
+                    app:layout_constraintBottom_toBottomOf="@id/step1Indicator" />
 
-                    <View
-                        android:id="@+id/step3Indicator"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@color/white_transparent" />
+                <!-- Линия между шагами 2 и 3 -->
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:background="@drawable/bg_progress_line_inactive"
+                    app:layout_constraintStart_toEndOf="@id/step2Indicator"
+                    app:layout_constraintEnd_toStartOf="@id/step3Indicator"
+                    app:layout_constraintTop_toTopOf="@id/step1Indicator"
+                    app:layout_constraintBottom_toBottomOf="@id/step1Indicator" />
 
-                    <View
-                        android:id="@+id/step4Indicator"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/white_transparent"
-                        android:layout_weight="1" />
+                <!-- Точка шага 3 -->
+                <View
+                    android:id="@+id/step3Indicator"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/bg_progress_dot_inactive"
+                    app:layout_constraintStart_toEndOf="@id/line2"
+                    app:layout_constraintEnd_toStartOf="@id/line3"
+                    app:layout_constraintTop_toTopOf="@id/step1Indicator"
+                    app:layout_constraintBottom_toBottomOf="@id/step1Indicator" />
 
-                    <View
-                        android:id="@+id/step5Indicator"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/white_transparent"
-                        android:layout_weight="1" />
+                <!-- Линия между шагами 3 и 4 -->
+                <View
+                    android:id="@+id/line3"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:background="@drawable/bg_progress_line_inactive"
+                    app:layout_constraintStart_toEndOf="@id/step3Indicator"
+                    app:layout_constraintEnd_toStartOf="@id/step4Indicator"
+                    app:layout_constraintTop_toTopOf="@id/step1Indicator"
+                    app:layout_constraintBottom_toBottomOf="@id/step1Indicator" />
 
-                </LinearLayout>
+                <!-- Точка шага 4 -->
+                <View
+                    android:id="@+id/step4Indicator"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/bg_progress_dot_inactive"
+                    app:layout_constraintStart_toEndOf="@id/line3"
+                    app:layout_constraintEnd_toStartOf="@id/line4"
+                    app:layout_constraintTop_toTopOf="@id/step1Indicator"
+                    app:layout_constraintBottom_toBottomOf="@id/step1Indicator" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <!-- Линия между шагами 4 и 5 -->
+                <View
+                    android:id="@+id/line4"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:background="@drawable/bg_progress_line_inactive"
+                    app:layout_constraintStart_toEndOf="@id/step4Indicator"
+                    app:layout_constraintEnd_toStartOf="@id/step5Indicator"
+                    app:layout_constraintTop_toTopOf="@id/step1Indicator"
+                    app:layout_constraintBottom_toBottomOf="@id/step1Indicator" />
+
+                <!-- Точка шага 5 -->
+                <View
+                    android:id="@+id/step5Indicator"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/bg_progress_dot_inactive"
+                    app:layout_constraintStart_toEndOf="@id/line4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/step1Indicator"
+                    app:layout_constraintBottom_toBottomOf="@id/step1Indicator" />
+
+                <!-- Название шага 1 -->
+                <TextView
+                    android:id="@+id/step1Text"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="4dp">
+                    android:text="Машина"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/step1Indicator"
+                    app:layout_constraintStart_toStartOf="@id/step1Indicator"
+                    android:layout_marginTop="6dp" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Машина"
-                        android:textColor="@color/white"
-                        android:textSize="10sp"
-                        android:gravity="start" />
+                <!-- Название шага 2 -->
+                <TextView
+                    android:id="@+id/step2Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Прицеп"
+                    android:textColor="@color/white_transparent"
+                    android:textSize="10sp"
+                    app:layout_constraintTop_toTopOf="@id/step1Text"
+                    app:layout_constraintStart_toStartOf="@id/step2Indicator"
+                    app:layout_constraintEnd_toEndOf="@id/step2Indicator" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Прицеп"
-                        android:textColor="@color/white_transparent"
-                        android:textSize="10sp" />
+                <!-- Название шага 3 -->
+                <TextView
+                    android:id="@+id/step3Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Водитель"
+                    android:textColor="@color/white_transparent"
+                    android:textSize="10sp"
+                    app:layout_constraintTop_toTopOf="@id/step1Text"
+                    app:layout_constraintStart_toStartOf="@id/step3Indicator"
+                    app:layout_constraintEnd_toEndOf="@id/step3Indicator" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Водитель"
-                        android:textColor="@color/white_transparent"
-                        android:textSize="10sp" />
+                <!-- Название шага 4 -->
+                <TextView
+                    android:id="@+id/step4Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Детали"
+                    android:textColor="@color/white_transparent"
+                    android:textSize="10sp"
+                    app:layout_constraintTop_toTopOf="@id/step1Text"
+                    app:layout_constraintStart_toStartOf="@id/step4Indicator"
+                    app:layout_constraintEnd_toEndOf="@id/step4Indicator" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Детали"
-                        android:textColor="@color/white_transparent"
-                        android:textSize="10sp"
-                        android:gravity="center" />
+                <!-- Название шага 5 -->
+                <TextView
+                    android:id="@+id/step5Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Готово"
+                    android:textColor="@color/white_transparent"
+                    android:textSize="10sp"
+                    app:layout_constraintTop_toTopOf="@id/step1Text"
+                    app:layout_constraintEnd_toEndOf="@id/step5Indicator" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Готово"
-                        android:textColor="@color/white_transparent"
-                        android:textSize="10sp"
-                        android:gravity="end" />
-
-                </LinearLayout>
-
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 

@@ -50,7 +50,9 @@ class CarListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        val adapter = CarAdapter()
+        val adapter = CarAdapter() {
+            //TODO
+        }
         binding.carListRecyclerView.adapter = adapter
         binding.carListRecyclerView.itemAnimator = null
     }

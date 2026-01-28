@@ -9,19 +9,24 @@ import com.petproject.workflow.domain.entities.Car
 import com.petproject.workflow.domain.entities.CarStatus
 
 class CarInfoViewHolder(
-    val binding: ItemCarInfoBinding
+    val binding: ItemCarInfoBinding,
+    private val onCarClick: (Car) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     companion object {
-        fun inflateFrom(viewGroup: ViewGroup): CarInfoViewHolder {
+        fun inflateFrom(viewGroup: ViewGroup, onCarClick: (Car) -> Unit): CarInfoViewHolder {
             val inflater = LayoutInflater.from(viewGroup.context)
             val binding = ItemCarInfoBinding.inflate(inflater, viewGroup, false)
-            return CarInfoViewHolder(binding)
+            return CarInfoViewHolder(binding, onCarClick)
         }
     }
 
     fun bind(car: Car) {
         binding.car = car
+
+        binding.root.setOnClickListener {
+            onCarClick(car)
+        }
 
         binding.tvYear.text = String.format(
             binding.root.context.resources.getString(R.string.year_pattern),
@@ -52,7 +57,6 @@ class CarInfoViewHolder(
     private fun getCarStatusText(status: CarStatus): String {
         return when (status) {
             CarStatus.ACTIVE -> binding.root.context.getString(R.string.car_status_active)
-            CarStatus.ON_JOURNEY -> binding.root.context.getString(R.string.car_status_on_journey)
             CarStatus.MAINTENANCE -> binding.root.context.getString(R.string.car_status_maintenance)
             CarStatus.INACTIVE -> binding.root.context.getString(R.string.car_status_inactive)
         }
@@ -61,7 +65,6 @@ class CarInfoViewHolder(
     private fun getCarStatusColor(status: CarStatus): Int {
         return when (status) {
             CarStatus.ACTIVE -> R.color.green
-            CarStatus.ON_JOURNEY -> R.color.blue
             CarStatus.MAINTENANCE -> R.color.orange
             CarStatus.INACTIVE -> R.color.red
         }
