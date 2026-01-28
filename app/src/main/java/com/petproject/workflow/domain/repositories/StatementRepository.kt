@@ -7,4 +7,6 @@ interface StatementRepository {
     suspend fun getAllStatements(): List<Statement>
 
     suspend fun getStatementById(id: String): Statement
+
+    suspend fun createStatement(statement: Statement): Statement
 }

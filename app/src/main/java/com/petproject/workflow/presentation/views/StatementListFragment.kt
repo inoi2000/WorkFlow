@@ -14,6 +14,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.petproject.workflow.R
@@ -124,7 +128,26 @@ class StatementListFragment : Fragment() {
     }
 
     private fun setupUI() {
+        setupToolbar()
         setupSwipeRefresh()
+
+        binding.createStatementButton.setOnClickListener {
+            val action = StatementListFragmentDirections
+                .actionStatementListFragmentToCreateStatementFragment()
+            findNavController().navigate(action)
+        }
+    }
+
+    private fun setupToolbar() {
+        (requireActivity() as AppCompatActivity).apply {
+            setSupportActionBar(binding.toolbar)
+            val navHostFragment = supportFragmentManager
+                .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            val navController = navHostFragment.navController
+            val builder = AppBarConfiguration.Builder(navController.graph)
+            val appBarConfiguration = builder.build()
+            binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+        }
     }
 
     private fun setupRecyclerView() {

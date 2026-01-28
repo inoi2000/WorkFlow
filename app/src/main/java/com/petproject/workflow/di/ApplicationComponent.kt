@@ -9,6 +9,7 @@ import com.petproject.workflow.presentation.views.AbsenceListFragment
 import com.petproject.workflow.presentation.views.AccessListFragment
 import com.petproject.workflow.presentation.views.CarListFragment
 import com.petproject.workflow.presentation.views.CreateAnnouncementFragment
+import com.petproject.workflow.presentation.views.CreateStatementFragment
 import com.petproject.workflow.presentation.views.CreateStatementSelectionTransportFragment
 import com.petproject.workflow.presentation.views.CreateTaskAddDetailsFragment
 import com.petproject.workflow.presentation.views.CreateTaskDoneFragment
@@ -18,6 +19,7 @@ import com.petproject.workflow.presentation.views.FuellingListFragment
 import com.petproject.workflow.presentation.views.InspectorTaskListFragment
 import com.petproject.workflow.presentation.views.InstructionListFragment
 import com.petproject.workflow.presentation.views.JourneyListFragment
+import com.petproject.workflow.presentation.views.SelectionEmployeeFragment
 import com.petproject.workflow.presentation.views.ServiceListFragment
 import com.petproject.workflow.presentation.views.StatementListFragment
 import com.petproject.workflow.presentation.views.TrailerListFragment
@@ -65,6 +67,10 @@ interface ApplicationComponent {
     fun inject(createAnnouncementFragment: CreateAnnouncementFragment)
 
     fun inject(createStatementSelectionTransportFragment: CreateStatementSelectionTransportFragment)
+
+    fun inject(createStatementFragment: CreateStatementFragment)
+
+    fun inject(selectionEmployeeFragment: SelectionEmployeeFragment)
 
     fun activityComponentFactory(): ActivityComponent.Factory
 

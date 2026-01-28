@@ -36,7 +36,7 @@ class CreateTaskDoneViewModel @Inject constructor(
 
     fun setTaskData(task: Task) {
         executorName.set(task.executor?.name)
-        deadline.set(task.deadline?.format(dateFormatter))
+        deadline.set(task.deadline.format(dateFormatter))
         priority.set(
             when (task.priority) {
                 TaskPriority.URGENT -> "Срочный"

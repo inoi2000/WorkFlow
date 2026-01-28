@@ -50,7 +50,9 @@ class TrailerListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        val adapter = TrailerAdapter()
+        val adapter = TrailerAdapter() {
+            //TODO
+        }
         binding.trailerListRecyclerView.adapter = adapter
         binding.trailerListRecyclerView.itemAnimator = null
     }

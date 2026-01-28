@@ -9,19 +9,24 @@ import com.petproject.workflow.domain.entities.Car
 import com.petproject.workflow.domain.entities.CarStatus
 
 class CarInfoViewHolder(
-    val binding: ItemCarInfoBinding
+    val binding: ItemCarInfoBinding,
+    private val onCarClick: (Car) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     companion object {
-        fun inflateFrom(viewGroup: ViewGroup): CarInfoViewHolder {
+        fun inflateFrom(viewGroup: ViewGroup, onCarClick: (Car) -> Unit): CarInfoViewHolder {
             val inflater = LayoutInflater.from(viewGroup.context)
             val binding = ItemCarInfoBinding.inflate(inflater, viewGroup, false)
-            return CarInfoViewHolder(binding)
+            return CarInfoViewHolder(binding, onCarClick)
         }
     }
 
     fun bind(car: Car) {
         binding.car = car
+
+        binding.root.setOnClickListener {
+            onCarClick(car)
+        }
 
         binding.tvYear.text = String.format(
             binding.root.context.resources.getString(R.string.year_pattern),
