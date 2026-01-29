@@ -19,6 +19,10 @@ interface EmployeeApiService {
         @Path("query") query: String
     ): List<EmployeeDto>
 
+    @GET("api/employees/drivers")
+    suspend fun getDriversEmployees(
+    ): List<EmployeeDto>
+
     @GET("api/employees/subordinate/{id}")
     suspend fun getSubordinateEmployees(
         @Path("id") employeeId: String

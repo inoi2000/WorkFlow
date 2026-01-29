@@ -19,7 +19,9 @@ import com.petproject.workflow.presentation.views.FuellingListFragment
 import com.petproject.workflow.presentation.views.InspectorTaskListFragment
 import com.petproject.workflow.presentation.views.InstructionListFragment
 import com.petproject.workflow.presentation.views.JourneyListFragment
+import com.petproject.workflow.presentation.views.SelectionCarFragment
 import com.petproject.workflow.presentation.views.SelectionEmployeeFragment
+import com.petproject.workflow.presentation.views.SelectionTrailerFragment
 import com.petproject.workflow.presentation.views.ServiceListFragment
 import com.petproject.workflow.presentation.views.StatementListFragment
 import com.petproject.workflow.presentation.views.TrailerListFragment
@@ -71,6 +73,10 @@ interface ApplicationComponent {
     fun inject(createStatementFragment: CreateStatementFragment)
 
     fun inject(selectionEmployeeFragment: SelectionEmployeeFragment)
+
+    fun inject(selectionCarFragment: SelectionCarFragment)
+
+    fun inject(selectionTrailerFragment: SelectionTrailerFragment)
 
     fun activityComponentFactory(): ActivityComponent.Factory
 

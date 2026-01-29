@@ -335,5 +335,29 @@
         <action
             android:id="@+id/action_createStatementFragment_to_selectionEmployeeFragment"
             app:destination="@id/selectionEmployeeFragment" />
+        <action
+            android:id="@+id/action_createStatementFragment_to_selectionTrailerFragment"
+            app:destination="@id/selectionTrailerFragment" />
+        <action
+            android:id="@+id/action_createStatementFragment_to_selectionCarFragment"
+            app:destination="@id/selectionCarFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectionCarFragment"
+        android:name="com.petproject.workflow.presentation.views.SelectionCarFragment"
+        android:label="fragment_selection_car"
+        tools:layout="@layout/fragment_selection_car" >
+        <argument
+            android:name="selectionArg"
+            app:argType="com.petproject.workflow.presentation.utils.SelectionCarArg" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectionTrailerFragment"
+        android:name="com.petproject.workflow.presentation.views.SelectionTrailerFragment"
+        android:label="fragment_selection_trailer"
+        tools:layout="@layout/fragment_selection_trailer" >
+        <argument
+            android:name="selectionArg"
+            app:argType="com.petproject.workflow.presentation.utils.SelectionTrailerArg" />
     </fragment>
 </navigation>
