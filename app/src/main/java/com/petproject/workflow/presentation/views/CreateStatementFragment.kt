@@ -11,10 +11,14 @@ import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentCreateStatementBinding
 import com.petproject.workflow.domain.entities.Employee
+import com.petproject.workflow.presentation.utils.SelectionCarArg
 import com.petproject.workflow.presentation.utils.SelectionEmployeeArg
+import com.petproject.workflow.presentation.utils.SelectionTrailerArg
 import com.petproject.workflow.presentation.viewmodels.CreateStatementViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
+import com.petproject.workflow.presentation.views.adapters.CarInfoViewHolder
 import com.petproject.workflow.presentation.views.adapters.EmployeeInfoViewHolder
+import com.petproject.workflow.presentation.views.adapters.TrailerInfoViewHolder
 import javax.inject.Inject
 
 class CreateStatementFragment : Fragment() {
@@ -47,10 +51,78 @@ class CreateStatementFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.btnAddCar.setOnClickListener {
+            selectCar()
+        }
+
+        binding.btnAddTrailer.setOnClickListener {
+            selectTrailer()
+        }
+
         binding.btnAddEmployee.setOnClickListener {
             selectEmployee()
         }
 
+        viewModel.car.observe(viewLifecycleOwner) { car ->
+            car?.let {
+                val carVH = CarInfoViewHolder(
+                    binding.carInfo,
+                ) { }
+                carVH.bind(it)
+
+                binding.btnAddCar.visibility = View.GONE
+                binding.btnRemoveCar.visibility = View.VISIBLE
+                binding.carInfo.root.visibility = View.VISIBLE
+            }
+        }
+
+        viewModel.trailer.observe(viewLifecycleOwner) { trailer ->
+            trailer?.let {
+                val trailerVH = TrailerInfoViewHolder(
+                    binding.trailerInfo
+                ) { }
+                trailerVH.bind(it)
+
+                binding.btnAddTrailer.visibility = View.GONE
+                binding.btnRemoveTrailer.visibility = View.VISIBLE
+                binding.trailerInfo.root.visibility = View.VISIBLE
+            }
+        }
+
+        viewModel.driver.observe(viewLifecycleOwner) { employee ->
+            employee?.let {
+                val driverVH = EmployeeInfoViewHolder(
+                    binding.employeeInfo,
+                    viewModel.requestManager)
+                driverVH.bind(it) { }
+
+                binding.btnAddEmployee.visibility = View.GONE
+                binding.btnRemoveEmployee.visibility = View.VISIBLE
+                binding.employeeInfo.root.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun selectCar() {
+        val action = CreateStatementFragmentDirections
+            .actionCreateStatementFragmentToSelectionCarFragment(
+                SelectionCarArg { car ->
+                    viewModel.setCar(car)
+                    findNavController().navigateUp()
+                }
+            )
+        findNavController().navigate(action)
+    }
+
+    private fun selectTrailer() {
+        val action = CreateStatementFragmentDirections
+            .actionCreateStatementFragmentToSelectionTrailerFragment(
+                SelectionTrailerArg { trailer ->
+                    viewModel.setTrailer(trailer)
+                    findNavController().navigateUp()
+                }
+            )
+        findNavController().navigate(action)
     }
 
     private fun selectEmployee() {
@@ -58,14 +130,10 @@ class CreateStatementFragment : Fragment() {
             .actionCreateStatementFragmentToSelectionEmployeeFragment(
                 SelectionEmployeeArg(
                     {
-                        emptyList()
+                        viewModel.getAllDriverEmployeesUseCase.invoke()
                     },
                     { employee: Employee ->
-                        val driver = EmployeeInfoViewHolder(
-                            binding.employeeInfo,
-                            viewModel.requestManager)
-                        driver.bind(employee) {}
-
+                        viewModel.setDriver(employee)
                         findNavController().navigateUp()
                     }
                 )

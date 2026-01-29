@@ -17,7 +17,9 @@ import com.petproject.workflow.presentation.viewmodels.FuellingListViewModel
 import com.petproject.workflow.presentation.viewmodels.InspectorTaskListViewModel
 import com.petproject.workflow.presentation.viewmodels.InstructionListViewModel
 import com.petproject.workflow.presentation.viewmodels.JourneyListViewModel
+import com.petproject.workflow.presentation.viewmodels.SelectionCarViewModel
 import com.petproject.workflow.presentation.viewmodels.SelectionEmployeeViewModel
+import com.petproject.workflow.presentation.viewmodels.SelectionTrailerViewModel
 import com.petproject.workflow.presentation.viewmodels.ServiceListViewModel
 import com.petproject.workflow.presentation.viewmodels.StatementListViewModel
 import com.petproject.workflow.presentation.viewmodels.TrailerListViewModel
@@ -127,4 +129,14 @@ interface ViewModelModule {
     @ViewModelKey(SelectionEmployeeViewModel::class)
     @Binds
     fun bindSelectionEmployeeViewModel(impl: SelectionEmployeeViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(SelectionCarViewModel::class)
+    @Binds
+    fun bindSelectionCarViewModel(impl: SelectionCarViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(SelectionTrailerViewModel::class)
+    @Binds
+    fun bindSelectionTrailerViewModel(impl: SelectionTrailerViewModel): ViewModel
 }

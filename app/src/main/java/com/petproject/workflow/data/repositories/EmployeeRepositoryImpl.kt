@@ -41,6 +41,7 @@ class EmployeeRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getDriverEmployees(): List<Employee> {
-        TODO("Not yet implemented")
+        val employees = employeeApiService.getDriversEmployees()
+        return employees.map { dto -> employeeMapper.mapDtoToEntity(dto) }
     }
 }
