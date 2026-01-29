@@ -1,5 +1,7 @@
 package com.petproject.workflow.presentation.views
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +21,9 @@ import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import com.petproject.workflow.presentation.views.adapters.CarInfoViewHolder
 import com.petproject.workflow.presentation.views.adapters.EmployeeInfoViewHolder
 import com.petproject.workflow.presentation.views.adapters.TrailerInfoViewHolder
+import java.time.LocalTime
+import java.util.Calendar
+import java.util.Locale
 import javax.inject.Inject
 
 class CreateStatementFragment : Fragment() {
@@ -54,6 +59,66 @@ class CreateStatementFragment : Fragment() {
         setupSelectedCarCard()
         setupSelectedTrailerCard()
         setupSelectedEmployeeCard()
+
+        setupDatePicker()
+        setupTimePicker()
+    }
+
+    private val calendar = Calendar.getInstance()
+
+    private fun setupDatePicker() {
+        binding.etDestinationDate.setOnClickListener {
+            showDatePickerDialog()
+        }
+
+        binding.tilDestinationDate.setEndIconOnClickListener {
+            showDatePickerDialog()
+        }
+    }
+
+    private fun showDatePickerDialog() {
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { _, year, month, dayOfMonth ->
+                calendar.set(Calendar.YEAR, year)
+                calendar.set(Calendar.MONTH, month)
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+                val dateFormat = java.text.SimpleDateFormat(viewModel.dateFormatPattern, Locale.getDefault())
+                binding.etDestinationDate.setText(dateFormat.format(calendar.time))
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+
+        // Установка минимальной даты - сегодня
+        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
+
+        datePickerDialog.show()
+    }
+
+    private fun setupTimePicker() {
+        binding.etDestinationTime.setOnClickListener {
+            showTimePickerDialog()
+        }
+
+        binding.tilDestinationTime.setEndIconOnClickListener {
+            showTimePickerDialog()
+        }
+    }
+
+    private fun showTimePickerDialog() {
+        val timePickerDialog = TimePickerDialog(
+            requireContext(),
+            { _, hour, minute ->
+                binding.etDestinationTime.setText("%02d:%02d".format(hour, minute))
+            },
+            LocalTime.now().hour,
+            LocalTime.now().minute,
+            true
+        )
+        timePickerDialog.show()
     }
 
     private fun setupSelectedCarCard() {
