@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentCreateStatementBinding
 import com.petproject.workflow.domain.entities.Employee
@@ -51,54 +50,34 @@ class CreateStatementFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupSelectedCarCard()
+        setupSelectedTrailerCard()
+        setupSelectedEmployeeCard()
+    }
+
+    private fun setupSelectedCarCard() {
         binding.btnAddCar.setOnClickListener {
             selectCar()
         }
 
-        binding.btnAddTrailer.setOnClickListener {
-            selectTrailer()
-        }
-
-        binding.btnAddEmployee.setOnClickListener {
-            selectEmployee()
+        binding.btnRemoveCar.setOnClickListener {
+            viewModel.removeCar()
         }
 
         viewModel.car.observe(viewLifecycleOwner) { car ->
-            car?.let {
+            if (car != null) {
                 val carVH = CarInfoViewHolder(
                     binding.carInfo,
                 ) { }
-                carVH.bind(it)
+                carVH.bind(car)
 
                 binding.btnAddCar.visibility = View.GONE
                 binding.btnRemoveCar.visibility = View.VISIBLE
                 binding.carInfo.root.visibility = View.VISIBLE
-            }
-        }
-
-        viewModel.trailer.observe(viewLifecycleOwner) { trailer ->
-            trailer?.let {
-                val trailerVH = TrailerInfoViewHolder(
-                    binding.trailerInfo
-                ) { }
-                trailerVH.bind(it)
-
-                binding.btnAddTrailer.visibility = View.GONE
-                binding.btnRemoveTrailer.visibility = View.VISIBLE
-                binding.trailerInfo.root.visibility = View.VISIBLE
-            }
-        }
-
-        viewModel.driver.observe(viewLifecycleOwner) { employee ->
-            employee?.let {
-                val driverVH = EmployeeInfoViewHolder(
-                    binding.employeeInfo,
-                    viewModel.requestManager)
-                driverVH.bind(it) { }
-
-                binding.btnAddEmployee.visibility = View.GONE
-                binding.btnRemoveEmployee.visibility = View.VISIBLE
-                binding.employeeInfo.root.visibility = View.VISIBLE
+            } else {
+                binding.btnAddCar.visibility = View.VISIBLE
+                binding.btnRemoveCar.visibility = View.GONE
+                binding.carInfo.root.visibility = View.GONE
             }
         }
     }
@@ -114,6 +93,34 @@ class CreateStatementFragment : Fragment() {
         findNavController().navigate(action)
     }
 
+
+    private fun setupSelectedTrailerCard() {
+        binding.btnAddTrailer.setOnClickListener {
+            selectTrailer()
+        }
+
+        binding.btnRemoveTrailer.setOnClickListener {
+            viewModel.removeTrailer()
+        }
+
+        viewModel.trailer.observe(viewLifecycleOwner) { trailer ->
+            if (trailer != null) {
+                val trailerVH = TrailerInfoViewHolder(
+                    binding.trailerInfo
+                ) { }
+                trailerVH.bind(trailer)
+
+                binding.btnAddTrailer.visibility = View.GONE
+                binding.btnRemoveTrailer.visibility = View.VISIBLE
+                binding.trailerInfo.root.visibility = View.VISIBLE
+            } else {
+                binding.btnAddTrailer.visibility = View.VISIBLE
+                binding.btnRemoveTrailer.visibility = View.GONE
+                binding.trailerInfo.root.visibility = View.GONE
+            }
+        }
+    }
+
     private fun selectTrailer() {
         val action = CreateStatementFragmentDirections
             .actionCreateStatementFragmentToSelectionTrailerFragment(
@@ -123,6 +130,34 @@ class CreateStatementFragment : Fragment() {
                 }
             )
         findNavController().navigate(action)
+    }
+
+
+    private fun setupSelectedEmployeeCard() {
+        binding.btnAddEmployee.setOnClickListener {
+            selectEmployee()
+        }
+
+        binding.btnRemoveEmployee.setOnClickListener {
+            viewModel.removeDriver()
+        }
+
+        viewModel.driver.observe(viewLifecycleOwner) { employee ->
+            if (employee != null) {
+                val driverVH = EmployeeInfoViewHolder(
+                    binding.employeeInfo,
+                    viewModel.requestManager)
+                driverVH.bind(employee) { }
+
+                binding.btnAddEmployee.visibility = View.GONE
+                binding.btnRemoveEmployee.visibility = View.VISIBLE
+                binding.employeeInfo.root.visibility = View.VISIBLE
+            } else {
+                binding.btnAddEmployee.visibility = View.VISIBLE
+                binding.btnRemoveEmployee.visibility = View.GONE
+                binding.employeeInfo.root.visibility = View.GONE
+            }
+        }
     }
 
     private fun selectEmployee() {
@@ -140,6 +175,7 @@ class CreateStatementFragment : Fragment() {
             )
         findNavController().navigate(action)
     }
+
 
     override fun onDestroyView() {
         _binding = null
