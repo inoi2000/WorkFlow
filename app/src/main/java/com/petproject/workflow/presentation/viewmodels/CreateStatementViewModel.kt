@@ -8,6 +8,7 @@ import com.bumptech.glide.RequestManager
 import com.petproject.workflow.domain.entities.Car
 import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.entities.Trailer
+import com.petproject.workflow.domain.usecases.GetAllCarsByStatusUseCase
 import com.petproject.workflow.domain.usecases.GetDriverEmployeesUseCase
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -15,6 +16,7 @@ import javax.inject.Inject
 
 class CreateStatementViewModel @Inject constructor(
     val requestManager: RequestManager,
+    val getAllCarsByStatusUseCase: GetAllCarsByStatusUseCase,
     val getAllDriverEmployeesUseCase: GetDriverEmployeesUseCase,
 ): ViewModel() {
 

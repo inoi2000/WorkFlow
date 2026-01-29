@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentCreateStatementBinding
+import com.petproject.workflow.domain.entities.CarStatus
 import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.presentation.utils.SelectionCarArg
 import com.petproject.workflow.presentation.utils.SelectionEmployeeArg
@@ -85,10 +86,15 @@ class CreateStatementFragment : Fragment() {
     private fun selectCar() {
         val action = CreateStatementFragmentDirections
             .actionCreateStatementFragmentToSelectionCarFragment(
-                SelectionCarArg { car ->
-                    viewModel.setCar(car)
-                    findNavController().navigateUp()
-                }
+                SelectionCarArg(
+                    {
+                        viewModel.getAllCarsByStatusUseCase.invoke(CarStatus.ACTIVE)
+                    },
+                    { car ->
+                        viewModel.setCar(car)
+                        findNavController().navigateUp()
+                    }
+                )
             )
         findNavController().navigate(action)
     }

@@ -5,12 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.petproject.workflow.domain.entities.Car
-import com.petproject.workflow.domain.usecases.GetAllCarsUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SelectionCarViewModel @Inject constructor(
-    private val getAllCarsUseCase: GetAllCarsUseCase
 ) : ViewModel() {
 
     private val _carList = MutableLiveData<List<Car>>()
@@ -23,16 +21,18 @@ class SelectionCarViewModel @Inject constructor(
     val errorState: LiveData<String?> get() = _errorState
 
     init {
-        loadData()
+//        loadData()
     }
 
-    fun loadData() {
+    fun loadData(
+        getCars: suspend () -> List<Car>
+    ) {
         _loadingState.value = true
         _errorState.value = null
 
         viewModelScope.launch {
             try {
-                val car = getAllCarsUseCase()
+                val car = getCars()
                 _carList.value = car
             } catch (e: Exception) {
                 _errorState.value = "Ошибка загрузки машин"
@@ -43,6 +43,6 @@ class SelectionCarViewModel @Inject constructor(
     }
 
     fun refreshData() {
-        loadData()
+//        loadData()
     }
 }
