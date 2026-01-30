@@ -13,6 +13,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
@@ -20,6 +21,9 @@ import com.petproject.workflow.databinding.FragmentSelectionEmployeeBinding
 import com.petproject.workflow.presentation.viewmodels.SelectionEmployeeViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import com.petproject.workflow.presentation.views.adapters.EmployeeAdapter
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SelectionEmployeeFragment : Fragment() {
@@ -61,7 +65,6 @@ class SelectionEmployeeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
         setupViews()
-        setupMenuProvider()
         setupObservers()
     }
 
@@ -73,29 +76,24 @@ class SelectionEmployeeFragment : Fragment() {
     }
 
     private fun setupViews() {
+        setupToolbar()
         setupRecyclerView()
         setupSwipeRefresh()
         setupSearch()
         setupRetryButton()
     }
 
-    private fun setupMenuProvider() {
-        val menuProvider = object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.selection_menu, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-                    R.id.action_filter_off -> {
-                        viewModel.clearFilter()
-                        true
-                    }
-                    else -> false
+    private fun setupToolbar() {
+        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.action_filter_off -> {
+                    viewModel.clearFilter()
+                    binding.searchEditText.text?.clear()
+                    true
                 }
+                else -> false
             }
         }
-        requireActivity().addMenuProvider(menuProvider, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun setupRecyclerView() {
@@ -115,9 +113,15 @@ class SelectionEmployeeFragment : Fragment() {
         )
     }
 
+    private var searchJob: Job? = null
+
     private fun setupSearch() {
         binding.searchEditText.doAfterTextChanged { text ->
-            viewModel.filterEmployees(text.toString())
+            searchJob?.cancel()
+            searchJob = viewLifecycleOwner.lifecycleScope.launch {
+                delay(300)
+                viewModel.filterEmployees(text.toString())
+            }
         }
     }
 

@@ -42,7 +42,10 @@ class SelectionCarViewModel @Inject constructor(
     }
 
     fun filterCars(pattern: String) {
-        if (pattern.isBlank()) return
+        if (pattern.isBlank()) {
+            _carList.value = allCars
+            return
+        }
         _carList.value = allCars.filter { car ->
             val searchPattern = pattern.lowercase().trim()
             car.brand.lowercase().contains(searchPattern) ||

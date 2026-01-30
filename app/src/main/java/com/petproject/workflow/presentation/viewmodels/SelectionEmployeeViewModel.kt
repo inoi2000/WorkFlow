@@ -44,7 +44,10 @@ class SelectionEmployeeViewModel @Inject constructor(
     }
 
     fun filterEmployees(pattern: String) {
-        if (pattern.isBlank()) return
+        if (pattern.isBlank()) {
+            _employeeList.value = allEmployees
+            return
+        }
         val filteredList = allEmployees.filter { employee ->
             val searchPattern = pattern.lowercase().trim()
             employee.name.lowercase().contains(searchPattern)
