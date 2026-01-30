@@ -2,12 +2,16 @@ package com.petproject.workflow.presentation.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.MenuProvider
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.petproject.workflow.R
@@ -57,6 +61,7 @@ class SelectionEmployeeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
         setupViews()
+        setupMenuProvider()
         setupObservers()
     }
 
@@ -74,6 +79,25 @@ class SelectionEmployeeFragment : Fragment() {
         setupRetryButton()
     }
 
+    private fun setupMenuProvider() {
+        val menuProvider = object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.selection_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.action_filter_off -> {
+                        viewModel.clearFilter()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }
+        requireActivity().addMenuProvider(menuProvider, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
     private fun setupRecyclerView() {
         with(binding.employeeListRecyclerView) {
             adapter = employeeAdapter
@@ -84,7 +108,7 @@ class SelectionEmployeeFragment : Fragment() {
 
     private fun setupSwipeRefresh() {
         binding.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.refreshData()
+            viewModel.loadData(false) { args.selectionArg.getEmployees() }
         }
         binding.swipeRefreshLayout.setColorSchemeColors(
             ContextCompat.getColor(requireContext(), R.color.blue)
@@ -93,13 +117,13 @@ class SelectionEmployeeFragment : Fragment() {
 
     private fun setupSearch() {
         binding.searchEditText.doAfterTextChanged { text ->
-//            viewModel.filterEmployees(text.toString())
+            viewModel.filterEmployees(text.toString())
         }
     }
 
     private fun setupRetryButton() {
-        binding.retryButton.setOnClickListener {
-            viewModel.refreshData()
+        binding.updateErrorStateButton.setOnClickListener {
+            viewModel.loadData { args.selectionArg.getEmployees() }
         }
     }
 
@@ -124,7 +148,6 @@ class SelectionEmployeeFragment : Fragment() {
         binding.loadingState.visibility = View.VISIBLE
         binding.emptyState.visibility = View.GONE
         binding.errorState.visibility = View.GONE
-        binding.retryButton.visibility = View.GONE
     }
 
     private fun showContentState() {
@@ -133,7 +156,6 @@ class SelectionEmployeeFragment : Fragment() {
         binding.loadingState.visibility = View.GONE
         binding.emptyState.visibility = if (isEmpty) View.VISIBLE else View.GONE
         binding.errorState.visibility = View.GONE
-        binding.retryButton.visibility = View.GONE
     }
 
     private fun showErrorState(error: String) {
@@ -141,11 +163,9 @@ class SelectionEmployeeFragment : Fragment() {
         binding.loadingState.visibility = View.GONE
         binding.emptyState.visibility = View.GONE
         binding.errorState.visibility = View.VISIBLE
-        binding.retryButton.visibility = View.VISIBLE
 
         // Устанавливаем текст ошибки
-        val errorTextView = binding.errorState.findViewById<TextView>(R.id.errorMessageTextView)
-        errorTextView?.text = error
+        binding.errorText.text = error
     }
 
     override fun onDestroyView() {

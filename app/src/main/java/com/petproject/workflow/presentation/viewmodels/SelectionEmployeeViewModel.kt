@@ -13,6 +13,8 @@ class SelectionEmployeeViewModel @Inject constructor(
     val requestManager: RequestManager
 ) : ViewModel() {
 
+    private var allEmployees: List<Employee> = emptyList()
+
     private val _employeeList = MutableLiveData<List<Employee>>()
     val employeeList: LiveData<List<Employee>> get() = _employeeList
 
@@ -22,29 +24,35 @@ class SelectionEmployeeViewModel @Inject constructor(
     private val _errorState = MutableLiveData<String?>()
     val errorState: LiveData<String?> get() = _errorState
 
-    init {
-//        loadData()
-    }
-
     fun loadData(
+        loadingState: Boolean = true,
         getEmployee: suspend () -> List<Employee>
     ) {
-        _loadingState.value = true
+        _loadingState.value = loadingState
         _errorState.value = null
 
         viewModelScope.launch {
             try {
-                val employees = getEmployee()
-                _employeeList.value = employees
+                allEmployees = getEmployee()
+                _employeeList.value = allEmployees
             } catch (e: Exception) {
-                _errorState.value = "Ошибка загрузки сотрудников"
+                _errorState.value = "Ошибка загрузки сотрудников: ${e.localizedMessage}"
             } finally {
                 _loadingState.value = false
             }
         }
     }
 
-    fun refreshData() {
-//        loadData()
+    fun filterEmployees(pattern: String) {
+        if (pattern.isBlank()) return
+        val filteredList = allEmployees.filter { employee ->
+            val searchPattern = pattern.lowercase().trim()
+            employee.name.lowercase().contains(searchPattern)
+        }
+        _employeeList.value = filteredList
+    }
+
+    fun clearFilter() {
+        _employeeList.value = allEmployees
     }
 }

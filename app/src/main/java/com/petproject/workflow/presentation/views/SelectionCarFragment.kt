@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -69,7 +69,7 @@ class SelectionCarFragment : Fragment() {
     private fun setupViews() {
         setupRecyclerView()
         setupSwipeRefresh()
-//        setupSearch()
+        setupSearch()
         setupRetryButton()
     }
 
@@ -83,16 +83,22 @@ class SelectionCarFragment : Fragment() {
 
     private fun setupSwipeRefresh() {
         binding.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.refreshData()
+            viewModel.loadData(false) { args.selectionArg.getCars() }
         }
         binding.swipeRefreshLayout.setColorSchemeColors(
             ContextCompat.getColor(requireContext(), R.color.blue)
         )
     }
 
+    private fun setupSearch() {
+        binding.searchEditText.doAfterTextChanged { text ->
+            viewModel.filterCars(text.toString())
+        }
+    }
+
     private fun setupRetryButton() {
-        binding.retryButton.setOnClickListener {
-            viewModel.refreshData()
+        binding.updateErrorStateButton.setOnClickListener {
+            viewModel.loadData { args.selectionArg.getCars() }
         }
     }
 
@@ -117,7 +123,6 @@ class SelectionCarFragment : Fragment() {
         binding.loadingState.visibility = View.VISIBLE
         binding.emptyState.visibility = View.GONE
         binding.errorState.visibility = View.GONE
-        binding.retryButton.visibility = View.GONE
     }
 
     private fun showContentState() {
@@ -126,7 +131,6 @@ class SelectionCarFragment : Fragment() {
         binding.loadingState.visibility = View.GONE
         binding.emptyState.visibility = if (isEmpty) View.VISIBLE else View.GONE
         binding.errorState.visibility = View.GONE
-        binding.retryButton.visibility = View.GONE
     }
 
     private fun showErrorState(error: String) {
@@ -134,11 +138,9 @@ class SelectionCarFragment : Fragment() {
         binding.loadingState.visibility = View.GONE
         binding.emptyState.visibility = View.GONE
         binding.errorState.visibility = View.VISIBLE
-        binding.retryButton.visibility = View.VISIBLE
 
         // Устанавливаем текст ошибки
-        val errorTextView = binding.errorState.findViewById<TextView>(R.id.errorMessageTextView)
-        errorTextView?.text = error
+        binding.errorText.text = error
     }
 
     override fun onDestroyView() {

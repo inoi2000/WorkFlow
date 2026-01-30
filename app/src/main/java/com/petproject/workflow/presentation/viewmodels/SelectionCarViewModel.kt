@@ -11,6 +11,8 @@ import javax.inject.Inject
 class SelectionCarViewModel @Inject constructor(
 ) : ViewModel() {
 
+    private var allCars: List<Car> = emptyList()
+
     private val _carList = MutableLiveData<List<Car>>()
     val carList: LiveData<List<Car>> get() = _carList
 
@@ -20,14 +22,11 @@ class SelectionCarViewModel @Inject constructor(
     private val _errorState = MutableLiveData<String?>()
     val errorState: LiveData<String?> get() = _errorState
 
-    init {
-//        loadData()
-    }
-
     fun loadData(
+        loadingState: Boolean = true,
         getCars: suspend () -> List<Car>
     ) {
-        _loadingState.value = true
+        _loadingState.value = loadingState
         _errorState.value = null
 
         viewModelScope.launch {
@@ -35,14 +34,23 @@ class SelectionCarViewModel @Inject constructor(
                 val car = getCars()
                 _carList.value = car
             } catch (e: Exception) {
-                _errorState.value = "Ошибка загрузки машин"
+                _errorState.value = "Не удалось загрузить список заявок: ${e.localizedMessage}"
             } finally {
                 _loadingState.value = false
             }
         }
     }
 
-    fun refreshData() {
-//        loadData()
+    fun filterCars(pattern: String) {
+        if (pattern.isBlank()) return
+        _carList.value = allCars.filter { car ->
+            val searchPattern = pattern.lowercase().trim()
+            car.brand.lowercase().contains(searchPattern) ||
+                    car.licensePlate.lowercase().contains(searchPattern)
+        }
+    }
+
+    fun clearFilter() {
+        _carList.value = allCars
     }
 }
