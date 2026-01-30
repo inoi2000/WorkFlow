@@ -31,8 +31,8 @@ class SelectionCarViewModel @Inject constructor(
 
         viewModelScope.launch {
             try {
-                val car = getCars()
-                _carList.value = car
+                allCars = getCars()
+                _carList.value = allCars
             } catch (e: Exception) {
                 _errorState.value = "Не удалось загрузить список заявок: ${e.localizedMessage}"
             } finally {
@@ -46,11 +46,12 @@ class SelectionCarViewModel @Inject constructor(
             _carList.value = allCars
             return
         }
-        _carList.value = allCars.filter { car ->
-            val searchPattern = pattern.lowercase().trim()
+        val searchPattern = pattern.lowercase().trim()
+        val filteredList = allCars.filter { car ->
             car.brand.lowercase().contains(searchPattern) ||
-                    car.licensePlate.lowercase().contains(searchPattern)
+                   car.licensePlate.lowercase().contains(searchPattern)
         }
+        _carList.value = filteredList
     }
 
     fun clearFilter() {

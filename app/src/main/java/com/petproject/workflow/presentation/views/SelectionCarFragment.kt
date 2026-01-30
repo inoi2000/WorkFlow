@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
@@ -15,6 +16,9 @@ import com.petproject.workflow.databinding.FragmentSelectionCarBinding
 import com.petproject.workflow.presentation.viewmodels.SelectionCarViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import com.petproject.workflow.presentation.views.adapters.CarAdapter
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SelectionCarFragment : Fragment() {
@@ -67,10 +71,24 @@ class SelectionCarFragment : Fragment() {
     }
 
     private fun setupViews() {
+        setupToolbar()
         setupRecyclerView()
         setupSwipeRefresh()
         setupSearch()
         setupRetryButton()
+    }
+
+    private fun setupToolbar() {
+        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.action_filter_off -> {
+                    viewModel.clearFilter()
+                    binding.searchEditText.text?.clear()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -90,9 +108,15 @@ class SelectionCarFragment : Fragment() {
         )
     }
 
+    private var searchJob: Job? = null
+
     private fun setupSearch() {
         binding.searchEditText.doAfterTextChanged { text ->
-            viewModel.filterCars(text.toString())
+            searchJob?.cancel()
+            searchJob = viewLifecycleOwner.lifecycleScope.launch {
+                delay(300)
+                viewModel.filterCars(text.toString())
+            }
         }
     }
 

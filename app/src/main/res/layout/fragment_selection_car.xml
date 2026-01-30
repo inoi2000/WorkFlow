@@ -25,9 +25,11 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:contentInsetEnd="0dp"
+                android:paddingHorizontal="16dp"
                 app:contentInsetStart="22dp"
                 app:titleTextColor="?attr/colorOnPrimary"
+                app:contentInsetEnd="0dp"
+                app:menu="@menu/selection_menu"
                 app:title="Выбор транспорта" />
 
         </com.google.android.material.appbar.AppBarLayout>
