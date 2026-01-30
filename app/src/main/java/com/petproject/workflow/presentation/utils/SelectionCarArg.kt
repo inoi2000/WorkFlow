@@ -6,5 +6,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class SelectionCarArg(
+    val getCars: suspend () -> List<Car>,
     val onCarSelected: (Car) -> Unit
 ): Parcelable

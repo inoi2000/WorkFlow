@@ -62,6 +62,8 @@ class SelectionCarFragment : Fragment() {
     private fun setupViewModel() {
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        viewModel.loadData { args.selectionArg.getCars() }
     }
 
     private fun setupViews() {

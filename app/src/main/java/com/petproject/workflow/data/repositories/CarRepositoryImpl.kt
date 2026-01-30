@@ -3,6 +3,7 @@ package com.petproject.workflow.data.repositories
 import com.petproject.workflow.data.network.CarApiService
 import com.petproject.workflow.data.network.mappers.CarMapper
 import com.petproject.workflow.domain.entities.Car
+import com.petproject.workflow.domain.entities.CarStatus
 import com.petproject.workflow.domain.repositories.CarRepository
 import java.io.IOException
 import javax.inject.Inject
@@ -15,6 +16,12 @@ class CarRepositoryImpl @Inject constructor(
     override suspend fun getAllCars(): List<Car> {
         val response = carApiService.getAllCars()
         return response.map { carMapper.mapDtoToEntity(it) }
+    }
+
+    override suspend fun getAllCarsByStatus(status: CarStatus): List<Car> {
+        return carApiService.getAllCars()
+            .map { carMapper.mapDtoToEntity(it) }
+            .filter { it.status == status }
     }
 
     override suspend fun getCarById(id: String): Car {
