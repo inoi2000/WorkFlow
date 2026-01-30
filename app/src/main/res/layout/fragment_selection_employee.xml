@@ -15,7 +15,6 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <!-- Упрощенный AppBar с прогресс-баром -->
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,7 +29,8 @@
                 app:contentInsetStart="22dp"
                 app:titleTextColor="?attr/colorOnPrimary"
                 app:contentInsetEnd="0dp"
-                app:title="Выбор сотрудника">
+                app:title="Выбор сотрудника"
+                app:menu="@menu/selection_menu">
 
             </com.google.android.material.appbar.MaterialToolbar>
 
@@ -74,35 +74,122 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingBottom="8dp"
                     android:text="Доступные сотрудники"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:paddingHorizontal="16dp"
-                    android:paddingBottom="8dp" />
+                    android:textStyle="bold" />
 
                 <!-- Состояние загрузки -->
-                <include
+                <LinearLayout
                     android:id="@+id/loadingState"
-                    layout="@layout/state_loading"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="gone" />
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="32dp"
+                    android:visibility="gone">
+
+                    <ProgressBar
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:indeterminateTint="?attr/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Загрузка сотрудников..."
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="14sp" />
+                </LinearLayout>
 
                 <!-- Пустое состояние -->
-                <include
-                    android:id="@+id/emptyState"
-                    layout="@layout/state_empty"
+                <LinearLayout
+                    android:id="@+id/empty_state"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="gone" />
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="32dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_person"
+                        app:tint="?android:attr/textColorSecondary"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/empty_state_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Сотрудники не найдены"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:tint="?android:attr/textColorSecondary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="Попробуйте изменить поисковый запрос"
+                        android:textColor="@color/grey_for_text"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
 
                 <!-- Ошибка -->
-                <include
-                    android:id="@+id/errorState"
-                    layout="@layout/state_error"
+                <LinearLayout
+                    android:id="@+id/error_state"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="gone" />
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="32dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:alpha="0.7"
+                        android:src="@drawable/ic_error"
+                        app:tint="?attr/colorError"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/error_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:text="Ошибка загрузки"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="Попробуйте обновить данные"
+                        android:textColor="@color/grey_for_text"
+                        android:textSize="14sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/update_error_state_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:text="Повторить"
+                        app:icon="@drawable/ic_refresh" />
+
+                </LinearLayout>
 
                 <!-- Список сотрудников -->
                 <androidx.recyclerview.widget.RecyclerView
@@ -119,18 +206,6 @@
             </LinearLayout>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-        <!-- Кнопка обновления при ошибке -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/retryButton"
-            style="@style/Widget.Material3.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:layout_margin="16dp"
-            android:text="Повторить"
-            android:visibility="gone"
-            app:icon="@drawable/ic_refresh" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

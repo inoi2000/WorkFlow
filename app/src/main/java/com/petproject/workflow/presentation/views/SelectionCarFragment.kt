@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
@@ -15,6 +16,9 @@ import com.petproject.workflow.databinding.FragmentSelectionCarBinding
 import com.petproject.workflow.presentation.viewmodels.SelectionCarViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import com.petproject.workflow.presentation.views.adapters.CarAdapter
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SelectionCarFragment : Fragment() {
@@ -67,10 +71,24 @@ class SelectionCarFragment : Fragment() {
     }
 
     private fun setupViews() {
+        setupToolbar()
         setupRecyclerView()
         setupSwipeRefresh()
-//        setupSearch()
+        setupSearch()
         setupRetryButton()
+    }
+
+    private fun setupToolbar() {
+        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.action_filter_off -> {
+                    viewModel.clearFilter()
+                    binding.searchEditText.text?.clear()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -83,16 +101,28 @@ class SelectionCarFragment : Fragment() {
 
     private fun setupSwipeRefresh() {
         binding.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.refreshData()
+            viewModel.loadData(false) { args.selectionArg.getCars() }
         }
         binding.swipeRefreshLayout.setColorSchemeColors(
             ContextCompat.getColor(requireContext(), R.color.blue)
         )
     }
 
+    private var searchJob: Job? = null
+
+    private fun setupSearch() {
+        binding.searchEditText.doAfterTextChanged { text ->
+            searchJob?.cancel()
+            searchJob = viewLifecycleOwner.lifecycleScope.launch {
+                delay(300)
+                viewModel.filterCars(text.toString())
+            }
+        }
+    }
+
     private fun setupRetryButton() {
-        binding.retryButton.setOnClickListener {
-            viewModel.refreshData()
+        binding.updateErrorStateButton.setOnClickListener {
+            viewModel.loadData { args.selectionArg.getCars() }
         }
     }
 
@@ -117,7 +147,6 @@ class SelectionCarFragment : Fragment() {
         binding.loadingState.visibility = View.VISIBLE
         binding.emptyState.visibility = View.GONE
         binding.errorState.visibility = View.GONE
-        binding.retryButton.visibility = View.GONE
     }
 
     private fun showContentState() {
@@ -126,7 +155,6 @@ class SelectionCarFragment : Fragment() {
         binding.loadingState.visibility = View.GONE
         binding.emptyState.visibility = if (isEmpty) View.VISIBLE else View.GONE
         binding.errorState.visibility = View.GONE
-        binding.retryButton.visibility = View.GONE
     }
 
     private fun showErrorState(error: String) {
@@ -134,11 +162,9 @@ class SelectionCarFragment : Fragment() {
         binding.loadingState.visibility = View.GONE
         binding.emptyState.visibility = View.GONE
         binding.errorState.visibility = View.VISIBLE
-        binding.retryButton.visibility = View.VISIBLE
 
         // Устанавливаем текст ошибки
-        val errorTextView = binding.errorState.findViewById<TextView>(R.id.errorMessageTextView)
-        errorTextView?.text = error
+        binding.errorText.text = error
     }
 
     override fun onDestroyView() {
