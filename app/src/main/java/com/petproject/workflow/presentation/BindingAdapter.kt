@@ -4,16 +4,42 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.BindingAdapter
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.petproject.workflow.R
-import com.petproject.workflow.domain.entities.Absence
 import com.petproject.workflow.domain.entities.AbsenceType
 import com.petproject.workflow.domain.entities.Role
 import com.petproject.workflow.domain.entities.TaskPriority
 import com.petproject.workflow.domain.entities.TaskStatus
 import java.time.LocalDate
 import java.time.LocalDateTime
+
+
+@BindingAdapter("safeText")
+fun bindSafeText(
+    editText: TextInputEditText,
+    liveData: MutableLiveData<String>?
+) {
+    var previousValue = liveData?.value
+
+    editText.doAfterTextChanged { text ->
+        if (text?.toString() != previousValue) {
+            liveData?.value = text?.toString()
+            previousValue = text?.toString()
+        }
+    }
+
+    liveData?.observe((editText.context as? Fragment)?.viewLifecycleOwner ?: return) { value ->
+        if (editText.text?.toString() != value) {
+            editText.setText(value)
+            previousValue = value
+        }
+    }
+}
 
 @BindingAdapter("errorInputEmail")
 fun bindErrorInputName(textInputLayout: TextInputLayout, isError: Boolean) {

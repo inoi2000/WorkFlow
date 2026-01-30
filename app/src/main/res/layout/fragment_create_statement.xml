@@ -270,7 +270,7 @@
                                 android:inputType="textMultiLine"
                                 android:maxLines="5"
                                 android:scrollbars="vertical"
-                                android:text="@={viewmodel.dataField}" />
+                                app:safeText="@{viewmodel.dataField}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -294,7 +294,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="Контактный телефон"
                                 android:inputType="phone"
-                                android:text="@={viewmodel.contactPhoneField}" />
+                                app:safeText="@{viewmodel.contactPhoneField}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -317,7 +317,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="Адрес назначения"
                                 android:inputType="text"
-                                android:text="@={viewmodel.destinationAddressField}" />
+                                app:safeText="@{viewmodel.destinationAddressField}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -342,7 +342,7 @@
                                 android:focusable="false"
                                 android:hint="Дата выезда"
                                 android:inputType="none"
-                                android:text="@={viewmodel.destinationDateField}" />
+                                app:safeText="@{viewmodel.destinationDateField}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -367,7 +367,7 @@
                                 android:focusable="false"
                                 android:hint="Время назначения"
                                 android:inputType="none"
-                                android:text="@={viewmodel.destinationTimeField}" />
+                                app:safeText="@{viewmodel.destinationTimeField}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 

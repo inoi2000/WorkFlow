@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentCreateStatementBinding
 import com.petproject.workflow.domain.entities.CarStatus
@@ -86,6 +88,8 @@ class CreateStatementFragment : Fragment() {
 
                 val dateFormat = java.text.SimpleDateFormat(viewModel.dateFormatPattern, Locale.getDefault())
                 binding.etDestinationDate.setText(dateFormat.format(calendar.time))
+
+                setProgressBarStatus(ProgressBarStatus.WRITING_DETAILS)
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
@@ -113,6 +117,8 @@ class CreateStatementFragment : Fragment() {
             requireContext(),
             { _, hour, minute ->
                 binding.etDestinationTime.setText("%02d:%02d".format(hour, minute))
+
+                setProgressBarStatus(ProgressBarStatus.WRITING_DETAILS)
             },
             LocalTime.now().hour,
             LocalTime.now().minute,
@@ -140,6 +146,8 @@ class CreateStatementFragment : Fragment() {
                 binding.btnAddCar.visibility = View.GONE
                 binding.btnRemoveCar.visibility = View.VISIBLE
                 binding.carInfo.root.visibility = View.VISIBLE
+
+                setProgressBarStatus(ProgressBarStatus.SELECTING_CAR)
             } else {
                 binding.btnAddCar.visibility = View.VISIBLE
                 binding.btnRemoveCar.visibility = View.GONE
@@ -184,6 +192,8 @@ class CreateStatementFragment : Fragment() {
                 binding.btnAddTrailer.visibility = View.GONE
                 binding.btnRemoveTrailer.visibility = View.VISIBLE
                 binding.trailerInfo.root.visibility = View.VISIBLE
+
+                setProgressBarStatus(ProgressBarStatus.SELECTING_TRAILER)
             } else {
                 binding.btnAddTrailer.visibility = View.VISIBLE
                 binding.btnRemoveTrailer.visibility = View.GONE
@@ -223,6 +233,8 @@ class CreateStatementFragment : Fragment() {
                 binding.btnAddEmployee.visibility = View.GONE
                 binding.btnRemoveEmployee.visibility = View.VISIBLE
                 binding.employeeInfo.root.visibility = View.VISIBLE
+
+                setProgressBarStatus(ProgressBarStatus.SELECTING_EMPLOYEE)
             } else {
                 binding.btnAddEmployee.visibility = View.VISIBLE
                 binding.btnRemoveEmployee.visibility = View.GONE
@@ -245,6 +257,140 @@ class CreateStatementFragment : Fragment() {
                 )
             )
         findNavController().navigate(action)
+    }
+
+    private enum class ProgressBarStatus {
+        WRITING_DETAILS,
+        SELECTING_CAR,
+        SELECTING_TRAILER,
+        SELECTING_EMPLOYEE,
+        DONE
+    }
+
+    private fun setProgressBarStatus(status: ProgressBarStatus) {
+        val bgProgressDotActive = R.drawable.bg_progress_dot_active
+        val bgProgressDotInactive = R.drawable.bg_progress_dot_inactive
+        val textColorActive = ContextCompat.getColor(this.requireContext(), R.color.white)
+        val textColorInactive = ContextCompat.getColor(this.requireContext(), R.color.white_transparent)
+        val bgProgressLineActive = R.drawable.bg_progress_line_active
+        val bgProgressLineInactive = R.drawable.bg_progress_line_inactive
+
+        when (status) {
+            ProgressBarStatus.WRITING_DETAILS -> {
+                binding.stepTextView.text = "Шаг 1 из 5: Заполнение данных"
+
+                binding.step1Indicator.setBackgroundResource(bgProgressDotActive)
+                binding.step1Text.setTextColor(textColorActive)
+                binding.line1.setBackgroundResource(bgProgressLineActive)
+
+                binding.step2Indicator.setBackgroundResource(bgProgressDotInactive)
+                binding.step2Text.setTextColor(textColorInactive)
+                binding.line2.setBackgroundResource(bgProgressLineInactive)
+
+                binding.step3Indicator.setBackgroundResource(bgProgressDotInactive)
+                binding.step3Text.setTextColor(textColorInactive)
+                binding.line3.setBackgroundResource(bgProgressLineInactive)
+
+                binding.step4Indicator.setBackgroundResource(bgProgressDotInactive)
+                binding.step4Text.setTextColor(textColorInactive)
+                binding.line4.setBackgroundResource(bgProgressLineInactive)
+
+                binding.step5Indicator.setBackgroundResource(bgProgressDotInactive)
+                binding.step5Text.setTextColor(textColorInactive)
+            }
+
+            ProgressBarStatus.SELECTING_CAR -> {
+                binding.stepTextView.text = "Шаг 2 из 5: Выбор машины"
+
+                binding.step1Indicator.setBackgroundResource(bgProgressDotActive)
+                binding.step1Text.setTextColor(textColorActive)
+                binding.line1.setBackgroundResource(bgProgressLineActive)
+
+                binding.step2Indicator.setBackgroundResource(bgProgressDotActive)
+                binding.step2Text.setTextColor(textColorActive)
+                binding.line2.setBackgroundResource(bgProgressLineActive)
+
+                binding.step3Indicator.setBackgroundResource(bgProgressDotInactive)
+                binding.step3Text.setTextColor(textColorInactive)
+                binding.line3.setBackgroundResource(bgProgressLineInactive)
+
+                binding.step4Indicator.setBackgroundResource(bgProgressDotInactive)
+                binding.step4Text.setTextColor(textColorInactive)
+                binding.line4.setBackgroundResource(bgProgressLineInactive)
+
+                binding.step5Indicator.setBackgroundResource(bgProgressDotInactive)
+                binding.step5Text.setTextColor(textColorInactive)
+            }
+
+            ProgressBarStatus.SELECTING_TRAILER -> {
+                binding.stepTextView.text = "Шаг 3 из 5: Выбор прицепа"
+
+                binding.step1Indicator.setBackgroundResource(bgProgressDotActive)
+                binding.step1Text.setTextColor(textColorActive)
+                binding.line1.setBackgroundResource(bgProgressLineActive)
+
+                binding.step2Indicator.setBackgroundResource(bgProgressDotActive)
+                binding.step2Text.setTextColor(textColorActive)
+                binding.line2.setBackgroundResource(bgProgressLineActive)
+
+                binding.step3Indicator.setBackgroundResource(bgProgressDotActive)
+                binding.step3Text.setTextColor(textColorActive)
+                binding.line3.setBackgroundResource(bgProgressLineActive)
+
+                binding.step4Indicator.setBackgroundResource(bgProgressDotInactive)
+                binding.step4Text.setTextColor(textColorInactive)
+                binding.line4.setBackgroundResource(bgProgressLineInactive)
+
+                binding.step5Indicator.setBackgroundResource(bgProgressDotInactive)
+                binding.step5Text.setTextColor(textColorInactive)
+            }
+
+            ProgressBarStatus.SELECTING_EMPLOYEE -> {
+                binding.stepTextView.text = "Шаг 4 из 5: Выбор водителя"
+
+                binding.step1Indicator.setBackgroundResource(bgProgressDotActive)
+                binding.step1Text.setTextColor(textColorActive)
+                binding.line1.setBackgroundResource(bgProgressLineActive)
+
+                binding.step2Indicator.setBackgroundResource(bgProgressDotActive)
+                binding.step2Text.setTextColor(textColorActive)
+                binding.line2.setBackgroundResource(bgProgressLineActive)
+
+                binding.step3Indicator.setBackgroundResource(bgProgressDotActive)
+                binding.step3Text.setTextColor(textColorActive)
+                binding.line3.setBackgroundResource(bgProgressLineActive)
+
+                binding.step4Indicator.setBackgroundResource(bgProgressDotActive)
+                binding.step4Text.setTextColor(textColorActive)
+                binding.line4.setBackgroundResource(bgProgressLineActive)
+
+                binding.step5Indicator.setBackgroundResource(bgProgressDotInactive)
+                binding.step5Text.setTextColor(textColorInactive)
+            }
+
+            ProgressBarStatus.DONE -> {
+                binding.stepTextView.text = "Шаг 5 из 5: Готово"
+
+                binding.step1Indicator.setBackgroundResource(bgProgressDotActive)
+                binding.step1Text.setTextColor(textColorActive)
+                binding.line1.setBackgroundResource(bgProgressLineActive)
+
+                binding.step2Indicator.setBackgroundResource(bgProgressDotActive)
+                binding.step2Text.setTextColor(textColorActive)
+                binding.line2.setBackgroundResource(bgProgressLineActive)
+
+                binding.step3Indicator.setBackgroundResource(bgProgressDotActive)
+                binding.step3Text.setTextColor(textColorActive)
+                binding.line3.setBackgroundResource(bgProgressLineActive)
+
+                binding.step4Indicator.setBackgroundResource(bgProgressDotActive)
+                binding.step4Text.setTextColor(textColorActive)
+                binding.line4.setBackgroundResource(bgProgressLineActive)
+
+                binding.step5Indicator.setBackgroundResource(bgProgressDotActive)
+                binding.step5Text.setTextColor(textColorActive)
+            }
+        }
     }
 
 

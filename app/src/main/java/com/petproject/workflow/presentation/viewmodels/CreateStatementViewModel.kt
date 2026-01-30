@@ -37,7 +37,7 @@ class CreateStatementViewModel @Inject constructor(
 
     val dateTimeFormatPattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
     val dateFormatPattern = "dd.MM.yyyy"
-    val timeFormatPattern = "HH:mm:ss.SSSSSS"
+//    val timeFormatPattern = "HH:mm:ss.SSSSSS"
 
     private val _errorInputData = MutableLiveData<Boolean>()
     val errorInputData: LiveData<Boolean> get() = _errorInputData
@@ -54,48 +54,48 @@ class CreateStatementViewModel @Inject constructor(
     private val _errorInputDestinationTime = MutableLiveData<Boolean>()
     val errorInputDestinationTime: LiveData<Boolean> get() = _errorInputDestinationTime
 
-    var dataField = ObservableField<String>()
-    var contactPhoneField = ObservableField<String>()
-    var destinationAddressField = ObservableField<String>()
-    var destinationDateField = ObservableField<String>()
-    var destinationTimeField = ObservableField<String>()
+    val dataField = MutableLiveData<String>()
+    val contactPhoneField = MutableLiveData<String>()
+    val destinationAddressField = MutableLiveData<String>()
+    val destinationDateField = MutableLiveData<String>()
+    val destinationTimeField = MutableLiveData<String>()
 
     private fun validateInput(): Boolean {
         var isValid = true
 
-        if (dataField.get().isNullOrBlank()) {
+        if (dataField.value.isNullOrBlank()) {
             _errorInputData.value = true
             isValid = false
         }
 
-        if (contactPhoneField.get().isNullOrBlank()) {
+        if (contactPhoneField.value.isNullOrBlank()) {
             _errorInputContactPhone.value = true
             isValid = false
         }
 
-        if (destinationAddressField.get().isNullOrBlank()) {
+        if (destinationAddressField.value.isNullOrBlank()) {
             _errorInputDestinationAddress.value = true
             isValid = false
         }
 
-        val destinationDateString = destinationTimeField.get()
+        val destinationDateString = destinationDateField.value
         if (destinationDateString.isNullOrBlank()) {
-            _errorInputDestinationTime.value = true
+            _errorInputDestinationDate.value = true
             isValid = false
         } else {
             try {
                 val deadline = LocalDate.parse(destinationDateString, DateTimeFormatter.ofPattern(dateFormatPattern))
                 if (deadline < LocalDate.now()) {
-                    _errorInputDestinationTime.value = true
+                    _errorInputDestinationDate.value = true
                     isValid = false
                 }
             } catch (e: Exception) {
-                _errorInputDestinationTime.value = false
+                _errorInputDestinationDate.value = false
                 isValid = false
             }
         }
 
-        val destinationTimeString = destinationTimeField.get()
+        val destinationTimeString = destinationTimeField.value
         if (destinationTimeString.isNullOrBlank()) {
             _errorInputDestinationTime.value = true
             isValid = false
