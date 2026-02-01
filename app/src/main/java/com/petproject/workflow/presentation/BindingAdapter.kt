@@ -22,23 +22,23 @@ import java.time.LocalDateTime
 @BindingAdapter("safeText")
 fun bindSafeText(
     editText: TextInputEditText,
-    liveData: MutableLiveData<String>?
+    liveData: MutableLiveData<String>
 ) {
-    var previousValue = liveData?.value
+    var previousValue = liveData.value
 
     editText.doAfterTextChanged { text ->
         if (text?.toString() != previousValue) {
-            liveData?.value = text?.toString()
+            liveData.value = text?.toString()
             previousValue = text?.toString()
         }
     }
 
-    liveData?.observe((editText.context as? Fragment)?.viewLifecycleOwner ?: return) { value ->
-        if (editText.text?.toString() != value) {
-            editText.setText(value)
-            previousValue = value
-        }
-    }
+//    liveData?.observe((editText.context as? Fragment)?.viewLifecycleOwner ?: return) { value ->
+//        if (editText.text?.toString() != value) {
+//            editText.setText(value)
+//            previousValue = value
+//        }
+//    }
 }
 
 @BindingAdapter("errorInputEmail")

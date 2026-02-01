@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentCreateStatementBinding
@@ -52,11 +53,16 @@ class CreateStatementFragment : Fragment() {
     ): View {
         component.inject(this)
         _binding = FragmentCreateStatementBinding.inflate(inflater, container, false)
+        binding.viewmodel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setupOnClickListener()
+        observeViewModel()
 
         setupSelectedCarCard()
         setupSelectedTrailerCard()
@@ -65,6 +71,57 @@ class CreateStatementFragment : Fragment() {
         setupDatePicker()
         setupTimePicker()
     }
+
+    private fun setupOnClickListener() {
+        binding.createStatementButton.setOnClickListener {
+            viewModel.createStatement()
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.errorFieldsDate.observe(viewLifecycleOwner) {
+            if (it) {
+                val snackBar = Snackbar.make(
+                    requireView(),
+                    "Ошибка в заполении данных",
+                    Snackbar.LENGTH_LONG
+                )
+                snackBar.show()
+            }
+        }
+        viewModel.errorCar.observe(viewLifecycleOwner) {
+            if (it) {
+                val snackBar = Snackbar.make(
+                    requireView(),
+                    "Не выбран автомобиль",
+                    Snackbar.LENGTH_LONG
+                )
+                snackBar.show()
+            }
+        }
+        viewModel.errorDriver.observe(viewLifecycleOwner) {
+            if (it) {
+                val snackBar = Snackbar.make(
+                    requireView(),
+                    "Не выбран водитель",
+                    Snackbar.LENGTH_LONG
+                )
+                snackBar.show()
+            }
+        }
+
+
+        viewModel.navigateToDone.observe(viewLifecycleOwner) { statement ->
+            statement?.let {
+                val action = CreateStatementFragmentDirections
+                    .actionCreateStatementFragmentToCreateStatementDoneFragment(it)
+                findNavController().navigate(action)
+                viewModel.onNavigationComplete()
+            }
+
+        }
+    }
+
 
     private val calendar = Calendar.getInstance()
 
