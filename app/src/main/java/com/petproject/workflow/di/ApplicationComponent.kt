@@ -9,6 +9,7 @@ import com.petproject.workflow.presentation.views.AbsenceListFragment
 import com.petproject.workflow.presentation.views.AccessListFragment
 import com.petproject.workflow.presentation.views.CarListFragment
 import com.petproject.workflow.presentation.views.CreateAnnouncementFragment
+import com.petproject.workflow.presentation.views.CreateStatementDoneFragment
 import com.petproject.workflow.presentation.views.CreateStatementFragment
 import com.petproject.workflow.presentation.views.CreateStatementSelectionTransportFragment
 import com.petproject.workflow.presentation.views.CreateTaskAddDetailsFragment
@@ -59,6 +60,8 @@ interface ApplicationComponent {
     fun inject(createTaskAddDetailsFragment: CreateTaskAddDetailsFragment)
 
     fun inject(createTaskDoneFragment: CreateTaskDoneFragment)
+
+    fun inject(createStatementDoneFragment: CreateStatementDoneFragment)
 
     fun inject(fuellingListFragment: FuellingListFragment)
 

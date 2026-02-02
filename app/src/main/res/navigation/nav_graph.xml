@@ -341,6 +341,9 @@
         <action
             android:id="@+id/action_createStatementFragment_to_selectionCarFragment"
             app:destination="@id/selectionCarFragment" />
+        <action
+            android:id="@+id/action_createStatementFragment_to_createStatementDoneFragment"
+            app:destination="@id/createStatementDoneFragment" />
     </fragment>
     <fragment
         android:id="@+id/selectionCarFragment"
@@ -359,5 +362,17 @@
         <argument
             android:name="selectionArg"
             app:argType="com.petproject.workflow.presentation.utils.SelectionTrailerArg" />
+    </fragment>
+    <fragment
+        android:id="@+id/createStatementDoneFragment"
+        android:name="com.petproject.workflow.presentation.views.CreateStatementDoneFragment"
+        android:label="fragment_create_statement_done"
+        tools:layout="@layout/fragment_create_statement_done" >
+        <argument
+            android:name="statement"
+            app:argType="com.petproject.workflow.domain.entities.Statement" />
+        <action
+            android:id="@+id/action_createStatementDoneFragment_to_statementListFragment"
+            app:destination="@id/statementListFragment" />
     </fragment>
 </navigation>

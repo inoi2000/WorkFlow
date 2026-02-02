@@ -2,18 +2,21 @@ package com.petproject.workflow.data.network.mappers
 
 import com.petproject.workflow.data.network.models.JourneyDto
 import com.petproject.workflow.data.network.models.StatementDto
+import com.petproject.workflow.data.network.utils.DateTimeHelper
 import com.petproject.workflow.di.ApplicationScope
 import com.petproject.workflow.domain.entities.Journey
 import com.petproject.workflow.domain.entities.JourneyStatus
 import com.petproject.workflow.domain.entities.Statement
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @ApplicationScope
 class StatementJourneyMapper @Inject constructor(
     private val employeeMapper: EmployeeMapper,
     private val carMapper: CarMapper,
-    private val trailerMapper: TrailerMapper
+    private val trailerMapper: TrailerMapper,
+    private val dateTimeHelper: DateTimeHelper
 ) {
 
     fun mapDtoToEntity(dto: StatementDto): Statement {
@@ -36,7 +39,7 @@ class StatementJourneyMapper @Inject constructor(
             logist = employeeMapper.mapEntityToDto(entity.logist),
             data = entity.data,
             contactPhone = entity.contactPhone,
-            destinationTime = entity.destinationTime.toString(),
+            destinationTime = entity.destinationTime.format(dateTimeHelper.dateTimeFormatter),
             destinationAddress = entity.destinationAddress,
             createdAt = entity.createdAt.toString(),
             updatedAt = entity.updatedAt.toString(),
@@ -79,6 +82,4 @@ class StatementJourneyMapper @Inject constructor(
             statement = entity.statement?.let { mapEntityToDto(it) }
         )
     }
-
-
 }
