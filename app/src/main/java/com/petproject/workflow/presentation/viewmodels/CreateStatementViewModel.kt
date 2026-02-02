@@ -44,7 +44,6 @@ class CreateStatementViewModel @Inject constructor(
     private val _trailer = MutableLiveData<Trailer?>()
     val trailer: LiveData<Trailer?> get() = _trailer
 
-    val dateTimeFormatPattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
     val dateFormatPattern = "dd.MM.yyyy"
     val timeFormatPattern = "HH:mm"
 
@@ -81,7 +80,6 @@ class CreateStatementViewModel @Inject constructor(
 
     private val dateFormatter = DateTimeFormatter.ofPattern(dateFormatPattern)
     private val timeFormatter = DateTimeFormatter.ofPattern(timeFormatPattern)
-    private val dateTimeFormatter = DateTimeFormatter.ofPattern(dateTimeFormatPattern)
 
     private fun validateInput(): Boolean {
         var isValid = true
@@ -197,13 +195,22 @@ class CreateStatementViewModel @Inject constructor(
 
                 // Формируем дату и время доставки
                 val date = LocalDate.parse(destinationDateField.value, dateFormatter)
-                val time = destinationTimeField.value?.let {
+                val time = LocalTime.parse(destinationTimeField.value?.let {
                     if (it.contains(":")) it else "$it:00"
-                } ?: "00:00"
+                } ?: "00:00")
 
-//                val dateTimeFormatPattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
-                val dateTimeString = "${date.format(DateTimeFormatter.ISO_LOCAL_DATE)}T$time:00.000000"
-                val destinationDateTime = LocalDateTime.parse(dateTimeString, dateTimeFormatter)
+                // Сервер ожидает: "2026-02-02T12:00:00.000000"
+
+                // Парсим с микросекундами
+                val destinationDateTime = LocalDateTime.of(
+                    date.year,
+                    date.month,
+                    date.dayOfMonth,
+                    time.hour,
+                    time.minute,
+                    time.second,
+                    time.nano
+                )
 
                 val logist = getCurrentEmployeeUseCase()
                 val car =

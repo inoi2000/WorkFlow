@@ -20,6 +20,7 @@ import com.petproject.workflow.data.network.TaskApiService
 import com.petproject.workflow.data.network.TrailerApiService
 import com.petproject.workflow.data.network.utils.AuthFailedInterceptor
 import com.petproject.workflow.data.network.utils.AuthInterceptor
+import com.petproject.workflow.data.network.utils.DateTimeHelper
 import com.petproject.workflow.data.network.utils.FileUploadHelper
 import dagger.Module
 import dagger.Provides
@@ -124,6 +125,11 @@ class DataModule {
     @Provides
     fun provideAuthService(context: Context): AuthorizationService {
         return AuthorizationService(context)
+    }
+
+    @Provides
+    fun provideDateTimeHelper(): DateTimeHelper {
+        return DateTimeHelper()
     }
 
     @Provides
