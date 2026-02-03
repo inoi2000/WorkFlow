@@ -5,21 +5,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.RequestManager
-import com.petproject.workflow.domain.entities.Employee
 import com.petproject.workflow.domain.entities.Statement
-import com.petproject.workflow.domain.usecases.GetEmployeeUseCase
 import com.petproject.workflow.domain.usecases.GetStatementByIdUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class EmployeeInfoViewModel @Inject constructor(
-    private val employeeId: String,
-    private val getEmployeeByIdUseCase: GetEmployeeUseCase,
+class StatementInfoViewModel @Inject constructor(
+    private val statementId: String,
+    private val getStatementByIdUseCase: GetStatementByIdUseCase,
     val requestManager: RequestManager
-): ViewModel() {
+) : ViewModel() {
 
-    private val _employee = MutableLiveData<Employee>()
-    val employee: LiveData<Employee> get() = _employee
+    private val _statement = MutableLiveData<Statement>()
+    val statement: LiveData<Statement> get() = _statement
 
     init {
         loadData()
@@ -27,7 +25,7 @@ class EmployeeInfoViewModel @Inject constructor(
 
     fun loadData() {
         viewModelScope.launch {
-            _employee.value = getEmployeeByIdUseCase(employeeId)
+            _statement.value = getStatementByIdUseCase(statementId)
         }
     }
 }
