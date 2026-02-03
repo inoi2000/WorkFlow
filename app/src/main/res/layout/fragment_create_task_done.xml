@@ -126,13 +126,14 @@
             android:orientation="vertical"
             android:gravity="center"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:padding="32dp">
+            android:paddingHorizontal="32dp"
+            android:paddingTop="16dp">
 
             <!-- Иконка успеха с анимацией -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="160dp"
                 android:layout_height="160dp"
-                android:layout_marginBottom="24dp">
+                android:layout_marginBottom="16dp">
 
                 <!-- Фон круга -->
                 <View
@@ -176,7 +177,7 @@
                 android:id="@+id/successMessageTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="16dp"
                 android:gravity="center"
                 android:text="Задача назначена сотруднику и появится в его списке"
                 android:textColor="?android:attr/textColorSecondary"
@@ -187,7 +188,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp"
                 app:strokeColor="?attr/colorPrimary"

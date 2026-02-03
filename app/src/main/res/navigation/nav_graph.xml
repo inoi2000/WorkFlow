@@ -257,7 +257,11 @@
         android:id="@+id/journeyListFragment"
         android:name="com.petproject.workflow.presentation.views.JourneyListFragment"
         android:label="fragment_journey_list"
-        tools:layout="@layout/fragment_journey_list" />
+        tools:layout="@layout/fragment_journey_list" >
+        <action
+            android:id="@+id/action_journeyListFragment_to_journeyInfoFragment"
+            app:destination="@id/journeyInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fuellingListFragment"
         android:name="com.petproject.workflow.presentation.views.FuellingListFragment"
@@ -271,6 +275,9 @@
         <action
             android:id="@+id/action_statementListFragment_to_createStatementFragment"
             app:destination="@id/createStatementFragment" />
+        <action
+            android:id="@+id/action_statementListFragment_to_statementInfoFragment"
+            app:destination="@id/statementInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -312,12 +319,20 @@
         android:id="@+id/carListFragment"
         android:name="com.petproject.workflow.presentation.views.CarListFragment"
         android:label="fragment_car_list"
-        tools:layout="@layout/fragment_car_list" />
+        tools:layout="@layout/fragment_car_list" >
+        <action
+            android:id="@+id/action_carListFragment_to_carInfoFragment"
+            app:destination="@id/carInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/trailerListFragment"
         android:name="com.petproject.workflow.presentation.views.TrailerListFragment"
         android:label="fragment_trailer_list"
-        tools:layout="@layout/fragment_trailer_list" />
+        tools:layout="@layout/fragment_trailer_list" >
+        <action
+            android:id="@+id/action_trailerListFragment_to_trailerInfoFragment"
+            app:destination="@id/trailerInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/selectionEmployeeFragment"
         android:name="com.petproject.workflow.presentation.views.SelectionEmployeeFragment"
@@ -374,5 +389,39 @@
         <action
             android:id="@+id/action_createStatementDoneFragment_to_statementListFragment"
             app:destination="@id/statementListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/journeyInfoFragment"
+        android:name="com.petproject.workflow.presentation.views.JourneyInfoFragment"
+        android:label="fragment_journey_info"
+        tools:layout="@layout/fragment_journey_info" >
+        <argument
+            android:name="journeyId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/statementInfoFragment"
+        android:name="com.petproject.workflow.presentation.views.StatementInfoFragment"
+        android:label="fragment_statement_info"
+        tools:layout="@layout/fragment_statement_info" >
+        <argument android:name="statementId" />
+    </fragment>
+    <fragment
+        android:id="@+id/carInfoFragment"
+        android:name="com.petproject.workflow.presentation.views.CarInfoFragment"
+        android:label="fragment_car_info"
+        tools:layout="@layout/fragment_car_info" >
+        <argument
+            android:name="carId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/trailerInfoFragment"
+        android:name="com.petproject.workflow.presentation.views.TrailerInfoFragment"
+        android:label="fragment_trailer_info"
+        tools:layout="@layout/fragment_trailer_info" >
+        <argument
+            android:name="trailerId"
+            app:argType="string" />
     </fragment>
 </navigation>

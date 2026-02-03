@@ -1,12 +1,11 @@
 package com.petproject.workflow.di
 
 import android.content.Context
-import com.petproject.workflow.presentation.views.AccountFragment
-import com.petproject.workflow.presentation.views.ExecutorTaskListFragment
-import com.petproject.workflow.presentation.views.AuthActivity
-import com.petproject.workflow.presentation.views.AnnouncementListFragment
 import com.petproject.workflow.presentation.views.AbsenceListFragment
 import com.petproject.workflow.presentation.views.AccessListFragment
+import com.petproject.workflow.presentation.views.AccountFragment
+import com.petproject.workflow.presentation.views.AnnouncementListFragment
+import com.petproject.workflow.presentation.views.AuthActivity
 import com.petproject.workflow.presentation.views.CarListFragment
 import com.petproject.workflow.presentation.views.CreateAnnouncementFragment
 import com.petproject.workflow.presentation.views.CreateStatementDoneFragment
@@ -15,7 +14,7 @@ import com.petproject.workflow.presentation.views.CreateStatementSelectionTransp
 import com.petproject.workflow.presentation.views.CreateTaskAddDetailsFragment
 import com.petproject.workflow.presentation.views.CreateTaskDoneFragment
 import com.petproject.workflow.presentation.views.CreateTaskSelectionEmployeeFragment
-import com.petproject.workflow.presentation.views.EmployeeInfoFragment
+import com.petproject.workflow.presentation.views.ExecutorTaskListFragment
 import com.petproject.workflow.presentation.views.FuellingListFragment
 import com.petproject.workflow.presentation.views.InspectorTaskListFragment
 import com.petproject.workflow.presentation.views.InstructionListFragment

@@ -163,6 +163,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        tools:listitem="@layout/item_uploaded_file"
+                        tools:itemCount="2"
                         android:nestedScrollingEnabled="false" />
 
                 </LinearLayout>
