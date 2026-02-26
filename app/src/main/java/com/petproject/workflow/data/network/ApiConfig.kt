@@ -13,11 +13,11 @@ object ApiConfig {
     const val BASE_JOURNEY_API = "https://e-workflow.ru:9600/"
     const val BASE_STATEMENT_API = "https://e-workflow.ru:9600/"
 
-//    const val BASE_CAR_API = "http://192.168.0.155:9600/"
-//    const val BASE_TRAILER_API = "http://192.168.0.155:9600/"
-//    const val BASE_FUELLING_API = "http://192.168.0.155:9600/"
-//    const val BASE_JOURNEY_API = "http://192.168.0.155:9600/"
-//    const val BASE_STATEMENT_API = "http://192.168.0.155:9600/"
+//    const val BASE_CAR_API = "http://192.168.0.159:9600/"
+//    const val BASE_TRAILER_API = "http://192.168.0.159:9600/"
+//    const val BASE_FUELLING_API = "http://192.168.0.159:9600/"
+//    const val BASE_JOURNEY_API = "http://192.168.0.159:9600/"
+//    const val BASE_STATEMENT_API = "http://192.168.0.159:9600/"
 
     const val BASE_ANNOUNCEMENT_API = "https://e-workflow.ru:9500/"
 
