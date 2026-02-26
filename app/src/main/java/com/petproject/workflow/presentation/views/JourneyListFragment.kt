@@ -14,6 +14,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentJourneyListBinding
@@ -70,6 +71,8 @@ class JourneyListFragment : Fragment() {
         setupUI()
         setupObservers()
         setupCalendar()
+
+        viewModel.loadData()
     }
 
     private fun setupMenuProvider() {
@@ -124,7 +127,9 @@ class JourneyListFragment : Fragment() {
 
     private fun setupRecyclerView() {
         adapter = JourneyAdapter { journeyId ->
-            navigateToJourneyDetails(journeyId)
+            val action = JourneyListFragmentDirections
+                .actionJourneyListFragmentToJourneyInfoFragment(journeyId)
+            findNavController().navigate(action)
         }
 
         with(binding.journeyListRecyclerView) {
@@ -225,10 +230,6 @@ class JourneyListFragment : Fragment() {
         binding.emptyStateLayout.visibility = View.GONE
         binding.errorLayout.visibility = View.VISIBLE
         binding.errorText.text = message
-    }
-
-    private fun navigateToJourneyDetails(journeyId: String) {
-        // TODO: Навигация к деталям выезда
     }
 
     override fun onDestroyView() {
