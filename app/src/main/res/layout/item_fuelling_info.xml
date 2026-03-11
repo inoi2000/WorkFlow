@@ -10,10 +10,20 @@
             type="com.petproject.workflow.domain.entities.Fuelling" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_fuelling_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="12dp">
-    </androidx.cardview.widget.CardView>
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="6dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="1dp"
+        app:strokeColor="@color/grey_light"
+        app:strokeWidth="0.5dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground">
+
+
+    </com.google.android.material.card.MaterialCardView>
 </layout>
