@@ -1,13 +1,105 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <style name="Base.Theme.WorkFlow" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/main_blue</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="android:colorBackground">@color/test</item>
+
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorOnSecondary">@color/grey_for_text</item>
+
+        <item name="colorSurface">@color/white_dark</item>
+
+        <item name="background">@color/white_dark</item>
+
+        <item name="android:navigationBarColor">@color/white</item>
+
+
+        <item name="android:windowBackground">@color/white_dark</item>
 
         <item name="hintTextColor">@color/grey</item>
 
         <item name="colorPrimaryVariant">@color/grey_dark</item>
+
+        <item name="android:datePickerDialogTheme">@style/DataPickerTheme</item>
+
+        <item name="materialCardViewStyle">@style/AppMaterialCardViewStyle</item>
     </style>
 
     <style name="Theme.WorkFlow" parent="Base.Theme.WorkFlow" />
+
+    <style name="AppMaterialCardViewStyle" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardElevation">1dp</item>
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="strokeColor">@color/grey_dark</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="BottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="HorizontalLineView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">@color/grey_light</item>
+    </style>
+
+    <style name="StatusLineView">
+        <item name="android:layout_width">6dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="StatusChip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="textEndPadding">0dp</item>
+        <item name="textStartPadding">0dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+    </style>
+    <style name="DataPickerTheme" parent="ThemeOverlay.Material3.Dialog">
+        <item name="colorAccent">@color/blue</item>
+        <item name="android:windowBackground">@color/white_dark</item>
+    </style>
+
+    <style name="SearchTextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@android:color/transparent</item>
+        <item name="android:background">@color/white</item>
+        <item name="hintTextColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="boxBackgroundMode">outline</item>
+    </style>
+
+    <style name="TaskDetailItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="TaskDetailLabel">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TaskDetailValue">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">end</item>
+    </style>
+
+    <style name="CalendarDateText" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="CalendarWeekDayText" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textColor">@color/grey_for_text</item>
+    </style>
 </resources>

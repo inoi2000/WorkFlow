@@ -134,6 +134,9 @@
     <string name="journeys">Journeys</string>
     <string name="statements">Statements</string>
     <string name="fuellings">Fuellings</string>
+    <string name="fuel_volume_format">%.2f l</string>
+    <string name="car_with_plate_format">%s %s %s</string>
+
 
     <!-- Existing strings -->
     <string name="colleagues_services_news">Search tasks…</string>

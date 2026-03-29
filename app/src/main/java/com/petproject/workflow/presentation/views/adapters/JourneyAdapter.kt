@@ -52,7 +52,13 @@ class JourneyAdapter(
             binding.chipStatus.setChipBackgroundColorResource(getStatusColor(journey.status))
 
             // Настраиваем видимость прицепа
-            binding.rowTrailer.visibility = if (journey.trailer != null) View.VISIBLE else View.GONE
+            if (journey.trailer != null) {
+                binding.iconTrailer.visibility = View.VISIBLE
+                binding.textTrailerLicense.visibility = View.VISIBLE
+            } else {
+                binding.iconTrailer.visibility = View.GONE
+                binding.textTrailerLicense.visibility = View.GONE
+            }
 
             // Обработчики кликов
             binding.cardJourneyItem.setOnClickListener {
