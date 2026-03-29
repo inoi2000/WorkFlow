@@ -130,6 +130,8 @@
     <string name="journeys">Выезды</string>
     <string name="statements">Заявки</string>
     <string name="fuellings">Заправки</string>
+    <string name="fuel_volume_format">%.1f л</string>
+    <string name="car_with_plate_format">%s %s %s</string>
 
     <!-- Existing strings -->
     <string name="colleagues_services_news">Коллеги, сервисы, новости</string>

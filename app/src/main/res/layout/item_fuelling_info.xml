@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="fuelling"
             type="com.petproject.workflow.domain.entities.Fuelling" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_fuelling_item"
+        android:id="@+id/cardFuellingItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
@@ -24,6 +23,129 @@
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Левая колонка: время и дата (вертикально отцентрированы) -->
+            <TextView
+                android:id="@+id/textTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/textDate"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintVertical_bias="0.5"
+                tools:text="14:30" />
+
+            <TextView
+                android:id="@+id/textDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/grey_for_text"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="@+id/textTime"
+                app:layout_constraintTop_toBottomOf="@+id/textTime"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="12 дек 2023" />
+
+            <!-- Вертикальный guideline на 28% ширины экрана -->
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.28" />
+
+            <!-- Правая колонка: объём, водитель, автомобиль -->
+            <!-- Объём -->
+            <ImageView
+                android:id="@+id/iconFuel"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/ic_fuelling"
+                app:layout_constraintStart_toStartOf="@+id/guideline_vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="12dp"
+                app:tint="@color/main_blue"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/textVolume"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{@string/fuel_volume_format(fuelling.volume)}"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iconFuel"
+                app:layout_constraintTop_toTopOf="@+id/iconFuel"
+                app:layout_constraintBottom_toBottomOf="@+id/iconFuel"
+                tools:text="45.5 л" />
+
+            <!-- Водитель -->
+            <ImageView
+                android:id="@+id/iconDriver"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/ic_person"
+                app:layout_constraintStart_toStartOf="@+id/iconFuel"
+                app:layout_constraintTop_toBottomOf="@+id/iconFuel"
+                app:tint="@color/grey_for_text"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/textDriver"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{fuelling.driver.name}"
+                android:textColor="@color/grey_for_text"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iconDriver"
+                app:layout_constraintTop_toTopOf="@+id/iconDriver"
+                app:layout_constraintBottom_toBottomOf="@+id/iconDriver"
+                tools:text="Иванов И.И." />
+
+            <!-- Автомобиль с номером -->
+            <ImageView
+                android:id="@+id/iconCar"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="6dp"
+                android:src="@drawable/ic_car"
+                app:layout_constraintStart_toStartOf="@+id/iconFuel"
+                app:layout_constraintTop_toBottomOf="@+id/iconDriver"
+                app:tint="@color/grey_for_text"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/textCarWithPlate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{@string/car_with_plate_format(fuelling.car.brand, fuelling.car.model, fuelling.car.licensePlate)}"
+                android:textColor="@color/grey_for_text"
+                android:textSize="13sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iconCar"
+                app:layout_constraintTop_toTopOf="@+id/iconCar"
+                app:layout_constraintBottom_toBottomOf="@+id/iconCar"
+                tools:text="Kia Rio · A123BC777" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 </layout>

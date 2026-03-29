@@ -19,7 +19,7 @@ data class FuellingDto(
     @SerializedName("volume")
     @Expose
     val volume: Double,
-    @SerializedName("createdAt")
+    @SerializedName("created_at")
     @Expose
     val createdAt: String
 )
