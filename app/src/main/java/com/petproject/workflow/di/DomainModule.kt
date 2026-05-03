@@ -11,8 +11,10 @@ import com.petproject.workflow.data.repositories.FuellingRepositoryImpl
 import com.petproject.workflow.data.repositories.InstructionRepositoryImpl
 import com.petproject.workflow.data.repositories.JourneyRepositoryImpl
 import com.petproject.workflow.data.repositories.StatementRepositoryImpl
+import com.petproject.workflow.data.repositories.StorageRepositoryImpl
 import com.petproject.workflow.data.repositories.TaskRepositoryImpl
 import com.petproject.workflow.data.repositories.TrailerRepositoryImpl
+import com.petproject.workflow.data.repositories.WasteRepositoryImpl
 import com.petproject.workflow.domain.repositories.AbsenceRepository
 import com.petproject.workflow.domain.repositories.AccessRepository
 import com.petproject.workflow.domain.repositories.AnnouncementRepository
@@ -24,8 +26,10 @@ import com.petproject.workflow.domain.repositories.FuellingRepository
 import com.petproject.workflow.domain.repositories.InstructionRepository
 import com.petproject.workflow.domain.repositories.JourneyRepository
 import com.petproject.workflow.domain.repositories.StatementRepository
+import com.petproject.workflow.domain.repositories.StorageRepository
 import com.petproject.workflow.domain.repositories.TaskRepository
 import com.petproject.workflow.domain.repositories.TrailerRepository
+import com.petproject.workflow.domain.repositories.WasteRepository
 import dagger.Binds
 import dagger.Module
 
@@ -70,4 +74,10 @@ interface DomainModule {
 
     @Binds
     fun bindTrailerRepository(impl: TrailerRepositoryImpl): TrailerRepository
+
+    @Binds
+    fun bindStorageRepository(impl: StorageRepositoryImpl): StorageRepository
+
+    @Binds
+    fun bindWasteRepository(impl: WasteRepositoryImpl): WasteRepository
 }

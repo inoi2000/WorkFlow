@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="waste"
+            type="com.petproject.workflow.domain.entities.Waste" />
+        <import type="android.view.View" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardWasteItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="6dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="1dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp">
+
+            <!-- Название отхода -->
+            <TextView
+                android:id="@+id/textWasteName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{waste.name}"
+                android:textColor="?android:attr/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Отработанные масла" />
+
+            <!-- Иконка отхода -->
+            <ImageView
+                android:id="@+id/iconWaste"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="18dp"
+                android:src="@drawable/ic_recycling"
+                app:tint="@android:color/darker_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textWasteName"
+                tools:ignore="ContentDescription" />
+
+            <!-- Текст статуса (перерабатываемый / нет) -->
+            <TextView
+                android:id="@+id/textWasteType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text='@{waste.isRecycle ? @string/recyclable_status : @string/non_recyclable_status}'
+                android:textStyle="bold"
+                android:textSize="13sp"
+                app:layout_constraintStart_toEndOf="@+id/iconWaste"
+                app:layout_constraintEnd_toStartOf="@+id/buttonDetails"
+                app:layout_constraintTop_toTopOf="@+id/iconWaste"
+                app:layout_constraintBottom_toBottomOf="@+id/iconWaste"
+                tools:text="Перерабатываемый отход" />
+
+            <!-- Кнопка "Подробнее" (как в Storage – справа от текста статуса) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/blue_button_transparent"
+                android:text="наличие в хранилищах"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="11sp"
+                app:icon="@drawable/ic_arrow_forward"
+                app:iconGravity="textEnd"
+                app:iconPadding="5dp"
+                app:iconSize="14dp"
+                app:iconTint="?attr/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/iconWaste"
+                app:layout_constraintBottom_toBottomOf="@+id/iconWaste" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

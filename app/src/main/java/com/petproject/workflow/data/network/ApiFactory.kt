@@ -1,6 +1,7 @@
 package com.petproject.workflow.data.network
 
 import com.petproject.workflow.di.ApplicationScope
+import com.petproject.workflow.domain.entities.Storage
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -96,4 +97,18 @@ class ApiFactory @Inject constructor(
         .client(okHttpClient)
         .build()
         .create(StatementApiService::class.java)
+
+    val storageApiService  = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(apiConfig.BASE_STORAGE_API)
+        .client(okHttpClient)
+        .build()
+        .create(StorageApiService::class.java)
+
+    val wasteApiService  = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(apiConfig.BASE_WASTE_API)
+        .client(okHttpClient)
+        .build()
+        .create(WasteApiService::class.java)
 }

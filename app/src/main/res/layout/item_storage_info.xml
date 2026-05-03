@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="storage"
+            type="com.petproject.workflow.domain.entities.Storage" />
+        <import type="android.view.View" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardStorageItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="6dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="1dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp">
+
+            <!-- Цветная полоса – индикатор заполнения -->
+            <View
+                android:id="@+id/indicatorFill"
+                android:layout_width="4dp"
+                android:layout_height="0dp"
+                android:background="@color/main_blue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <!-- Основной контейнер контента -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/contentContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                app:layout_constraintStart_toEndOf="@+id/indicatorFill"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <!-- Название склада -->
+                <TextView
+                    android:id="@+id/textStorageName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{storage.name}"
+                    android:textColor="?android:attr/colorPrimary"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textPercent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="E-1" />
+
+                <!-- Процент заполнения -->
+                <TextView
+                    android:id="@+id/textPercent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{storage.totalVolume > 0 ? (int)(storage.currentVolume / storage.totalVolume * 100) + " %" : "0 %"}'
+                    android:textColor="?android:attr/colorPrimary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textStorageName"
+                    tools:text="42 %" />
+
+                <!-- Иконка отхода -->
+                <ImageView
+                    android:id="@+id/iconWaste"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_waste"
+                    android:visibility="@{storage.currentWaste != null ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textStorageName"
+                    tools:visibility="visible" />
+
+                <!-- Название текущего отхода -->
+                <TextView
+                    android:id="@+id/textCurrentWaste"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="@{storage.currentWaste != null ? storage.currentWaste.name : null}"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:visibility="@{storage.currentWaste != null ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintStart_toEndOf="@+id/iconWaste"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonDetails"
+                    app:layout_constraintTop_toTopOf="@+id/iconWaste"
+                    app:layout_constraintBottom_toBottomOf="@+id/iconWaste"
+                    tools:text="Мазут"
+                    tools:visibility="visible" />
+
+                <!-- Текст "Нет отхода" -->
+                <TextView
+                    android:id="@+id/textNoWaste"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Нет активного отхода"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="13sp"
+                    android:visibility="@{storage.currentWaste == null ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textStorageName"
+                    tools:visibility="gone"/>
+
+                <!-- Детали объёма -->
+                <TextView
+                    android:id="@+id/textVolumeDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text='@{String.format(java.util.Locale.US, "%.1f / %.1f м³", storage.currentVolume, storage.totalVolume)}'
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textPercent"
+                    tools:text="12.5 / 100.0 м³"/>
+
+                <!-- Дополнительная информация (дата обновления) -->
+                <TextView
+                    android:id="@+id/textAdditionalInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text='@{@string/updated_at + " " + storage.updatedAt.toString()}'
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/buttonDetails"
+                    app:layout_constraintBottom_toBottomOf="@+id/buttonDetails"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonDetails"
+                    tools:text="Изменено: 12.12.2023 10:30" />
+
+                <!-- Кнопка "Подробнее" -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="@color/blue_button_transparent"
+                    android:text="@string/more"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="11sp"
+                    app:icon="@drawable/ic_arrow_forward"
+                    app:iconGravity="textEnd"
+                    app:iconPadding="5dp"
+                    app:iconSize="14dp"
+                    app:iconTint="?attr/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textVolumeDetails" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
