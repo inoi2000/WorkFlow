@@ -10,7 +10,12 @@ data class Storage(
     val name: String,
     val totalVolume: Double,
     val currentVolume: Double,
-    val currentWaste: Waste?,
+    val currentProduct: Product?,
+    val allowedMixing: Boolean,
+    val outputProduct: Product?,
+    val sector: String,
+    val placement: StoragePlacement,
+    val location: String,
     val updatedAt: LocalDateTime,
-    val allowedWastes: List<Waste>?
+    val allowedProducts: List<Product>?
 ) : Parcelable

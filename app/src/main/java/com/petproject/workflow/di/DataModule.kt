@@ -19,7 +19,7 @@ import com.petproject.workflow.data.network.StatementApiService
 import com.petproject.workflow.data.network.StorageApiService
 import com.petproject.workflow.data.network.TaskApiService
 import com.petproject.workflow.data.network.TrailerApiService
-import com.petproject.workflow.data.network.WasteApiService
+import com.petproject.workflow.data.network.ProductApiService
 import com.petproject.workflow.data.network.utils.AuthFailedInterceptor
 import com.petproject.workflow.data.network.utils.AuthInterceptor
 import com.petproject.workflow.data.network.utils.DateTimeHelper
@@ -100,8 +100,8 @@ class DataModule {
     }
 
     @Provides
-    fun provideWasteApiService(apiFactory: ApiFactory): WasteApiService {
-        return apiFactory.wasteApiService
+    fun provideProductApiService(apiFactory: ApiFactory): ProductApiService {
+        return apiFactory.productApiService
     }
 
     @ApplicationScope

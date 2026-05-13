@@ -7,7 +7,6 @@
         <variable
             name="storage"
             type="com.petproject.workflow.domain.entities.Storage" />
-        <import type="android.view.View" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -16,10 +15,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="6dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="1dp"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -50,7 +49,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent">
 
-                <!-- Название склада -->
+                <!-- Название склада (простая привязка через data binding) -->
                 <TextView
                     android:id="@+id/textStorageName"
                     android:layout_width="0dp"
@@ -66,12 +65,11 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="E-1" />
 
-                <!-- Процент заполнения -->
+                <!-- Процент заполнения (заполняется в коде) -->
                 <TextView
                     android:id="@+id/textPercent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text='@{storage.totalVolume > 0 ? (int)(storage.currentVolume / storage.totalVolume * 100) + " %" : "0 %"}'
                     android:textColor="?android:attr/colorPrimary"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -79,69 +77,60 @@
                     app:layout_constraintTop_toTopOf="@+id/textStorageName"
                     tools:text="42 %" />
 
-                <!-- Иконка отхода -->
                 <ImageView
-                    android:id="@+id/iconWaste"
+                    android:id="@+id/iconProduct"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_marginTop="8dp"
-                    android:src="@drawable/ic_waste"
-                    android:visibility="@{storage.currentWaste != null ? View.VISIBLE : View.GONE}"
+                    android:src="@drawable/ic_storage"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textStorageName"
                     tools:visibility="visible" />
 
-                <!-- Название текущего отхода -->
                 <TextView
-                    android:id="@+id/textCurrentWaste"
+                    android:id="@+id/textCurrentProduct"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
-                    android:text="@{storage.currentWaste != null ? storage.currentWaste.name : null}"
-                    android:textStyle="bold"
                     android:textSize="13sp"
-                    android:visibility="@{storage.currentWaste != null ? View.VISIBLE : View.GONE}"
-                    app:layout_constraintStart_toEndOf="@+id/iconWaste"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/iconProduct"
                     app:layout_constraintEnd_toStartOf="@+id/buttonDetails"
-                    app:layout_constraintTop_toTopOf="@+id/iconWaste"
-                    app:layout_constraintBottom_toBottomOf="@+id/iconWaste"
+                    app:layout_constraintTop_toTopOf="@+id/iconProduct"
+                    app:layout_constraintBottom_toBottomOf="@+id/iconProduct"
                     tools:text="Мазут"
                     tools:visibility="visible" />
 
-                <!-- Текст "Нет отхода" -->
                 <TextView
-                    android:id="@+id/textNoWaste"
+                    android:id="@+id/textNoProduct"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Нет активного отхода"
+                    android:text="Нет залитого продукта"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="13sp"
-                    android:visibility="@{storage.currentWaste == null ? View.VISIBLE : View.GONE}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textStorageName"
-                    tools:visibility="gone"/>
+                    tools:visibility="gone" />
 
-                <!-- Детали объёма -->
+                <!-- Детали объёма (заполняется в коде) -->
                 <TextView
                     android:id="@+id/textVolumeDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text='@{String.format(java.util.Locale.US, "%.1f / %.1f м³", storage.currentVolume, storage.totalVolume)}'
                     android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textPercent"
-                    tools:text="12.5 / 100.0 м³"/>
+                    tools:text="12.5 / 100.0 м³" />
 
-                <!-- Дополнительная информация (дата обновления) -->
+                <!-- Дополнительная информация (дата обновления, заполняется в коде) -->
                 <TextView
                     android:id="@+id/textAdditionalInfo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text='@{@string/updated_at + " " + storage.updatedAt.toString()}'
                     android:textColor="@android:color/darker_gray"
                     android:textSize="11sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -169,8 +158,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/textVolumeDetails" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </com.google.android.material.card.MaterialCardView>
 </layout>

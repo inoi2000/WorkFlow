@@ -4,9 +4,11 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Waste(
+data class Product(
     val id: String,
     val name: String,
-    val isRecycle: Boolean,
+    val density: Double,
+    val status: ProductStatus,
+    val type: ProductType,
     val allowedStorages: List<Storage>?
 ) : Parcelable

@@ -22,7 +22,7 @@ object ApiConfig {
     const val BASE_ANNOUNCEMENT_API = "https://e-workflow.ru:9500/"
 
     const val BASE_STORAGE_API = "http://192.168.0.159:9700/"
-    const val BASE_WASTE_API = "http://192.168.0.159:9700/"
+    const val BASE_PRODUCT_API = "http://192.168.0.159:9700/"
 
     const val BASE_TASK_API = "https://e-workflow.ru:9200/"
     const val BASE_COMMENT_API = "https://e-workflow.ru:9200/"

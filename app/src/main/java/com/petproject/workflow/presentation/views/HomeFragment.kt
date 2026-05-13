@@ -112,6 +112,11 @@ class HomeFragment : Fragment() {
                 .actionHomeFragmentToFuellingListFragment()
             findNavController().navigate(action)
         }
+        binding.storagesCardView.setOnClickListener {
+            val action = HomeFragmentDirections
+                .actionHomeFragmentToStorageListFragment()
+            findNavController().navigate(action)
+        }
 
         binding.othersCardView.setOnClickListener {
             val action = HomeFragmentDirections

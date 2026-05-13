@@ -5,13 +5,12 @@
 
     <data>
         <variable
-            name="waste"
-            type="com.petproject.workflow.domain.entities.Waste" />
-        <import type="android.view.View" />
+            name="product"
+            type="com.petproject.workflow.domain.entities.Product" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardWasteItem"
+        android:id="@+id/cardProductItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
@@ -29,12 +28,12 @@
             android:paddingEnd="16dp"
             android:paddingBottom="12dp">
 
-            <!-- Название отхода -->
+            <!-- Название отхода (простая привязка) -->
             <TextView
-                android:id="@+id/textWasteName"
+                android:id="@+id/textProductName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{waste.name}"
+                android:text="@{product.name}"
                 android:textColor="?android:attr/colorPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -45,34 +44,33 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Отработанные масла" />
 
-            <!-- Иконка отхода -->
+            <!-- Иконка переработки (статичная, всегда видна) -->
             <ImageView
-                android:id="@+id/iconWaste"
+                android:id="@+id/iconProduct"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_marginTop="18dp"
                 android:src="@drawable/ic_recycling"
                 app:tint="@android:color/darker_gray"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textWasteName"
+                app:layout_constraintTop_toBottomOf="@+id/textProductName"
                 tools:ignore="ContentDescription" />
 
-            <!-- Текст статуса (перерабатываемый / нет) -->
+            <!-- Статус переработки (заполняется в коде) -->
             <TextView
-                android:id="@+id/textWasteType"
+                android:id="@+id/textProductType"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
-                android:text='@{waste.isRecycle ? @string/recyclable_status : @string/non_recyclable_status}'
-                android:textStyle="bold"
                 android:textSize="13sp"
-                app:layout_constraintStart_toEndOf="@+id/iconWaste"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/iconProduct"
                 app:layout_constraintEnd_toStartOf="@+id/buttonDetails"
-                app:layout_constraintTop_toTopOf="@+id/iconWaste"
-                app:layout_constraintBottom_toBottomOf="@+id/iconWaste"
+                app:layout_constraintTop_toTopOf="@+id/iconProduct"
+                app:layout_constraintBottom_toBottomOf="@+id/iconProduct"
                 tools:text="Перерабатываемый отход" />
 
-            <!-- Кнопка "Подробнее" (как в Storage – справа от текста статуса) -->
+            <!-- Кнопка "Подробнее" -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonDetails"
                 android:layout_width="wrap_content"
@@ -87,10 +85,9 @@
                 app:iconSize="14dp"
                 app:iconTint="?attr/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/iconWaste"
-                app:layout_constraintBottom_toBottomOf="@+id/iconWaste" />
+                app:layout_constraintTop_toTopOf="@+id/iconProduct"
+                app:layout_constraintBottom_toBottomOf="@+id/iconProduct" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </com.google.android.material.card.MaterialCardView>
 </layout>
