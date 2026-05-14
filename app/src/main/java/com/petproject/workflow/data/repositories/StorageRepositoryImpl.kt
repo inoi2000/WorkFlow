@@ -20,63 +20,63 @@ class StorageRepositoryImpl @Inject constructor(
 ): StorageRepository {
 
     override suspend fun getAllStorages(): List<Storage> {
-//        val response = storageApiService.getAllStorages()
-//        return response.map { storageProductMapper.mapDtoToEntity(it) }
+        val response = storageApiService.getAllStorages()
+        return response.map { storageProductMapper.mapDtoToEntity(it) }
 
-        val heatingOil = Product(
-            UUID.randomUUID().toString(),
-            "Печное топливо",
-            0.86,
-            ProductStatus.LIQUID,
-            ProductType.PURCHASED_FOR_PRODUCTION,
-            ArrayList()
-        )
-
-        val testStorage1 = Storage(
-            UUID.randomUUID().toString(),
-            "E1",
-            40.0,
-            0.0,
-            null,
-            false,
-            null,
-            "56:21:1808001:858",
-            StoragePlacement.ABOVE_GROUND,
-            "Ёмкостной парк",
-            LocalDateTime.now(),
-            listOf()
-        )
-
-        val testStorage2 = Storage(
-            UUID.randomUUID().toString(),
-            "E2",
-            50.0,
-            30.0,
-            heatingOil,
-            false,
-            null,
-            "56:21:1808001:858",
-            StoragePlacement.ABOVE_GROUND,
-            "Пандус",
-            LocalDateTime.now(),
-            listOf()
-        )
-
-        val testStorage3 = Storage(
-            UUID.randomUUID().toString(),
-            "E3",
-            100.0,
-            90.5,
-            heatingOil,
-            false,
-            null,
-            "56:21:1808001:858",
-            StoragePlacement.ABOVE_GROUND,
-            "Пандус",
-            LocalDateTime.now(),
-            listOf()
-        )
-        return listOf(testStorage1, testStorage2, testStorage3)
+//        val heatingOil = Product(
+//            UUID.randomUUID().toString(),
+//            "Печное топливо",
+//            0.86,
+//            ProductStatus.LIQUID,
+//            ProductType.PURCHASED_FOR_PRODUCTION,
+//            ArrayList()
+//        )
+//
+//        val testStorage1 = Storage(
+//            UUID.randomUUID().toString(),
+//            "E1",
+//            40.0,
+//            0.0,
+//            null,
+//            false,
+//            null,
+//            "56:21:1808001:858",
+//            StoragePlacement.ABOVE_GROUND,
+//            "Ёмкостной парк",
+//            LocalDateTime.now(),
+//            listOf()
+//        )
+//
+//        val testStorage2 = Storage(
+//            UUID.randomUUID().toString(),
+//            "E2",
+//            50.0,
+//            30.0,
+//            heatingOil,
+//            false,
+//            null,
+//            "56:21:1808001:858",
+//            StoragePlacement.ABOVE_GROUND,
+//            "Пандус",
+//            LocalDateTime.now(),
+//            listOf()
+//        )
+//
+//        val testStorage3 = Storage(
+//            UUID.randomUUID().toString(),
+//            "E3",
+//            100.0,
+//            90.5,
+//            heatingOil,
+//            false,
+//            null,
+//            "56:21:1808001:858",
+//            StoragePlacement.ABOVE_GROUND,
+//            "Пандус",
+//            LocalDateTime.now(),
+//            listOf()
+//        )
+//        return listOf(testStorage1, testStorage2, testStorage3)
     }
 
     override suspend fun getStorageById(id: String): Storage {
