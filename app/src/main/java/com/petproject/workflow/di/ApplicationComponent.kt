@@ -24,7 +24,9 @@ import com.petproject.workflow.presentation.views.SelectionEmployeeFragment
 import com.petproject.workflow.presentation.views.SelectionTrailerFragment
 import com.petproject.workflow.presentation.views.ServiceListFragment
 import com.petproject.workflow.presentation.views.StatementListFragment
+import com.petproject.workflow.presentation.views.StorageListFragment
 import com.petproject.workflow.presentation.views.TrailerListFragment
+import com.petproject.workflow.presentation.views.ProductListFragment
 import dagger.BindsInstance
 import dagger.Component
 
@@ -67,6 +69,10 @@ interface ApplicationComponent {
     fun inject(journeyListFragment: JourneyListFragment)
 
     fun inject(statementListFragment: StatementListFragment)
+
+    fun inject(storageListFragment: StorageListFragment)
+
+    fun inject(productListFragment: ProductListFragment)
 
     fun inject(createAnnouncementFragment: CreateAnnouncementFragment)
 

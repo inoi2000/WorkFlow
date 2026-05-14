@@ -23,7 +23,9 @@ import com.petproject.workflow.presentation.viewmodels.SelectionEmployeeViewMode
 import com.petproject.workflow.presentation.viewmodels.SelectionTrailerViewModel
 import com.petproject.workflow.presentation.viewmodels.ServiceListViewModel
 import com.petproject.workflow.presentation.viewmodels.StatementListViewModel
+import com.petproject.workflow.presentation.viewmodels.StorageListViewModel
 import com.petproject.workflow.presentation.viewmodels.TrailerListViewModel
+import com.petproject.workflow.presentation.viewmodels.ProductListViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -120,6 +122,16 @@ interface ViewModelModule {
     @ViewModelKey(StatementListViewModel::class)
     @Binds
     fun bindStatementListViewModel(impl: StatementListViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(StorageListViewModel::class)
+    @Binds
+    fun bindStorageListViewModel(impl: StorageListViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(ProductListViewModel::class)
+    @Binds
+    fun bindProductListViewModel(impl: ProductListViewModel): ViewModel
 
     @IntoMap
     @ViewModelKey(CreateAnnouncementViewModel::class)

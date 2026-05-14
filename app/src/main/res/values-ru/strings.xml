@@ -167,4 +167,16 @@
     <string name="clear_filters">Clear filters</string>
     <string name="search_absences">Search absence</string>
 
+    <string name="no_product">Нет залитого продукта</string>
+
+    <string name="percent_format">%d %%</string>
+    <string name="product_icon">Иконка продукта</string>
+    <string name="location_icon">Иконка локации</string>
+
+    <string name="product_type_purchased">Продукты, закупленные для производства и потребления</string>
+    <string name="product_type_own_production">Продукты произведенные на предприятии</string>
+    <string name="product_type_customer_waste">Отходы полученные от заказчиков</string>
+    <string name="product_type_own_waste">Собственные отходы</string>
+    <string name="product_type_customer_owned">Продукты, принадлежащие заказчику</string>
+
 </resources>

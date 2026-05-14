@@ -61,6 +61,12 @@
         <action
             android:id="@+id/action_homeFragment_to_trailerListFragment"
             app:destination="@id/trailerListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_storageListFragment"
+            app:destination="@id/storageListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_productListFragment"
+            app:destination="@id/productListFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -424,4 +430,14 @@
             android:name="trailerId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/storageListFragment"
+        android:name="com.petproject.workflow.presentation.views.StorageListFragment"
+        android:label="fragment_storage_list"
+        tools:layout="@layout/fragment_storage_list" />
+    <fragment
+        android:id="@+id/productListFragment"
+        android:name="com.petproject.workflow.presentation.views.ProductListFragment"
+        android:label="fragment_product_list"
+        tools:layout="@layout/fragment_product_list" />
 </navigation>

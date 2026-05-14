@@ -96,4 +96,18 @@ class ApiFactory @Inject constructor(
         .client(okHttpClient)
         .build()
         .create(StatementApiService::class.java)
+
+    val storageApiService  = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(apiConfig.BASE_STORAGE_API)
+        .client(okHttpClient)
+        .build()
+        .create(StorageApiService::class.java)
+
+    val productApiService  = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(apiConfig.BASE_PRODUCT_API)
+        .client(okHttpClient)
+        .build()
+        .create(ProductApiService::class.java)
 }

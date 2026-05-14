@@ -16,8 +16,10 @@ import com.petproject.workflow.data.network.FuellingApiService
 import com.petproject.workflow.data.network.InstructionApiService
 import com.petproject.workflow.data.network.JourneyApiService
 import com.petproject.workflow.data.network.StatementApiService
+import com.petproject.workflow.data.network.StorageApiService
 import com.petproject.workflow.data.network.TaskApiService
 import com.petproject.workflow.data.network.TrailerApiService
+import com.petproject.workflow.data.network.ProductApiService
 import com.petproject.workflow.data.network.utils.AuthFailedInterceptor
 import com.petproject.workflow.data.network.utils.AuthInterceptor
 import com.petproject.workflow.data.network.utils.DateTimeHelper
@@ -90,6 +92,16 @@ class DataModule {
     @Provides
     fun provideStatementApiService(apiFactory: ApiFactory): StatementApiService {
         return apiFactory.statementApiService
+    }
+
+    @Provides
+    fun provideStorageApiService(apiFactory: ApiFactory): StorageApiService {
+        return apiFactory.storageApiService
+    }
+
+    @Provides
+    fun provideProductApiService(apiFactory: ApiFactory): ProductApiService {
+        return apiFactory.productApiService
     }
 
     @ApplicationScope
