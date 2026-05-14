@@ -17,6 +17,7 @@
         android:layout_marginVertical="6dp"
         android:clickable="true"
         android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
         app:cardCornerRadius="16dp"
         app:cardElevation="1dp">
 
@@ -30,13 +31,36 @@
 
             <!-- Цветная полоса – индикатор заполнения -->
             <View
-                android:id="@+id/indicatorFill"
+                android:id="@+id/indicatorFillHigh"
                 android:layout_width="4dp"
                 android:layout_height="0dp"
-                android:background="@color/main_blue"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginVertical="2dp"
+                android:background="?android:attr/colorPrimary"
+                app:layout_constraintBottom_toTopOf="@+id/indicatorFillMedium"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_chainStyle="spread_inside" />
+
+            <View
+                android:id="@+id/indicatorFillMedium"
+                android:layout_width="4dp"
+                android:layout_height="0dp"
+                android:layout_marginVertical="2dp"
+                android:background="?android:attr/colorPrimary"
+                app:layout_constraintBottom_toTopOf="@+id/indicatorFillLow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/indicatorFillHigh" />
+
+            <View
+                android:id="@+id/indicatorFillLow"
+                android:layout_width="4dp"
+                android:layout_height="0dp"
+                android:layout_marginVertical="2dp"
+                android:background="?android:attr/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/indicatorFillMedium" />
+
 
             <!-- Основной контейнер контента -->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,28 +68,28 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                app:layout_constraintStart_toEndOf="@+id/indicatorFill"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintStart_toEndOf="@+id/indicatorFillLow"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <!-- Название склада (простая привязка через data binding) -->
+                <!-- Название склада -->
                 <TextView
                     android:id="@+id/textStorageName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:text="@{storage.name}"
                     android:textColor="?android:attr/colorPrimary"
                     android:textSize="24sp"
                     android:textStyle="bold"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/textPercent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="E-1" />
 
-                <!-- Процент заполнения (заполняется в коде) -->
+                <!-- Процент заполнения -->
                 <TextView
                     android:id="@+id/textPercent"
                     android:layout_width="wrap_content"
@@ -77,16 +101,19 @@
                     app:layout_constraintTop_toTopOf="@+id/textStorageName"
                     tools:text="42 %" />
 
+                <!-- Иконка продукта -->
                 <ImageView
                     android:id="@+id/iconProduct"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_marginTop="8dp"
+                    android:contentDescription="@string/product_icon"
                     android:src="@drawable/ic_storage"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textStorageName"
                     tools:visibility="visible" />
 
+                <!-- Текущий продукт -->
                 <TextView
                     android:id="@+id/textCurrentProduct"
                     android:layout_width="0dp"
@@ -94,26 +121,69 @@
                     android:layout_marginStart="6dp"
                     android:textSize="13sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/iconProduct"
-                    app:layout_constraintEnd_toStartOf="@+id/buttonDetails"
-                    app:layout_constraintTop_toTopOf="@+id/iconProduct"
                     app:layout_constraintBottom_toBottomOf="@+id/iconProduct"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonDetails"
+                    app:layout_constraintStart_toEndOf="@+id/iconProduct"
+                    app:layout_constraintTop_toTopOf="@+id/iconProduct"
                     tools:text="Мазут"
                     tools:visibility="visible" />
 
+                <!-- Нет продукта -->
                 <TextView
                     android:id="@+id/textNoProduct"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Нет залитого продукта"
+                    android:layout_marginStart="6dp"
+                    android:text="@string/no_product"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="13sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textStorageName"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="@+id/iconProduct"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonDetails"
+                    app:layout_constraintStart_toEndOf="@+id/iconProduct"
+                    app:layout_constraintTop_toTopOf="@+id/iconProduct"
                     tools:visibility="gone" />
 
-                <!-- Детали объёма (заполняется в коде) -->
+                <!-- Иконка локации -->
+                <ImageView
+                    android:id="@+id/iconLocation"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="8dp"
+                    android:contentDescription="@string/location_icon"
+                    android:src="@drawable/ic_location"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iconProduct"
+                    tools:visibility="visible" />
+
+                <!-- Локация -->
+                <TextView
+                    android:id="@+id/textLocation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/iconLocation"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonDetails"
+                    app:layout_constraintStart_toEndOf="@+id/iconLocation"
+                    app:layout_constraintTop_toTopOf="@+id/iconLocation"
+                    tools:text="Ёмкостной парк"
+                    tools:visibility="visible" />
+
+                <!-- Сектор -->
+                <TextView
+                    android:id="@+id/textSector"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/textLocation"
+                    app:layout_constraintTop_toBottomOf="@+id/textLocation"
+                    tools:text="56:21:1808001:858"
+                    tools:visibility="visible" />
+
+                <!-- Детали объёма -->
                 <TextView
                     android:id="@+id/textVolumeDetails"
                     android:layout_width="wrap_content"
@@ -125,7 +195,19 @@
                     app:layout_constraintTop_toBottomOf="@+id/textPercent"
                     tools:text="12.5 / 100.0 м³" />
 
-                <!-- Дополнительная информация (дата обновления, заполняется в коде) -->
+                <!-- Детали веса -->
+                <TextView
+                    android:id="@+id/textWeightDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/textVolumeDetails"
+                    app:layout_constraintTop_toBottomOf="@+id/textVolumeDetails"
+                    tools:text="11.8 / 98.1 т" />
+
+                <!-- Дополнительная информация -->
                 <TextView
                     android:id="@+id/textAdditionalInfo"
                     android:layout_width="0dp"
@@ -133,10 +215,10 @@
                     android:layout_marginTop="12dp"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="11sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/buttonDetails"
                     app:layout_constraintBottom_toBottomOf="@+id/buttonDetails"
                     app:layout_constraintEnd_toStartOf="@+id/buttonDetails"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/buttonDetails"
                     tools:text="Изменено: 12.12.2023 10:30" />
 
                 <!-- Кнопка "Подробнее" -->
@@ -144,7 +226,7 @@
                     android:id="@+id/buttonDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="10dp"
                     android:backgroundTint="@color/blue_button_transparent"
                     android:text="@string/more"
                     android:textColor="?attr/colorPrimary"
@@ -155,7 +237,7 @@
                     app:iconSize="14dp"
                     app:iconTint="?attr/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textVolumeDetails" />
+                    app:layout_constraintTop_toTopOf="@+id/textSector" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

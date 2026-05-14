@@ -166,4 +166,16 @@
     <string name="clear_filters">Clear filters</string>
     <string name="search_absences">Search absence</string>
 
+    <string name="no_product">No product</string>
+
+    <string name="percent_format">%d %%</string>
+    <string name="product_icon">Product icon</string>
+    <string name="location_icon">Location icon</string>
+
+    <string name="product_type_purchased">Purchased for production</string>
+    <string name="product_type_own_production">Own production</string>
+    <string name="product_type_customer_waste">Customer waste</string>
+    <string name="product_type_own_waste">Own waste</string>
+    <string name="product_type_customer_owned">Customer owned</string>
+
 </resources>

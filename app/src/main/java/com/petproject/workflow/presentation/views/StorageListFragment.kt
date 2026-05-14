@@ -18,7 +18,9 @@ import com.petproject.workflow.databinding.FragmentStorageListBinding
 import com.petproject.workflow.domain.entities.Storage
 import com.petproject.workflow.presentation.viewmodels.StorageListViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
+import com.petproject.workflow.presentation.views.adapters.CarAdapter
 import com.petproject.workflow.presentation.views.adapters.StorageAdapter
+import com.petproject.workflow.presentation.views.adapters.TaskAdapter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,6 +40,14 @@ class StorageListFragment : Fragment() {
 
     private val component by lazy {
         (requireActivity().application as WorkFlowApplication).component
+    }
+
+    private val storageAdapter by lazy {
+        StorageAdapter { storage ->
+//            val action = InspectorTaskListFragmentDirections
+//                .actionInspectorTaskListFragmentToInspectorTaskInfoFragment(taskId)
+//            findNavController().navigate(action)
+        }
     }
 
     override fun onCreateView(
@@ -99,13 +109,8 @@ class StorageListFragment : Fragment() {
     }
 
     private fun setRecyclerView() {
-        val adapter = StorageAdapter() { storage ->
-//            val action = InspectorTaskListFragmentDirections
-//                .actionInspectorTaskListFragmentToInspectorTaskInfoFragment(taskId)
-//            findNavController().navigate(action)
-        }
         binding.storageListRecyclerView.itemAnimator = null
-        binding.storageListRecyclerView.adapter = adapter
+        binding.storageListRecyclerView.adapter = storageAdapter
     }
 
     private fun observeViewModel() {
@@ -114,6 +119,11 @@ class StorageListFragment : Fragment() {
                 launch {
                     viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
                         handleUiState(uiState)
+                    }
+                }
+                launch {
+                    viewModel.filteredStorageList.observe(viewLifecycleOwner) { storage ->
+                        storageAdapter.submitList(storage)
                     }
                 }
             }
