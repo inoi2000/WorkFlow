@@ -434,10 +434,45 @@
         android:id="@+id/storageListFragment"
         android:name="com.petproject.workflow.presentation.views.StorageListFragment"
         android:label="fragment_storage_list"
-        tools:layout="@layout/fragment_storage_list" />
+        tools:layout="@layout/fragment_storage_list" >
+        <action
+            android:id="@+id/action_storageListFragment_to_storageInfoFragment"
+            app:destination="@id/storageInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/productListFragment"
         android:name="com.petproject.workflow.presentation.views.ProductListFragment"
         android:label="fragment_product_list"
-        tools:layout="@layout/fragment_product_list" />
+        tools:layout="@layout/fragment_product_list" >
+        <action
+            android:id="@+id/action_productListFragment_to_productInfoFragment"
+            app:destination="@id/productInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createStorageEventFragment"
+        android:name="com.petproject.workflow.presentation.views.CreateStorageEventFragment"
+        android:label="fragment_create_storage_event"
+        tools:layout="@layout/fragment_create_storage_event" />
+    <fragment
+        android:id="@+id/storageInfoFragment"
+        android:name="com.petproject.workflow.presentation.views.StorageInfoFragment"
+        android:label="fragment_storage_info"
+        tools:layout="@layout/fragment_storage_info" >
+        <action
+            android:id="@+id/action_storageInfoFragment_to_createStorageEventFragment"
+            app:destination="@id/createStorageEventFragment" />
+        <action
+            android:id="@+id/action_storageInfoFragment_to_storageEventListFragment"
+            app:destination="@id/storageEventListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productInfoFragment"
+        android:name="com.petproject.workflow.presentation.views.ProductInfoFragment"
+        android:label="fragment_product_info"
+        tools:layout="@layout/fragment_product_info" />
+    <fragment
+        android:id="@+id/storageEventListFragment"
+        android:name="com.petproject.workflow.presentation.views.StorageEventListFragment"
+        android:label="fragment_storage_event_list"
+        tools:layout="@layout/fragment_storage_event_list" />
 </navigation>

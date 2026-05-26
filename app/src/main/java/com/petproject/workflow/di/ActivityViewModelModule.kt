@@ -8,8 +8,11 @@ import com.petproject.workflow.presentation.viewmodels.ExecutorTaskInfoViewModel
 import com.petproject.workflow.presentation.viewmodels.HomeViewModel
 import com.petproject.workflow.presentation.viewmodels.InspectorTaskInfoViewModel
 import com.petproject.workflow.presentation.viewmodels.JourneyInfoViewModel
+import com.petproject.workflow.presentation.viewmodels.ProductInfoViewModel
 import com.petproject.workflow.presentation.viewmodels.SearchViewModel
 import com.petproject.workflow.presentation.viewmodels.StatementInfoViewModel
+import com.petproject.workflow.presentation.viewmodels.StorageEventListViewModel
+import com.petproject.workflow.presentation.viewmodels.StorageInfoViewModel
 import com.petproject.workflow.presentation.viewmodels.TaskCommentListViewModel
 import com.petproject.workflow.presentation.viewmodels.TrailerInfoViewModel
 import dagger.Binds
@@ -68,6 +71,21 @@ interface ActivityViewModelModule {
     @ViewModelKey(CreateTaskCommentViewModel::class)
     @Binds
     fun bindCreateTaskCommentViewModel(impl: CreateTaskCommentViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(StorageInfoViewModel::class)
+    @Binds
+    fun bindStorageInfoViewModel(impl: StorageInfoViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(StorageEventListViewModel::class)
+    @Binds
+    fun bindStorageEventListViewModel(impl: StorageEventListViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(ProductInfoViewModel::class)
+    @Binds
+    fun bindProductInfoViewModel(impl: ProductInfoViewModel): ViewModel
 
     @IntoMap
     @ViewModelKey(EmployeeInfoViewModel::class)

@@ -7,8 +7,11 @@ import com.petproject.workflow.presentation.views.ExecutorTaskInfoFragment
 import com.petproject.workflow.presentation.views.HomeFragment
 import com.petproject.workflow.presentation.views.InspectorTaskInfoFragment
 import com.petproject.workflow.presentation.views.JourneyInfoFragment
+import com.petproject.workflow.presentation.views.ProductInfoFragment
 import com.petproject.workflow.presentation.views.SearchFragment
 import com.petproject.workflow.presentation.views.StatementInfoFragment
+import com.petproject.workflow.presentation.views.StorageEventListFragment
+import com.petproject.workflow.presentation.views.StorageInfoFragment
 import com.petproject.workflow.presentation.views.TaskCommentListFragment
 import com.petproject.workflow.presentation.views.TrailerInfoFragment
 import dagger.BindsInstance
@@ -36,6 +39,12 @@ interface ActivityComponent {
     fun inject(taskCommentListFragment: TaskCommentListFragment)
 
     fun inject(employeeInfoFragment: EmployeeInfoFragment)
+
+    fun inject(productInfoFragment: ProductInfoFragment)
+
+    fun inject(storageInfoFragment: StorageInfoFragment)
+
+    fun inject(storageEventListFragment: StorageEventListFragment)
 
     fun inject(createTaskCommentFragment: CreateTaskCommentFragment)
 
