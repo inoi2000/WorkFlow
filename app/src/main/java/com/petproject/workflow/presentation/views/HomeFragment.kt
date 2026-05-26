@@ -117,6 +117,11 @@ class HomeFragment : Fragment() {
                 .actionHomeFragmentToStorageListFragment()
             findNavController().navigate(action)
         }
+        binding.productsCardView.setOnClickListener {
+            val action = HomeFragmentDirections
+                .actionHomeFragmentToProductListFragment()
+            findNavController().navigate(action)
+        }
 
         binding.othersCardView.setOnClickListener {
             val action = HomeFragmentDirections

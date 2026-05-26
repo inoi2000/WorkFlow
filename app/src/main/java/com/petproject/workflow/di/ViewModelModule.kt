@@ -10,6 +10,7 @@ import com.petproject.workflow.presentation.viewmodels.CarListViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateAnnouncementViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateStatementDoneViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateStatementViewModel
+import com.petproject.workflow.presentation.viewmodels.CreateStorageEventViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateTaskAddDetailsViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateTaskDoneViewModel
 import com.petproject.workflow.presentation.viewmodels.CreateTaskSelectionEmployeeViewModel
@@ -142,6 +143,11 @@ interface ViewModelModule {
     @ViewModelKey(CreateStatementViewModel::class)
     @Binds
     fun bindCreateStatementViewModel(impl: CreateStatementViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(CreateStorageEventViewModel::class)
+    @Binds
+    fun bindCreateStorageEventViewModel(impl: CreateStorageEventViewModel): ViewModel
 
     @IntoMap
     @ViewModelKey(SelectionEmployeeViewModel::class)

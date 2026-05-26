@@ -11,6 +11,7 @@ import com.petproject.workflow.presentation.views.CreateAnnouncementFragment
 import com.petproject.workflow.presentation.views.CreateStatementDoneFragment
 import com.petproject.workflow.presentation.views.CreateStatementFragment
 import com.petproject.workflow.presentation.views.CreateStatementSelectionTransportFragment
+import com.petproject.workflow.presentation.views.CreateStorageEventFragment
 import com.petproject.workflow.presentation.views.CreateTaskAddDetailsFragment
 import com.petproject.workflow.presentation.views.CreateTaskDoneFragment
 import com.petproject.workflow.presentation.views.CreateTaskSelectionEmployeeFragment
@@ -79,6 +80,8 @@ interface ApplicationComponent {
     fun inject(createStatementSelectionTransportFragment: CreateStatementSelectionTransportFragment)
 
     fun inject(createStatementFragment: CreateStatementFragment)
+
+    fun inject(createStorageEventFragment: CreateStorageEventFragment)
 
     fun inject(selectionEmployeeFragment: SelectionEmployeeFragment)
 
