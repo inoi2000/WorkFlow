@@ -18,6 +18,9 @@ class StorageInfoViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     companion object {
+        const val SHOW_MODE = 0
+        const val SELECT_MODE = 1
+
         fun inflateFrom(
             viewGroup: ViewGroup,
             onStorageClick: (Storage) -> Unit
@@ -28,11 +31,18 @@ class StorageInfoViewHolder(
         }
     }
 
-    fun bind(storage: Storage) {
+    fun bind(storage: Storage, mode: Int) {
         binding.storage = storage
 
-        binding.buttonDetails.setOnClickListener {
-            onStorageClick(storage)
+        if (mode == 0) {
+            binding.buttonDetails.setOnClickListener {
+                onStorageClick(storage)
+            }
+        } else {
+            binding.root.setOnClickListener {
+                onStorageClick(storage)
+            }
+            binding.buttonDetails.visibility = View.INVISIBLE
         }
 
         // Процент заполнения

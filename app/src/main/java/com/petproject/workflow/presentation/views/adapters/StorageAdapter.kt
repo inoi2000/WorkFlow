@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.petproject.workflow.domain.entities.Storage
 
 class StorageAdapter(
+    private val mode: Int,
     private val onStorageClick: (Storage) -> Unit
 ) : ListAdapter<Storage, StorageInfoViewHolder>(StorageDiffItemCallback) {
 
@@ -13,6 +14,6 @@ class StorageAdapter(
 
     override fun onBindViewHolder(holder: StorageInfoViewHolder, position: Int) {
         val storage = getItem(position)
-        holder.bind(storage)
+        holder.bind(storage, mode)
     }
 }

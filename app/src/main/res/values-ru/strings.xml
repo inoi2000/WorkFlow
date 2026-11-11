@@ -179,4 +179,51 @@
     <string name="product_type_own_waste">Собственные отходы</string>
     <string name="product_type_customer_owned">Продукты, принадлежащие заказчику</string>
 
+    <!-- Заголовки секций -->
+    <string name="storage_name">Название склада</string>
+    <string name="fill_level">Заполнение</string>
+    <string name="current_product">Текущий продукт</string>
+    <string name="volume">Объем</string>
+    <string name="weight">Масса</string>
+    <string name="location_info">Местоположение</string>
+    <string name="additional_info">Дополнительная информация</string>
+
+    <!-- Детали объема -->
+    <string name="current_volume">Текущий объем:</string>
+    <string name="total_volume">Полный объем:</string>
+
+    <!-- Детали массы -->
+    <string name="current_weight">Текущая масса:</string>
+    <string name="max_weight">Максимальная масса:</string>
+
+    <!-- Местоположение -->
+    <string name="placement">Размещение:</string>
+    <string name="location">Локация:</string>
+    <string name="sector">Сектор:</string>
+
+    <!-- Дополнительная информация -->
+    <string name="allowed_mixing">Смешивание:</string>
+    <string name="output_product">Выходной продукт:</string>
+    <string name="updated_at">Обновлено:</string>
+
+    <!-- Кнопки действий -->
+    <string name="pouring">Заливка</string>
+    <string name="draining">Слив</string>
+    <string name="check_storage">Проверить склад</string>
+
+    <!-- Текст на экране ошибки -->
+    <string name="error_loading_storage">Ошибка при загрузке информации о складе</string>
+    <string name="error_subtitle">Попробуйте обновить данные</string>
+
+    <!-- Значения по умолчанию (используются в tools:text) -->
+    <string name="not_specified">Не указан</string>
+    <string name="allowed">Разрешено</string>
+    <string name="forbidden">Запрещено</string>
+    <string name="above_ground">Наземный</string>
+    <string name="underground">Подземный</string>
+
+    <!-- Единицы измерения (используются в formatted данных) -->
+    <string name="cubic_meter">м³</string>
+    <string name="ton">т</string>
+
 </resources>

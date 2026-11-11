@@ -1,6 +1,7 @@
 package com.petproject.workflow.presentation.views.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.petproject.workflow.R
@@ -14,6 +15,9 @@ class ProductInfoViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     companion object {
+        const val SHOW_MODE = 0
+        const val SELECT_MODE = 1
+
         fun inflateFrom(viewGroup: ViewGroup, onProductClick: (Product) -> Unit): ProductInfoViewHolder {
             val inflater = LayoutInflater.from(viewGroup.context)
             val binding = ItemProductInfoBinding.inflate(inflater, viewGroup, false)
@@ -21,12 +25,20 @@ class ProductInfoViewHolder(
         }
     }
 
-    fun bind(product: Product) {
+    fun bind(product: Product, mode: Int) {
         binding.product = product
 
-        binding.buttonDetails.setOnClickListener {
-            onProductClick(product)
+        if (mode == 0) {
+            binding.buttonDetails.setOnClickListener {
+                onProductClick(product)
+            }
+        } else {
+            binding.root.setOnClickListener {
+                onProductClick(product)
+            }
+            binding.buttonDetails.visibility = View.INVISIBLE
         }
+
 
         binding.textProductName.text = product.name
         binding.textProductType.text = when (product.type) {

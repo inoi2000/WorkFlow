@@ -452,7 +452,11 @@
         android:id="@+id/createStorageEventFragment"
         android:name="com.petproject.workflow.presentation.views.CreateStorageEventFragment"
         android:label="fragment_create_storage_event"
-        tools:layout="@layout/fragment_create_storage_event" />
+        tools:layout="@layout/fragment_create_storage_event" >
+        <argument
+            android:name="storageId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/storageInfoFragment"
         android:name="com.petproject.workflow.presentation.views.StorageInfoFragment"
@@ -464,15 +468,26 @@
         <action
             android:id="@+id/action_storageInfoFragment_to_storageEventListFragment"
             app:destination="@id/storageEventListFragment" />
+        <argument
+            android:name="storageId"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/productInfoFragment"
         android:name="com.petproject.workflow.presentation.views.ProductInfoFragment"
         android:label="fragment_product_info"
-        tools:layout="@layout/fragment_product_info" />
+        tools:layout="@layout/fragment_product_info" >
+        <argument android:name="productId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_productInfoFragment_to_storageInfoFragment"
+            app:destination="@id/storageInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/storageEventListFragment"
         android:name="com.petproject.workflow.presentation.views.StorageEventListFragment"
         android:label="fragment_storage_event_list"
-        tools:layout="@layout/fragment_storage_event_list" />
+        tools:layout="@layout/fragment_storage_event_list" >
+        <argument android:name="storageId" />
+    </fragment>
 </navigation>

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.petproject.workflow.domain.entities.Product
 
 class ProductAdapter(
+    private val mode: Int,
     private val onProductClick: (Product) -> Unit
 ) : ListAdapter<Product, ProductInfoViewHolder>(ProductDiffItemCallback) {
 
@@ -13,6 +14,6 @@ class ProductAdapter(
 
     override fun onBindViewHolder(holder: ProductInfoViewHolder, position: Int) {
         val product = getItem(position)
-        holder.bind(product)
+        holder.bind(product, mode)
     }
 }
