@@ -12,6 +12,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentProductListBinding
@@ -19,6 +20,7 @@ import com.petproject.workflow.domain.entities.Product
 import com.petproject.workflow.presentation.viewmodels.ProductListViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import com.petproject.workflow.presentation.views.adapters.ProductAdapter
+import com.petproject.workflow.presentation.views.adapters.ProductInfoViewHolder
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -41,10 +43,10 @@ class ProductListFragment : Fragment() {
     }
 
     private val productAdapter by lazy {
-        ProductAdapter { product ->
-
-
-            // TODO
+        ProductAdapter(ProductInfoViewHolder.SHOW_MODE) { product ->
+            val action = ProductListFragmentDirections
+                .actionProductListFragmentToProductInfoFragment(product.id)
+            findNavController().navigate(action)
         }
     }
 

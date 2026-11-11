@@ -178,4 +178,50 @@
     <string name="product_type_own_waste">Own waste</string>
     <string name="product_type_customer_owned">Customer owned</string>
 
+    <!-- Section headers -->
+    <string name="storage_name">Storage name</string>
+    <string name="fill_level">Fill level</string>
+    <string name="current_product">Current product</string>
+    <string name="volume">Volume</string>
+    <string name="weight">Weight</string>
+    <string name="location_info">Location</string>
+    <string name="additional_info">Additional information</string>
+
+    <!-- Volume details -->
+    <string name="current_volume">Current volume:</string>
+    <string name="total_volume">Total volume:</string>
+
+    <!-- Weight details -->
+    <string name="current_weight">Current weight:</string>
+    <string name="max_weight">Max weight:</string>
+
+    <!-- Location -->
+    <string name="placement">Placement:</string>
+    <string name="location">Location:</string>
+    <string name="sector">Sector:</string>
+
+    <!-- Additional information -->
+    <string name="allowed_mixing">Mixing:</string>
+    <string name="output_product">Output product:</string>
+    <string name="updated_at">Updated:</string>
+
+    <!-- Action buttons -->
+    <string name="pouring">Pour</string>
+    <string name="draining">Drain</string>
+    <string name="check_storage">Check storage</string>
+
+    <!-- Error state text -->
+    <string name="error_loading_storage">Error loading storage information</string>
+    <string name="error_subtitle">Try to refresh the data</string>
+    <!-- Default values (used in tools:text) -->
+    <string name="not_specified">Not specified</string>
+    <string name="allowed">Allowed</string>
+    <string name="forbidden">Forbidden</string>
+    <string name="above_ground">Above ground</string>
+    <string name="underground">Underground</string>
+
+    <!-- Units of measurement -->
+    <string name="cubic_meter">m³</string>
+    <string name="ton">t</string>
+
 </resources>

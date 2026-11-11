@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.petproject.workflow.R
 import com.petproject.workflow.WorkFlowApplication
 import com.petproject.workflow.databinding.FragmentStorageListBinding
@@ -20,6 +21,7 @@ import com.petproject.workflow.presentation.viewmodels.StorageListViewModel
 import com.petproject.workflow.presentation.viewmodels.ViewModelFactory
 import com.petproject.workflow.presentation.views.adapters.CarAdapter
 import com.petproject.workflow.presentation.views.adapters.StorageAdapter
+import com.petproject.workflow.presentation.views.adapters.StorageInfoViewHolder
 import com.petproject.workflow.presentation.views.adapters.TaskAdapter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -43,10 +45,10 @@ class StorageListFragment : Fragment() {
     }
 
     private val storageAdapter by lazy {
-        StorageAdapter { storage ->
-//            val action = InspectorTaskListFragmentDirections
-//                .actionInspectorTaskListFragmentToInspectorTaskInfoFragment(taskId)
-//            findNavController().navigate(action)
+        StorageAdapter(StorageInfoViewHolder.SHOW_MODE) { storage ->
+            val action = StorageListFragmentDirections
+                .actionStorageListFragmentToStorageInfoFragment(storage.id)
+            findNavController().navigate(action)
         }
     }
 

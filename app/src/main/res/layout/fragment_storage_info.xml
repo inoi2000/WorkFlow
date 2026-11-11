@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentation.views.StorageInfoFragment">
 
     <data>
@@ -10,9 +10,512 @@
             type="com.petproject.workflow.presentation.viewmodels.StorageInfoViewModel" />
     </data>
 
-    <TextView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Storage info" />
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:navigationIcon="@drawable/ic_arrow_back"
+                app:navigationIconTint="?attr/colorOnPrimary"
+                app:title="@{viewmodel.storage.name}"
+                tools:title="Информация о складе" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!-- Основной контент -->
+                    <LinearLayout
+                        android:id="@+id/content_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <!-- Основная карточка с информацией -->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            app:cardCornerRadius="12dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <!-- Название склада -->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="8dp"
+                                    android:text="@string/storage_name"
+                                    android:textColor="?attr/colorPrimary"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/storage_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{viewmodel.storage.name}"
+                                    tools:text="Резервуар Е-1" />
+
+                                <View
+                                    style="@style/HorizontalLineView"
+                                    android:layout_marginTop="12dp" />
+
+                                <!-- Заполнение -->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="8dp"
+                                    android:text="@string/fill_level"
+                                    android:textColor="?attr/colorPrimary"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/fill_percent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{viewmodel.formattedFillPercent}"
+                                    tools:text="42 %" />
+
+                                <!-- Прогресс бар -->
+                                <ProgressBar
+                                    android:id="@+id/fill_progress"
+                                    style="?android:attr/progressBarStyleHorizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="8dp"
+                                    android:layout_marginTop="8dp"
+                                    android:progress="@{viewmodel.fillProgress}"
+                                    android:progressTint="?attr/colorPrimary"
+                                    tools:progress="42" />
+
+                                <View
+                                    style="@style/HorizontalLineView"
+                                    android:layout_marginTop="12dp" />
+
+                                <!-- Текущий продукт -->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="8dp"
+                                    android:text="@string/current_product"
+                                    android:textColor="?attr/colorPrimary"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/current_product"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{viewmodel.formattedCurrentProduct}"
+                                    tools:text="Мазут М-100" />
+
+                                <View
+                                    style="@style/HorizontalLineView"
+                                    android:layout_marginTop="12dp" />
+
+                                <!-- Объем -->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="8dp"
+                                    android:text="@string/volume"
+                                    android:textColor="?attr/colorPrimary"
+                                    android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="4dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="@string/current_volume"
+                                        android:textColor="@color/grey_for_text" />
+
+                                    <TextView
+                                        android:id="@+id/current_volume"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="end"
+                                        android:text="@{viewmodel.formattedCurrentVolume}"
+                                        android:textColor="@color/grey_for_text"
+                                        tools:text="12.5 м³" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="4dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="@string/total_volume"
+                                        android:textColor="@color/grey_for_text" />
+
+                                    <TextView
+                                        android:id="@+id/total_volume"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="end"
+                                        android:text="@{viewmodel.formattedTotalVolume}"
+                                        android:textColor="@color/grey_for_text"
+                                        tools:text="100.0 м³" />
+                                </LinearLayout>
+
+                                <View
+                                    style="@style/HorizontalLineView"
+                                    android:layout_marginTop="12dp" />
+
+                                <!-- Масса -->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="8dp"
+                                    android:text="@string/weight"
+                                    android:textColor="?attr/colorPrimary"
+                                    android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="4dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="@string/current_weight"
+                                        android:textColor="@color/grey_for_text" />
+
+                                    <TextView
+                                        android:id="@+id/current_weight"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="end"
+                                        android:text="@{viewmodel.formattedCurrentWeight}"
+                                        android:textColor="@color/grey_for_text"
+                                        tools:text="11.8 т" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="4dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="@string/max_weight"
+                                        android:textColor="@color/grey_for_text" />
+
+                                    <TextView
+                                        android:id="@+id/max_weight"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="end"
+                                        android:text="@{viewmodel.formattedMaxWeight}"
+                                        android:textColor="@color/grey_for_text"
+                                        tools:text="98.1 т" />
+                                </LinearLayout>
+
+                                <View
+                                    style="@style/HorizontalLineView"
+                                    android:layout_marginTop="12dp" />
+
+                                <!-- Местоположение -->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="8dp"
+                                    android:text="@string/location_info"
+                                    android:textColor="?attr/colorPrimary"
+                                    android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="4dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="@string/placement"
+                                        android:textColor="@color/grey_for_text" />
+
+                                    <TextView
+                                        android:id="@+id/placement"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="end"
+                                        android:text="@{viewmodel.formattedPlacement}"
+                                        android:textColor="@color/grey_for_text"
+                                        tools:text="Наземный" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="4dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="@string/location"
+                                        android:textColor="@color/grey_for_text" />
+
+                                    <TextView
+                                        android:id="@+id/location"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="end"
+                                        android:text="@{viewmodel.storage.location}"
+                                        android:textColor="@color/grey_for_text"
+                                        tools:text="Ёмкостной парк" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="4dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="@string/sector"
+                                        android:textColor="@color/grey_for_text" />
+
+                                    <TextView
+                                        android:id="@+id/sector"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="end"
+                                        android:text="@{viewmodel.storage.sector}"
+                                        android:textColor="@color/grey_for_text"
+                                        tools:text="56:21:1808001:858" />
+                                </LinearLayout>
+
+                                <View
+                                    style="@style/HorizontalLineView"
+                                    android:layout_marginTop="12dp" />
+
+                                <!-- Дополнительная информация -->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="8dp"
+                                    android:text="@string/additional_info"
+                                    android:textColor="?attr/colorPrimary"
+                                    android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="4dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="@string/allowed_mixing"
+                                        android:textColor="@color/grey_for_text" />
+
+                                    <TextView
+                                        android:id="@+id/allowed_mixing"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="end"
+                                        android:text="@{viewmodel.formattedAllowedMixing}"
+                                        android:textColor="@color/grey_for_text"
+                                        tools:text="Разрешено" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="4dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="@string/output_product"
+                                        android:textColor="@color/grey_for_text" />
+
+                                    <TextView
+                                        android:id="@+id/output_product"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="end"
+                                        android:text="@{viewmodel.formattedOutputProduct}"
+                                        android:textColor="@color/grey_for_text"
+                                        tools:text="Дизельное топливо" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="4dp"
+                                    android:orientation="horizontal"
+                                    android:paddingBottom="12dp">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="@string/updated_at"
+                                        android:textColor="@color/grey_for_text" />
+
+                                    <TextView
+                                        android:id="@+id/updated_at"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="end"
+                                        android:text="@{viewmodel.formattedUpdatedAt}"
+                                        android:textColor="@color/grey_for_text"
+                                        tools:text="12.12.2023 10:30" />
+                                </LinearLayout>
+
+                                <!-- Кнопки действий (пример для StorageEventActionType) -->
+                                <Button
+                                    android:id="@+id/pour_button"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="@string/pouring"
+                                    tools:visibility="visible" />
+
+                                <Button
+                                    android:id="@+id/drain_button"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="@string/draining"
+                                    tools:visibility="visible" />
+
+                                <Button
+                                    android:id="@+id/check_button"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="@string/check_storage"
+                                    tools:visibility="visible" />
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <!-- Состояние ошибки -->
+                    <LinearLayout
+                        android:id="@+id/error_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="32dp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:alpha="0.7"
+                            android:src="@drawable/ic_error"
+                            app:tint="@color/red"
+                            tools:ignore="ContentDescription" />
+
+                        <TextView
+                            android:id="@+id/error_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:gravity="center"
+                            android:text="Ошибка при загрузке информации о складе"
+                            android:textColor="@color/grey_for_text"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:gravity="center"
+                            android:text="Попробуйте обновить данные"
+                            android:textColor="@color/grey_for_text"
+                            android:textSize="14sp" />
+
+                        <Button
+                            android:id="@+id/update_error_state_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp"
+                            android:text="Повторить" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </ScrollView>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
